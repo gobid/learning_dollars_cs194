@@ -5,6 +5,7 @@ if __name__ == "__main__":
   args = argparser.parse_args()
   query = "http://www.ocwsearch.com/api/v1/search.json?q="
   query += args.q
+  # So this should probably be changed to learningdollars.com or something
   query += "&page=1&contact=http%3a%2f%2fwww.penis.com"
   f = urllib.urlopen(query)
   s = f.read()
