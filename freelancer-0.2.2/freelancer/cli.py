@@ -56,7 +56,7 @@ from exceptions import Exception
 import sys
 import readline
 
-CONSUMER = ('b8720f555b3dd8ac538fd86ab67c9d4267373af5', '798dec89ac683b271e4a7aae56d41d9b7e019913')
+CONSUMER = ('63fab644941c11d9aeb036130d8520e0e7ab1138', 'c5479e0bf3c20893fb2f7e95259e3a4818872b4e')
 SANDBOX = 'api.sandbox.freelancer.com'
 SANDBOX_APP = 'http://www.sandbox.freelancer.com/users/api-token/auth.php'
 
