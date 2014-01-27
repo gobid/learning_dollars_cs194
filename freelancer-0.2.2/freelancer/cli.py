@@ -48,9 +48,9 @@ Use the admin.exit() method to leave the shell
 
 freelancer>> admin.exit()"""
 
-from freelancer.api import Freelancer
-from freelancer.oauth import get_authorize_url, get_access_token
-from freelancer.client import FreelancerClient
+from api import Freelancer
+from oauth import get_authorize_url, get_access_token
+from client import FreelancerClient
 from exceptions import Exception
 
 import sys
