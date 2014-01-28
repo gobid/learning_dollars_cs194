@@ -12,6 +12,7 @@ import webapp2
 
 from config import config
 from freelancer import job_api_calls
+from ocw import youtube
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -154,6 +155,17 @@ class UpdateModules(webapp2.RequestHandler):
     def get(self):
         jac = job_api_calls.JobApiCalls()
         categories = jac.get_categories()
+        y = youtube.Youtube()
+        for c in categories:
+            c_id = int(c['id'])
+            name = c['name']
+            match = Module.query(Module.category == c_id).fetch()
+            y_link = y.search(name)
+            if len(match) == 0:
+                module = Module(name=name, youtube=y_link, category=c_id)
+                print module
+            else:
+                print 'module exists'
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(categories)) 
 
