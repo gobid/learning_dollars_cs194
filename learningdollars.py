@@ -10,6 +10,7 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 
+from config import config
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -36,7 +37,7 @@ class Greeting(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
 '''
 
-# Data Models
+# Database Models
 
 class Module(ndb.Model):
     name = ndb.StringProperty()
@@ -47,6 +48,26 @@ class Account(ndb.Model):
     guser = ndb.UserProperty()
     tutorials_completed = ndb.IntegerProperty(repeated=True) # module ids
     jobs_completed = ndb.IntegerProperty(repeated=True) # freelancer.com job ids
+
+# Helper Functions
+
+def basicinfo(user, self):
+    if user:
+        url = users.create_logout_url(self.request.uri)
+        url_linktext = 'Logout'
+        nickname = user.nickname()
+    else:
+        url = users.create_login_url(self.request.uri)
+        url_linktext = 'Login'
+        nickname = None
+
+    template_values = {
+        'title': config.SITE_NAME,
+        'url': url,
+        'url_linktext': url_linktext,
+        'nickname': nickname
+    }
+    return template_values
 
 # Views Classes
 
@@ -67,19 +88,16 @@ class MainPage(webapp2.RequestHandler):
             'url_linktext': url_linktext,
         }
         ''' 
-        if users.get_current_user():
-            url = users.create_logout_url(self.request.uri)
-            url_linktext = 'Logout'
-        else:
-            url = users.create_login_url(self.request.uri)
-            url_linktext = 'Login'
-
-        template_values = {
-            'url': url,
-            'url_linktext': url_linktext,
-        }
-
+        template_values = basicinfo(users.get_current_user(), self)
         template = JINJA_ENVIRONMENT.get_template('templates/index.html')
+        self.response.write(template.render(template_values))
+
+class AboutPage(webapp2.RequestHandler):
+
+    def get(self):
+        template_values = basicinfo(users.get_current_user(), self)
+        template_values['title'] = 'About'    
+        template = JINJA_ENVIRONMENT.get_template('templates/about.html')
         self.response.write(template.render(template_values))
 
 # JSON Output Classes
@@ -135,8 +153,11 @@ class Guestbook(webapp2.RequestHandler):
 '''
 
 application = webapp2.WSGIApplication([
+    # Views
     webapp2.Route('/', handler=MainPage, name='main'),
+    webapp2.Route('/about', handler=AboutPage, name='about'),
     # ('/sign', Guestbook),
+    # Json
     webapp2.Route('/accountinfo/<account_id:\d+>', handler=AccountInfo, name='account'),
     webapp2.Route('/moduleinfo/<module_id:\d+>', handler=ModuleInfo, name='module'),
 ], debug=True)
