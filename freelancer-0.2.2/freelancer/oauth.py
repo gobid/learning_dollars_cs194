@@ -232,7 +232,7 @@ class FreelancerOauth(FreelancerClient):
 
         return token
 
-def get_authorize_url(consumer, callback='oob', app_url='http://www.freelancer.com/users/api-token/auth.php', **kwargs):
+def get_authorize_url(consumer, callback='oob', app_url='api.sandbox.freelancer.com', **kwargs): #http://www.freelancer.com/users/api-token/auth.php', **kwargs):
     """
     Returns authorization url for an application
 

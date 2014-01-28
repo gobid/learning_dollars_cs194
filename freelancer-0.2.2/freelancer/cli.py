@@ -216,7 +216,7 @@ class OauthCommand(Command):
 
     def setToken(self, **kwargs):
         if not kwargs.get('token', False) or not kwargs.get('token_secret', False):
-            msg = "Unable to set token key and secret. See oauth.help() for more."
+            msg = "Shit! Unable to set token key and secret. See oauth.help() for more."
             self.shell.msg(msg)
         else:
             self.shell.options['token'] = (kwargs.get('token', False), kwargs.get('token_secret', False))
