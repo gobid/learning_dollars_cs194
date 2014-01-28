@@ -11,6 +11,7 @@ import jinja2
 import webapp2
 
 from config import config
+from freelancer import job_api_calls
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -100,6 +101,22 @@ class AboutPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/about.html')
         self.response.write(template.render(template_values))
 
+class TeamPage(webapp2.RequestHandler):
+
+    def get(self):
+        template_values = basicinfo(users.get_current_user(), self)
+        template_values['title'] = 'Team'    
+        template = JINJA_ENVIRONMENT.get_template('templates/team.html')
+        self.response.write(template.render(template_values))
+
+class ModulesPage(webapp2.RequestHandler):
+
+    def get(self):
+        template_values = basicinfo(users.get_current_user(), self)
+        template_values['title'] = 'Modules'    
+        template = JINJA_ENVIRONMENT.get_template('templates/modules.html')
+        self.response.write(template.render(template_values))
+
 # JSON Output Classes
 
 class AccountInfo(webapp2.RequestHandler):
@@ -156,7 +173,10 @@ application = webapp2.WSGIApplication([
     # Views
     webapp2.Route('/', handler=MainPage, name='main'),
     webapp2.Route('/about', handler=AboutPage, name='about'),
+    webapp2.Route('/team', handler=TeamPage, name='team'),
+    webapp2.Route('/modules', handler=ModulesPage, name='modules'),
     # ('/sign', Guestbook),
+    
     # Json
     webapp2.Route('/accountinfo/<account_id:\d+>', handler=AccountInfo, name='account'),
     webapp2.Route('/moduleinfo/<module_id:\d+>', handler=ModuleInfo, name='module'),

@@ -34,6 +34,6 @@ class JobApiCalls(object):
 		job_categories = []
 
 		for s in job_list_dict:
-			job_categories.append(s['name'])
+			job_categories.append(s)
 
 		return job_categories
