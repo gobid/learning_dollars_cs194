@@ -54,7 +54,7 @@ from client import FreelancerClient
 from exceptions import Exception
 
 import sys
-import readline
+# import readline (removed this import because GAE doesn't seem to support it, doesn't seem to be used)
 
 CONSUMER = ('63fab644941c11d9aeb036130d8520e0e7ab1138', 'c5479e0bf3c20893fb2f7e95259e3a4818872b4e')
 SANDBOX = 'api.sandbox.freelancer.com'

@@ -117,7 +117,7 @@ class ModulesPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/modules.html')
         self.response.write(template.render(template_values))
 
-# JSON Output Classes
+# Info Classes (JSON response)
 
 class AccountInfo(webapp2.RequestHandler):
 
@@ -146,6 +146,16 @@ class ModuleInfo(webapp2.RequestHandler):
         }
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(info)) 
+
+# Action Classes (JSON response)
+
+class UpdateModules(webapp2.RequestHandler):
+
+    def get(self):
+        jac = job_api_calls.JobApiCalls()
+        categories = jac.get_categories()
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(categories)) 
 
 '''
 class Guestbook(webapp2.RequestHandler):
@@ -177,7 +187,10 @@ application = webapp2.WSGIApplication([
     webapp2.Route('/modules', handler=ModulesPage, name='modules'),
     # ('/sign', Guestbook),
     
-    # Json
+    # Info
     webapp2.Route('/accountinfo/<account_id:\d+>', handler=AccountInfo, name='account'),
     webapp2.Route('/moduleinfo/<module_id:\d+>', handler=ModuleInfo, name='module'),
+
+    # Actions
+    webapp2.Route('/updatemodules', handler=UpdateModules, name='updatemodules'),
 ], debug=True)
