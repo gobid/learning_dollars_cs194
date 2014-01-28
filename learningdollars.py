@@ -2,6 +2,7 @@
 
 import os
 import urllib
+import json
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -35,6 +36,20 @@ class Greeting(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
 '''
 
+# Data Models
+
+class Module(ndb.Model):
+    name = ndb.StringProperty()
+    youtube = ndb.StringProperty() # youtube playlist/video id
+    category = ndb.IntegerProperty()  # freelancer category id
+
+class Account(ndb.Model):
+    guser = ndb.UserProperty()
+    tutorials_completed = ndb.IntegerProperty(repeated=True) # module ids
+    jobs_completed = ndb.IntegerProperty(repeated=True) # freelancer.com job ids
+
+# Views Classes
+
 class MainPage(webapp2.RequestHandler):
 
     def get(self):
@@ -67,6 +82,36 @@ class MainPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/index.html')
         self.response.write(template.render(template_values))
 
+# JSON Output Classes
+
+class AccountInfo(webapp2.RequestHandler):
+
+    def get(self, account_id):
+        account_id = int(account_id)
+        account = Account.get_by_id(account_id)
+        info = {
+            'nickname': account.guser.nickname(),
+            'email': account.guser.email(),
+            'id': account.guser.user_id(),
+            'jobs_completed': account.jobs_completed,
+            'tutorials_completed': account.tutorials_completed
+        }
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(info)) 
+
+class ModuleInfo(webapp2.RequestHandler):
+
+    def get(self, module_id):
+        module_id = int(module_id)
+        module = Module.get_by_id(module_id)
+        info = {
+            'name': module.name,
+            'youtube': module.youtube,
+            'category': module.category
+        }
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(info)) 
+
 '''
 class Guestbook(webapp2.RequestHandler):
 
@@ -90,6 +135,8 @@ class Guestbook(webapp2.RequestHandler):
 '''
 
 application = webapp2.WSGIApplication([
-    ('/', MainPage),
+    webapp2.Route('/', handler=MainPage, name='main'),
     # ('/sign', Guestbook),
+    webapp2.Route('/accountinfo/<account_id:\d+>', handler=AccountInfo, name='account'),
+    webapp2.Route('/moduleinfo/<module_id:\d+>', handler=ModuleInfo, name='module'),
 ], debug=True)
