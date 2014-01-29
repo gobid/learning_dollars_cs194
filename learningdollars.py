@@ -41,12 +41,19 @@ class Greeting(ndb.Model):
 
 # Database Models
 
-class Module(ndb.Model):
+class ModelUtils(object):
+
+    def to_dict(self):
+        result = super(ModelUtils,self).to_dict()
+        result['key'] = self.key.id()
+        return result
+
+class Module(ModelUtils, ndb.Model):
     name = ndb.StringProperty()
     youtube = ndb.StringProperty() # youtube playlist/video id
     category = ndb.IntegerProperty()  # freelancer category id
 
-class Account(ndb.Model):
+class Account(ModelUtils, ndb.Model):
     guser = ndb.UserProperty()
     tutorials_completed = ndb.IntegerProperty(repeated=True) # module ids
     jobs_completed = ndb.IntegerProperty(repeated=True) # freelancer.com job ids
@@ -115,6 +122,8 @@ class ModulesPage(webapp2.RequestHandler):
     def get(self):
         template_values = basicinfo(users.get_current_user(), self)
         template_values['title'] = 'Modules'    
+        mi = ModulesInfo()
+        template_values['modules'] = mi.get_modules()
         template = JINJA_ENVIRONMENT.get_template('templates/modules.html')
         self.response.write(template.render(template_values))
 
@@ -148,6 +157,16 @@ class ModuleInfo(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(info)) 
 
+class ModulesInfo(webapp2.RequestHandler):
+
+    def get_modules(self):
+        return [m.to_dict() for m in Module.query().fetch()]
+
+    def get(self):
+        modules = self.get_modules()
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(modules)) 
+
 # Action Classes (JSON response)
 
 class UpdateModules(webapp2.RequestHandler):
@@ -157,15 +176,23 @@ class UpdateModules(webapp2.RequestHandler):
         categories = jac.get_categories()
         y = youtube.Youtube()
         for c in categories:
+            # retrieve items from API's
             c_id = int(c['id'])
             name = c['name']
-            match = Module.query(Module.category == c_id).fetch()
             y_link = y.search(name)
-            if len(match) == 0:
-                module = Module(name=name, youtube=y_link, category=c_id)
-                print module
+            # store/update as needed
+            match = Module.query(Module.category == c_id).fetch()
+            module = Module(name=name, youtube=y_link, category=c_id)
+            if len(match) == 0:        
+                module.put()
             else:
-                print 'module exists'
+                match = match[0]
+                if  str(match.name) != name or str(match.youtube) != y_link:
+                    print 'module different'
+                    match.name = name
+                    match.youtube = y_link
+                    match.put()
+                    break
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(categories)) 
 
@@ -202,6 +229,7 @@ application = webapp2.WSGIApplication([
     # Info
     webapp2.Route('/accountinfo/<account_id:\d+>', handler=AccountInfo, name='account'),
     webapp2.Route('/moduleinfo/<module_id:\d+>', handler=ModuleInfo, name='module'),
+    webapp2.Route('/modulesinfo', handler=ModulesInfo, name='modules'),
 
     # Actions
     webapp2.Route('/updatemodules', handler=UpdateModules, name='updatemodules'),

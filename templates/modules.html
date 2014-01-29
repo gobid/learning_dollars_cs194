@@ -9,6 +9,11 @@
       {% include 'templates/navbar.html' %}
       <h1>Modules</h1>
       <hr>
+      <ul>
+        {% for m in modules %}
+          <li><a href = "/module/{{ m.key }}">{{ m.name }}</a></li>
+        {% endfor %}
+      </ul>
     </div>
     {% include 'templates/footer.html' %}
   </body>
