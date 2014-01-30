@@ -54,11 +54,11 @@ from client import FreelancerClient
 from exceptions import Exception
 
 import sys
-import readline
+# import readline (removed this import because GAE doesn't seem to support it, doesn't seem to be used)
 
-CONSUMER = ('63fab644941c11d9aeb036130d8520e0e7ab1138', 'c5479e0bf3c20893fb2f7e95259e3a4818872b4e')
-SANDBOX = 'api.sandbox.freelancer.com'
-SANDBOX_APP = 'http://www.sandbox.freelancer.com/users/api-token/auth.php'
+from config import config
+
+CONSUMER = (config.CONSUMER_KEY, config.CONSUMER_SECRET)
 
 class IncompatibleShell(Exception):
     pass
@@ -224,13 +224,13 @@ class OauthCommand(Command):
         return self.shell
 
     def getToken(self):
-        self.shell.msg("Visit this url to authorize this application: %s" % get_authorize_url(self.shell.options['consumer'], 'oob', SANDBOX_APP, domain=SANDBOX))
+        self.shell.msg("Visit this url to authorize this application: %s" % get_authorize_url(self.shell.options['consumer'], 'oob', config.SANDBOX_APP, domain=config.SANDBOX))
         self.shell.msg('')
 
         oauth_token = self.shell.prompt('What is your oauth token? ')
         verifier = self.shell.prompt('What is your verifier? ')
         try:
-            self.shell.options['token'] = get_access_token(self.shell.options['consumer'], oauth_token, verifier, domain=SANDBOX)
+            self.shell.options['token'] = get_access_token(self.shell.options['consumer'], oauth_token, verifier, domain=config.SANDBOX)
         except ValueError:
             msg = 'Unable to retrieve access tokens. Try again.'
             self.shell.msg(msg)
@@ -321,7 +321,7 @@ class ApiCommand(Command):
             self.shell.msg('Unable to initalized client, bad tokens.')
             return self.shell
         
-        freelancer = Freelancer(client, SANDBOX)
+        freelancer = Freelancer(client, config.SANDBOX)
 
         for link in self.chain[1:]:
             freelancer = getattr(freelancer, link)
@@ -363,7 +363,7 @@ class MockCommand(Command):
             return self.shell
 
         client = FreelancerClient(self.shell.options['consumer'])
-        freelancer = Freelancer(client, SANDBOX)
+        freelancer = Freelancer(client, config.SANDBOX)
 
         for link in self.chain[1:]:
             freelancer = getattr(freelancer, link)
