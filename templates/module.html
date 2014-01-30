@@ -7,13 +7,8 @@
   <body>
     <div class="container">
       {% include 'templates/navbar.html' %}
-      <h1>Modules</h1>
-      <hr>
-      <ul>
-        {% for m in modules %}
-          <li><a href = "{{ m.key }}">{{ m.name }}</a></li>
-        {% endfor %}
-      </ul>
+      <h1>{{ name }}</h1>
+      <iframe width="560" height="315" src="//www.youtube.com/embed/{{ youtube }}" frameborder="0" allowfullscreen></iframe>
     </div>
     {% include 'templates/footer.html' %}
   </body>
