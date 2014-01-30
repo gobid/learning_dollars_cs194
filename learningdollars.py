@@ -61,10 +61,16 @@ class Account(ModelUtils, ndb.Model):
 # Helper Functions
 
 def basicinfo(user, self):
+    # retrieves basic info, completes a session check
     if user:
         url = users.create_logout_url(self.request.uri)
         url_linktext = 'Logout'
         nickname = user.nickname()
+        #BUG HERE
+        #accounts = Account.query(guser=user).fetch()
+        #if len(accounts) == 0:
+        #    new_account = Account(guser=user, tutorials_completed=[], jobs_completed=[])
+        #    new_account.put()
     else:
         url = users.create_login_url(self.request.uri)
         url_linktext = 'Login'
@@ -127,6 +133,21 @@ class ModulesPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/modules.html')
         self.response.write(template.render(template_values))
 
+class ModulePage(webapp2.RequestHandler):
+
+    def get(self, module_id):
+        template_values = basicinfo(users.get_current_user(), self)
+        mi = ModuleInfo()
+        module = mi.get_info(module_id)
+        print 'module'
+        print module
+        template_values['title'] = module['name']
+        template_values['name'] = module['name']
+        template_values['youtube'] = module['youtube']
+        template_values['category'] = module['category']
+        template = JINJA_ENVIRONMENT.get_template('templates/module.html')
+        self.response.write(template.render(template_values))
+
 # Info Classes (JSON response)
 
 class AccountInfo(webapp2.RequestHandler):
@@ -146,7 +167,7 @@ class AccountInfo(webapp2.RequestHandler):
 
 class ModuleInfo(webapp2.RequestHandler):
 
-    def get(self, module_id):
+    def get_info(self, module_id):
         module_id = int(module_id)
         module = Module.get_by_id(module_id)
         info = {
@@ -154,6 +175,10 @@ class ModuleInfo(webapp2.RequestHandler):
             'youtube': module.youtube,
             'category': module.category
         }
+        return info
+
+    def get(self, module_id):
+        info = self.get_info(module_id)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(info)) 
 
@@ -224,6 +249,7 @@ application = webapp2.WSGIApplication([
     webapp2.Route('/about', handler=AboutPage, name='about'),
     webapp2.Route('/team', handler=TeamPage, name='team'),
     webapp2.Route('/modules', handler=ModulesPage, name='modules'),
+    webapp2.Route('/<module_id:\d+>', handler=ModulePage, name='module'),
     # ('/sign', Guestbook),
     
     # Info
