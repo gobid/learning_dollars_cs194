@@ -66,11 +66,10 @@ def basicinfo(user, self):
         url = users.create_logout_url(self.request.uri)
         url_linktext = 'Logout'
         nickname = user.nickname()
-        #BUG HERE
-        #accounts = Account.query(guser=user).fetch()
-        #if len(accounts) == 0:
-        #    new_account = Account(guser=user, tutorials_completed=[], jobs_completed=[])
-        #    new_account.put()
+        accounts = Account.query(Account.guser == user).fetch()
+        if len(accounts) == 0:
+            new_account = Account(guser=user, tutorials_completed=[], jobs_completed=[])
+            new_account.put()
     else:
         url = users.create_login_url(self.request.uri)
         url_linktext = 'Login'
