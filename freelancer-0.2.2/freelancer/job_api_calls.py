@@ -37,3 +37,7 @@ class JobApiCalls(object):
 			job_categories.append(s)
 
 		return job_categories
+
+	def get_jobs(self):
+		jobs = self.freelancer.Job.getCategoryJobList({5})
+		return jobs
