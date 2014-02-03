@@ -38,6 +38,9 @@ class JobApiCalls(object):
 
 		return job_categories
 
-	def get_jobs(self):
-		jobs = self.freelancer.Job.getCategoryJobList({5})
-		return jobs
+	def get_jobs(self, keyword):
+		searchResults = self.freelancer.Project.searchProjects({
+			'count':1000,
+			'searchkeyword':keyword
+		})
+		return searchResults
