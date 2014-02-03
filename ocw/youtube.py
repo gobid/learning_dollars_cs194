@@ -41,8 +41,8 @@ class Youtube:
         playlists.append(search_result["id"]["playlistId"])
     
     if len(playlists) > 0:
-      return playlists[0]
+      return playlists[0], "playlist"
     elif len(videos) > 0:
-      return videos[0]
+      return videos[0], "video"
     else:
-      return ''
+      return '', "blank"
