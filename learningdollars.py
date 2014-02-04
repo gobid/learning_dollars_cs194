@@ -4,6 +4,8 @@ import os
 import urllib
 import json
 
+import urlparse
+
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -73,10 +75,10 @@ def freelancer_auth(self):
     redirect_to = oauth.get_authorize_url(consumer, 'localhost:10080/?', config.SANDBOX_APP, domain=config.SANDBOX)
     print 'redirect_to'
     print redirect_to
-    # parsed = urlparse.urlparse(redirect_to)
-    # oauth_token urlparse.parse_qs(parsed.query)['oauth_token']
-    # print 'oauth_token'
-    # print oauth_token
+    parsed = urlparse.urlparse(redirect_to)
+    oauth_token = urlparse.parse_qs(parsed.query)['oauth_token'][0]
+    print 'oauth_token'
+    print oauth_token
     #self.redirect(redirect_to)
     #verifier = '7bd8e8c177544d2b91b8c5a012e45983a096d18a'
     #access_token = oauth.get_access_token(consumer, oauth_token, verifier, domain=config.SANDBOX)
@@ -203,10 +205,10 @@ class ModuleInfo(webapp2.RequestHandler):
         module_id = int(module_id)
         module = Module.get_by_id(module_id)
         info = {
-            'name': module['name'],
-            'youtube': module['youtube'],
-            'yt_type': module['yt_type'],
-            'category': module['category']
+            'name': module.name,
+            'youtube': module.youtube,
+            'yt_type': module.yt_type,
+            'category': module.category
         }
         return info
 
