@@ -9,10 +9,14 @@
       {% include 'templates/navbar.html' %}
       <h1>{{ name }}</h1>
         {% if yt_type == "video" %}
-          <iframe width="560" height="315" src="//www.youtube.com/embed/{{ youtube }}" frameborder="0" allowfullscreen></iframe>
+          {% for video in youtube %}
+            <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video }}" frameborder="0" allowfullscreen></iframe>
+          {% endfor %}
         {% else %}
           {% if yt_type == "playlist" %}
-            <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ youtube }}" frameborder="0" allowfullscreen></iframe>
+            {% for pl in youtube %}
+              <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ pl }}" frameborder="0" allowfullscreen></iframe>
+            {% endfor %}
           {% endif %}
         {% endif %}
      </div>

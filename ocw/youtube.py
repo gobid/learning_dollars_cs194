@@ -8,7 +8,7 @@ from oauth2client.tools import argparser
 
 from config import config
 
-MAX_RESULTS = 1
+MAX_RESULTS = 25
 
 class Youtube:
 
@@ -34,15 +34,16 @@ class Youtube:
     
     for search_result in search_response.get("items", []):
       if search_result["id"]["kind"] == "youtube#video":
-        videos.append(search_result["id"]["videoId"])
+        videos.append("%s" % (search_result["id"]["videoId"]))
       elif search_result["id"]["kind"] == "youtube#channel":
-        channels.append(search_result["id"]["channelId"])
+        channels.append("%s" % (search_result["id"]["channelId"]))
       elif search_result["id"]["kind"] == "youtube#playlist":
-        playlists.append(search_result["id"]["playlistId"])
-    
+        playlists.append("%s" % (search_result["id"]["playlistId"]))
+      print search_result 
+ 
     if len(playlists) > 0:
-      return playlists[0], "playlist"
+      return playlists, "playlist"
     elif len(videos) > 0:
-      return videos[0], "video"
+      return videos, "video"
     else:
       return '', "blank"
