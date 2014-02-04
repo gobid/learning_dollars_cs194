@@ -1,4 +1,15 @@
 # -*- coding: utf-8 -*-
+
+# Whether production
+PROD = 0 
+
+# Conditional
+if PROD:
+	WEBSITE = 'https://learningdollars.com/'
+else:
+	WEBSITE = 'http://127.0.0.1:10080/'
+
+# General
 SITE_NAME = 'Learning Dollars'
 
 # Freelancer

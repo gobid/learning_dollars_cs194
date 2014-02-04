@@ -58,7 +58,8 @@ class Module(ModelUtils, ndb.Model):
 
 class Account(ModelUtils, ndb.Model):
     guser = ndb.UserProperty()
-    freelancer_at = ndb.StringProperty() # freelancer access token 
+    freelancer_at_key = ndb.StringProperty() # freelancer access token key
+    freelancer_at_secret = ndb.StringProperty() # freelancer access token secret
     tutorials_completed = ndb.IntegerProperty(repeated=True) # module ids
     jobs_completed = ndb.IntegerProperty(repeated=True) # freelancer.com job ids
 
@@ -68,24 +69,61 @@ def freelancer_auth(self):
     # 8c6f443fdaba9bd20f16beaaa5993ea3f4be11b2
     # 86b4bde9ad3dfcc8ae086ddf20874ac85036aaa8
     consumer = (config.CONSUMER_KEY, config.CONSUMER_SECRET)
-    # fr_oauth = oauth.FreelancerOauth(consumer)
-    # request_tokens = fr_oauth.get_request_token(oauth_callback='localhost:10080/?', domain='api.sandbox.freelancer.com')    
-    # print 'request_tokens:'
-    # print request_tokens
-    redirect_to = oauth.get_authorize_url(consumer, 'localhost:10080/?', config.SANDBOX_APP, domain=config.SANDBOX)
-    print 'redirect_to'
+    fr_oauth = oauth.FreelancerOauth(consumer)
+    request_tokens = fr_oauth.get_request_token(
+        oauth_callback= config.WEBSITE + '?', 
+        domain=config.SANDBOX
+    )    
+    print 'request_tokens:'
+    print request_tokens
+    
+    redirect_to = fr_oauth.get_authorize_url(app_url=config.SANDBOX_APP)
     print redirect_to
-    parsed = urlparse.urlparse(redirect_to)
-    oauth_token = urlparse.parse_qs(parsed.query)['oauth_token'][0]
-    print 'oauth_token'
-    print oauth_token
-    #self.redirect(redirect_to)
+
+    #redirect_to = oauth.get_authorize_url(consumer, config.WEBSITE + '?', \
+    #    config.SANDBOX_APP, domain=config.SANDBOX)
+    #print 'redirect_to'
+    #print redirect_to
+    #parsed = urlparse.urlparse(redirect_to)
+    #oauth_token = urlparse.parse_qs(parsed.query)['oauth_token'][0]
+    #print 'oauth_token'
+    #print oauth_token
+    
+    # self.redirect(redirect_to)
     #verifier = '7bd8e8c177544d2b91b8c5a012e45983a096d18a'
     #access_token = oauth.get_access_token(consumer, oauth_token, verifier, domain=config.SANDBOX)
     #print 'access_token'
     #print access_token
 
-def basicinfo(user, self, fr_at=None):
+def get_access_token(self):
+    print 'here in get_access_token'
+    consumer = (config.CONSUMER_KEY, config.CONSUMER_SECRET)
+    fr_oauth = oauth.FreelancerOauth(consumer)
+    oauth_token = self.request.get('oauth_token')
+    oauth_verifier = self.request.get('oauth_verifier')
+    if oauth_token and oauth_verifier:
+        oauth_token, oauth_verifier = str(oauth_token), str(oauth_verifier)
+        print 'oauth_token and verif exist'
+        
+        # re-get request token
+        request_tokens = fr_oauth.get_request_token(
+            oauth_callback= config.WEBSITE + '?', 
+            domain=config.SANDBOX
+        ) 
+        print 'request_tokens'
+        request_token = request_tokens[0]
+        #access_token = oauth.get_access_token(consumer, request_token, oauth_verifier)
+        access_token = fr_oauth.upgrade_to_access_token(
+            oauth_verifier, 
+            request_token,
+            domain=config.SANDBOX
+        )
+        print 'ACCESS TOKEN'
+        print access_token
+    else:
+        print 'oauth_token and verif DONT exist'
+
+def basicinfo(user, self):
     # retrieves basic info, completes a session check
     if user:
         url = users.create_logout_url(self.request.uri)
@@ -93,6 +131,7 @@ def basicinfo(user, self, fr_at=None):
         nickname = user.nickname()
         accounts = Account.query(Account.guser == user).fetch()
         if len(accounts) == 0: # if no Account object exists for user
+            fr_at = get_access_token(self)
             if fr_at is None: # if user has not gone through freelancer OAuth
                 print 'No Account and no freelancer OAuth'
                 freelancer_auth(self)
