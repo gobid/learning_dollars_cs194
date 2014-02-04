@@ -203,10 +203,10 @@ class ModuleInfo(webapp2.RequestHandler):
         module_id = int(module_id)
         module = Module.get_by_id(module_id)
         info = {
-            'name': module.name,
-            'youtube': module.youtube,
-            'yt_type': module.yt_type,
-            'category': module.category
+            'name': module['name'],
+            'youtube': module['youtube'],
+            'yt_type': module['yt_type'],
+            'category': module['category']
         }
         return info
 
