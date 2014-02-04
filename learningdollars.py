@@ -51,6 +51,7 @@ class ModelUtils(object):
 class Module(ModelUtils, ndb.Model):
     name = ndb.StringProperty()
     youtube = ndb.StringProperty() # youtube playlist/video id
+    yt_type = ndb.StringProperty() # whether it's a YT playlist/video
     category = ndb.IntegerProperty()  # freelancer category id
 
 class Account(ModelUtils, ndb.Model):
@@ -174,6 +175,7 @@ class ModulePage(webapp2.RequestHandler):
         template_values['title'] = module['name']
         template_values['name'] = module['name']
         template_values['youtube'] = module['youtube']
+        template_values['yt_type'] = module['yt_type']
         template_values['category'] = module['category']
         template = JINJA_ENVIRONMENT.get_template('templates/module.html')
         self.response.write(template.render(template_values))
@@ -203,6 +205,7 @@ class ModuleInfo(webapp2.RequestHandler):
         info = {
             'name': module.name,
             'youtube': module.youtube,
+            'yt_type': module.yt_type,
             'category': module.category
         }
         return info
@@ -234,20 +237,23 @@ class UpdateModules(webapp2.RequestHandler):
             # retrieve items from API's
             c_id = int(c['id'])
             name = c['name']
-            y_link = y.search(name)
+            print name
+            search_name = name + " tutorial"
+            y_link, y_type = y.search(search_name)
             # store/update as needed
             match = Module.query(Module.category == c_id).fetch()
-            module = Module(name=name, youtube=y_link, category=c_id)
+            module = Module(name=name, youtube=y_link, yt_type=y_type, category=c_id)
             if len(match) == 0:        
                 module.put()
             else:
                 match = match[0]
-                if  str(match.name) != name or str(match.youtube) != y_link:
+                if  str(match.name) != name or str(match.yt_type) != y_type or str(match.youtube) != y_link:
                     print 'module different'
                     match.name = name
                     match.youtube = y_link
+                    match.yt_type = y_type
                     match.put()
-                    break
+                    # break
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(categories)) 
 
