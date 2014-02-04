@@ -8,8 +8,14 @@
     <div class="container">
       {% include 'templates/navbar.html' %}
       <h1>{{ name }}</h1>
-      <iframe width="560" height="315" src="//www.youtube.com/embed/{{ youtube }}" frameborder="0" allowfullscreen></iframe>
-    </div>
+        {% if yt_type == "video" %}
+          <iframe width="560" height="315" src="//www.youtube.com/embed/{{ youtube }}" frameborder="0" allowfullscreen></iframe>
+        {% else %}
+          {% if yt_type == "playlist" %}
+            <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ youtube }}" frameborder="0" allowfullscreen></iframe>
+          {% endif %}
+        {% endif %}
+     </div>
     {% include 'templates/footer.html' %}
   </body>
 </html>
