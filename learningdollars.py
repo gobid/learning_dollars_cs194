@@ -11,7 +11,7 @@ import jinja2
 import webapp2
 
 from config import config
-from freelancer import job_api_calls
+from freelancer import job_api_calls, oauth
 from ocw import youtube
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -55,21 +55,52 @@ class Module(ModelUtils, ndb.Model):
 
 class Account(ModelUtils, ndb.Model):
     guser = ndb.UserProperty()
+    freelancer_at = ndb.StringProperty() # freelancer access token 
     tutorials_completed = ndb.IntegerProperty(repeated=True) # module ids
     jobs_completed = ndb.IntegerProperty(repeated=True) # freelancer.com job ids
 
 # Helper Functions
 
-def basicinfo(user, self):
+def freelancer_auth(self):
+    # 8c6f443fdaba9bd20f16beaaa5993ea3f4be11b2
+    # 86b4bde9ad3dfcc8ae086ddf20874ac85036aaa8
+    consumer = (config.CONSUMER_KEY, config.CONSUMER_SECRET)
+    # fr_oauth = oauth.FreelancerOauth(consumer)
+    # request_tokens = fr_oauth.get_request_token(oauth_callback='localhost:10080/?', domain='api.sandbox.freelancer.com')    
+    # print 'request_tokens:'
+    # print request_tokens
+    redirect_to = oauth.get_authorize_url(consumer, 'localhost:10080/?', config.SANDBOX_APP, domain=config.SANDBOX)
+    print 'redirect_to'
+    print redirect_to
+    # parsed = urlparse.urlparse(redirect_to)
+    # oauth_token urlparse.parse_qs(parsed.query)['oauth_token']
+    # print 'oauth_token'
+    # print oauth_token
+    #self.redirect(redirect_to)
+    #verifier = '7bd8e8c177544d2b91b8c5a012e45983a096d18a'
+    #access_token = oauth.get_access_token(consumer, oauth_token, verifier, domain=config.SANDBOX)
+    #print 'access_token'
+    #print access_token
+
+def basicinfo(user, self, fr_at=None):
     # retrieves basic info, completes a session check
     if user:
         url = users.create_logout_url(self.request.uri)
         url_linktext = 'Logout'
         nickname = user.nickname()
         accounts = Account.query(Account.guser == user).fetch()
-        if len(accounts) == 0:
-            new_account = Account(guser=user, tutorials_completed=[], jobs_completed=[])
-            new_account.put()
+        if len(accounts) == 0: # if no Account object exists for user
+            if fr_at is None: # if user has not gone through freelancer OAuth
+                print 'No Account and no freelancer OAuth'
+                freelancer_auth(self)
+            else:    
+                new_account = Account(
+                    guser=user, 
+                    freelancer_at=fr_at, 
+                    tutorials_completed=[], 
+                    jobs_completed=[]
+                )
+                new_account.put()
     else:
         url = users.create_login_url(self.request.uri)
         url_linktext = 'Login'
