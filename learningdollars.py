@@ -52,7 +52,7 @@ class ModelUtils(object):
 
 class Module(ModelUtils, ndb.Model):
     name = ndb.StringProperty()
-    youtube = ndb.StringProperty() # youtube playlist/video id
+    youtube = ndb.StringProperty(repeated=True) # youtube playlist/video ids
     yt_type = ndb.StringProperty() # whether it's a YT playlist/video
     category = ndb.IntegerProperty()  # freelancer category id
 
@@ -239,20 +239,19 @@ class UpdateModules(webapp2.RequestHandler):
             # retrieve items from API's
             c_id = int(c['id'])
             name = c['name']
-            print name
             search_name = name + " tutorial"
-            y_link, y_type = y.search(search_name)
+            y_list, y_type = y.search(search_name)
             # store/update as needed
             match = Module.query(Module.category == c_id).fetch()
-            module = Module(name=name, youtube=y_link, yt_type=y_type, category=c_id)
+            module = Module(name=name, youtube=y_list, yt_type=y_type, category=c_id)
             if len(match) == 0:        
                 module.put()
             else:
                 match = match[0]
-                if  str(match.name) != name or str(match.yt_type) != y_type or str(match.youtube) != y_link:
+                if  str(match.name) != name or str(match.yt_type) != y_type or match.youtube != y_list:
                     print 'module different'
                     match.name = name
-                    match.youtube = y_link
+                    match.youtube = y_list
                     match.yt_type = y_type
                     match.put()
                     # break
