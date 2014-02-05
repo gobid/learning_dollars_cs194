@@ -8,13 +8,33 @@
     <div class="container">
       {% include 'templates/navbar.html' %}
       <h1>{{ name }}</h1>
-        {% if yt_type == "video" %}
-          <iframe width="560" height="315" src="//www.youtube.com/embed/{{ youtube }}" frameborder="0" allowfullscreen></iframe>
-        {% else %}
-          {% if yt_type == "playlist" %}
-            <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ youtube }}" frameborder="0" allowfullscreen></iframe>
+        <h2>Tutorial Videos</h2>
+          {% if yt_type == "video" %}
+            {% for video in youtube %}
+              <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video }}" frameborder="0" allowfullscreen></iframe>
+            {% endfor %}
+          {% else %}
+            {% if yt_type == "playlist" %}
+              {% for pl in youtube %}
+                <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ pl }}" frameborder="0" allowfullscreen></iframe>
+              {% endfor %}
+            {% endif %}
           {% endif %}
-        {% endif %}
+       <h2>Courses (Beta)</h2>
+         <table>
+         {% for course in courses %}
+           {% if course != "" %}
+             <tr><td><a href="{{ course.CourseURL }}">{{ course.Title }}</a></td></tr>
+             <tr><td>{{ course.Institution }} ({{ course.TeachingDate }}) </td></tr>
+             <tr><td>Instructors: {{ course.Instructors }}</td></tr>
+             <tr><td>Description: {{ course.Description }} </td></tr>
+             <tr><td><a href="{{ course.DownloadPageLink }}">Course Materials</a></td></tr>
+             <tr><td>&nbsp</td></tr>
+           {% endif %}
+         {% endfor %} 
+         </table>
+       <h2>Jobs</h2>
+         Jobs go here yo
      </div>
     {% include 'templates/footer.html' %}
   </body>

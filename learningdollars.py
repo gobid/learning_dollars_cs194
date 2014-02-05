@@ -4,6 +4,8 @@ import os
 import urllib
 import json
 
+import urlparse
+
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -13,6 +15,7 @@ import webapp2
 from config import config
 from freelancer import job_api_calls, oauth
 from ocw import youtube
+from ocw import ocwsearch
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -50,13 +53,15 @@ class ModelUtils(object):
 
 class Module(ModelUtils, ndb.Model):
     name = ndb.StringProperty()
-    youtube = ndb.StringProperty() # youtube playlist/video id
+    youtube = ndb.StringProperty(repeated=True) # youtube playlist/video ids
     yt_type = ndb.StringProperty() # whether it's a YT playlist/video
+    courses = ndb.JsonProperty(repeated=True) # OCW courses
     category = ndb.IntegerProperty()  # freelancer category id
 
 class Account(ModelUtils, ndb.Model):
     guser = ndb.UserProperty()
-    freelancer_at = ndb.StringProperty() # freelancer access token 
+    freelancer_at_key = ndb.StringProperty() # freelancer access token key
+    freelancer_at_secret = ndb.StringProperty() # freelancer access token secret
     tutorials_completed = ndb.IntegerProperty(repeated=True) # module ids
     jobs_completed = ndb.IntegerProperty(repeated=True) # freelancer.com job ids
 
@@ -66,24 +71,61 @@ def freelancer_auth(self):
     # 8c6f443fdaba9bd20f16beaaa5993ea3f4be11b2
     # 86b4bde9ad3dfcc8ae086ddf20874ac85036aaa8
     consumer = (config.CONSUMER_KEY, config.CONSUMER_SECRET)
-    # fr_oauth = oauth.FreelancerOauth(consumer)
-    # request_tokens = fr_oauth.get_request_token(oauth_callback='localhost:10080/?', domain='api.sandbox.freelancer.com')    
-    # print 'request_tokens:'
-    # print request_tokens
-    redirect_to = oauth.get_authorize_url(consumer, 'localhost:10080/?', config.SANDBOX_APP, domain=config.SANDBOX)
-    print 'redirect_to'
+    fr_oauth = oauth.FreelancerOauth(consumer)
+    request_tokens = fr_oauth.get_request_token(
+        oauth_callback= config.WEBSITE + '?', 
+        domain=config.SANDBOX
+    )    
+    print 'request_tokens:'
+    print request_tokens
+    
+    redirect_to = fr_oauth.get_authorize_url(app_url=config.SANDBOX_APP)
     print redirect_to
-    # parsed = urlparse.urlparse(redirect_to)
-    # oauth_token urlparse.parse_qs(parsed.query)['oauth_token']
-    # print 'oauth_token'
-    # print oauth_token
-    #self.redirect(redirect_to)
+
+    #redirect_to = oauth.get_authorize_url(consumer, config.WEBSITE + '?', \
+    #    config.SANDBOX_APP, domain=config.SANDBOX)
+    #print 'redirect_to'
+    #print redirect_to
+    #parsed = urlparse.urlparse(redirect_to)
+    #oauth_token = urlparse.parse_qs(parsed.query)['oauth_token'][0]
+    #print 'oauth_token'
+    #print oauth_token
+    
+    # self.redirect(redirect_to)
     #verifier = '7bd8e8c177544d2b91b8c5a012e45983a096d18a'
     #access_token = oauth.get_access_token(consumer, oauth_token, verifier, domain=config.SANDBOX)
     #print 'access_token'
     #print access_token
 
-def basicinfo(user, self, fr_at=None):
+def get_access_token(self):
+    print 'here in get_access_token'
+    consumer = (config.CONSUMER_KEY, config.CONSUMER_SECRET)
+    fr_oauth = oauth.FreelancerOauth(consumer)
+    oauth_token = self.request.get('oauth_token')
+    oauth_verifier = self.request.get('oauth_verifier')
+    if oauth_token and oauth_verifier:
+        oauth_token, oauth_verifier = str(oauth_token), str(oauth_verifier)
+        print 'oauth_token and verif exist'
+        
+        # re-get request token
+        request_tokens = fr_oauth.get_request_token(
+            oauth_callback= config.WEBSITE + '?', 
+            domain=config.SANDBOX
+        ) 
+        print 'request_tokens'
+        request_token = request_tokens[0]
+        #access_token = oauth.get_access_token(consumer, request_token, oauth_verifier)
+        access_token = fr_oauth.upgrade_to_access_token(
+            oauth_verifier, 
+            request_token,
+            domain=config.SANDBOX
+        )
+        print 'ACCESS TOKEN'
+        print access_token
+    else:
+        print 'oauth_token and verif DONT exist'
+
+def basicinfo(user, self):
     # retrieves basic info, completes a session check
     if user:
         url = users.create_logout_url(self.request.uri)
@@ -91,6 +133,7 @@ def basicinfo(user, self, fr_at=None):
         nickname = user.nickname()
         accounts = Account.query(Account.guser == user).fetch()
         if len(accounts) == 0: # if no Account object exists for user
+            fr_at = get_access_token(self)
             if fr_at is None: # if user has not gone through freelancer OAuth
                 print 'No Account and no freelancer OAuth'
                 freelancer_auth(self)
@@ -176,6 +219,7 @@ class ModulePage(webapp2.RequestHandler):
         template_values['name'] = module['name']
         template_values['youtube'] = module['youtube']
         template_values['yt_type'] = module['yt_type']
+        template_values['courses'] = module['courses']
         template_values['category'] = module['category']
         template = JINJA_ENVIRONMENT.get_template('templates/module.html')
         self.response.write(template.render(template_values))
@@ -206,6 +250,7 @@ class ModuleInfo(webapp2.RequestHandler):
             'name': module.name,
             'youtube': module.youtube,
             'yt_type': module.yt_type,
+            'courses': module.courses,
             'category': module.category
         }
         return info
@@ -233,25 +278,27 @@ class UpdateModules(webapp2.RequestHandler):
         jac = job_api_calls.JobApiCalls()
         categories = jac.get_categories()
         y = youtube.Youtube()
+        ocws = ocwsearch.OCWSearch()
         for c in categories:
             # retrieve items from API's
             c_id = int(c['id'])
             name = c['name']
-            print name
             search_name = name + " tutorial"
-            y_link, y_type = y.search(search_name)
+            y_list, y_type = y.search(search_name)
+            course_list = ocws.search(name)
             # store/update as needed
             match = Module.query(Module.category == c_id).fetch()
-            module = Module(name=name, youtube=y_link, yt_type=y_type, category=c_id)
+            module = Module(name=name, youtube=y_list, yt_type=y_type, courses=course_list, category=c_id)
             if len(match) == 0:        
                 module.put()
             else:
                 match = match[0]
-                if  str(match.name) != name or str(match.yt_type) != y_type or str(match.youtube) != y_link:
+                if  str(match.name) != name or str(match.yt_type) != y_type or match.youtube != y_list or match.courses != course_list:
                     print 'module different'
                     match.name = name
-                    match.youtube = y_link
+                    match.youtube = y_list
                     match.yt_type = y_type
+                    match.courses = course_list
                     match.put()
                     # break
         self.response.headers['Content-Type'] = 'application/json'
