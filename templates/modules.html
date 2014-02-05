@@ -9,11 +9,20 @@
       {% include 'templates/navbar.html' %}
       <h1>Modules</h1>
       <hr>
-      <ul>
+      <table>
         {% for m in modules %}
-          <li><a href = "{{ m.key }}">{{ m.name }}</a></li>
+          {% if modules.index(m)%5 == 0 %}
+            <tr><td><a href = "{{ m.key }}">{{ m.name }}</a></td>
+          {% else %}
+            <td><a href = "{{ m.key }}">{{ m.name }}</a></td>
+          {% endif %}
+
+          {% if modules.index(m)%5 == 4 %}
+            </tr>
+          {% endif %}
         {% endfor %}
-      </ul>
+      </table>
+
     </div>
     {% include 'templates/footer.html' %}
   </body>
