@@ -2,7 +2,8 @@
 
 import webapp2
 
-from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage
+from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
+    DashboardPage
 from info import AccountInfo, ModuleInfo, ModulesInfo
 from actions import UpdateModules
 
@@ -33,7 +34,12 @@ application = webapp2.WSGIApplication([
         handler=ModulePage, 
         name='module'
     ),
-    
+    webapp2.Route(
+        '/dashboard', 
+        handler=DashboardPage, 
+        name='dashboard'
+    ),
+
     # Info
     webapp2.Route(
         '/accountinfo/<account_id:\d+>', 

@@ -72,3 +72,11 @@ class ModulePage(webapp2.RequestHandler):
         print template_values['jobs']
         template = JINJA_ENVIRONMENT.get_template('templates/module.html')
         self.response.write(template.render(template_values))
+
+class DashboardPage(webapp2.RequestHandler):
+
+    def get(self):
+        template_values = basicinfo(users.get_current_user(), self)
+        template_values['title'] = 'Dashboard'    
+        template = JINJA_ENVIRONMENT.get_template('templates/dashboard.html')
+        self.response.write(template.render(template_values))
