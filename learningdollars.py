@@ -17,6 +17,7 @@ from freelancer import job_api_calls, oauth
 from ocw import youtube
 from ocw import ocwsearch
 
+
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -190,7 +191,7 @@ class ModulesPage(webapp2.RequestHandler):
         template_values = basicinfo(users.get_current_user(), self)
         template_values['title'] = 'Modules'    
         mi = ModulesInfo()
-        template_values['modules'] = mi.get_modules()
+        template_values['modules'] = sorted(mi.get_modules(), key = lambda module: module['name'])
         template = JINJA_ENVIRONMENT.get_template('templates/modules.html')
         self.response.write(template.render(template_values))
 
