@@ -204,7 +204,7 @@ class ModulesPage(webapp2.RequestHandler):
         template_values = basicinfo(users.get_current_user(), self)
         template_values['title'] = 'Modules'    
         mi = ModulesInfo()
-        template_values['modules'] = sorted(mi.get_modules(), key = lambda module: module['name'])
+        template_values['modules'] = sorted(mi.get_modules(), key = lambda module: module['name'].lower())
         template = JINJA_ENVIRONMENT.get_template('templates/modules.html')
         self.response.write(template.render(template_values))
 
