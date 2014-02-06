@@ -7,7 +7,7 @@ PROD = 0
 if PROD:
 	WEBSITE = 'https://learningdollars.com/'
 else:
-	WEBSITE = 'http://127.0.0.1:10080/'
+	WEBSITE = 'http://127.0.0.1:8080/'
 
 # General
 SITE_NAME = 'Learning Dollars'
