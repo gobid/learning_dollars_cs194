@@ -69,8 +69,6 @@ class Account(ModelUtils, ndb.Model):
 # Helper Functions
 
 def freelancer_auth(self):
-    # 8c6f443fdaba9bd20f16beaaa5993ea3f4be11b2
-    # 86b4bde9ad3dfcc8ae086ddf20874ac85036aaa8
     consumer = (config.CONSUMER_KEY, config.CONSUMER_SECRET)
     fr_oauth = oauth.FreelancerOauth(consumer)
     request_tokens = fr_oauth.get_request_token(
@@ -82,21 +80,7 @@ def freelancer_auth(self):
     
     redirect_to = fr_oauth.get_authorize_url(app_url=config.SANDBOX_APP)
     print redirect_to
-
-    #redirect_to = oauth.get_authorize_url(consumer, config.WEBSITE + '?', \
-    #    config.SANDBOX_APP, domain=config.SANDBOX)
-    #print 'redirect_to'
-    #print redirect_to
-    #parsed = urlparse.urlparse(redirect_to)
-    #oauth_token = urlparse.parse_qs(parsed.query)['oauth_token'][0]
-    #print 'oauth_token'
-    #print oauth_token
-    
-    # self.redirect(redirect_to)
-    #verifier = '7bd8e8c177544d2b91b8c5a012e45983a096d18a'
-    #access_token = oauth.get_access_token(consumer, oauth_token, verifier, domain=config.SANDBOX)
-    #print 'access_token'
-    #print access_token
+    self.redirect(redirect_to)
 
 def get_access_token(self):
     print 'here in get_access_token'
@@ -107,7 +91,6 @@ def get_access_token(self):
     if oauth_token and oauth_verifier:
         oauth_token, oauth_verifier = str(oauth_token), str(oauth_verifier)
         print 'oauth_token and verif exist'
-        
         # re-get request token
         request_tokens = fr_oauth.get_request_token(
             oauth_callback= config.WEBSITE + '?', 
@@ -116,13 +99,16 @@ def get_access_token(self):
         print 'request_tokens'
         request_token = request_tokens[0]
         #access_token = oauth.get_access_token(consumer, request_token, oauth_verifier)
+        print 'oauth_verifier'
+        print oauth_verifier
         access_token = fr_oauth.upgrade_to_access_token(
             oauth_verifier, 
-            request_token,
+            request_token=oauth_token,
             domain=config.SANDBOX
         )
         print 'ACCESS TOKEN'
         print access_token
+        return access_token
     else:
         print 'oauth_token and verif DONT exist'
 
@@ -141,7 +127,8 @@ def basicinfo(user, self):
             else:    
                 new_account = Account(
                     guser=user, 
-                    freelancer_at=fr_at, 
+                    freelancer_at_key=fr_at[0], 
+                    freelancer_at_secret=fr_at[1],
                     tutorials_completed=[], 
                     jobs_completed=[]
                 )
@@ -222,6 +209,9 @@ class ModulePage(webapp2.RequestHandler):
         template_values['yt_type'] = module['yt_type']
         template_values['courses'] = module['courses']
         template_values['category'] = module['category']
+        template_values['jobs'] = module['jobs']
+        print "template_values['jobs']"
+        print template_values['jobs']
         template = JINJA_ENVIRONMENT.get_template('templates/module.html')
         self.response.write(template.render(template_values))
 
@@ -247,12 +237,16 @@ class ModuleInfo(webapp2.RequestHandler):
     def get_info(self, module_id):
         module_id = int(module_id)
         module = Module.get_by_id(module_id)
+        jac = job_api_calls.JobApiCalls()
+        jobs = jac.get_jobs(module.name)['json-result']['items']
+        # jobs = [{'projectname':'job1'},{'projectname':'job2'}]
         info = {
             'name': module.name,
             'youtube': module.youtube,
             'yt_type': module.yt_type,
             'courses': module.courses,
-            'category': module.category
+            'category': module.category,
+            'jobs': jobs
         }
         return info
 
