@@ -40,7 +40,7 @@ class JobApiCalls(object):
 
 	def get_jobs(self, keyword):
 		searchResults = self.freelancer.Project.searchProjects({
-			'count':1000,
+			'count':10,
 			'searchkeyword':keyword
 		})
 		return searchResults
