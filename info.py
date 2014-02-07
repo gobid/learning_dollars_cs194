@@ -1,4 +1,5 @@
 import webapp2
+import json
 
 from config import config
 from models import Module, Account
@@ -52,3 +53,16 @@ class ModulesInfo(webapp2.RequestHandler):
         modules = self.get_modules()
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(modules)) 
+
+class ProjectBidsInfo(webapp2.RequestHandler):
+
+    def get_bids(self, project_id):
+        jac = job_api_calls.JobApiCalls()
+        bids = jac.get_project_bids(project_id)
+        return bids
+
+    def get(self, project_id):
+        jac = job_api_calls.JobApiCalls()
+        bids = jac.get_project_bids(project_id)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(bids))

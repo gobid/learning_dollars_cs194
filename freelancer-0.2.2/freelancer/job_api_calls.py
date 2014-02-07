@@ -44,3 +44,9 @@ class JobApiCalls(object):
 			'searchkeyword':keyword
 		})
 		return searchResults
+
+	def get_project_bids(self, project_id):
+		searchResults = self.freelancer.Project.getBidsDetails({
+			'projectid': project_id		
+		})
+		return searchResults
