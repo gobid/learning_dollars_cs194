@@ -4,7 +4,7 @@ import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
-from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo
+from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo
 from actions import UpdateModules
 
 application = webapp2.WSGIApplication([
@@ -60,6 +60,11 @@ application = webapp2.WSGIApplication([
         '/getprojectbids/<project_id:\d+>',
         handler=ProjectBidsInfo,
         name='projectbids'
+    ),
+    webapp2.Route(
+        '/postsinfo',
+        handler=PostsInfo,
+        name='getposts'
     ),
 
     # Actions

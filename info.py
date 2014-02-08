@@ -54,6 +54,13 @@ class ModulesInfo(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(modules)) 
 
+class PostsInfo(webapp2.RequestHandler):
+    def get(self):
+        jac = job_api_calls.JobApiCalls()
+        posts = jac.get_posts()
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(posts))
+
 class ProjectBidsInfo(webapp2.RequestHandler):
 
     def get_bids(self, project_id):

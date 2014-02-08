@@ -50,3 +50,12 @@ class JobApiCalls(object):
 			'projectid': project_id		
 		})
 		return searchResults
+
+	def get_posts(self):
+		searchResults = self.freelancer.Employer.getPostedProjectList({
+			'status': 1 # all		
+		})
+		return searchResults
+
+	# def create_milestone_payment(self, project_id, amount, touserid, reasontext):
+
