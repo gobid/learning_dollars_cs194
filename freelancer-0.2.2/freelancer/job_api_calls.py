@@ -63,9 +63,9 @@ class JobApiCalls(object):
 		print status
 		return status
 
-	def retract_bid_on_project(self):
+	def retract_bid_on_project(self, project_id):
 		status = self.freelancer.Account.Freelancer.retractBidFromProject({
-			'projectid':2
+			'projectid':project_id
 		})
 		print status
 		return status
@@ -75,6 +75,17 @@ class JobApiCalls(object):
 			'status': 1 # all
 		})
 		return searchResults
+
+	def create_new_project(self, projectname, projectdesc, jobtypecsv, budgetoption, budget, duration):
+		response = self.freelancer.Employer.postNewProject({
+			'projectname': projectname,
+			'projectdesc': projectdesc,
+			'jobtypecsv': jobtypecsv,
+			'budgetoption': budgetoption,
+			'budget': budget,
+			'duration': duration
+		})
+		return response
 
 	def create_milestone_payment(self, project_id, amount, touserid, reasontext, reasontype):
 		response = self.freelancer.Payment.createMilestonePayment({

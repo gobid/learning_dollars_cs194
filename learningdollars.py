@@ -80,8 +80,8 @@ application = webapp2.WSGIApplication([
         name='createmilestonepayment'
     ),
     webapp2.Route(
-        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/<:description\w+>', 
-        handler=BidOnProject, 
+        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/<description:\w+>', 
+        handler=BidOnProject,
         name='bidonproject'
     ),
 

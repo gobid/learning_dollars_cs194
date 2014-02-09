@@ -78,12 +78,3 @@ class BidOnProject(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
-    # def post(self):
-    #     project_id = self.request.get('project_id')
-    #     amount = self.request.get('amount')
-    #     days = self.request.get('days')
-    #     description = self.request.get('description')
-    #     jac = job_api_calls.JobApiCalls()
-    #     response = jac.place_bid_on_project(project_id, amount, days, description)
-    #     self.response.headers['Content-Type'] = 'application/json'
-    #     self.response.write(json.dumps(response))
