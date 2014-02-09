@@ -58,11 +58,13 @@ class JobApiCalls(object):
 		})
 		return searchResults
 
-	def create_milestone_payment(self, project_id, amount, touserid, reasontext, reasontype):
+	def create_milestone_payment(self, project_id, amount, currency, 
+		touserid, reasontext, reasontype):
 		response = self.freelancer.Payment.createMilestonePayment({
 			'projectid': project_id,
 			'amount': amount,
-			'touserid': touserid,
+			'currency': currency,
+			'tousername': touserid,
 			'reasontext': reasontext,
 			'reasontype': reasontype		
 		})

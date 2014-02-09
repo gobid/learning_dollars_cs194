@@ -54,12 +54,13 @@ class UpdateModules(webapp2.RequestHandler):
 
 class CreateMilestonePayment(webapp2.RequestHandler):
 
-    def get(self, project_id, amount, touserid, reasontext, reasontype):
+    def get(self, project_id, amount, currency, touserid, reasontext, reasontype):
         jac = get_personal_jac()
         if jac:
             response = jac.create_milestone_payment(
                 project_id, 
                 amount, 
+                currency,
                 touserid, 
                 reasontext, 
                 reasontype
