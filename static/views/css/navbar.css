@@ -18,7 +18,15 @@ body {
 	color:#FFFFFF;
 }
 
-td {
-	padding-left: 5px;
-	padding-right: 5px;
+th, td {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#inboxMessages tr, td {
+	border: solid gray 1px;
+}
+
+#sentMessages tr, th, td {
+	border: solid gray 1px;
 }
