@@ -76,11 +76,11 @@ class JobApiCalls(object):
 		sentMessages = self.freelancer.Account.Message.getSentMessages()
 		return sentMessages
 
-	def sent_message(self, project_id, message_text, user_id):
-		message = self.freelancer.Account.Message.sentMessage({
+	def send_message(self, project_id, message_text, user_name):
+		message = self.freelancer.Account.Message.sendMessage({
 			'projectid': project_id,
 			'messagetext': message_text,
-			'userid': user_id
+			'username': user_name
 		})
 		return message
 

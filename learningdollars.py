@@ -4,8 +4,9 @@ import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
-from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo
-from actions import UpdateModules, CreateMilestonePayment
+from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
+    InboxMessages, SentMessages
+from actions import UpdateModules, CreateMilestonePayment, SendMessage
 
 application = webapp2.WSGIApplication([
     # Views
@@ -66,6 +67,16 @@ application = webapp2.WSGIApplication([
         handler=PostsInfo,
         name='getposts'
     ),
+    webapp2.Route(
+        '/inboxMessages',
+        handler=InboxMessages,
+        name='getInboxMessages'
+    ),
+    webapp2.Route(
+        '/sentMessages',
+        handler=SentMessages,
+        name='getSentMessages'
+    ),
 
     # Actions
     webapp2.Route(
@@ -80,9 +91,9 @@ application = webapp2.WSGIApplication([
         name='createmilestonepayment'
     ),
     webapp2.Route(
-        '/sentMessage/<user_id:\d+>/<project_id:\d+>',
-        handler=SentMessage,
-        name='sentMessage'
+        '/sendMessage/<project_id:\d+>/<message_text:\w+>/<user_name:\w+>',
+        handler=SendMessage,
+        name='sendMessage'
     ),
 
 ], debug=True)

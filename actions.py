@@ -71,4 +71,25 @@ class CreateMilestonePayment(webapp2.RequestHandler):
         self.response.write(json.dumps(response))
 
 
-class 
+class SendMessage(webapp2.RequestHandler):
+
+    def get(self, project_id, message_text, user_name):
+        jac = get_personal_jac()
+        if jac:
+            response = jac.send_message(
+                project_id,
+                message_text,
+                user_name
+            )
+        else:
+            response = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+
+
+
+
+
+
