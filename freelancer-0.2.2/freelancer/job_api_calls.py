@@ -50,3 +50,26 @@ class JobApiCalls(object):
 			'projectid': project_id		
 		})
 		return searchResults
+
+	# def get_posted_projects(self):
+	# 	projects_posted = self.freelancer.Account.Employer.getPostedProjectList({
+	# 		'status':1
+	# 	})
+	# 	return projects_posted
+
+	def place_bid_on_project(self):
+		status = self.freelancer.Account.Freelancer.placeBidOnProject({
+			'amount':20,
+			'days':6,
+			'description': 'hello test',
+			'projectid':1036
+		})
+		print status
+		return status
+
+	def retract_bid_on_project(self):
+		status = self.freelancer.Account.Freelancer.retractBidFromProject({
+			'projectid':2
+		})
+		print status
+		return status
