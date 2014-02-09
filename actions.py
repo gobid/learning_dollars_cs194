@@ -29,8 +29,9 @@ class UpdateModules(webapp2.RequestHandler):
             module = Module(
                 name=name, 
                 youtube=y_list, 
-                yt_type=y_type, courses=course_list, category=c_id)
-            
+                yt_type=y_type, courses=course_list, category=c_id
+            )
+
             if len(match) == 0:        
                 module.put()
             else:
@@ -49,7 +50,10 @@ class UpdateModules(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(categories)) 
 
-#class CreateMilestonePayment(webapp2.RequestHandler):
+class CreateMilestonePayment(webapp2.RequestHandler):
 
-#    def 
-
+    def get(self, project_id, amount, touserid, reasontext, reasontype):
+        jac = job_api_calls.JobApiCalls()
+        response = jac.create_milestone_payment()
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))

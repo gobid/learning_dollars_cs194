@@ -19,7 +19,8 @@ CONSUMER_KEY = '8c6f443fdaba9bd20f16beaaa5993ea3f4be11b2'
 CONSUMER_SECRET = '86b4bde9ad3dfcc8ae086ddf20874ac85036aaa8'
 
 # Non-user associated tokens for loading information even when user is not
-# logged in. Associated with test25@example.com on Govi's localhost. 
+# logged in. Associated with test25@example.com and govindadasu login for 
+# sandbox. 
 TOKEN_KEY = 'c049ddd3228d3764dfd666c09af5f3296b778c54'
 TOKEN_SECRET = 'd932b5513f18a236afc47d2ad94a86fd44dce0e0'
 

@@ -2,8 +2,9 @@ import webapp2
 import json
 
 from config import config
-from models import Module, Account
 from freelancer import job_api_calls, oauth
+from models import Module, Account
+from functions import get_personal_jac
 
 # Info Classes (JSON response)
 
@@ -56,8 +57,12 @@ class ModulesInfo(webapp2.RequestHandler):
 
 class PostsInfo(webapp2.RequestHandler):
     def get(self):
-        jac = job_api_calls.JobApiCalls()
-        posts = jac.get_posts()
+        jac = get_personal_jac()
+        if jac:
+            posts = jac.get_posts()
+        else:
+            posts = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(posts))
 
