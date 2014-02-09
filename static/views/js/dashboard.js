@@ -37,18 +37,47 @@ $(document).ready(function() {
 
 	$.get('/inboxMessages', function(data) {
 		messages = data['json-result']['items']
-		
+
+		for (var m in messages) {
+
+			$('#inboxMessages').append('<tr><td>' + messages[m].fromusername 
+				+ '</td><td>' + messages[m].text + '</td></tr>')
+		}
 	})
 
+	$.get('/sentMessages', function(data) {
+		messages = data['json-result']['items']
+
+		for (var m in messages) {
+
+			$('#sentMessages').append('<tr><td>' + messages[m].tousername 
+				+ '</td><td>' + messages[m].text + '</td></tr>')
+		}
+	})
+
+
 	$('#sendBtn').click(function (e) {
+		e.preventDefault();
 		projectId = $('#project_id').val()
 		messageText = $('#message_text').val()
 		toUserName = $('#to_user_name').val()
-		url = '/sendMessage/1034/' + messageText + '/' + toUserName
-		window.console&&console.log(url)
+		url = '/sendMessage/' + projectId + '/' + messageText + '/' + toUserName
 
 		$.get(url, function(data) {
-			$('#newMessage').append(data)
+			result = data['json-result']
+			if(result){
+				$('#newMessage').append("<h4 class=\"response\">SEND!</h4>")
+				setTimeout(function(){ 
+					$('#newMessage').find('form')[0].reset() 
+				}, 3000)
+			} else {
+				result = data['errors']
+				error_txt = result['error'].longmsg
+				$('#newMessage').append("<h4 class=\"response\">" + error_txt.toUpperCase() + "</h4>")
+			}
+			setTimeout(function(){ 
+				$('.response').fadeOut() 
+			}, 3000)
 		})
 	})
 })
