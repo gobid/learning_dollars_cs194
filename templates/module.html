@@ -33,7 +33,10 @@
                 Days: <input type="text" id="days">
                 <br>
                 Description: <input type="text" id="description">
-                <input type="submit" class="bid_submit" projectid = '1034'>
+                <!-- <input type="submit" class="bid_submit" projectid = '1034'> -->
+                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='1034'>
+                  Submit
+                </button>
             </div>
             </li>
             {% for job in jobs %}
@@ -47,7 +50,10 @@
                 Days: <input type="text" id="days">
                 <br>
                 Description: <input type="text" id="description">
-                <input type="submit" class="bid_submit" projectid = '{{job.projectid}}'>
+               <!--  <input type="submit" class="bid_submit" projectid = '{{job.projectid}}'> -->
+                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='{{job.projectid}}'>
+                  Submit
+                </button>
               </div>
               </li>
             {% endfor %}
