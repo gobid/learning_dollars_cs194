@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	// My Posts handlers (Tim & Govi)
-
+/*
 	$("#post_project").click(post_project);
 
 	$.get('/postsinfo', function(data){
@@ -12,10 +12,10 @@ $(document).ready(function() {
 		}
 	})
 
-
+*/
 	$.get('/getplacedbids', function(data){
-		console.log(data)
-		returnval = data['count']
+		data = jQuery.parseJSON(data)
+		returnval = data['json-result']['items']
 		console.log(returnval)
 		// if(returnval) {
 		// 	bids = returnval['items'];
@@ -30,6 +30,7 @@ $(document).ready(function() {
 		// }
 	})
 
+/*
 	$.get('/getprojectbids/1034', function(data){
 		bids = data['json-result']['items']
 		for (var b in bids){
@@ -40,6 +41,8 @@ $(document).ready(function() {
 				+ bids[b].provider_userid + '" >Pick</button>' + '</li>')
 		}
 	})
+*/
+
 
 	// My Bids handlers (Will)
 
@@ -56,7 +59,7 @@ $(document).ready(function() {
 
 	// Mailbox handlers (Leo)
 
-
+/*
 	$('#messageTabs a').click(function (e) {
 	  	e.preventDefault()
 	  	$(this).tab('show')
@@ -107,6 +110,8 @@ $(document).ready(function() {
 			}, 3000)
 		})
 	})
+
+*/
 })
 
 //Helper Functions
