@@ -9,8 +9,28 @@
       {% include 'templates/navbar.html' %}
       <h1>Dashboard</h1>
       <hr>
+      <div class = "row">
+        <div class = "col-md-4"> <!-- bids --> 
+        </div>
+        <div class = "col-md-4"> <!-- milestones for bid --> 
+        </div>
+        <div class = "col-md-4"> <!-- mailbox --> 
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-md-4"> <!-- posts --> 
+        </div>
+        <div class = "col-md-4"> <!-- bids on post --> 
+          <h1>Bids on Post</h1>
+          <ol id = "bids-on-post" postid = "8"> <!--eventually load postid with jquery-->
+          </ol>
+        </div>
+        <div class = "col-md-4"> <!-- milestones on post --> 
+        </div>
+      </div>
     </div>
     {% include 'templates/footer.html' %}
+    <script src = 'static/views/js/dashboard.js'></script>
   </body>
 </html>
 {% endautoescape %}

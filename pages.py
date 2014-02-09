@@ -59,8 +59,6 @@ class ModulePage(webapp2.RequestHandler):
         template_values = basicinfo(users.get_current_user(), self)
         mi = ModuleInfo()
         module = mi.get_info(module_id)
-        print 'module'
-        print module
         template_values['title'] = module['name']
         template_values['name'] = module['name']
         template_values['youtube'] = module['youtube']
@@ -68,8 +66,6 @@ class ModulePage(webapp2.RequestHandler):
         template_values['courses'] = module['courses']
         template_values['category'] = module['category']
         template_values['jobs'] = module['jobs']
-        print "template_values['jobs']"
-        print template_values['jobs']
         template = JINJA_ENVIRONMENT.get_template('templates/module.html')
         self.response.write(template.render(template_values))
 

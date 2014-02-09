@@ -33,8 +33,9 @@ def get_access_token(self):
     else:
         print 'oauth_token and oauth_verifier DONT exist'
 
+# For Views:
+# Retrieves basic info, completes a session check.
 def basicinfo(user, self):
-    # retrieves basic info, completes a session check
     if user:
         url = users.create_logout_url(self.request.uri)
         url_linktext = 'Logout'
@@ -66,3 +67,25 @@ def basicinfo(user, self):
         'nickname': nickname
     }
     return template_values
+
+# For Controllers: 
+# Completes session check without redirecting for login on no session.
+def get_account():
+    user = users.get_current_user()
+    if user:
+        accounts = Account.query(Account.guser == user).fetch()
+        if len(accounts) > 0:
+            account = accounts[0]
+            return account
+    return None
+
+def get_personal_jac():
+    account = get_account()
+    if account:
+        token = (
+            account.freelancer_at_key, 
+            account.freelancer_at_secret
+        )
+        jac = job_api_calls.JobApiCalls(token=token)
+        return jac
+    return None
