@@ -4,8 +4,14 @@ import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
+<<<<<<< HEAD
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo
 from actions import UpdateModules, CreateMilestonePayment, BidOnProject, PostNewProject
+=======
+from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
+    InboxMessages, SentMessages
+from actions import UpdateModules, CreateMilestonePayment, SendMessage
+>>>>>>> 218bcd6202d9de2651ecb5418efbc15f053e2651
 
 application = webapp2.WSGIApplication([
     # Views
@@ -66,6 +72,16 @@ application = webapp2.WSGIApplication([
         handler=PostsInfo,
         name='getposts'
     ),
+    webapp2.Route(
+        '/inboxMessages',
+        handler=InboxMessages,
+        name='getInboxMessages'
+    ),
+    webapp2.Route(
+        '/sentMessages',
+        handler=SentMessages,
+        name='getSentMessages'
+    ),
 
     # Actions
     webapp2.Route(
@@ -74,8 +90,8 @@ application = webapp2.WSGIApplication([
         name='updatemodules'
     ),
     webapp2.Route(
-        '/createmilestonepayment/<project_id:\d+>/<amount:\w+>/' + \
-        '<touserid:\w+>/<reasontext:\w+>/<reasontype:\w+>', 
+        '/createmilestonepayment/<project_id:\d+>/<amount:\d+>/' + \
+        '<currency:\w+>/<touserid:\w+>/<reasontext:\w+>/<reasontype:\w+>', 
         handler=CreateMilestonePayment, 
         name='createmilestonepayment'
     ),
@@ -92,5 +108,10 @@ application = webapp2.WSGIApplication([
         name='postnewproject'
     ),
 
-
+    webapp2.Route(
+        '/sendMessage/<project_id:\d+>/<message_text:\w+>/<user_name:\w+>',
+        handler=SendMessage,
+        name='sendMessage'
+    ),
+    
 ], debug=True)

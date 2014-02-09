@@ -76,6 +76,7 @@ class JobApiCalls(object):
 		})
 		return searchResults
 
+
 	def post_new_project(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
 		print 'hitttttt!!!'
 		response = self.freelancer.Employer.postNewProject({
@@ -88,11 +89,14 @@ class JobApiCalls(object):
 		print response
 		return response
 
-	def create_milestone_payment(self, project_id, amount, touserid, reasontext, reasontype):
+
+	def create_milestone_payment(self, project_id, amount, currency, 
+		touserid, reasontext, reasontype):
 		response = self.freelancer.Payment.createMilestonePayment({
 			'projectid': project_id,
 			'amount': amount,
-			'touserid': touserid,
+			'currency': currency,
+			'tousername': touserid,
 			'reasontext': reasontext,
 			'reasontype': reasontype		
 		})
@@ -107,11 +111,11 @@ class JobApiCalls(object):
 		sentMessages = self.freelancer.Account.Message.getSentMessages()
 		return sentMessages
 
-	def sent_message(self, project_id, message_text, user_id):
-		message = self.freelancer.Account.Message.sentMessage({
+	def send_message(self, project_id, message_text, user_name):
+		message = self.freelancer.Account.Message.sendMessage({
 			'projectid': project_id,
 			'messagetext': message_text,
-			'userid': user_id
+			'username': user_name
 		})
 		return message
 

@@ -54,12 +54,13 @@ class UpdateModules(webapp2.RequestHandler):
 
 class CreateMilestonePayment(webapp2.RequestHandler):
 
-    def get(self, project_id, amount, touserid, reasontext, reasontype):
+    def get(self, project_id, amount, currency, touserid, reasontext, reasontype):
         jac = get_personal_jac()
         if jac:
             response = jac.create_milestone_payment(
                 project_id, 
                 amount, 
+                currency,
                 touserid, 
                 reasontext, 
                 reasontype
@@ -69,6 +70,7 @@ class CreateMilestonePayment(webapp2.RequestHandler):
             + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+
 
 class BidOnProject(webapp2.RequestHandler):
 
@@ -83,6 +85,21 @@ class PostNewProject(webapp2.RequestHandler):
     def get(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
         jac = job_api_calls.JobApiCalls()
         response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)
+
+
+class SendMessage(webapp2.RequestHandler):
+
+    def get(self, project_id, message_text, user_name):
+        jac = get_personal_jac()
+        if jac:
+            response = jac.send_message(
+                project_id,
+                message_text,
+                user_name
+            )
+        else:
+            response = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
