@@ -67,3 +67,20 @@ class JobApiCalls(object):
 			'reasontype': reasontype		
 		})
 		return response
+
+	def get_inbox_messages(self):
+		inboxMessages = self.freelancer.Account.Message.getInboxMessages()
+		return inboxMessages
+
+	def get_sent_messages(self):
+		sentMessages = self.freelancer.Account.Message.getSentMessages()
+		return sentMessages
+
+	def sent_message(self, project_id, message_text, user_id):
+		message = self.freelancer.Account.Message.sentMessage({
+			'projectid': project_id,
+			'messagetext': message_text,
+			'userid': user_id
+		})
+		return message
+
