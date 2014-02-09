@@ -27,6 +27,7 @@ $(document).ready(function() {
 		messages = data['json-result']['items']
 
 		for (var m in messages) {
+
 			$('#inboxMessages').append('<tr><td>' + messages[m].fromusername 
 				+ '</td><td>' + messages[m].text + '</td></tr>')
 		}
@@ -36,6 +37,7 @@ $(document).ready(function() {
 		messages = data['json-result']['items']
 
 		for (var m in messages) {
+
 			$('#sentMessages').append('<tr><td>' + messages[m].tousername 
 				+ '</td><td>' + messages[m].text + '</td></tr>')
 		}
@@ -53,13 +55,17 @@ $(document).ready(function() {
 			result = data['json-result']
 			if(result){
 				$('#newMessage').append("<h4 class=\"response\">SEND!</h4>")
+				setTimeout(function(){ 
+					$('#newMessage').find('form')[0].reset() 
+				}, 3000)
 			} else {
 				result = data['errors']
 				error_txt = result['error'].longmsg
 				$('#newMessage').append("<h4 class=\"response\">" + error_txt.toUpperCase() + "</h4>")
 			}
-			setTimeout(function(){ $('.response').fadeOut() }, 3000)
-			$('#newMessage').find('form')[0].reset();
+			setTimeout(function(){ 
+				$('.response').fadeOut() 
+			}, 3000)
 		})
 	})
 })

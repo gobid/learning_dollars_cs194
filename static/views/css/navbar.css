@@ -23,10 +23,7 @@ th, td {
 	padding-right: 10px;
 }
 
-#inboxMessages tr, td {
-	border: solid gray 1px;
-}
-
-#sentMessages tr, th, td {
-	border: solid gray 1px;
+.tab-content {
+	max-height: 500px;
+    overflow-y:scroll; 
 }
