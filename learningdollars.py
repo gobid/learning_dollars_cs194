@@ -5,7 +5,7 @@ import webapp2
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo
-from actions import UpdateModules, CreateMilestonePayment, BidOnProject
+from actions import UpdateModules, CreateMilestonePayment, BidOnProject, PostNewProject
 
 application = webapp2.WSGIApplication([
     # Views
@@ -79,10 +79,18 @@ application = webapp2.WSGIApplication([
         handler=CreateMilestonePayment, 
         name='createmilestonepayment'
     ),
+
     webapp2.Route(
         '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/<description:\w+>', 
         handler=BidOnProject,
         name='bidonproject'
     ),
+
+    webapp2.Route(
+        '/postnewproject/<projectname:\w+>/<projectdesc:\w+>/<jobtypecsv:\w+>/<budgetoption:\d+>/<duration:\d+>', 
+        handler=PostNewProject,
+        name='postnewproject'
+    ),
+
 
 ], debug=True)

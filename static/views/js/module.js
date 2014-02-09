@@ -8,16 +8,17 @@ $(document).ready(function() {
  */
 function initializePage() {
 	console.log("init!!!! ");
-    $("#bid_submit").click(make_bid_request);
+    $(".bid_submit").click(make_bid_request);
 }
 
 function make_bid_request(e) {
-	id = $("#project_id").val();
+	id = this.getAttribute('projectid');
+	console.log('attr id' + id)
 	amount = $("#amount").val();
 	days = $("#days").val();
 	description = $("#description").val();
 	$.get('/bidonproject/' + id + '/' + amount + '/' + days + '/' + description, function(data){
-		response = data['json-result']
+		response = data['json-result'];
 		console.log(response);
 	})
 }

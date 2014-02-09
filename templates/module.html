@@ -7,13 +7,7 @@
   <body>
     <div class="container">
       {% include 'templates/navbar.html' %}
-      <div class-"place-bid">
-          ProjectID: <input type="text" id="project_id">
-          Amount: <input type="text" id="amount">
-          Days: <input type="text" id="days">
-          Description: <input type="text" id="description">
-          <input type="submit" id="bid_submit">
-      </div>
+     
       <div class = "row">
         <div class = "col-md-8">
           <h1>{{ name }}</h1>
@@ -33,8 +27,18 @@
           <h1>Jobs</h1>
           <ol>
             {% for job in jobs %}
-              <li><b><a target = '_blank' href = ''>{{ job.projectname }}</a></b>
-              {% if job.averagebid != False %}<b>${{ job.averagebid }}</b>{% endif %}
+              <li><b><a target = '_blank' href = ''>
+                {{ job.projectname }}</a></b>
+                {% if job.averagebid != False %}<b>${{ job.averagebid }}</b>
+              {% endif %}
+                <div class-"place-bid">
+                Amount: <input type="text" id="amount">
+                <br>
+                Days: <input type="text" id="days">
+                <br>
+                Description: <input type="text" id="description">
+                <input type="submit" class="bid_submit" projectid = '{{job.projectid}}'>
+              </div>
               </li>
             {% endfor %}
           </ol>
