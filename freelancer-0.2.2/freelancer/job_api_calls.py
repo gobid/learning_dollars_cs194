@@ -12,7 +12,8 @@ token = (config.TOKEN_KEY, config.TOKEN_SECRET)
 
 class JobApiCalls(object):
 
-	def __init__(self):
+	def __init__(self, token=token): 
+		# use default token unless otherwise specified
 		self.client = FreelancerClient(consumer, token)
 		self.freelancer = Freelancer(self.client, config.SANDBOX)
 
@@ -51,18 +52,13 @@ class JobApiCalls(object):
 		})
 		return searchResults
 
-	# def get_posted_projects(self):
-	# 	projects_posted = self.freelancer.Account.Employer.getPostedProjectList({
-	# 		'status':1
-	# 	})
-	# 	return projects_posted
-
-	def place_bid_on_project(self):
+	#use project 1037
+	def place_bid_on_project(self, project_id, amount, days, description):
 		status = self.freelancer.Account.Freelancer.placeBidOnProject({
-			'amount':20,
-			'days':6,
-			'description': 'hello test',
-			'projectid':1036
+			'amount':amount,
+			'days':days,
+			'description': description,
+			'projectid':project_id
 		})
 		print status
 		return status
@@ -73,3 +69,20 @@ class JobApiCalls(object):
 		})
 		print status
 		return status
+
+	def get_posts(self):
+		searchResults = self.freelancer.Employer.getPostedProjectList({
+			'status': 1 # all
+		})
+		return searchResults
+
+	def create_milestone_payment(self, project_id, amount, touserid, reasontext, reasontype):
+		response = self.freelancer.Payment.createMilestonePayment({
+			'projectid': project_id,
+			'amount': amount,
+			'touserid': touserid,
+			'reasontext': reasontext,
+			'reasontype': reasontype		
+		})
+		return response
+

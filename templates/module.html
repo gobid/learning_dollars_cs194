@@ -7,6 +7,13 @@
   <body>
     <div class="container">
       {% include 'templates/navbar.html' %}
+      <div class-"place-bid">
+          ProjectID: <input type="text" id="project_id">
+          Amount: <input type="text" id="amount">
+          Days: <input type="text" id="days">
+          Description: <input type="text" id="description">
+          <input type="submit" id="bid_submit">
+      </div>
       <div class = "row">
         <div class = "col-md-8">
           <h1>{{ name }}</h1>
@@ -48,6 +55,7 @@
          </table>
      </div>
     {% include 'templates/footer.html' %}
+     <script src = 'static/views/js/module.js'></script>
   </body>
 </html>
 {% endautoescape %}
