@@ -79,3 +79,45 @@ class CreateMilestonePayment(webapp2.RequestHandler):
             + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+
+
+class BidOnProject(webapp2.RequestHandler):
+
+    def get(self, project_id, amount, days, description):
+        jac = get_personal_jac()
+        response = jac.place_bid_on_project(project_id, amount, days, description)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+class RetractBid(webapp2.RequestHandler):
+
+    def get(self, project_id):
+        jac = get_personal_jac()
+        response = jac.retract_bid(project_id)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+class PostNewProject(webapp2.RequestHandler):
+
+    def get(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
+        jac = get_personal_jac()
+        response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+class SendMessage(webapp2.RequestHandler):
+
+    def get(self, project_id, message_text, user_name):
+        jac = get_personal_jac()
+        if jac:
+            response = jac.send_message(
+                project_id,
+                message_text,
+                user_name
+            )
+        else:
+            response = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+

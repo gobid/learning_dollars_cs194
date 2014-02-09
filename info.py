@@ -78,3 +78,26 @@ class ProjectBidsInfo(webapp2.RequestHandler):
         bids = jac.get_project_bids(project_id)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(bids))
+
+class InboxMessages(webapp2.RequestHandler):
+
+    def get(self):
+        jac = get_personal_jac()
+        if jac:
+            messages = jac.get_inbox_messages()
+        else:
+            messages = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(messages))
+
+class SentMessages(webapp2.RequestHandler):
+    def get(self):
+        jac = get_personal_jac()
+        if jac:
+            messages = jac.get_sent_messages()
+        else:
+            messages = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(messages))

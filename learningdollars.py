@@ -4,8 +4,10 @@ import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
-from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo
-from actions import UpdateModules, CreateMilestonePayment, SelectWinner
+from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
+    SendMessage, BidOnProject, PostNewProject, RetractBid
+from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
+    InboxMessages, SentMessages
 
 application = webapp2.WSGIApplication([
     # Views
@@ -66,6 +68,16 @@ application = webapp2.WSGIApplication([
         handler=PostsInfo,
         name='getposts'
     ),
+    webapp2.Route(
+        '/inboxMessages',
+        handler=InboxMessages,
+        name='getInboxMessages'
+    ),
+    webapp2.Route(
+        '/sentMessages',
+        handler=SentMessages,
+        name='getSentMessages'
+    ),
 
     # Actions
     webapp2.Route(
@@ -85,4 +97,28 @@ application = webapp2.WSGIApplication([
         name='createmilestonepayment'
     ),
 
+    webapp2.Route(
+        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/<description:[^/]+>', 
+        handler=BidOnProject,
+        name='bidonproject'
+    ),
+
+     webapp2.Route(
+        '/retractbid/<project_id:\d+>', 
+        handler=RetractBid,
+        name='retractbid'
+    ),
+
+    webapp2.Route(
+        '/postnewproject/<projectname:[^/]+>/<projectdesc:[^/]+>/<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>', 
+        handler=PostNewProject,
+        name='postnewproject'
+    ),
+
+    webapp2.Route(
+        '/sendMessage/<project_id:\d+>/<message_text:[^/]+>/<user_name:\w+>',
+        handler=SendMessage,
+        name='sendMessage'
+    ),
+    
 ], debug=True)

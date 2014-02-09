@@ -10,13 +10,20 @@ body {
 .btn {
 	background-color: #000000;
 	border-color: #000000;
+	color:#D0D0D0;
 }
 
 .btn:hover {
 	background-color: #282828;
+	color:#FFFFFF;
 }
 
-td {
-	padding-left: 5px;
-	padding-right: 5px;
+th, td {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.tab-content {
+	max-height: 500px;
+    overflow-y:scroll; 
 }
