@@ -69,6 +69,3 @@ class CreateMilestonePayment(webapp2.RequestHandler):
             + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
-
-
-class 

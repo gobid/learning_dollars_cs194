@@ -83,4 +83,3 @@ class JobApiCalls(object):
 			'userid': user_id
 		})
 		return message
-

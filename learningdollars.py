@@ -79,10 +79,4 @@ application = webapp2.WSGIApplication([
         handler=CreateMilestonePayment, 
         name='createmilestonepayment'
     ),
-    webapp2.Route(
-        '/sentMessage/<user_id:\d+>/<project_id:\d+>',
-        handler=SentMessage,
-        name='sentMessage'
-    ),
-
 ], debug=True)
