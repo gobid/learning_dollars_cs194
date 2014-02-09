@@ -45,7 +45,7 @@ $(document).ready(function() {
 
 //Tim
 function post_project(e) {
-	console.log("hit!!!!");
+	$('#log_message').remove();
 	name = $("#name").val();
 	description = $("#description").val();
 	type = $("#type").val();
@@ -53,7 +53,12 @@ function post_project(e) {
 	duration = $("#duration").val();
 	$.get('/postnewproject/' + name + '/' + description + '/' + type + '/' + budget_option + '/' + duration, function(data){
 		response = data['json-result'];
-		console.log(response);
+		if(response) {
+			url = response['projecturl'];
+			$("#post_project").after("<h2 id='log_message'>Project sucessfully posted, see url to view on freelancer: " + url + "</h2>");
+		} else {
+			$("#post_project").after("<h3 id='log_message'>Error, submit again</h3>");
+		}
 	})
 }
 

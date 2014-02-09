@@ -54,16 +54,13 @@
             <!-- Second Row -->
             <div class = "row">
                 <div class = "col-md-4"> <!-- posts --> 
-                    <div class-"place-bid">
-                     
-                        Name: <input type="text" id="name">
-                        <br>
-                        Description: <input type="text" id="description">
-                        <br>
-                        Job Type: <input type="text" id="type">
-                        <br>
-                        Budget Option
-                        <select id="budget_option">
+                    <div class-"post_project"> 
+                        <h2>Post New Project</h2>
+                        Name: <input class="form-control" type="text" id="name">
+                        Job Type: <input class="form-control" type="text" id="type" placeholder="ex: 'Java' ">
+                        Description: <textarea class="form-control" id="description"></textarea>
+                        Budget Option:
+                        <select class="form-control" id="budget_option">
                             <option value="1">$250-750</option>
                             <option value="2">$750-1500</option>
                             <option value="3">$1500-3000</option>
@@ -71,9 +68,10 @@
                             <option value="5">$30-$250</option>
                             <option value="5">&gt$5000</option>
                         </select>
-                             <br>
-                        Duration (Max 60 days): <input type="text" id="duration">
-                        <input type="submit" id="post_project">
+                        Duration (Max 60 days): <input class="form-control" type="text" id="duration">
+                        <br>
+                        <button type="button" class="btn btn-default btn-lg" id='post_project'> Post Project
+                        </button>
                     </div>
                 </div>
                 <div class = "col-md-4"> <!-- bids on post --> 
