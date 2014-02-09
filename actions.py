@@ -52,15 +52,24 @@ class UpdateModules(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(categories)) 
 
+class SelectWinner(webapp2.RequestHandler):
+
+    def get(self, project_id, winner_id):
+        jac = job_api_calls.JobApiCalls()
+        response = jac.select_winner(project_id, winner_id)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response)) 
+
 class CreateMilestonePayment(webapp2.RequestHandler):
 
-    def get(self, project_id, amount, currency, touserid, reasontext, reasontype):
+    def get(self, project_id, amount, currency_id, touserid, reasontext, 
+        reasontype):
         jac = get_personal_jac()
         if jac:
             response = jac.create_milestone_payment(
                 project_id, 
                 amount, 
-                currency,
+                currency_id,
                 touserid, 
                 reasontext, 
                 reasontype

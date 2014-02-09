@@ -102,14 +102,12 @@ class SentMessages(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(messages))
 
+
 class GetPlacedBids(webapp2.RequestHandler):
 
     def get(self):
         jac = get_personal_jac()
         placed_bids = jac.get_placed_bids()
         self.response.write(json.dumps(placed_bids))
-
-
-
 
 

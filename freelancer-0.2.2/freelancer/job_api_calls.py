@@ -52,6 +52,13 @@ class JobApiCalls(object):
 		})
 		return searchResults
 
+	def select_winner(self, project_id, winner_id):
+		response = self.freelancer.Employer.chooseWinnerForProject({
+			'projectid': project_id,
+			'useridcsv': winner_id
+		})
+		return response
+
 	#use project 1037
 	def place_bid_on_project(self, project_id, amount, days, description):
 		status = self.freelancer.Account.Freelancer.placeBidOnProject({
@@ -76,7 +83,6 @@ class JobApiCalls(object):
 		})
 		return searchResults
 
-
 	def post_new_project(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
 		print 'hitttttt!!!'
 		response = self.freelancer.Employer.postNewProject({
@@ -89,13 +95,15 @@ class JobApiCalls(object):
 		print response
 		return response
 
-
 	def create_milestone_payment(self, project_id, amount, currency, 
 		touserid, reasontext, reasontype):
+		print 'account balance'
+		print self.freelancer.Payment.getAccountBalanceStatus()
+		print 'amount: ' + amount
 		response = self.freelancer.Payment.createMilestonePayment({
 			'projectid': project_id,
 			'amount': amount,
-			'currency': currency,
+			'currency': currency_id,
 			'tousername': touserid,
 			'reasontext': reasontext,
 			'reasontype': reasontype		
