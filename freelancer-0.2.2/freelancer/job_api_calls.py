@@ -127,3 +127,10 @@ class JobApiCalls(object):
 		})
 		return message
 
+	def get_placed_bids(self):
+		placed_bids = self.freelancer.Account.Freelancer.getProjectListForPlacedBids({
+			'status': 1
+		})
+		print placed_bids
+		return placed_bids
+
