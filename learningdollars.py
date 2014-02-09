@@ -5,7 +5,7 @@ import webapp2
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo
-from actions import UpdateModules, CreateMilestonePayment
+from actions import UpdateModules, CreateMilestonePayment, SelectWinner
 
 application = webapp2.WSGIApplication([
     # Views
@@ -74,8 +74,13 @@ application = webapp2.WSGIApplication([
         name='updatemodules'
     ),
     webapp2.Route(
+        '/selectwinner/<project_id:\d+>/<winner_id:\d+>', 
+        handler=SelectWinner, 
+        name='selectwinner'
+    ),
+    webapp2.Route(
         '/createmilestonepayment/<project_id:\d+>/<amount:\d+>/' + \
-        '<currency:\w+>/<touserid:\w+>/<reasontext:\w+>/<reasontype:\w+>', 
+        '<currency_id:\d+>/<touserid:\w+>/<reasontext:\w+>/<reasontype:\w+>', 
         handler=CreateMilestonePayment, 
         name='createmilestonepayment'
     ),
