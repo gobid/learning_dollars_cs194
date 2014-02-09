@@ -13,12 +13,11 @@ function initializePage() {
 
 function make_bid_request(e) {
 	id = this.getAttribute('projectid');
-	console.log('attr id' + id)
 	amount = $("#amount").val();
 	days = $("#days").val();
 	description = $("#description").val();
 	$.get('/bidonproject/' + id + '/' + amount + '/' + days + '/' + description, function(data){
-		response = data['json-result'];
-		console.log(response);
+		response = data['json-result']['statusconfirmation'];
+		console.log('RESPONSE!: ' + response);
 	})
 }

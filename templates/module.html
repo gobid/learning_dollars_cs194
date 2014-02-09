@@ -26,7 +26,16 @@
         <div class = "col-md-4">
           <h1>Jobs</h1>
           <ol>
-            <li><b><a target = '_blank' href = '' projectid = '1034'>Ruby on Rails</a></b></li>
+            <li><b><a target = '_blank' href = '' projectid = '1034'>Ruby on Rails</a></b>
+            <div class-"place-bid">
+                Amount: <input type="text" id="amount">
+                <br>
+                Days: <input type="text" id="days">
+                <br>
+                Description: <input type="text" id="description">
+                <input type="submit" class="bid_submit" projectid = '1034'>
+            </div>
+            </li>
             {% for job in jobs %}
               <li><b><a target = '_blank' href = ''>
                 {{ job.projectname }}</a></b>

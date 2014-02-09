@@ -4,14 +4,10 @@ import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
-<<<<<<< HEAD
-from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo
-from actions import UpdateModules, CreateMilestonePayment, BidOnProject, PostNewProject
-=======
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
     InboxMessages, SentMessages
-from actions import UpdateModules, CreateMilestonePayment, SendMessage
->>>>>>> 218bcd6202d9de2651ecb5418efbc15f053e2651
+from actions import UpdateModules, CreateMilestonePayment, SendMessage, BidOnProject, PostNewProject
+
 
 application = webapp2.WSGIApplication([
     # Views
