@@ -54,12 +54,13 @@ class UpdateModules(webapp2.RequestHandler):
 
 class CreateMilestonePayment(webapp2.RequestHandler):
 
-    def get(self, project_id, amount, touserid, reasontext, reasontype):
+    def get(self, project_id, amount, currency, touserid, reasontext, reasontype):
         jac = get_personal_jac()
         if jac:
             response = jac.create_milestone_payment(
                 project_id, 
                 amount, 
+                currency,
                 touserid, 
                 reasontext, 
                 reasontype
@@ -69,6 +70,7 @@ class CreateMilestonePayment(webapp2.RequestHandler):
             + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+<<<<<<< HEAD
 
 
 class SendMessage(webapp2.RequestHandler):
@@ -93,3 +95,5 @@ class SendMessage(webapp2.RequestHandler):
 
 
 
+=======
+>>>>>>> 7405a9b4611d6a0cfa982225741ff530eb0f29c3

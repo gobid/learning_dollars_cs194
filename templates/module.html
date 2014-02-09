@@ -25,8 +25,9 @@
         <div class = "col-md-4">
           <h1>Jobs</h1>
           <ol>
+            <li><b><a target = '_blank' href = '' projectid = '1034'>Ruby on Rails</a></b></li>
             {% for job in jobs %}
-              <li><b><a target = '_blank' href = ''>{{ job.projectname }}</a></b>
+              <li><b><a target = '_blank' href = '' projectid = '{{job.projectid}}'>{{ job.projectname }}</a></b>
               {% if job.averagebid != False %}<b>${{ job.averagebid }}</b>{% endif %}
               </li>
             {% endfor %}
