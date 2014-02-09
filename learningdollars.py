@@ -6,7 +6,7 @@ from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
     InboxMessages, SentMessages
-from actions import UpdateModules, CreateMilestonePayment, SendMessage, BidOnProject, PostNewProject
+from actions import UpdateModules, CreateMilestonePayment, SendMessage, BidOnProject, PostNewProject, RetractBid
 
 
 application = webapp2.WSGIApplication([
@@ -93,13 +93,19 @@ application = webapp2.WSGIApplication([
     ),
 
     webapp2.Route(
-        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/<description:\w+>', 
+        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/<description:[^/]+>', 
         handler=BidOnProject,
         name='bidonproject'
     ),
 
+     webapp2.Route(
+        '/retractbid/<project_id:\d+>', 
+        handler=RetractBid,
+        name='retractbid'
+    ),
+
     webapp2.Route(
-        '/postnewproject/<projectname:\w+>/<projectdesc:\w+>/<jobtypecsv:\w+>/<budgetoption:\d+>/<duration:\d+>', 
+        '/postnewproject/<projectname:[^/]+>/<projectdesc:[^/]+>/<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>', 
         handler=PostNewProject,
         name='postnewproject'
     ),

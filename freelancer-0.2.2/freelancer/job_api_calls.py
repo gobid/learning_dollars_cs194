@@ -63,7 +63,7 @@ class JobApiCalls(object):
 		print status
 		return status
 
-	def retract_bid_on_project(self, project_id):
+	def retract_bid(self, project_id):
 		status = self.freelancer.Account.Freelancer.retractBidFromProject({
 			'projectid':project_id
 		})

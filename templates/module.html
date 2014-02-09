@@ -28,14 +28,14 @@
           <ol>
             <li><b><a target = '_blank' href = '' projectid = '1034'>Ruby on Rails</a></b>
             <div class-"place-bid">
-                Amount: <input type="text" id="amount">
-                <br>
-                Days: <input type="text" id="days">
-                <br>
-                Description: <input type="text" id="description">
+                Amount: <input class="form-control" type="number" id="amount" placeholder="greater than $250">
+                Days: <input class="form-control" type="number" id="days">
+                <div class="form-group">
+                Description: <textarea class="form-control" id="description"></textarea>
+              </div>
                 <!-- <input type="submit" class="bid_submit" projectid = '1034'> -->
-                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='1034'>
-                  Submit
+                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='1034' id='1034'>
+                  Place Bid
                 </button>
             </div>
             </li>
@@ -45,14 +45,11 @@
                 {% if job.averagebid != False %}<b>${{ job.averagebid }}</b>
               {% endif %}
                 <div class-"place-bid">
-                Amount: <input type="text" id="amount">
-                <br>
-                Days: <input type="text" id="days">
-                <br>
-                Description: <input type="text" id="description">
-               <!--  <input type="submit" class="bid_submit" projectid = '{{job.projectid}}'> -->
-                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='{{job.projectid}}'>
-                  Submit
+                Amount: <input class="form-control" type="number" id="amount" placeholder="greater than $250">
+                Days: <input class="form-control" type="number" id="days">
+                Description: <textarea class="form-control" id="description"></textarea>
+                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='{{job.projectid}}' id='{{job.projectid}}'>
+                Place Bid
                 </button>
               </div>
               </li>
