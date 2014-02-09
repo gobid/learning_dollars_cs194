@@ -5,7 +5,7 @@ import webapp2
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
-    InboxMessages, SentMessages
+    InboxMessages, SentMessages, GetPlacedBids
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, BidOnProject, PostNewProject, RetractBid
 
 
@@ -116,4 +116,9 @@ application = webapp2.WSGIApplication([
         name='sendMessage'
     ),
     
+     webapp2.Route(
+        '/getplacedbids',
+        handler=GetPlacedBids,
+        name='getPlacedBids'
+    ),
 ], debug=True)

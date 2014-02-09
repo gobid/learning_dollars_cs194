@@ -10,10 +10,24 @@ $(document).ready(function() {
 		for (var p in posts){
 			project = posts[p];
 			$('#posted_projects').append('<tr><td>'+project.projectname+'</td><td>'+ project.additionalstatus + '</td><td>'+ project.averagebid+'</td><td>' + project.bidcount+'</td><td>'+project.enddate+'</td><td>'+project.projectid + '</td><td>'+ project.projecturl+'</td></tr>');
-
 		}
-		// 	$('#bids-on-post').append('<li>' + bids[b].descr + ' ' 
-		// 		+ '($' + bids[b].bid_amount + ') </li>')
+	})
+
+
+	$.get('/getplacedbids', function(data){
+		console.log(data)
+		returnval = data['count']
+		console.log(returnval)
+		// if(returnval) {
+		// 	bids = returnval['items'];
+		// 	for (var b in bids){
+		// 		bid = bids[b];
+		// 		$('#all_placed_bids').append('<tr><td>'+bid.projectname+'</td><td>'+ bid.ownerusername + '</td><td>'+ bid.prjecturl +'</td><td>' + bid.status +'</td><td>'+ bid.enddate+'</td>');
+		// 	}
+		// } else {
+		// 	console.log("hitttttt");
+		// 	$('#all_placed_bids').append('<tr>You have no bids at this time</tr>');
+
 		// }
 	})
 
