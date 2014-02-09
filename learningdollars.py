@@ -105,7 +105,7 @@ application = webapp2.WSGIApplication([
     ),
 
     webapp2.Route(
-        '/sendMessage/<project_id:\d+>/<message_text:\w+>/<user_name:\w+>',
+        '/sendMessage/<project_id:\d+>/<message_text:[^/]+>/<user_name:\w+>',
         handler=SendMessage,
         name='sendMessage'
     ),

@@ -10,10 +10,12 @@ body {
 .btn {
 	background-color: #000000;
 	border-color: #000000;
+	color:#D0D0D0;
 }
 
 .btn:hover {
 	background-color: #282828;
+	color:#FFFFFF;
 }
 
 td {
