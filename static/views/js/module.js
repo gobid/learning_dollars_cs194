@@ -19,9 +19,10 @@ function make_bid_request(e) {
 		if(response) {
 			responseGood = response['statusconfirmation'];
 			console.log('RESPONSE!: ' + responseGood);
+			console.log(this);
+			this.innerHTML="Rectract bid";
 		} else {
 			console.log('OMG ERROR!');
 		}
-		
 	})
 }

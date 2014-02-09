@@ -99,7 +99,7 @@ application = webapp2.WSGIApplication([
     ),
 
     webapp2.Route(
-        '/postnewproject/<projectname:\w+>/<projectdesc:\w+>/<jobtypecsv:\w+>/<budgetoption:\d+>/<duration:\d+>', 
+        '/postnewproject/<projectname:\w+>/<projectdesc:\w+>/<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>', 
         handler=PostNewProject,
         name='postnewproject'
     ),
