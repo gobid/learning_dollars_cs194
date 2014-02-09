@@ -75,7 +75,7 @@ class CreateMilestonePayment(webapp2.RequestHandler):
 class BidOnProject(webapp2.RequestHandler):
 
     def get(self, project_id, amount, days, description):
-        jac = job_api_calls.JobApiCalls()
+        jac = get_personal_jac()
         response = jac.place_bid_on_project(project_id, amount, days, description)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
@@ -83,7 +83,7 @@ class BidOnProject(webapp2.RequestHandler):
 class RetractBid(webapp2.RequestHandler):
 
     def get(self, project_id):
-        jac = job_api_calls.JobApiCalls()
+        jac = get_personal_jac()
         response = jac.retract_bid(project_id)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
@@ -91,7 +91,7 @@ class RetractBid(webapp2.RequestHandler):
 class PostNewProject(webapp2.RequestHandler):
 
     def get(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
-        jac = job_api_calls.JobApiCalls()
+        jac = get_personal_jac()
         response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))

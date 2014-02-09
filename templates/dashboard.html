@@ -54,7 +54,7 @@
             <!-- Second Row -->
             <div class = "row">
                 <div class = "col-md-4"> <!-- posts --> 
-                    <div class-"post_project"> 
+                    <div class="post_project"> 
                         <h2>Post New Project</h2>
                         Name: <input class="form-control" type="text" id="name">
                         Job Type: <input class="form-control" type="text" id="type" placeholder="ex: 'Java' ">
@@ -81,6 +81,20 @@
                 </div>
                 <div class = "col-md-4"> <!-- milestones on post --> 
                 </div>
+            </div>
+            <div class="row">
+                <h2>Posted Projects</h2>
+                <table class="table table-striped" id="posted_projects">
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Average bid</th>
+                        <th>Bid count</th>
+                        <th>End date</th>
+                        <th>Project id</th>
+                        <th>Url</th>
+                        </tr>
+                </table>
             </div>
         </div>
         {% include 'templates/footer.html' %}

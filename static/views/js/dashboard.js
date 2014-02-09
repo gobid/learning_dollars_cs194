@@ -5,6 +5,18 @@ $(document).ready(function() {
 
 	$("#post_project").click(post_project);
 
+	$.get('/postsinfo', function(data){
+		posts = data['json-result']['items'];
+		for (var p in posts){
+			project = posts[p];
+			$('#posted_projects').append('<tr><td>'+project.projectname+'</td><td>'+ project.additionalstatus + '</td><td>'+ project.averagebid+'</td><td>' + project.bidcount+'</td><td>'+project.enddate+'</td><td>'+project.projectid + '</td><td>'+ project.projecturl+'</td></tr>');
+
+		}
+		// 	$('#bids-on-post').append('<li>' + bids[b].descr + ' ' 
+		// 		+ '($' + bids[b].bid_amount + ') </li>')
+		// }
+	})
+
 	$.get('/getprojectbids/1034', function(data){
 		bids = data['json-result']['items']
 		for (var b in bids){
