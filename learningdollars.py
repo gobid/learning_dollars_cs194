@@ -74,8 +74,8 @@ application = webapp2.WSGIApplication([
         name='updatemodules'
     ),
     webapp2.Route(
-        """/createmilestonepayment/<project_id:\d+>/<amount:\d+>/
-        <touserid:\d+>/<:reasontext\w+>/<:reasontype\w+>""", 
+        '/createmilestonepayment/<project_id:\d+>/<amount:\w+>/' + \
+        '<touserid:\w+>/<reasontext:\w+>/<reasontype:\w+>', 
         handler=CreateMilestonePayment, 
         name='createmilestonepayment'
     ),

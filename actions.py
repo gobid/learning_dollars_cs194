@@ -1,10 +1,12 @@
 import webapp2
+import json
 
 from config import config
 from ocw import youtube
 from ocw import ocwsearch
 from freelancer import job_api_calls, oauth
 from models import Module, Account
+from functions import get_personal_jac
 
 # Action Classes (JSON response)
 
@@ -53,8 +55,18 @@ class UpdateModules(webapp2.RequestHandler):
 class CreateMilestonePayment(webapp2.RequestHandler):
 
     def get(self, project_id, amount, touserid, reasontext, reasontype):
-        jac = job_api_calls.JobApiCalls()
-        response = jac.create_milestone_payment()
+        jac = get_personal_jac()
+        if jac:
+            response = jac.create_milestone_payment(
+                project_id, 
+                amount, 
+                touserid, 
+                reasontext, 
+                reasontype
+            )
+        else:
+            response = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
