@@ -52,11 +52,43 @@ class JobApiCalls(object):
 		})
 		return searchResults
 
+	#use project 1037
+	def place_bid_on_project(self, project_id, amount, days, description):
+		status = self.freelancer.Account.Freelancer.placeBidOnProject({
+			'amount':amount,
+			'days':days,
+			'description': description,
+			'projectid':project_id
+		})
+		print status
+		return status
+
+	def retract_bid_on_project(self, project_id):
+		status = self.freelancer.Account.Freelancer.retractBidFromProject({
+			'projectid':project_id
+		})
+		print status
+		return status
+
 	def get_posts(self):
 		searchResults = self.freelancer.Employer.getPostedProjectList({
 			'status': 1 # all
 		})
 		return searchResults
+
+
+	def post_new_project(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
+		print 'hitttttt!!!'
+		response = self.freelancer.Employer.postNewProject({
+			'projectname': projectname,
+			'projectdesc': projectdesc,
+			'jobtypecsv': jobtypecsv,
+			'budgetoption': budgetoption,
+			'duration': duration
+		})
+		print response
+		return response
+
 
 	def create_milestone_payment(self, project_id, amount, currency, 
 		touserid, reasontext, reasontype):
@@ -69,6 +101,7 @@ class JobApiCalls(object):
 			'reasontype': reasontype		
 		})
 		return response
+
 
 	def get_inbox_messages(self):
 		inboxMessages = self.freelancer.Account.Message.getInboxMessages()
@@ -85,3 +118,4 @@ class JobApiCalls(object):
 			'username': user_name
 		})
 		return message
+

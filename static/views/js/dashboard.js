@@ -2,6 +2,9 @@ $(document).ready(function() {
 
 	// My Posts handlers (Tim & Govi)
 
+
+	$("#post_project").click(post_project);
+
 	$.get('/getprojectbids/1034', function(data){
 		bids = data['json-result']['items']
 		for (var b in bids){
@@ -13,6 +16,7 @@ $(document).ready(function() {
 	// My Bids handlers (Will)
 
 	// Mailbox handlers (Leo)
+
 
 	$('#messageTabs a').click(function (e) {
 	  	e.preventDefault()
@@ -36,3 +40,28 @@ $(document).ready(function() {
 		})
 	})
 })
+
+//Helper Functions
+
+//Tim
+function post_project(e) {
+	console.log("hit!!!!");
+	name = $("#name").val();
+	description = $("#description").val();
+	type = $("#type").val();
+	budget_option = $("#budget_option option:selected").attr("value");
+	duration = $("#duration").val();
+	$.get('/postnewproject/' + name + '/' + description + '/' + type + '/' + budget_option + '/' + duration, function(data){
+		response = data['json-result'];
+		console.log(response);
+	})
+}
+
+// Leo
+
+
+// Govi
+
+
+// Will
+

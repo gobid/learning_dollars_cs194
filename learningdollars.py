@@ -6,7 +6,8 @@ from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
     InboxMessages, SentMessages
-from actions import UpdateModules, CreateMilestonePayment, SendMessage
+from actions import UpdateModules, CreateMilestonePayment, SendMessage, BidOnProject, PostNewProject
+
 
 application = webapp2.WSGIApplication([
     # Views
@@ -90,6 +91,19 @@ application = webapp2.WSGIApplication([
         handler=CreateMilestonePayment, 
         name='createmilestonepayment'
     ),
+
+    webapp2.Route(
+        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/<description:\w+>', 
+        handler=BidOnProject,
+        name='bidonproject'
+    ),
+
+    webapp2.Route(
+        '/postnewproject/<projectname:\w+>/<projectdesc:\w+>/<jobtypecsv:\w+>/<budgetoption:\d+>/<duration:\d+>', 
+        handler=PostNewProject,
+        name='postnewproject'
+    ),
+
     webapp2.Route(
         '/sendMessage/<project_id:\d+>/<message_text:[^/]+>/<user_name:\w+>',
         handler=SendMessage,

@@ -72,6 +72,21 @@ class CreateMilestonePayment(webapp2.RequestHandler):
         self.response.write(json.dumps(response))
 
 
+class BidOnProject(webapp2.RequestHandler):
+
+    def get(self, project_id, amount, days, description):
+        jac = job_api_calls.JobApiCalls()
+        response = jac.place_bid_on_project(project_id, amount, days, description)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+class PostNewProject(webapp2.RequestHandler):
+
+    def get(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
+        jac = job_api_calls.JobApiCalls()
+        response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)
+
+
 class SendMessage(webapp2.RequestHandler):
 
     def get(self, project_id, message_text, user_name):
