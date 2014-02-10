@@ -4,6 +4,18 @@ $(document).ready(function() {
 /*
 	$("#post_project").click(post_project);
 
+	$("#create_milestone_payment").click(create_milestone_payment);
+
+	$(document).on('click', '.btn.btn-lg.btn-default.accept_bid', function() {
+		projectid = $(this).attr('projectid');
+		accept_bid(1, projectid);
+	})
+
+	$(document).on('click', '.btn.btn-lg.btn-default.decline_bid',  function() {
+		projectid = $(this).attr('projectid');
+		accept_bid(0, projectid);
+	})
+
 	$.get('/postsinfo', function(data){
 		posts = data['json-result']['items'];
 		for (var p in posts){
@@ -12,25 +24,34 @@ $(document).ready(function() {
 		}
 	})
 
+	$.get('/getmilestonelist', function(data){
+		milestones = data['json-result']['items'];
+		for (var m in milestones){
+			milestone = milestones[m];
+			$('#milestone_list').append('<tr><td>'+milestone.id+'</td><td>'+ milestone.username + '</td><td>'+ milestone.date+'</td><td>' + milestone.projectid+'</td><td>'+milestone.projectname+'</td><td>'+milestone.reason + '</td></tr>');
+		}
+	})
 
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)
-		returnval = data['json-result']['items']
-		console.log(returnval)
-		// if(returnval) {
-		// 	bids = returnval['items'];
-		// 	for (var b in bids){
-		// 		bid = bids[b];
-		// 		$('#all_placed_bids').append('<tr><td>'+bid.projectname+'</td><td>'+ bid.ownerusername + '</td><td>'+ bid.prjecturl +'</td><td>' + bid.status +'</td><td>'+ bid.enddate+'</td>');
-		// 	}
-		// } else {
-		// 	console.log("hitttttt");
-		// 	$('#all_placed_bids').append('<tr>You have no bids at this time</tr>');
+		console.log(data)
+		bids = data['json-result']['items']
+		count = data['json-result']['count']
+		console.log(count)
+		if(count != 0) {
+			console.log("hitttt1");
+			for (var b in bids){
+				bid = bids[b];
+				console.log(bid.projectname);
+				$('#all_placed_bids').append('<tr><td>'+bid.projectname+'</td><td>'+bid.bidcount+"</td><td><a href='"+bid.projecturl+"'>Link</a></td><td>"+bid.enddate+'</td><td><button type="Submit" projectid="' + bid.projectid + '" class="btn btn-lg btn-default accept_bid" id="accept_bid">Accept</button><button value="Submit" projectid="' + bid.projectid + '" class="decline_bid">Decline</button></td></tr>');
+			}
+		} else {
+			console.log("hittttt2");
+			$('#my_bids_hdr').after('<p>You have no bids at this time</p>');
 
-		// }
+		}
 	})
 */
-
 
 	$.get('/getprojectbids/1034', function(data){
 		bids = data['json-result']['items']
@@ -42,7 +63,6 @@ $(document).ready(function() {
 				+ bids[b].provider_userid + '" >Pick</button>' + '</li>')
 		}
 	})
-
 
 
 	// My Bids handlers (Will)
@@ -60,7 +80,7 @@ $(document).ready(function() {
 
 	// Mailbox handlers (Leo)
 
-/*
+
 	$('#messageTabs a').click(function (e) {
 	  	e.preventDefault()
 	  	$(this).tab('show')
@@ -70,9 +90,13 @@ $(document).ready(function() {
 		messages = data['json-result']['items']
 
 		for (var m in messages) {
+			$.get('/projectDetails/'+messages[m].projectid, function(projectData) {
+				details = projectData['json-result']
 
-			$('#inboxMessages').append('<tr><td>' + messages[m].fromusername 
-				+ '</td><td>' + messages[m].text + '</td></tr>')
+				$('#inboxMessages').append('<tr><td>' + messages[m].fromusername 
+				+ '</td><td>' + messages[m].text + '</td><td><a href=\"' + details.url
+				+ '\">' + details.name + ' (' + messages[m].projectid + ')</a></td></tr>')
+			})
 		}
 	})
 
@@ -80,9 +104,13 @@ $(document).ready(function() {
 		messages = data['json-result']['items']
 
 		for (var m in messages) {
+			$.get('/projectDetails/'+messages[m].projectid, function(projectData) {
+				details = projectData['json-result']
 
-			$('#sentMessages').append('<tr><td>' + messages[m].tousername 
-				+ '</td><td>' + messages[m].text + '</td></tr>')
+				$('#sentMessages').append('<tr><td>' + messages[m].tousername 
+				+ '</td><td>' + messages[m].text + '</td><td><a href=\"' + details.url
+				+ '\">' + details.name + ' (' + messages[m].projectid + ')</a></td></tr>')
+			})
 		}
 	})
 
@@ -112,12 +140,13 @@ $(document).ready(function() {
 		})
 	})
 
-*/
+
 })
 
 //Helper Functions
 
 //Tim
+
 function post_project(e) {
 	$('#log_message').remove();
 	name = $("#name").val();
@@ -136,6 +165,8 @@ function post_project(e) {
 	})
 }
 
+
+
 // Leo
 
 
@@ -143,4 +174,37 @@ function post_project(e) {
 
 
 // Will
+
+function create_milestone_payment(e) {
+	$('#log_message').remove();
+	projectid = $("#projectid").val();
+	amount = $("#amount").val();
+	tousername = $("#tousername").val();
+	reasontext = $("#reasontext").val();
+	reasontype = $("#reasontype option:selected").attr("value");
+	$.get('/createmilestonepayment/' + projectid + '/' + amount + '/' + tousername + '/' + reasontext + '/' + reasontype, function(data){
+		response = data['json-result'];
+		if(response) {
+			status = response['statusconfirmation'];
+			$("#create_milestone").after("<h2 id='log_message'>Milestone created successfully.</h2>");
+		} else {
+			$("#create_milestone").after("<h3 id='log_message'>Error, submit again</h3>");
+		}
+	})
+}
+
+function accept_bid(e) {
+	$('#log_message').remove();
+	projectid = $("#accept_projectid").val();
+	state = $("#accept_state").val();
+	$.get('/acceptbid/' + projectid + '/' + state, function(data){
+		response = data['json-result'];
+		if(response) {
+			status = response['statusconfirmation'];
+			$("#create_milestone").after("<h2 id='log_message'>Bid acceptance/decline submitted successfully.</h2>");
+		} else {
+			$("#create_milestone").after("<h3 id='log_message'>Error, submit again</h3>");
+		}
+	})
+}
 
