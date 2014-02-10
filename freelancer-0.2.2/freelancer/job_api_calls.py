@@ -134,3 +134,9 @@ class JobApiCalls(object):
 		print placed_bids
 		return placed_bids
 
+	def get_project_details(self, project_id):
+		project = self.freelancer.Project.getProjectDetails({
+			'projectid': project_id
+		})
+		return project
+

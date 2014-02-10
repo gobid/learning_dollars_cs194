@@ -7,7 +7,7 @@ from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
 from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
     SendMessage, BidOnProject, PostNewProject, RetractBid
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
-    InboxMessages, SentMessages, GetPlacedBids
+    InboxMessages, SentMessages, GetPlacedBids, GetProjectDetails
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, BidOnProject, PostNewProject, RetractBid
 
 
@@ -79,6 +79,11 @@ application = webapp2.WSGIApplication([
         '/sentMessages',
         handler=SentMessages,
         name='getSentMessages'
+    ),
+    webapp2.Route(
+        '/projectDetails/<project_id:\d+>',
+        handler=GetProjectDetails,
+        name='getProjectDetails'
     ),
 
     # Actions

@@ -12,7 +12,7 @@ $(document).ready(function() {
 		}
 	})
 
-*/
+
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)
 		console.log(data)
@@ -33,7 +33,7 @@ $(document).ready(function() {
 		}
 	})
 
-/*
+
 	$.get('/getprojectbids/1034', function(data){
 		bids = data['json-result']['items']
 		for (var b in bids){
@@ -62,7 +62,7 @@ $(document).ready(function() {
 
 	// Mailbox handlers (Leo)
 
-/*
+
 	$('#messageTabs a').click(function (e) {
 	  	e.preventDefault()
 	  	$(this).tab('show')
@@ -72,9 +72,13 @@ $(document).ready(function() {
 		messages = data['json-result']['items']
 
 		for (var m in messages) {
+			$.get('/projectDetails/'+messages[m].projectid, function(projectData) {
+				details = projectData['json-result']
 
-			$('#inboxMessages').append('<tr><td>' + messages[m].fromusername 
-				+ '</td><td>' + messages[m].text + '</td></tr>')
+				$('#inboxMessages').append('<tr><td>' + messages[m].fromusername 
+				+ '</td><td>' + messages[m].text + '</td><td><a href=\"' + details.url
+				+ '\">' + details.name + ' (' + messages[m].projectid + ')</a></td></tr>')
+			})
 		}
 	})
 
@@ -82,9 +86,13 @@ $(document).ready(function() {
 		messages = data['json-result']['items']
 
 		for (var m in messages) {
+			$.get('/projectDetails/'+messages[m].projectid, function(projectData) {
+				details = projectData['json-result']
 
-			$('#sentMessages').append('<tr><td>' + messages[m].tousername 
-				+ '</td><td>' + messages[m].text + '</td></tr>')
+				$('#sentMessages').append('<tr><td>' + messages[m].tousername 
+				+ '</td><td>' + messages[m].text + '</td><td><a href=\"' + details.url
+				+ '\">' + details.name + ' (' + messages[m].projectid + ')</a></td></tr>')
+			})
 		}
 	})
 
@@ -114,7 +122,7 @@ $(document).ready(function() {
 		})
 	})
 
-*/
+
 })
 
 //Helper Functions
