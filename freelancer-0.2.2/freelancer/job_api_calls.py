@@ -77,6 +77,14 @@ class JobApiCalls(object):
 		print status
 		return status
 
+	def accept_bid(self, project_id, state):
+		status = self.freelancer.Account.Freelancer.acceptBidWon({
+			'projectid':project_id,
+			'state':state
+		})
+		print status
+		return status
+
 	def get_posts(self):
 		searchResults = self.freelancer.Employer.getPostedProjectList({
 			'status': 1 # all
@@ -95,7 +103,7 @@ class JobApiCalls(object):
 		print response
 		return response
 
-	def create_milestone_payment(self, project_id, amount, currency, 
+	def create_milestone_payment(self, project_id, amount, currency_id, 
 		touserid, reasontext, reasontype):
 		print 'account balance'
 		print self.freelancer.Payment.getAccountBalanceStatus()
@@ -110,6 +118,10 @@ class JobApiCalls(object):
 		})
 		return response
 
+	def get_milestone_list(self):
+		response = self.freelancer.Payment.getAccountMilestoneList({
+			})
+		return response
 
 	def get_inbox_messages(self):
 		inboxMessages = self.freelancer.Account.Message.getInboxMessages()

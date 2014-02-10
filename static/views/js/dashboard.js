@@ -4,11 +4,31 @@ $(document).ready(function() {
 
 	$("#post_project").click(post_project);
 
+	$("#create_milestone_payment").click(create_milestone_payment);
+
+	$(document).on('click', '.btn.btn-lg.btn-default.accept_bid', function() {
+		projectid = $(this).attr('projectid');
+		accept_bid(1, projectid);
+	})
+
+	$(document).on('click', '.btn.btn-lg.btn-default.decline_bid',  function() {
+		projectid = $(this).attr('projectid');
+		accept_bid(0, projectid);
+	})
+
 	$.get('/postsinfo', function(data){
 		posts = data['json-result']['items'];
 		for (var p in posts){
 			project = posts[p];
 			$('#posted_projects').append('<tr><td>'+project.projectname+'</td><td>'+ project.additionalstatus + '</td><td>'+ project.averagebid+'</td><td>' + project.bidcount+'</td><td>'+project.enddate+'</td><td>'+project.projectid + '</td><td>'+ project.projecturl+'</td></tr>');
+		}
+	})
+
+	$.get('/getmilestonelist', function(data){
+		milestones = data['json-result']['items'];
+		for (var m in milestones){
+			milestone = milestones[m];
+			$('#milestone_list').append('<tr><td>'+milestone.id+'</td><td>'+ milestone.username + '</td><td>'+ milestone.date+'</td><td>' + milestone.projectid+'</td><td>'+milestone.projectname+'</td><td>'+milestone.reason + '</td></tr>');
 		}
 	})
 
@@ -24,7 +44,7 @@ $(document).ready(function() {
 			for (var b in bids){
 				bid = bids[b];
 				console.log(bid.projectname);
-				$('#all_placed_bids').append('<tr><td>'+bid.projectname+'</td><td>'+bid.bidcount+"</td><td><a href='"+bid.projecturl+"'>Link</a></td><td>"+bid.enddate+'</td></tr>');
+				$('#all_placed_bids').append('<tr><td>'+bid.projectname+'</td><td>'+bid.bidcount+"</td><td><a href='"+bid.projecturl+"'>Link</a></td><td>"+bid.enddate+'</td><td><button type="Submit" projectid="' + bid.projectid + '" class="btn btn-lg btn-default accept_bid" id="accept_bid">Accept</button><button value="Submit" projectid="' + bid.projectid + '" class="decline_bid">Decline</button></td></tr>');
 			}
 		} else {
 			console.log("hittttt2");
@@ -138,6 +158,8 @@ function post_project(e) {
 	})
 }
 
+
+
 // Leo
 
 
@@ -145,4 +167,37 @@ function post_project(e) {
 
 
 // Will
+
+function create_milestone_payment(e) {
+	$('#log_message').remove();
+	projectid = $("#projectid").val();
+	amount = $("#amount").val();
+	tousername = $("#tousername").val();
+	reasontext = $("#reasontext").val();
+	reasontype = $("#reasontype option:selected").attr("value");
+	$.get('/createmilestonepayment/' + projectid + '/' + amount + '/' + tousername + '/' + reasontext + '/' + reasontype, function(data){
+		response = data['json-result'];
+		if(response) {
+			status = response['statusconfirmation'];
+			$("#create_milestone").after("<h2 id='log_message'>Milestone created successfully.</h2>");
+		} else {
+			$("#create_milestone").after("<h3 id='log_message'>Error, submit again</h3>");
+		}
+	})
+}
+
+function accept_bid(e) {
+	$('#log_message').remove();
+	projectid = $("#accept_projectid").val();
+	state = $("#accept_state").val();
+	$.get('/acceptbid/' + projectid + '/' + state, function(data){
+		response = data['json-result'];
+		if(response) {
+			status = response['statusconfirmation'];
+			$("#create_milestone").after("<h2 id='log_message'>Bid acceptance/decline submitted successfully.</h2>");
+		} else {
+			$("#create_milestone").after("<h3 id='log_message'>Error, submit again</h3>");
+		}
+	})
+}
 
