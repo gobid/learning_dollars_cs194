@@ -25,6 +25,15 @@ function make_bid_request(e) {
 			initializePage();
 			console.log(id);
 		} else {
+			response = data['errors'];
+			if (!response) response = data['error'];
+			else response = response['error']['longmsg'];
+			if (!($('.alert.alert-warning')[0])) {
+				var alertDiv = document.createElement('div');
+				alertDiv.className ='alert alert-warning';
+				document.getElementsByClassName('place-bid')[0].appendChild(alertDiv);
+			}
+			$('.alert.alert-warning').text(response);
 			console.log('OMG ERROR!');
 		}
 	})
