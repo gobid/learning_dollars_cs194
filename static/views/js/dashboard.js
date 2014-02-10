@@ -3,19 +3,23 @@ $(document).ready(function() {
 	// My Posts handlers (Tim & Govi)
 /*
 	$("#post_project").click(post_project);
+*/
 
 	$("#create_milestone_payment").click(create_milestone_payment);
 
-	$(document).on('click', '.btn.btn-lg.btn-default.accept_bid', function() {
+	$(document).on('click', '.btn.btn-default.accept_bid', function() {
 		projectid = $(this).attr('projectid');
-		accept_bid(1, projectid);
+		state = $(this).attr('state');
+		accept_bid(1, projectid, state);
 	})
 
-	$(document).on('click', '.btn.btn-lg.btn-default.decline_bid',  function() {
+	$(document).on('click', '.btn.btn-default.decline_bid',  function() {
 		projectid = $(this).attr('projectid');
-		accept_bid(0, projectid);
+		state = $(this).attr('state');
+		accept_bid(0, projectid, state);
 	})
 
+/*
 	$.get('/postsinfo', function(data){
 		posts = data['json-result']['items'];
 		for (var p in posts){
@@ -31,6 +35,7 @@ $(document).ready(function() {
 			$('#milestone_list').append('<tr><td>'+milestone.id+'</td><td>'+ milestone.username + '</td><td>'+ milestone.date+'</td><td>' + milestone.projectid+'</td><td>'+milestone.projectname+'</td><td>'+milestone.reason + '</td></tr>');
 		}
 	})
+*/
 
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)
@@ -43,7 +48,17 @@ $(document).ready(function() {
 			for (var b in bids){
 				bid = bids[b];
 				console.log(bid.projectname);
-				$('#all_placed_bids').append('<tr><td>'+bid.projectname+'</td><td>'+bid.bidcount+"</td><td><a href='"+bid.projecturl+"'>Link</a></td><td>"+bid.enddate+'</td><td><button type="Submit" projectid="' + bid.projectid + '" class="btn btn-lg btn-default accept_bid" id="accept_bid">Accept</button><button value="Submit" projectid="' + bid.projectid + '" class="decline_bid">Decline</button></td></tr>');
+				$('#all_placed_bids').append(
+					'<tr>' + '<td>' + bid.projectname + '</td>' + 
+					'<td>' + bid.bidcount + '</td>' + 
+					'<td><a href = "' + bid.projecturl + '">Link</a></td>' + 
+					'<td>' + bid.enddate + '</td>' + 
+					'<td><button type="Submit" state = "1" projectid="' + bid.projectid + 
+					'" class="btn btn-default accept_bid">Accept</button>' + 
+					'<button value="Submit" state = "0" projectid="' + bid.projectid + '"'
+					+ ' class="btn btn-default decline_bid">Decline</button>'
+					+ '</td></tr>'
+				);
 			}
 		} else {
 			console.log("hittttt2");
@@ -51,8 +66,8 @@ $(document).ready(function() {
 
 		}
 	})
-*/
 
+/*
 	$.get('/getprojectbids/1034', function(data){
 		bids = data['json-result']['items']
 		for (var b in bids){
@@ -63,7 +78,7 @@ $(document).ready(function() {
 				+ bids[b].provider_userid + '" >Pick</button>' + '</li>')
 		}
 	})
-
+*/
 
 	// My Bids handlers (Will)
 
@@ -176,13 +191,15 @@ function post_project(e) {
 // Will
 
 function create_milestone_payment(e) {
+	console.log('in create milestone payment')
 	$('#log_message').remove();
 	projectid = $("#projectid").val();
 	amount = $("#amount").val();
 	tousername = $("#tousername").val();
 	reasontext = $("#reasontext").val();
 	reasontype = $("#reasontype option:selected").attr("value");
-	$.get('/createmilestonepayment/' + projectid + '/' + amount + '/' + tousername + '/' + reasontext + '/' + reasontype, function(data){
+	// hardcoded in 1 for usd but this has to change potentially
+	$.get('/createmilestonepayment/' + projectid + '/' + amount + '/1/' + tousername + '/' + reasontext + '/' + reasontype, function(data){
 		response = data['json-result'];
 		if(response) {
 			status = response['statusconfirmation'];
@@ -193,17 +210,18 @@ function create_milestone_payment(e) {
 	})
 }
 
-function accept_bid(e) {
-	$('#log_message').remove();
-	projectid = $("#accept_projectid").val();
-	state = $("#accept_state").val();
+function accept_bid(accepted, projectid, state) {
+	$('#log_message').remove()
 	$.get('/acceptbid/' + projectid + '/' + state, function(data){
-		response = data['json-result'];
+		response = data['json-result']
+		console.log(response)
 		if(response) {
-			status = response['statusconfirmation'];
-			$("#create_milestone").after("<h2 id='log_message'>Bid acceptance/decline submitted successfully.</h2>");
+			status = response['statusconfirmation']
+			$("#create_milestone").after('<h2 id="log_message">' +
+				'Bid acceptance/decline submitted successfully.</h2>');
 		} else {
-			$("#create_milestone").after("<h3 id='log_message'>Error, submit again</h3>");
+			$("#create_milestone").after('<h3 id="log_message">' + 
+				'Error, submit again</h3>');
 		}
 	})
 }

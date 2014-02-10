@@ -107,6 +107,7 @@ class BidOnProject(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))   
 
+# This is retracting a bid from a project
 class RetractBid(webapp2.RequestHandler):
 
     def get(self, project_id):
@@ -118,6 +119,7 @@ class RetractBid(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
+# Accepting or Declining a Bid won: 
 class AcceptBid(webapp2.RequestHandler):
 
     def get(self, project_id, state):

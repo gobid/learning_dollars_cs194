@@ -111,7 +111,7 @@ application = webapp2.WSGIApplication([
     ),
 
     webapp2.Route(
-        '/acceptbid/<project_id:\d+>/<state:\d+>/', 
+        '/acceptbid/<project_id:\d+>/<state:\d+>', 
         handler=AcceptBid,
         name='acceptbid'
     ),
