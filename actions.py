@@ -55,8 +55,11 @@ class UpdateModules(webapp2.RequestHandler):
 class SelectWinner(webapp2.RequestHandler):
 
     def get(self, project_id, winner_id):
-        jac = job_api_calls.JobApiCalls()
-        response = jac.select_winner(project_id, winner_id)
+        jac = get_personal_jac()
+        if jac:
+            response = jac.select_winner(project_id, winner_id)
+        else:
+            response = {'error':'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response)) 
 
@@ -85,15 +88,21 @@ class BidOnProject(webapp2.RequestHandler):
 
     def get(self, project_id, amount, days, description):
         jac = get_personal_jac()
-        response = jac.place_bid_on_project(project_id, amount, days, description)
+        if jac: 
+            response = jac.place_bid_on_project(project_id, amount, days, description)
+        else:
+            response = {'error':'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
+        self.response.write(json.dumps(response))   
 
 class RetractBid(webapp2.RequestHandler):
 
     def get(self, project_id):
         jac = get_personal_jac()
-        response = jac.retract_bid(project_id)
+        if jac: 
+            response = jac.retract_bid(project_id)
+        else:
+            response = {'error':'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
@@ -101,7 +110,10 @@ class PostNewProject(webapp2.RequestHandler):
 
     def get(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
         jac = get_personal_jac()
-        response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)
+        if jac: 
+            response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)
+        else: 
+            response = {'error':'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
