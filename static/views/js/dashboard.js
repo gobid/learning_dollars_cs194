@@ -12,7 +12,7 @@ $(document).ready(function() {
 		}
 	})
 
-*/
+
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)
 		returnval = data['json-result']['items']
@@ -29,8 +29,9 @@ $(document).ready(function() {
 
 		// }
 	})
+*/
 
-/*
+
 	$.get('/getprojectbids/1034', function(data){
 		bids = data['json-result']['items']
 		for (var b in bids){
@@ -41,7 +42,7 @@ $(document).ready(function() {
 				+ bids[b].provider_userid + '" >Pick</button>' + '</li>')
 		}
 	})
-*/
+
 
 
 	// My Bids handlers (Will)

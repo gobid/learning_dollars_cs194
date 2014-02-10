@@ -4,6 +4,8 @@ from client import FreelancerClient
 from response import FreelancerResponse
 
 import json
+import csv
+import StringIO
 
 from config import config
 
@@ -53,9 +55,15 @@ class JobApiCalls(object):
 		return searchResults
 
 	def select_winner(self, project_id, winner_id):
+		winners = [winner_id]
+		si = StringIO.StringIO()
+		cw = csv.writer(si)
+		cw.writerow(winners)
+		winner_csv = si.getvalue().strip('\r\n')
+		print winner_csv
 		response = self.freelancer.Employer.chooseWinnerForProject({
 			'projectid': project_id,
-			'useridcsv': "'" + winner_id + "',"
+			'useridcsv': winner_csv
 		})
 		return response
 
