@@ -19,18 +19,13 @@ function make_bid_request(e) {
 		response = data['json-result'];
 		if(response) {
 			responseGood = response['statusconfirmation'];
-			console.log('RESPONSE!: ' + responseGood);
-			console.log("#r" + id);
-			if ($("#r" + id)) {
-				console.log($("#r" + id).size());
-			}
 			if ($("#r" + id).size() == 0) {
-				console.log(" hittttmee :::::");
 				$("#" + id).text('Update bid');
-				$("#" + id).after("<button type='button' class='btn btn-default btn-lg bid_retract' projectid ='" + id + "' id='r" + id + "'>Retract Bid</button>");
+				$("#" + id).after("<button type='button' class='btn" + 
+					" btn-default btn-lg bid_retract' projectid ='" + id +
+					"' id='r" + id + "'>Retract Bid</button>");
 				initializePage();
 			}
-			console.log(id);
 		} else {
 			response = data['errors'];
 			if (!response) response = data['error'];
@@ -51,10 +46,9 @@ function retract_bid(e) {
 	id = this.getAttribute('id');
 	console.log(id);
 	$.get('/retractbid/' + projectid, function(data){
-					console.log(data);
+		console.log(data);
 		response = data['json-result'];
 		if(response) {
-
 			responseGood = response['statusconfirmation'];
 			console.log('RESPONSE!: ' + responseGood);
 			$("#" + id).text('Place Bid');

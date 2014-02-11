@@ -19,12 +19,16 @@ $(document).ready(function() {
 		accept_bid(0, projectid, state);
 	})
 
-/*
+   /*
 	$.get('/postsinfo', function(data){
 		posts = data['json-result']['items'];
 		for (var p in posts){
 			project = posts[p];
-			$('#posted_projects').append('<tr><td>'+project.projectname+'</td><td>'+ project.additionalstatus + '</td><td>'+ project.averagebid+'</td><td>' + project.bidcount+'</td><td>'+project.enddate+'</td><td>'+project.projectid + '</td><td>'+ project.projecturl+'</td></tr>');
+			$('#posted_projects').append('<tr><td>'+project.projectname+ 
+				'</td><td>'+ project.additionalstatus + '</td><td>'+ 
+				project.averagebid+'</td><td>' + project.bidcount+ 
+				'</td><td>'+project.enddate+'</td><td>'+project.projectid + 
+				'</td><td>'+ project.projecturl+'</td></tr>');
 		}
 	})
 
@@ -32,9 +36,13 @@ $(document).ready(function() {
 		milestones = data['json-result']['items'];
 		for (var m in milestones){
 			milestone = milestones[m];
-			$('#milestone_list').append('<tr><td>'+milestone.id+'</td><td>'+ milestone.username + '</td><td>'+ milestone.date+'</td><td>' + milestone.projectid+'</td><td>'+milestone.projectname+'</td><td>'+milestone.reason + '</td></tr>');
+			$('#milestone_list').append('<tr><td>'+milestone.id+'</td><td>'+
+				milestone.username + '</td><td>'+ milestone.date+'</td><td>' + 
+			 	milestone.projectid+'</td><td>'+milestone.projectname+
+			 	'</td><td>'+milestone.reason + '</td></tr>');
 		}
 	})
+
 */
 
 	$.get('/getplacedbids', function(data){
@@ -49,16 +57,17 @@ $(document).ready(function() {
 					'<td>' + bid.bidcount + '</td>' + 
 					'<td><a href = "' + bid.projecturl + '">Link</a></td>' + 
 					'<td>' + bid.enddate + '</td>' + 
-					'<td><button type="Submit" state = "1" projectid="' + bid.projectid + 
+					'<td><button type="Submit" state = "1" projectid="' + 
+					bid.projectid + 
 					'" class="btn btn-default accept_bid">Accept</button>' + 
-					'<button value="Submit" state = "0" projectid="' + bid.projectid + '"'
-					+ ' class="btn btn-default decline_bid">Decline</button>'
+					'<button value="Submit" state = "0" projectid="' + 
+					bid.projectid + 
+					'" class="btn btn-default decline_bid">Decline</button>'
 					+ '</td></tr>'
 				);
 			}
 		} else {
 			$('#my_bids_hdr').after('<p>You have no bids at this time</p>');
-
 		}
 	})
 
@@ -100,13 +109,16 @@ $(document).ready(function() {
 		messages = data['json-result']['items']
 
 		for (var m in messages) {
-			$.get('/projectDetails/'+messages[m].projectid, function(projectData) {
-				details = projectData['json-result']
-
-				$('#inboxMessages').append('<tr><td>' + messages[m].fromusername 
-				+ '</td><td>' + messages[m].text + '</td><td><a href=\"' + details.url
-				+ '\">' + details.name + ' (' + messages[m].projectid + ')</a></td></tr>')
-			})
+			$.get('/projectDetails/'+messages[m].projectid, 
+				function(projectData) {
+					details = projectData['json-result']
+					$('#inboxMessages').append('<tr><td>' + 
+						messages[m].fromusername + '</td><td>' + 
+						messages[m].text + '</td><td><a href=\"' + 
+						details.url + '\">' + details.name + ' (' + 
+						messages[m].projectid + ')</a></td></tr>')
+				}
+			)
 		}
 	})
 
@@ -114,13 +126,16 @@ $(document).ready(function() {
 		messages = data['json-result']['items']
 
 		for (var m in messages) {
-			$.get('/projectDetails/'+messages[m].projectid, function(projectData) {
-				details = projectData['json-result']
-
-				$('#sentMessages').append('<tr><td>' + messages[m].tousername 
-				+ '</td><td>' + messages[m].text + '</td><td><a href=\"' + details.url
-				+ '\">' + details.name + ' (' + messages[m].projectid + ')</a></td></tr>')
-			})
+			$.get('/projectDetails/'+messages[m].projectid, 
+				function(projectData) {
+					details = projectData['json-result']
+					$('#sentMessages').append('<tr><td>' + 
+						messages[m].tousername + '</td><td>' + 
+						messages[m].text + '</td><td><a href=\"' 
+						+ details.url + '\">' + details.name + ' (' + 
+						messages[m].projectid + ')</a></td></tr>')
+				}
+			)
 		}
 	})
 
@@ -130,7 +145,8 @@ $(document).ready(function() {
 		projectId = $('#project_id').val()
 		messageText = $('#message_text').val()
 		toUserName = $('#to_user_name').val()
-		url = '/sendMessage/' + projectId + '/' + messageText + '/' + toUserName
+		url = '/sendMessage/' + projectId + '/' + messageText + 
+			'/' + toUserName
 
 		$.get(url, function(data) {
 			result = data['json-result']
@@ -142,7 +158,8 @@ $(document).ready(function() {
 			} else {
 				result = data['errors']
 				error_txt = result['error'].longmsg
-				$('#newMessage').append("<h4 class=\"response\">" + error_txt.toUpperCase() + "</h4>")
+				$('#newMessage').append("<h4 class=\"response\">" + 
+					error_txt.toUpperCase() + "</h4>")
 			}
 			setTimeout(function(){ 
 				$('.response').fadeOut() 
@@ -164,15 +181,20 @@ function post_project(e) {
 	type = $("#type").val();
 	budget_option = $("#budget_option option:selected").attr("value");
 	duration = $("#duration").val();
-	$.get('/postnewproject/' + name + '/' + description + '/' + type + '/' + budget_option + '/' + duration, function(data){
-		response = data['json-result'];
-		if(response) {
-			url = response['projecturl'];
-			$("#post_project").after("<h2 id='log_message'>Project sucessfully posted, see url to view on freelancer: " + url + "</h2>");
-		} else {
-			$("#post_project").after("<h3 id='log_message'>Error, submit again</h3>");
+	$.get('/postnewproject/' + name + '/' + description + '/' + type + '/' + 
+		budget_option + '/' + duration, function(data){
+			response = data['json-result'];
+			if(response) {
+				url = response['projecturl'];
+				$("#post_project").after("<h2 id='log_message'>Project " + 
+					"sucessfully posted, see url to view on freelancer: " +
+					 url + "</h2>");
+			} else {
+				$("#post_project").after("<h3 id='log_message'>" + 
+					"Error, submit again</h3>");
+			}
 		}
-	})
+	)
 }
 
 
@@ -194,15 +216,19 @@ function create_milestone_payment(e) {
 	reasontext = $("#reasontext").val();
 	reasontype = $("#reasontype option:selected").attr("value");
 	// hardcoded in 1 for usd but this has to change potentially
-	$.get('/createmilestonepayment/' + projectid + '/' + amount + '/1/' + tousername + '/' + reasontext + '/' + reasontype, function(data){
-		response = data['json-result'];
-		if(response) {
-			status = response['statusconfirmation'];
-			$("#create_milestone").after("<h2 id='log_message'>Milestone created successfully.</h2>");
-		} else {
-			$("#create_milestone").after("<h3 id='log_message'>Error, submit again</h3>");
+	$.get('/createmilestonepayment/' + projectid + '/' + amount + '/1/' + 
+		tousername + '/' + reasontext + '/' + reasontype, function(data){
+			response = data['json-result'];
+			if(response) {
+				status = response['statusconfirmation'];
+				$("#create_milestone").after("<h2 id='log_message'>" + 
+					"Milestone created successfully.</h2>");
+			} else {
+				$("#create_milestone").after("<h3 id='log_message'>" + 
+					"Error, submit again</h3>");
+			}
 		}
-	})
+	)
 }
 
 function accept_bid(accepted, projectid, state) {
