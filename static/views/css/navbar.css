@@ -27,3 +27,8 @@ th, td {
 	max-height: 500px;
 	overflow-y:scroll; 
 }
+
+.post_project {
+	margin: 10px;
+}
+

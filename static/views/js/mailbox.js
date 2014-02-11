@@ -5,40 +5,9 @@ $(document).ready(function() {
 	  	$(this).tab('show')
 	})
 
-	$.get('/inboxMessages', function(data) {
-		messages = data['json-result']['items']
+	$('#inboxTab').click(getMessages('inboxMessages'))
 
-		for (var m in messages) {
-			$.get('/projectDetails/'+messages[m].projectid, 
-				function(projectData) {
-					details = projectData['json-result']
-					$('#inboxMessages').append('<tr><td>' + 
-						messages[m].fromusername + '</td><td>' + 
-						messages[m].text + '</td><td><a href=\"' + 
-						details.url + '\">' + details.name + ' (' + 
-						messages[m].projectid + ')</a></td></tr>')
-				}
-			)
-		}
-	})
-
-	$.get('/sentMessages', function(data) {
-		messages = data['json-result']['items']
-
-		for (var m in messages) {
-			$.get('/projectDetails/'+messages[m].projectid, 
-				function(projectData) {
-					details = projectData['json-result']
-					$('#sentMessages').append('<tr><td>' + 
-						messages[m].tousername + '</td><td>' + 
-						messages[m].text + '</td><td><a href=\"' 
-						+ details.url + '\">' + details.name + ' (' + 
-						messages[m].projectid + ')</a></td></tr>')
-				}
-			)
-		}
-	})
-
+	$('#sentTab').click(getMessages('sentMessages'))
 
 	$('#sendBtn').click(function (e) {
 		e.preventDefault()
@@ -67,3 +36,31 @@ $(document).ready(function() {
 		})
 	})
 })
+
+// Helper Functions
+function getMessages(url) {
+	$('#'+url).append('<h4 class=\"loading\">Loading...</h4>')
+	$.get('/'+url, function(data) {
+		numMessages = data['json-result']['count']
+		if (numMessages != 0) {
+			messages = data['json-result']['items']
+
+			for (var m in messages) {
+				project_id = messages[m].projectid
+				text = messages[m].text
+				project_name = messages[m].project_name
+				project_url = message[m].project_url
+ 				username = ''
+				if (url == 'inboxMessages') username = messages[m].fromusername
+				else username = messages[m].tousername
+
+				$('#'+url).append('<tr><td>' + 
+					username + '</td><td>' + 
+					text + '</td><td><a href=\"' 
+					+ project_url + '\">' + project_name + ' (' + 
+					project_id + ')</a></td></tr>')
+			}
+			$('.loading').fadeOut()
+		}
+	})
+}

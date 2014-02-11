@@ -1,17 +1,5 @@
 $(document).ready(function(){
 
-	$.get('/getprojectbids/1034', function(data){
-		bids = data['json-result']['items']
-		for (var b in bids){
-			$('#bids-on-post').append('<li>' + bids[b].descr + ' ' 
-				+ '($' + bids[b].bid_amount + ') ' + 
-				'<button class="btn btn-default bid"' + 
-				' project_id = "' + '1034'  + '" user_id = "' 
-				+ bids[b].provider_userid + '" >Pick</button>' + '</li>'
-			)
-		}
-	})
-
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)
 		bids = data['json-result']['items']
@@ -22,7 +10,7 @@ $(document).ready(function(){
 				$('#all_placed_bids').append(
 					'<tr>' + '<td>' + bid.projectname + '</td>' + 
 					'<td>' + bid.bidcount + '</td>' + 
-					'<td><a href = "' + bid.projecturl + '">Link</a></td>' + 
+					'<td><a href = "' + bid.projecturl + '">Freelancer Website</a></td>' + 
 					'<td>' + bid.enddate + '</td>' + 
 					'<td><button type="Submit" state = "1" projectid="' + 
 					bid.projectid + 
@@ -37,6 +25,8 @@ $(document).ready(function(){
 			$('#my_bids_hdr').after('<p>You have no bids at this time</p>')
 		}
 	})
+
+
 
 	// Accept Bid Won
 	$(document).on('click', '.btn.btn-default.accept_bid', function() {
@@ -53,3 +43,19 @@ $(document).ready(function(){
 	})
 
 })
+
+function accept_bid(accepted, projectid, state) {
+	$('#log_message').remove()
+	$.get('/acceptbid/' + projectid + '/' + state, function(data){
+		response = data['json-result']
+		console.log(response)
+		if(response) {
+			status = response['statusconfirmation']
+			$("#create_milestone").after('<h2 id="log_message">' +
+				'Bid acceptance/decline submitted successfully.</h2>')
+		} else {
+			$("#create_milestone").after('<h3 id="log_message">' + 
+				'Error, submit again</h3>')
+		}
+	})
+}
