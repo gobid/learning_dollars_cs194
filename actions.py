@@ -1,5 +1,6 @@
 import webapp2
 import json
+import HTMLParser
 
 from config import config
 from ocw import youtube
@@ -21,7 +22,7 @@ class UpdateModules(webapp2.RequestHandler):
         for c in categories:
             # retrieve items from API's
             c_id = int(c['id'])
-            name = c['name']
+            name = HTMLParser.HTMLParser().unescape(c['name'])
             search_name = name + " tutorial"
             y_list, y_type = y.search(search_name)
             course_list = ocws.search(name)
