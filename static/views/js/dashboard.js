@@ -27,16 +27,64 @@ $(document).ready(function() {
 			$('#posted_projects').append('<tr><td>'+project.projectname+'</td><td>'+ project.additionalstatus + '</td><td>'+ project.averagebid+'</td><td>' + project.bidcount+'</td><td>'+project.enddate+'</td><td>'+project.projectid + '</td><td>'+ project.projecturl+'</td></tr>');
 		}
 	})
-
-	$.get('/getmilestonelist', function(data){
-		milestones = data['json-result']['items'];
+*/
+	$.get('/getincomingmilestonelist', function(data){
+		milestones = data['json-result']['items']
 		for (var m in milestones){
-			milestone = milestones[m];
-			$('#milestone_list').append('<tr><td>'+milestone.id+'</td><td>'+ milestone.username + '</td><td>'+ milestone.date+'</td><td>' + milestone.projectid+'</td><td>'+milestone.projectname+'</td><td>'+milestone.reason + '</td></tr>');
+			milestone = milestones[m]
+			$('#milestone_list').append(
+				'<tr><td>' + milestone.id + '</td><td>'
+				+ milestone.username + '</td><td>' + milestone.date +
+				'</td><td>' 
+				+ milestone.projectid + '</td><td>' + milestone.projectname + 
+				'</td><td>'
+				+ milestone.reason + 
+				' <button type = "button" transaction_id = "' + milestone.id +
+				'" class = "btn btn-default requestrelease">'
+				+ 'Request Release Milestone</button>'+ '</td></tr>'
+			)
 		}
 	})
-*/
 
+	$.get('/getoutgoingmilestonelist', function(data){
+		milestones = data['json-result']['items']
+		for (var m in milestones){
+			milestone = milestones[m]
+			$('#milestone_list').append(
+				'<tr><td>' + milestone.id + '</td><td>'
+				+ milestone.username + '</td><td>' + milestone.date + 
+				'</td><td>' + milestone.projectid + '</td><td>' + 
+				milestone.projectname+'</td><td>' + milestone.reason + 
+				' <button type = "button" transaction_id = "' + milestone.id
+				+ '" class = "btn btn-default release">'
+				+ ' Release Milestone</button>' + '</td></tr>'
+			)
+		}
+	})
+
+	$(document).on('click', '.btn.btn-default.requestrelease', function(){
+		console.log('requested release')
+		transaction_id = $(this).attr('transaction_id')
+		console.log(transaction_id)
+		$.get('/requestreleasemilestone/' + transaction_id, function(resp){
+			console.log(resp)
+		})
+	})
+
+	$(document).on('click', '.btn.btn-default.release', function(){
+		console.log('release')
+		transaction_id = $(this).attr('transaction_id')
+		console.log(transaction_id)
+		// using Sir right now, must replace with real name once that is added 
+		// to Account
+		s = $('#signature').val()
+		$.get('/releasemilestone/' + transaction_id + '/' + s, function(resp){
+			console.log(resp)
+		})
+	})
+
+
+/*
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)
 		console.log(data)
@@ -67,7 +115,7 @@ $(document).ready(function() {
 		}
 	})
 
-/*
+
 	$.get('/getprojectbids/1034', function(data){
 		bids = data['json-result']['items']
 		for (var b in bids){
