@@ -5,11 +5,12 @@ import webapp2
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage
 from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
-    SendMessage, BidOnProject, PostNewProject, RetractBid
+    SendMessage, BidOnProject, PostNewProject, RetractBid, GetMilestoneList, \
+    AcceptBid
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
-    InboxMessages, SentMessages, GetPlacedBids
+    InboxMessages, SentMessages, GetPlacedBids, GetProjectDetails
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
-    BidOnProject, PostNewProject, RetractBid    
+    BidOnProject, PostNewProject, RetractBid
 
 
 application = webapp2.WSGIApplication([
@@ -72,6 +73,11 @@ application = webapp2.WSGIApplication([
         name='getposts'
     ),
     webapp2.Route(
+        '/getmilestonelist',
+        handler=GetMilestoneList,
+        name='getmilestones'
+    ),
+    webapp2.Route(
         '/inboxMessages',
         handler=InboxMessages,
         name='getInboxMessages'
@@ -80,6 +86,11 @@ application = webapp2.WSGIApplication([
         '/sentMessages',
         handler=SentMessages,
         name='getSentMessages'
+    ),
+    webapp2.Route(
+        '/projectDetails/<project_id:\d+>',
+        handler=GetProjectDetails,
+        name='getProjectDetails'
     ),
 
     # Actions
@@ -95,14 +106,20 @@ application = webapp2.WSGIApplication([
     ),
     webapp2.Route(
         '/createmilestonepayment/<project_id:\d+>/<amount:\d+>/' + \
-        '<currency_id:\d+>/<touserid:\w+>/<reasontext:\w+>/<reasontype:\w+>', 
+        '<currency_id:\d+>/<tousername:\w+>/<reasontext:\w+>/<reasontype:\w+>', 
         handler=CreateMilestonePayment, 
         name='createmilestonepayment'
     ),
 
     webapp2.Route(
+        '/acceptbid/<project_id:\d+>/<state:\d+>', 
+        handler=AcceptBid,
+        name='acceptbid'
+    ),
+
+    webapp2.Route(
         '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/' + \
-        '<description:[^/]+>', 
+        '<description:[^/]+>',
         handler=BidOnProject,
         name='bidonproject'
     ),

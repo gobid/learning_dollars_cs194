@@ -4,6 +4,8 @@ from client import FreelancerClient
 from response import FreelancerResponse
 
 import json
+import csv
+import StringIO
 
 from config import config
 
@@ -53,9 +55,10 @@ class JobApiCalls(object):
 		return searchResults
 
 	def select_winner(self, project_id, winner_id):
+		print winner_csv
 		response = self.freelancer.Employer.chooseWinnerForProject({
 			'projectid': project_id,
-			'useridcsv': "'" + winner_id + "',"
+			'useridcsv':  winner_id
 		})
 		return response
 
@@ -73,6 +76,14 @@ class JobApiCalls(object):
 	def retract_bid(self, project_id):
 		status = self.freelancer.Account.Freelancer.retractBidFromProject({
 			'projectid':project_id
+		})
+		print status
+		return status
+
+	def accept_bid(self, project_id, state):
+		status = self.freelancer.Account.Freelancer.acceptBidWon({
+			'projectid':project_id,
+			'state':state
 		})
 		print status
 		return status
@@ -96,7 +107,7 @@ class JobApiCalls(object):
 		print response
 		return response
 
-	def create_milestone_payment(self, project_id, amount, currency, 
+	def create_milestone_payment(self, project_id, amount, currency_id, 
 		touserid, reasontext, reasontype):
 		print 'account balance'
 		print self.freelancer.Payment.getAccountBalanceStatus()
@@ -111,6 +122,10 @@ class JobApiCalls(object):
 		})
 		return response
 
+	def get_milestone_list(self):
+		response = self.freelancer.Payment.getAccountMilestoneList({
+			})
+		return response
 
 	def get_inbox_messages(self):
 		inboxMessages = self.freelancer.Account.Message.getInboxMessages()
@@ -135,4 +150,10 @@ class JobApiCalls(object):
 		})
 		print placed_bids
 		return placed_bids
+
+	def get_project_details(self, project_id):
+		project = self.freelancer.Project.getProjectDetails({
+			'projectid': project_id
+		})
+		return project
 

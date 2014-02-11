@@ -19,65 +19,18 @@
                         <th>Current Bid Count</th>
                         <th>Url</th>
                         <th>End date</th>
+                        <th>Accept/Decline</th>
                         </tr>
                     </table>
                 </div>
-                <div class = "col-md-4"> <!-- milestones for bid --> 
-                </div>
-                <div class = "col-md-4"> <!-- mailbox --> 
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><h3>Messages</h3></div>
-                        <div class="panel-body">
-                            <ul class="nav nav-tabs" id="messageTabs">
-                                <li class="active"><a href="#inbox">Inbox</a></li>
-                                <li><a href="#sent">Sent</a></li>
-                                <li><a href="#newMessage">New Message</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade in active" id="inbox">
-                                    <table class = "table table-hover" id = "inboxMessages">
-                                        <tr>
-                                            <th>From</th>
-                                            <th>Message</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" id="sent">
-                                    <table class = "table table-hover" id = "sentMessages">
-                                        <tr>
-                                            <th>To</th>
-                                            <th>Message</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" id="newMessage">
-                                    <form class="newMessageForm">
-                                        <div class="form-group">
-                                            <label>To:</label>
-                                            <input type="text" class="form-control" id="to_user_name" placeholder="User Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Project ID Number:</label>
-                                            <input type="number" class="form-control" id="project_id" placeholder="Project ID #">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Message:</label>
-                                            <textarea class="form-control" rows="3" id="message_text" placeholder="Enter Message Here"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <button value="Submit" class="btn btn-lg btn-default" id="sendBtn">Send</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class = "col-md-8"> <!-- mailbox --> 
+                    {% include 'templates/dashboard-message.html' %}
                 </div>
             </div>
             <!-- Second Row -->
             <div class = "row">
                 <div class = "col-md-4"> <!-- posts --> 
-                    <div class="post_project"> 
+                    <div class-"post_project"> 
                         <h2>Post New Project</h2>
                         Name: <input class="form-control" type="text" id="name">
                         Job Type: <input class="form-control" type="text" id="type" placeholder="ex: 'Java' ">
@@ -117,6 +70,40 @@
                         <th>Project id</th>
                         <th>Url</th>
                         </tr>
+                </table>
+            </div>
+            <div class = "row">
+              <div class = "create_milestone">
+                <h2>Create Milestone</h2>
+                  ID: 
+                  <input class ="form-control" type="text" id="projectid" placeholder="1034">
+                  Amount: 
+                  <input class="form-control" type="text" id="amount">
+                  User Name: 
+                  <input class="form-control" type="text" id="tousername" placeholder = "govindadasu">
+                  Reason: 
+                  <input class="form-control" type="text" id="reasontext">
+                  Reason Type: 
+                  <select class="form-control" id="reasontype">
+                    <option value="partial">Partial</option>
+                    <option value="full">Full</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <button type="button" class="btn btn-default btn-lg" id='create_milestone_payment'>   Create Milestone Payment
+                  </button>
+              </div>
+            </div>
+            <div class="row">
+                <h2>Milestone List</h2>
+                <table class="table table-striped" id="milestone_list">
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Date</th>
+                        <th>Project ID</th>
+                        <th>Project Name/th>
+                        <th>Reason</th>
+                    </tr>
                 </table>
             </div>
         </div>
