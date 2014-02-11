@@ -122,9 +122,29 @@ class JobApiCalls(object):
 		})
 		return response
 
-	def get_milestone_list(self):
+	def request_release_milestone(self, transaction_id):
+		response = self.freelancer.Payment.requestReleaseMilestone({
+			'transactionid': transaction_id	
+		})
+		return response
+
+	def release_milestone(self, transaction_id, fullname):
+		response = self.freelancer.Payment.releaseMilestone({
+			'transactionid': transaction_id,
+			'fullname': fullname
+		})
+		return response
+
+	# Outgoing Milestone List
+	def get_outgoing_milestone_list(self):
 		response = self.freelancer.Payment.getAccountMilestoneList({
-			})
+			'type': 'Outgoing'
+		})
+		return response
+
+	# Incoming Milestone List
+	def get_incoming_milestone_list(self):
+		response = self.freelancer.Payment.getAccountMilestoneList()
 		return response
 
 	def get_inbox_messages(self):

@@ -4,14 +4,17 @@ import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     DashboardPage, MailboxPage, MyBidsPage, MyPostsPage, MilestonesPage
-from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
-    SendMessage, BidOnProject, PostNewProject, RetractBid, GetMilestoneList, \
-    AcceptBid
-from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
-    InboxMessages, SentMessages, GetPlacedBids, GetProjectDetails
-from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
-    BidOnProject, PostNewProject, RetractBid
 
+from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
+    SendMessage, BidOnProject, PostNewProject, RetractBid, AcceptBid
+
+from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
+    PostsInfo, InboxMessages, SentMessages, GetPlacedBids, \
+    GetProjectDetails, GetIncomingMilestoneList, GetOutgoingMilestoneList
+
+from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
+    BidOnProject, PostNewProject, RetractBid, RequestReleaseMilestone, \
+    ReleaseMilestone
 
 application = webapp2.WSGIApplication([
     # Views
@@ -93,9 +96,14 @@ application = webapp2.WSGIApplication([
         name='getposts'
     ),
     webapp2.Route(
-        '/getmilestonelist',
-        handler=GetMilestoneList,
-        name='getmilestones'
+        '/getoutgoingmilestonelist',
+        handler=GetOutgoingMilestoneList,
+        name='getoutgoingmilestones'
+    ),
+    webapp2.Route(
+        '/getincomingmilestonelist',
+        handler=GetIncomingMilestoneList,
+        name='getincomingmilestones'
     ),
     webapp2.Route(
         '/inboxMessages',
@@ -126,9 +134,22 @@ application = webapp2.WSGIApplication([
     ),
     webapp2.Route(
         '/createmilestonepayment/<project_id:\d+>/<amount:\d+>/' + \
-        '<currency_id:\d+>/<tousername:\w+>/<reasontext:\w+>/<reasontype:\w+>', 
+        '<currency_id:\d+>/<tousername:\w+>/<reasontext:\w+>/' + \
+        '<reasontype:\w+>', 
         handler=CreateMilestonePayment, 
         name='createmilestonepayment'
+    ),
+
+    webapp2.Route(
+        '/requestreleasemilestone/<transaction_id:\d+>', 
+        handler=RequestReleaseMilestone,
+        name='requestreleasemilestone'
+    ),
+
+    webapp2.Route(
+        '/releasemilestone/<transaction_id:\d+>/<fullname:[^/]+>', 
+        handler=ReleaseMilestone,
+        name='releasemilestone'
     ),
 
     webapp2.Route(

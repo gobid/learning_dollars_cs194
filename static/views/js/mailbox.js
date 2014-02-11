@@ -41,7 +41,7 @@ $(document).ready(function() {
 
 
 	$('#sendBtn').click(function (e) {
-		e.preventDefault();
+		e.preventDefault()
 		projectId = $('#project_id').val()
 		messageText = $('#message_text').val()
 		toUserName = $('#to_user_name').val()
