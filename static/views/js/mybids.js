@@ -26,7 +26,7 @@ $(document).ready(function(){
 					'<td>' + bid.enddate + '</td>' + 
 					'<td><button type="Submit" state = "1" projectid="' + 
 					bid.projectid + 
-					'" class="btn btn-default accept_bid">Accept</button>' + 
+					'" class="btn btn-default accept_bid">Accept</button> ' + 
 					'<button value="Submit" state = "0" projectid="' + 
 					bid.projectid + 
 					'" class="btn btn-default decline_bid">Decline</button>'
