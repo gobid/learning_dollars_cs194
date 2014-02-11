@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html lang="en">
+    <head>
+        {% include 'templates/header.html' %}
+    </head>
+    <body>
+        <div class="container">
+            {% include 'templates/navbar.html' %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Milestones</h3>
+                </div>
+                <div class = "row">
+                    <div class = "col-md-4">
+                        <h2>Create Milestone</h2>
+                          ID: 
+                          <input class ="form-control" type="text" id="projectid" placeholder="1034">
+                          Amount: 
+                          <input class="form-control" type="text" id="amount">
+                          User Name: 
+                          <input class="form-control" type="text" id="tousername" placeholder = "govindadasu">
+                          Reason: 
+                          <input class="form-control" type="text" id="reasontext">
+                          Reason Type: 
+                          <select class="form-control" id="reasontype">
+                            <option value="partial">Partial</option>
+                            <option value="full">Full</option>
+                            <option value="other">Other</option>
+                          </select>
+                          <button type="button" class="btn btn-default btn-lg" id='create_milestone_payment'>   Create Milestone Payment
+                          </button>
+                    </div>
+                    <div class = "col-md-8">
+                        <h2>Milestone List</h2>
+                <table class="table table-striped" id="milestone_list">
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Date</th>
+                        <th>Project ID</th>
+                        <th>Project Name/th>
+                        <th>Reason</th>
+                    </tr>
+                </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'templates/footer.html' %}
+        <script src = 'static/views/js/milestones.js'></script>
+    </body>
+</html>
+{% endautoescape %}

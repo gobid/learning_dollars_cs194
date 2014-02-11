@@ -2,8 +2,8 @@ from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 
-# Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
-# tab of https://cloud.google.com/console
+# Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered 
+# apps tab of https://cloud.google.com/console
 # Please ensure that you have enabled the YouTube Data API for your project.
 
 from config import config

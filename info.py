@@ -102,7 +102,6 @@ class SentMessages(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(messages))
 
-
 class GetPlacedBids(webapp2.RequestHandler):
 
     def get(self):
@@ -121,5 +120,27 @@ class GetProjectDetails(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(projectDetail))
 
+class GetOutgoingMilestoneList(webapp2.RequestHandler):
 
+    def get(self):
+        jac = get_personal_jac()
+        if jac:
+            response = jac.get_outgoing_milestone_list()
+        else:
+            response = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response)) 
+
+class GetIncomingMilestoneList(webapp2.RequestHandler):
+
+    def get(self):
+        jac = get_personal_jac()
+        if jac:
+            response = jac.get_incoming_milestone_list()
+        else:
+            response = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response)) 
 
