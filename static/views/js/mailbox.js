@@ -48,20 +48,17 @@ function getMessages(url) {
 			for (var m in messages) {
 				project_id = messages[m].projectid
 				text = messages[m].text
-				username = ''
+				project_name = messages[m].project_name
+				project_url = message[m].project_url
+ 				username = ''
 				if (url == 'inboxMessages') username = messages[m].fromusername
 				else username = messages[m].tousername
 
-				$.get('/projectDetails/' + messages[m].projectid, 
-					function(projectData) {
-						details = projectData['json-result']
-						$('#'+url).append('<tr><td>' + 
-							username + '</td><td>' + 
-							text + '</td><td><a href=\"' 
-							+ details.url + '\">' + details.name + ' (' + 
-							project_id + ')</a></td></tr>')
-					}
-				)
+				$('#'+url).append('<tr><td>' + 
+					username + '</td><td>' + 
+					text + '</td><td><a href=\"' 
+					+ project_url + '\">' + project_name + ' (' + 
+					project_id + ')</a></td></tr>')
 			}
 			$('.loading').fadeOut()
 		}

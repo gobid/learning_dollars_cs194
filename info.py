@@ -85,6 +85,16 @@ class InboxMessages(webapp2.RequestHandler):
         jac = get_personal_jac()
         if jac:
             messages = jac.get_inbox_messages()
+            count = messages['json-result']['count']
+            if count > 0:
+                items = messages['json-result']['items']
+                for i in xrange(len(items)):
+                    id = items[i]['projectid']
+                    projectDetails = jac.get_project_details(id)
+                    name = projectDetails['json-result']['name']
+                    url = projectDetails['json-result']['url']
+                    items[i]['projectname'] = name
+                    items[i]['projecturl'] = url
         else:
             messages = {'error':'User has no associated account. ' \
             + 'Try logging out and logging in again.'}
@@ -96,6 +106,16 @@ class SentMessages(webapp2.RequestHandler):
         jac = get_personal_jac()
         if jac:
             messages = jac.get_sent_messages()
+            count = messages['json-result']['count']
+            if count > 0:
+                items = messages['json-result']['items']
+                for i in xrange(len(items)):
+                    id = items[i]['projectid']
+                    projectDetails = jac.get_project_details(id)
+                    name = projectDetails['json-result']['name']
+                    url = projectDetails['json-result']['url']
+                    items[i]['projectname'] = name
+                    items[i]['projecturl'] = url
         else:
             messages = {'error':'User has no associated account. ' \
             + 'Try logging out and logging in again.'}
