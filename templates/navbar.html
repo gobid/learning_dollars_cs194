@@ -1,36 +1,36 @@
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Learning Dollars</a>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Learning Dollars</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/team">Team</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/modules">Modules</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboard<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/mailbox">Mailbox</a></li>
+                        <li><a href="/mybids">My Bids</a></li>
+                        <li><a href="/myposts">My Posts</a></li>
+                        <li><a href="/milestones">Milestones</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if nickname %}
+                <li><a href="./">{{ nickname }}</a></li>
+                {% endif %}
+                <li><a href="{{ url|safe }}">{{ url_linktext }}</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="/">Home</a></li>
-        <li><a href="/team">Team</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/modules">Modules</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboard<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="/mailbox">Mailbox</a></li>
-            <li><a href="/mybids">My Bids</a></li>
-            <li><a href="/myposts">My Posts</a></li>
-            <li><a href="/milestones">Milestones</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        {% if nickname %}
-          <li><a href="./">{{ nickname }}</a></li>
-        {% endif %}
-        <li><a href="{{ url|safe }}">{{ url_linktext }}</a></li>
-      </ul>
-    </div>
-  </div>
 </div>

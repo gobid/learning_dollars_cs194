@@ -1,81 +1,93 @@
 <!DOCTYPE html>
 {% autoescape true %}
 <html lang="en">
-  <head>
-    {% include 'templates/header.html' %}
-  </head>
-  <body>
-    <div class="container">
-      {% include 'templates/navbar.html' %}
-     
-      <div class = "row">
-        <div class = "col-md-8">
-          <h1>{{ name }}</h1>
-              {% if yt_type == "video" %}
-                {% for video in youtube %}
-                  <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video }}" frameborder="0" allowfullscreen></iframe>
-                {% endfor %}
-              {% else %}
-                {% if yt_type == "playlist" %}
-                  {% for pl in youtube %}
+    <head>
+        {% include 'templates/header.html' %}
+    </head>
+    <body>
+        <div class="container">
+            {% include 'templates/navbar.html' %}
+            <div class = "row">
+                <div class = "col-md-8">
+                    <h1>{{ name }}</h1>
+                    {% if yt_type == "video" %}
+                    {% for video in youtube %}
+                    <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video }}" frameborder="0" allowfullscreen></iframe>
+                    {% endfor %}
+                    {% else %}
+                    {% if yt_type == "playlist" %}
+                    {% for pl in youtube %}
                     <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ pl }}" frameborder="0" allowfullscreen></iframe>
-                  {% endfor %}
-                {% endif %}
-              {% endif %}
-        </div>
-        <div class = "col-md-4">
-          <h1>Jobs</h1>
-          <ol>
-            <li><b><a target = '_blank' href = 'http://www.sandbox.freelancer.com/projects/Java/Develop-Java-App-Website.html' projectid = '1057'>Develop Java App Website</a></b>
-            <div class="place-bid">
-                Amount: <input class="form-control" type="number" id="amount" placeholder="greater than $250">
-                Days: <input class="form-control" type="number" id="days">
-                <div class="form-group">
-                Description: <textarea class="form-control" id="description"></textarea>
-              </div>
-                <!-- <input type="submit" class="bid_submit" projectid = '1034'> -->
-                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='1057' id='1057'>
-                  Place Bid
-                </button>
+                    {% endfor %}
+                    {% endif %}
+                    {% endif %}
+                </div>
+                <div class = "col-md-4">
+                    <h1>Jobs</h1>
+                    <ol>
+                        <li>
+                            <b><a target = '_blank' href = 'http://www.sandbox.freelancer.com/projects/Java/Develop-Java-App-Website.html' projectid = '1057'>Develop Java App Website</a></b>
+                            <div class="place-bid">
+                                Amount: <input class="form-control" type="number" id="amount" placeholder="greater than $250">
+                                Days: <input class="form-control" type="number" id="days">
+                                <div class="form-group">
+                                    Description: <textarea class="form-control" id="description"></textarea>
+                                </div>
+                                <!-- <input type="submit" class="bid_submit" projectid = '1034'> -->
+                                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='1057' id='1057'>
+                                Place Bid
+                                </button>
+                            </div>
+                        </li>
+                        {% for job in jobs %}
+                        <li>
+                            <b><a target = '_blank' href = ''>
+                            {{ job.projectname }}</a></b>
+                            {% if job.averagebid != False %}<b>${{ job.averagebid }}</b>
+                            {% endif %}
+                            <div class="place-bid">
+                                Amount: <input class="form-control" type="number" id="amount" placeholder="greater than $250">
+                                Days: <input class="form-control" type="number" id="days">
+                                Description: <textarea class="form-control" id="description"></textarea>
+                                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='{{job.projectid}}' id='{{job.projectid}}'>
+                                Place Bid
+                                </button>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
             </div>
-            </li>
-            {% for job in jobs %}
-              <li><b><a target = '_blank' href = ''>
-                {{ job.projectname }}</a></b>
-                {% if job.averagebid != False %}<b>${{ job.averagebid }}</b>
-              {% endif %}
-                <div class="place-bid">
-                Amount: <input class="form-control" type="number" id="amount" placeholder="greater than $250">
-                Days: <input class="form-control" type="number" id="days">
-                Description: <textarea class="form-control" id="description"></textarea>
-                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='{{job.projectid}}' id='{{job.projectid}}'>
-                Place Bid
-                </button>
-
-              </div>
-              </li>
-            {% endfor %}
-          </ol>
+            <h2>Courses</h2>
+            <table>
+                {% for course in courses %}
+                {% if course != "" %}
+                {% if course.Title %}
+                <tr>
+                    <td><a target = '_blank' href="{{ course.CourseURL }}">{{ course.Title }}</a></td>
+                </tr>
+                <tr>
+                    <td>{{ course.Institution }} ({{ course.TeachingDate }}) </td>
+                </tr>
+                <tr>
+                    <td>Instructors: {{ course.Instructors }}</td>
+                </tr>
+                <tr>
+                    <td>Description: {{ course.Description }} </td>
+                </tr>
+                <tr>
+                    <td><a target = '_blank' href="{{ course.DownloadPageLink }}">Course Materials</a></td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %} 
+            </table>
         </div>
-      </div>
-       <h2>Courses</h2>
-         <table>
-         {% for course in courses %}
-           {% if course != "" %}
-             {% if course.Title %}
-               <tr><td><a target = '_blank' href="{{ course.CourseURL }}">{{ course.Title }}</a></td></tr>
-               <tr><td>{{ course.Institution }} ({{ course.TeachingDate }}) </td></tr>
-               <tr><td>Instructors: {{ course.Instructors }}</td></tr>
-               <tr><td>Description: {{ course.Description }} </td></tr>
-               <tr><td><a target = '_blank' href="{{ course.DownloadPageLink }}">Course Materials</a></td></tr>
-               <tr><td>&nbsp</td></tr>
-             {% endif %}
-           {% endif %}
-         {% endfor %} 
-         </table>
-     </div>
-    {% include 'templates/footer.html' %}
-     <script src = 'static/views/js/module.js'></script>
-  </body>
+        {% include 'templates/footer.html' %}
+        <script src = 'static/views/js/module.js'></script>
+    </body>
 </html>
 {% endautoescape %}
