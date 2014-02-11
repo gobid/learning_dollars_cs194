@@ -81,7 +81,9 @@ function load_bids_on_post(project_id){
 		console.log(data)
 		jr = data['json-result']
 		count = jr['count']
-		if (count > 0){
+		console.log("here")
+		if (count != 0){
+			console.log('here')
 			bids = jr['items']
 			for (var b in bids){
 				$('#bids-on-post').append('<li>' + bids[b].descr + ' ' 
@@ -93,6 +95,7 @@ function load_bids_on_post(project_id){
 			}	
 		}
 		else {
+			console.log("not here")
 			$('#bids-on-post').append('<li>No Bids</li>')
 		}
 	})	

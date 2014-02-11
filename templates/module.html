@@ -25,7 +25,7 @@
                 <div class = "col-md-4">
                     <h1>Jobs</h1>
                         {% for job in jobs %}
-                            <b><a target = '_blank' href = ''>
+                            <b><a target = '_blank' href = "{{job.projecturl}}"" >
                             {{ job.projectname }}</a></b>
                             {% if job.averagebid != False %}<b>${{ job.averagebid }}</b>
                             {% endif %}
