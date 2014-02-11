@@ -62,12 +62,14 @@
          <table>
          {% for course in courses %}
            {% if course != "" %}
-             <tr><td><a target = '_blank' href="{{ course.CourseURL }}">{{ course.Title }}</a></td></tr>
-             <tr><td>{{ course.Institution }} ({{ course.TeachingDate }}) </td></tr>
-             <tr><td>Instructors: {{ course.Instructors }}</td></tr>
-             <tr><td>Description: {{ course.Description }} </td></tr>
-             <tr><td><a target = '_blank' href="{{ course.DownloadPageLink }}">Course Materials</a></td></tr>
-             <tr><td>&nbsp</td></tr>
+             {% if course.Title %}
+               <tr><td><a target = '_blank' href="{{ course.CourseURL }}">{{ course.Title }}</a></td></tr>
+               <tr><td>{{ course.Institution }} ({{ course.TeachingDate }}) </td></tr>
+               <tr><td>Instructors: {{ course.Instructors }}</td></tr>
+               <tr><td>Description: {{ course.Description }} </td></tr>
+               <tr><td><a target = '_blank' href="{{ course.DownloadPageLink }}">Course Materials</a></td></tr>
+               <tr><td>&nbsp</td></tr>
+             {% endif %}
            {% endif %}
          {% endfor %} 
          </table>
