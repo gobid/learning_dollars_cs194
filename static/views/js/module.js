@@ -15,32 +15,29 @@ function make_bid_request(e) {
 	amount = $("#amount").val();
 	days = $("#days").val();
 	description = $("#description").val();
-	$.get('/bidonproject/' + id + '/' + amount + '/' + 
-		days + '/' + description, function(data){
-			response = data['json-result'];
-			if(response) {
-				responseGood = response['statusconfirmation'];
-				console.log('RESPONSE!: ' + responseGood);
+	$.get('/bidonproject/' + id + '/' + amount + '/' + days + '/' + description, function(data){
+		response = data['json-result'];
+		if(response) {
+			responseGood = response['statusconfirmation'];
+			if ($("#r" + id).size() == 0) {
 				$("#" + id).text('Update bid');
 				$("#" + id).after("<button type='button' class='btn" + 
 					" btn-default btn-lg bid_retract' projectid ='" + id +
 					"' id='r" + id + "'>Retract Bid</button>");
 				initializePage();
-				console.log(id);
-			} else {
-				response = data['errors'];
-				if (!response) response = data['error'];
-				else response = response['error']['longmsg'];
-				if (!($('.alert.alert-warning')[0])) {
-					var alertDiv = document.createElement('div');
-					alertDiv.className ='alert alert-warning';
-					document.getElementsByClassName('place-bid')[0].appendChild(alertDiv);
-				}
-				$('.alert.alert-warning').html(response);
-				console.log('OMG ERROR!');
 			}
+		} else {
+			response = data['errors'];
+			if (!response) response = data['error'];
+			else response = response['error']['longmsg'];
+			if (!($('.alert.alert-warning')[0])) {
+				var alertDiv = document.createElement('div');
+				alertDiv.className ='alert alert-warning';
+				document.getElementsByClassName('place-bid')[0].appendChild(alertDiv);
+			}
+			$('.alert.alert-warning').text(response);
 		}
-	)
+	})
 }
 
 

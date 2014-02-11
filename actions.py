@@ -84,17 +84,29 @@ class CreateMilestonePayment(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
-class GetMilestoneList(webapp2.RequestHandler):
+class RequestReleaseMilestone(webapp2.RequestHandler):
 
-    def get(self):
+    def get(self, transaction_id):
         jac = get_personal_jac()
         if jac:
-            response = jac.get_milestone_list()
+            response = jac.request_release_milestone(transaction_id)
         else:
             response = {'error':'User has no associated account. ' \
             + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))       
+        self.response.write(json.dumps(response))
+
+class ReleaseMilestone(webapp2.RequestHandler):
+
+    def get(self, transaction_id, fullname):
+        jac = get_personal_jac()
+        if jac:
+            response = jac.release_milestone(transaction_id, fullname)
+        else:
+            response = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))      
 
 
 class BidOnProject(webapp2.RequestHandler):
@@ -134,7 +146,8 @@ class AcceptBid(webapp2.RequestHandler):
 
 class PostNewProject(webapp2.RequestHandler):
 
-    def get(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
+    def get(self, projectname, projectdesc, jobtypecsv, budgetoption, 
+            duration):
         jac = get_personal_jac()
         if jac: 
             response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)
