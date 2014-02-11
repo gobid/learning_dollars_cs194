@@ -1,14 +1,31 @@
 $(document).ready(function() {
 
+	$.get('/getprojectbids/1034', function(data){
+		bids = data['json-result']['items']
+		for (var b in bids){
+			$('#bids-on-post').append('<li>' + bids[b].descr + ' ' 
+				+ '($' + bids[b].bid_amount + ') ' + 
+				'<button class="btn btn-default bid"' + 
+				' project_id = "' + '1034'  + '" user_id = "' 
+				+ bids[b].provider_userid + '" >Pick</button>' + '</li>'
+			)
+		}
+	})
+
 	$.get('/postsinfo', function(data){
-		posts = data['json-result']['items']
-		for (var p in posts){
-			project = posts[p]
-			$('#posted_projects').append('<tr><td>'+project.projectname+ 
-				'</td><td>'+ project.additionalstatus + '</td><td>'+ 
-				project.averagebid+'</td><td>' + project.bidcount+ 
-				'</td><td>'+project.enddate+'</td><td>'+project.projectid + 
-				'</td><td>'+ project.projecturl+'</td></tr>')
+		console.log(data)
+		numPosts = data['json-result']['count']
+		if(numPosts > 0) {
+			posts = data['json-result']['items']
+			for (var p in posts){
+				project = posts[p]
+				console.log(project.projectname)
+				$('#posted_projects').append('<tr><td>'+project.projectname+ 
+					'</td><td>'+ project.additionalstatus + '</td><td>'+ 
+					project.averagebid+'</td><td>' + project.bidcount+ 
+					'</td><td>'+project.enddate+'</td><td>'+project.projectid + 
+					'</td><td>'+ project.projecturl+'</td></tr>')
+			}
 		}
 	})
 
