@@ -20,9 +20,16 @@ function make_bid_request(e) {
 		if(response) {
 			responseGood = response['statusconfirmation'];
 			console.log('RESPONSE!: ' + responseGood);
-			$("#" + id).text('Update bid');
-			$("#" + id).after("<button type='button' class='btn btn-default btn-lg bid_retract' projectid ='" + id + "' id='r" + id + "'>Retract Bid</button>");
-			initializePage();
+			console.log("#r" + id);
+			if ($("#r" + id)) {
+				console.log($("#r" + id).size());
+			}
+			if ($("#r" + id).size() == 0) {
+				console.log(" hittttmee :::::");
+				$("#" + id).text('Update bid');
+				$("#" + id).after("<button type='button' class='btn btn-default btn-lg bid_retract' projectid ='" + id + "' id='r" + id + "'>Retract Bid</button>");
+				initializePage();
+			}
 			console.log(id);
 		} else {
 			response = data['errors'];
@@ -34,7 +41,6 @@ function make_bid_request(e) {
 				document.getElementsByClassName('place-bid')[0].appendChild(alertDiv);
 			}
 			$('.alert.alert-warning').text(response);
-			console.log('OMG ERROR!');
 		}
 	})
 }

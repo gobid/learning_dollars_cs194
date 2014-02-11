@@ -39,15 +39,11 @@ $(document).ready(function() {
 
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)
-		console.log(data)
 		bids = data['json-result']['items']
 		count = data['json-result']['count']
-		console.log(count)
 		if(count != 0) {
-			console.log("hitttt1");
 			for (var b in bids){
 				bid = bids[b];
-				console.log(bid.projectname);
 				$('#all_placed_bids').append(
 					'<tr>' + '<td>' + bid.projectname + '</td>' + 
 					'<td>' + bid.bidcount + '</td>' + 
@@ -61,7 +57,6 @@ $(document).ready(function() {
 				);
 			}
 		} else {
-			console.log("hittttt2");
 			$('#my_bids_hdr').after('<p>You have no bids at this time</p>');
 
 		}

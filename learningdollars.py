@@ -118,7 +118,7 @@ application = webapp2.WSGIApplication([
     ),
 
     webapp2.Route(
-        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/' + \
+        '/bidonproject/<project_id:\d+>/<amount:[^/]+>/<days:\d+>/' + \
         '<description:[^/]+>',
         handler=BidOnProject,
         name='bidonproject'

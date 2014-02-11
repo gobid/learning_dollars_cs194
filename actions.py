@@ -100,15 +100,10 @@ class BidOnProject(webapp2.RequestHandler):
 
     def get(self, project_id, amount, days, description):
         jac = get_personal_jac()
-<<<<<<< HEAD
-        response = jac.place_bid_on_project(project_id, amount, days, 
-                    description)
-=======
         if jac: 
             response = jac.place_bid_on_project(project_id, amount, days, description)
         else:
             response = {'error':'You are not logged in. '}
->>>>>>> 899c8071596a8e1e4f6043a36b4631dec54d5dde
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))   
 
@@ -141,15 +136,10 @@ class PostNewProject(webapp2.RequestHandler):
     def get(self, projectname, projectdesc, jobtypecsv, budgetoption, 
             duration):
         jac = get_personal_jac()
-<<<<<<< HEAD
-        response = jac.post_new_project(projectname, projectdesc, jobtypecsv,
-                    budgetoption, duration)
-=======
         if jac: 
             response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)
         else: 
             response = {'error':'You are not logged in. '}
->>>>>>> 899c8071596a8e1e4f6043a36b4631dec54d5dde
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
