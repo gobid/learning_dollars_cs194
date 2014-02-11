@@ -35,7 +35,7 @@ function make_bid_request(e) {
 				alertDiv.className ='alert alert-warning';
 				document.getElementsByClassName('place-bid')[0].appendChild(alertDiv);
 			}
-			$('.alert.alert-warning').text(response);
+			$('.alert.alert-warning').html(response);
 		}
 	})
 }

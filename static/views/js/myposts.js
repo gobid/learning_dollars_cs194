@@ -76,8 +76,17 @@ function post_project(e) {
 					"sucessfully posted, see url to view on freelancer: " +
 					 url + "</h2>")
 			} else {
-				$("#post_project").after("<h3 id='log_message'>" + 
-					"Error, submit again</h3>")
+				response = data['errors'];
+				if (!response) response = data['error'];
+				else response = response['error']['longmsg'];
+				if (!($('.alert.alert-warning')[0])) {
+					var alertDiv = document.createElement('div');
+					alertDiv.className ='alert alert-warning';
+					var spaceMe = document.createElement('hr');
+					document.getElementsByClassName('post_project')[0].appendChild(spaceMe);
+					document.getElementsByClassName('post_project')[0].appendChild(alertDiv);
+				}
+				$('.alert.alert-warning').html(response);
 			}
 		}
 	)
