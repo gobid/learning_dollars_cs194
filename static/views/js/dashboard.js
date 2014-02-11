@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
 	// My Posts handlers (Tim & Govi)
-/*
+
 	$("#post_project").click(post_project);
-*/
+
 
 	$("#create_milestone_payment").click(create_milestone_payment);
 
@@ -76,6 +76,7 @@ $(document).ready(function() {
 		}
 	})
 
+//HARD CODED HERE FIX THIS YO
 /*
 	$.get('/getprojectbids/1034', function(data){
 		bids = data['json-result']['items']
@@ -87,8 +88,8 @@ $(document).ready(function() {
 				+ bids[b].provider_userid + '" >Pick</button>' + '</li>')
 		}
 	})
-*/
 
+*/
 	// My Bids handlers (Will)
 
 	$(document).on('click', '.btn.btn-default.bid', function(){
