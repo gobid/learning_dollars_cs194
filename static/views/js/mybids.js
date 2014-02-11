@@ -1,17 +1,5 @@
 $(document).ready(function(){
 
-	$.get('/getprojectbids/1034', function(data){
-		bids = data['json-result']['items']
-		for (var b in bids){
-			$('#bids-on-post').append('<li>' + bids[b].descr + ' ' 
-				+ '($' + bids[b].bid_amount + ') ' + 
-				'<button class="btn btn-default bid"' + 
-				' project_id = "' + '1034'  + '" user_id = "' 
-				+ bids[b].provider_userid + '" >Pick</button>' + '</li>'
-			)
-		}
-	})
-
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)
 		bids = data['json-result']['items']
