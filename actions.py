@@ -22,7 +22,7 @@ class UpdateModules(webapp2.RequestHandler):
         cnt = 0
         for c in categories:
             cnt = cnt + 1
-            if cnt > 81:
+            if cnt > 140:
                 # retrieve items from API's
                 c_id = int(c['id'])
                 name = HTMLParser.HTMLParser().unescape(c['name'])
