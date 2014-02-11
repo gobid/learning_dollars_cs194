@@ -18,41 +18,37 @@ class UpdateModules(webapp2.RequestHandler):
         categories = jac.get_categories()
         y = youtube.Youtube()
         ocws = ocwsearch.OCWSearch()
-
-        cnt = 0
         for c in categories:
-            cnt = cnt + 1
-            if cnt > 140:
-                # retrieve items from API's
-                c_id = int(c['id'])
-                name = HTMLParser.HTMLParser().unescape(c['name'])
-                search_name = name + " tutorial"
-                y_list, y_type = y.search(search_name)
-                course_list = ocws.search(name)
+            # retrieve items from API's
+            c_id = int(c['id'])
+            name = HTMLParser.HTMLParser().unescape(c['name'])
+            search_name = name + " tutorial"
+            y_list, y_type = y.search(search_name)
+            course_list = ocws.search(name)
 
-                # store/update as needed
-                match = Module.query(Module.category == c_id).fetch()
-                module = Module(
-                    name=name, 
-                    youtube=y_list, 
-                    yt_type=y_type, courses=course_list, category=c_id
-                )
+            # store/update as needed
+            match = Module.query(Module.category == c_id).fetch()
+            module = Module(
+                name=name, 
+                youtube=y_list, 
+                yt_type=y_type, courses=course_list, category=c_id
+            )
 
-                if len(match) == 0:        
-                    module.put()
-                else:
-                    match = match[0]
-                    if (str(match.name) != name or 
-                        str(match.yt_type) != y_type or 
-                        match.youtube != y_list or 
-                        match.courses != course_list):
-                            print 'module different'
-                            match.name = name
-                            match.youtube = y_list
-                            match.yt_type = y_type
-                            match.courses = course_list
-                            match.put()
-        
+            if len(match) == 0:        
+                module.put()
+            else:
+                match = match[0]
+                if (str(match.name) != name or 
+                    str(match.yt_type) != y_type or 
+                    match.youtube != y_list or 
+                    match.courses != course_list):
+                        print 'module different'
+                        match.name = name
+                        match.youtube = y_list
+                        match.yt_type = y_type
+                        match.courses = course_list
+                        match.put()
+    
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(categories)) 
 
