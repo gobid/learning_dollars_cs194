@@ -14,7 +14,7 @@ $(document).ready(function(){
 					'<td>' + bid.enddate + '</td>' + 
 					'<td><button type="Submit" state = "1" projectid="' + 
 					bid.projectid + 
-					'" class="btn btn-default accept_bid">Accept</button>' + 
+					'" class="btn btn-default accept_bid">Accept</button> ' + 
 					'<button value="Submit" state = "0" projectid="' + 
 					bid.projectid + 
 					'" class="btn btn-default decline_bid">Decline</button>'
@@ -39,5 +39,21 @@ $(document).ready(function(){
 		state = $(this).attr('state')
 		accept_bid(0, projectid, state)
 	})
+
+	function accept_bid(accepted, projectid, state) {
+		$('#log_message').remove()
+		$.get('/acceptbid/' + projectid + '/' + state, function(data){
+			response = data['json-result']
+			console.log(response)
+			if(response) {
+				status = response['statusconfirmation']
+				$("#create_milestone").after('<h2 id="log_message">' +
+					'Bid acceptance/decline submitted successfully.</h2>')
+			} else {
+				$("#create_milestone").after('<h3 id="log_message">' + 
+					'Error, submit again</h3>')
+		}
+	})
+}
 
 })

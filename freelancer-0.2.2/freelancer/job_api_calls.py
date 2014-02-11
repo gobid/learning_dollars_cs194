@@ -55,7 +55,6 @@ class JobApiCalls(object):
 		return searchResults
 
 	def select_winner(self, project_id, winner_id):
-		print winner_csv
 		response = self.freelancer.Employer.chooseWinnerForProject({
 			'projectid': project_id,
 			'useridcsv':  winner_id
