@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html lang="en">
+    <head>
+        {% include 'templates/header.html' %}
+    </head>
+    <body>
+        <div class="container">
+            {% include 'templates/navbar.html' %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>My Bids</h3>
+                </div>
+                <table class="table table-striped" id="all_placed_bids">
+                    <tr>
+                    <th>Project Name</th>
+                    <th>Current Bid Count</th>
+                    <th>Url</th>
+                    <th>End date</th>
+                    <th>Accept/Decline</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        {% include 'templates/footer.html' %}
+        <script src = 'static/views/js/mybids.js'></script>
+    </body>
+</html>
+{% endautoescape %}
