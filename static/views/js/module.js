@@ -12,9 +12,9 @@ function initializePage() {
 
 function make_bid_request(e) {
 	id = this.getAttribute('projectid');
-	amount = $("#amount").val();
-	days = $("#days").val();
-	description = $("#description").val();
+	amount = $("#amount"+id).val();
+	days = $("#days"+id).val();
+	description = $("#description"+id).val();
 	$.get('/bidonproject/' + id + '/' + amount + '/' + days + '/' + description, function(data){
 		response = data['json-result'];
 		if(response) {
@@ -31,11 +31,11 @@ function make_bid_request(e) {
 			if (!response) response = data['error'];
 			else response = response['error']['longmsg'];
 			if (!($('.alert.alert-warning')[0])) {
-				var alertDiv = document.createElement('div');
-				alertDiv.className ='alert alert-warning';
-				document.getElementsByClassName('place-bid')[0].appendChild(alertDiv);
+				// nothing + id gives button
+				console.log('id ' + id)
+				$('#' + id).after('<div class = "alert alert-warning">' + 
+					response + '</div>') 
 			}
-			$('.alert.alert-warning').html(response);
 		}
 	})
 }
