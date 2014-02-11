@@ -42,6 +42,7 @@ $(document).ready(function() {
 
 })
 
+
 function post_project(e) {
 	$('#log_message').remove()
 	name = $("#name").val()
