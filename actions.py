@@ -85,7 +85,8 @@ class BidOnProject(webapp2.RequestHandler):
 
     def get(self, project_id, amount, days, description):
         jac = get_personal_jac()
-        response = jac.place_bid_on_project(project_id, amount, days, description)
+        response = jac.place_bid_on_project(project_id, amount, days, 
+                    description)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
@@ -99,9 +100,11 @@ class RetractBid(webapp2.RequestHandler):
 
 class PostNewProject(webapp2.RequestHandler):
 
-    def get(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
+    def get(self, projectname, projectdesc, jobtypecsv, budgetoption, 
+            duration):
         jac = get_personal_jac()
-        response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)
+        response = jac.post_new_project(projectname, projectdesc, jobtypecsv,
+                    budgetoption, duration)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 

@@ -8,7 +8,8 @@ from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
     SendMessage, BidOnProject, PostNewProject, RetractBid
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, PostsInfo, \
     InboxMessages, SentMessages, GetPlacedBids
-from actions import UpdateModules, CreateMilestonePayment, SendMessage, BidOnProject, PostNewProject, RetractBid
+from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
+    BidOnProject, PostNewProject, RetractBid    
 
 
 application = webapp2.WSGIApplication([
@@ -100,7 +101,8 @@ application = webapp2.WSGIApplication([
     ),
 
     webapp2.Route(
-        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/<description:[^/]+>', 
+        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/' + \
+        '<description:[^/]+>', 
         handler=BidOnProject,
         name='bidonproject'
     ),
@@ -112,7 +114,8 @@ application = webapp2.WSGIApplication([
     ),
 
     webapp2.Route(
-        '/postnewproject/<projectname:[^/]+>/<projectdesc:[^/]+>/<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>', 
+        '/postnewproject/<projectname:[^/]+>/<projectdesc:[^/]+>/' + \
+        '<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>', 
         handler=PostNewProject,
         name='postnewproject'
     ),
