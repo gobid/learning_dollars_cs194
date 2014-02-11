@@ -134,7 +134,8 @@ class AcceptBid(webapp2.RequestHandler):
 
 class PostNewProject(webapp2.RequestHandler):
 
-    def get(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
+    def get(self, projectname, projectdesc, jobtypecsv, budgetoption, 
+            duration):
         jac = get_personal_jac()
         if jac: 
             response = jac.post_new_project(projectname, projectdesc, jobtypecsv, budgetoption, duration)

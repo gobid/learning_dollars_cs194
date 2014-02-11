@@ -94,7 +94,8 @@ class JobApiCalls(object):
 		})
 		return searchResults
 
-	def post_new_project(self, projectname, projectdesc, jobtypecsv, budgetoption, duration):
+	def post_new_project(self, projectname, projectdesc, jobtypecsv, 
+		budgetoption, duration):
 		print 'hitttttt!!!'
 		response = self.freelancer.Employer.postNewProject({
 			'projectname': projectname,
@@ -143,7 +144,8 @@ class JobApiCalls(object):
 		return message
 
 	def get_placed_bids(self):
-		placed_bids = self.freelancer.Account.Freelancer.getProjectListForPlacedBids({
+		placed_bids = \
+			self.freelancer.Account.Freelancer.getProjectListForPlacedBids({
 			'status': 1
 		})
 		print placed_bids
