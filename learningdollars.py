@@ -3,7 +3,7 @@
 import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
-    DashboardPage
+    DashboardPage, MailBoxPage, MyBidsPage, MyPostsPage, MilestonesPage
 from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
     SendMessage, BidOnProject, PostNewProject, RetractBid, GetMilestoneList, \
     AcceptBid
@@ -43,6 +43,26 @@ application = webapp2.WSGIApplication([
         '/dashboard', 
         handler=DashboardPage, 
         name='dashboard'
+    ),
+    webapp2.Route(
+        '/mailbox',
+        handler=MailboxPage,
+        name='mailbox'
+    ),
+    webapp2.Route(
+        '/mybids',
+        handler=MyBidsPage,
+        name='mybidspage'
+    ),
+    webapp2.Route(
+        '/myposts',
+        handler=MyPostsPage,
+        name='mypostspage'
+    ),
+    webapp2.Route(
+        '/milestones',
+        handler=MilestonesPage,
+        name='milestonespage'
     ),
 
     # Info
