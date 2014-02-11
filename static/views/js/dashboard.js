@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
 	// My Posts handlers (Tim & Govi)
-/*
+
 	$("#post_project").click(post_project);
-*/
+
 
 	$("#create_milestone_payment").click(create_milestone_payment);
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
 		accept_bid(0, projectid, state);
 	})
 
-   /*
+   
 	$.get('/postsinfo', function(data){
 		posts = data['json-result']['items'];
 		for (var p in posts){
@@ -43,7 +43,6 @@ $(document).ready(function() {
 		}
 	})
 
-*/
 
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)

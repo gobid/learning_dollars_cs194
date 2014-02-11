@@ -44,9 +44,7 @@ function make_bid_request(e) {
 function retract_bid(e) {
 	projectid = this.getAttribute('projectid');
 	id = this.getAttribute('id');
-	console.log(id);
 	$.get('/retractbid/' + projectid, function(data){
-		console.log(data);
 		response = data['json-result'];
 		if(response) {
 			responseGood = response['statusconfirmation'];
