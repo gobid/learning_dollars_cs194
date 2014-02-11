@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html lang="en">
+    <head>
+        {% include 'templates/header.html' %}
+    </head>
+    <body>
+        <div class="container">
+            {% include 'templates/navbar.html' %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Messages</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs" id="messageTabs">
+                        <li class="active"><a href="#inbox">Inbox</a></li>
+                        <li><a href="#sent">Sent</a></li>
+                        <li><a href="#newMessage">New Message</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="inbox">
+                            <table class = "table table-hover" id = "inboxMessages">
+                                <tr>
+                                    <th>From</th>
+                                    <th>Message</th>
+                                    <th>Project Name (ID)</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="sent">
+                            <table class = "table table-hover" id = "sentMessages">
+                                <tr>
+                                    <th>To</th>
+                                    <th>Message</th>
+                                    <th>Project Name (ID)</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="newMessage">
+                            <form class="newMessageForm">
+                                <div class="form-group">
+                                    <label>To:</label>
+                                    <input type="text" class="form-control" id="to_user_name" placeholder="User Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Project ID Number:</label>
+                                    <input type="number" class="form-control" id="project_id" placeholder="Project ID #">
+                                </div>
+                                <div class="form-group">
+                                    <label>Message:</label>
+                                    <textarea class="form-control" rows="3" id="message_text" placeholder="Enter Message Here"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button value="Submit" class="btn btn-lg btn-default" id="sendBtn">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'templates/footer.html' %}
+        <script src = 'static/views/js/mailbox.js'></script>
+    </body>
+</html>
+{% endautoescape %}

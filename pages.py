@@ -76,3 +76,36 @@ class DashboardPage(webapp2.RequestHandler):
         template_values['title'] = 'Dashboard'    
         template = JINJA_ENVIRONMENT.get_template('templates/dashboard.html')
         self.response.write(template.render(template_values))
+
+class MailboxPage(webapp2.RequestHandler):
+
+    def get(self):
+        template_values = basicinfo(users.get_current_user(), self)
+        template_values['title'] = 'Mailbox'
+        template = JINJA_ENVIRONMENT.get_template('templates/mailbox.html')
+        self.response.write(template.render(template_values))
+
+class MyBidsPage(webapp2.RequestHandler):
+
+    def get(self):
+        template_values = basicinfo(users.get_current_user(), self)
+        template_values['title'] = 'Mybids'
+        template = JINJA_ENVIRONMENT.get_template('templates/mybids.html')
+        self.response.write(template.render(template_values))
+
+class MyPostsPage(webapp2.RequestHandler):
+
+    def get(self):
+        template_values = basicinfo(users.get_current_user(), self)
+        template_values['title'] = 'Myposts'
+        template = JINJA_ENVIRONMENT.get_template('templates/myposts.html')
+        self.response.write(template.render(template_values))
+
+class MilestonesPage(webapp2.RequestHandler):
+
+    def get(self):
+        template_values = basicinfo(users.get_current_user(), self)
+        template_values['title'] = 'Milestones'
+        template = JINJA_ENVIRONMENT.get_template('templates/milestones.html')
+        self.response.write(template.render(template_values))
+

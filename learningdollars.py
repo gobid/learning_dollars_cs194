@@ -3,7 +3,7 @@
 import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
-    DashboardPage
+    DashboardPage, MailboxPage, MyBidsPage, MyPostsPage, MilestonesPage
 
 from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
     SendMessage, BidOnProject, PostNewProject, RetractBid, AcceptBid
@@ -47,6 +47,26 @@ application = webapp2.WSGIApplication([
         '/dashboard', 
         handler=DashboardPage, 
         name='dashboard'
+    ),
+    webapp2.Route(
+        '/mailbox',
+        handler=MailboxPage,
+        name='mailbox'
+    ),
+    webapp2.Route(
+        '/mybids',
+        handler=MyBidsPage,
+        name='mybidspage'
+    ),
+    webapp2.Route(
+        '/myposts',
+        handler=MyPostsPage,
+        name='mypostspage'
+    ),
+    webapp2.Route(
+        '/milestones',
+        handler=MilestonesPage,
+        name='milestonespage'
     ),
 
     # Info
@@ -114,7 +134,8 @@ application = webapp2.WSGIApplication([
     ),
     webapp2.Route(
         '/createmilestonepayment/<project_id:\d+>/<amount:\d+>/' + \
-        '<currency_id:\d+>/<tousername:\w+>/<reasontext:\w+>/<reasontype:\w+>', 
+        '<currency_id:\d+>/<tousername:\w+>/<reasontext:\w+>/' + \
+        '<reasontype:\w+>', 
         handler=CreateMilestonePayment, 
         name='createmilestonepayment'
     ),
@@ -138,7 +159,8 @@ application = webapp2.WSGIApplication([
     ),
 
     webapp2.Route(
-        '/bidonproject/<project_id:\d+>/<amount:\d+>/<days:\d+>/<description:[^/]+>', 
+        '/bidonproject/<project_id:\d+>/<amount:[^/]+>/<days:\d+>/' + \
+        '<description:[^/]+>',
         handler=BidOnProject,
         name='bidonproject'
     ),
@@ -150,7 +172,8 @@ application = webapp2.WSGIApplication([
     ),
 
     webapp2.Route(
-        '/postnewproject/<projectname:[^/]+>/<projectdesc:[^/]+>/<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>', 
+        '/postnewproject/<projectname:[^/]+>/<projectdesc:[^/]+>/' + \
+        '<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>', 
         handler=PostNewProject,
         name='postnewproject'
     ),
