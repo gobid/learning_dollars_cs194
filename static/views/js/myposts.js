@@ -1,17 +1,5 @@
 $(document).ready(function() {
 
-	$.get('/getprojectbids/1034', function(data){
-		bids = data['json-result']['items']
-		for (var b in bids){
-			$('#bids-on-post').append('<li>' + bids[b].descr + ' ' 
-				+ '($' + bids[b].bid_amount + ') ' + 
-				'<button class="btn btn-default bid"' + 
-				' project_id = "' + '1034'  + '" user_id = "' 
-				+ bids[b].provider_userid + '" >Pick</button>' + '</li>'
-			)
-		}
-	})
-
 	$.get('/postsinfo', function(data){
 		console.log(data)
 		numPosts = data['json-result']['count']
@@ -20,13 +8,23 @@ $(document).ready(function() {
 			for (var p in posts){
 				project = posts[p]
 				console.log(project.projectname)
-				$('#posted_projects').append('<tr><td>'+project.projectname+ 
+				$('#posted_projects').append('<tr><td>'+ 
+					'<input value = "' + project.projectid + '" type="radio" '
+					+ ' class = "projects"> ' + project.projectname +
 					'</td><td>'+ project.additionalstatus + '</td><td>'+ 
 					project.averagebid+'</td><td>' + project.bidcount+ 
 					'</td><td>'+project.enddate+'</td><td>'+project.projectid + 
 					'</td><td>'+ project.projecturl+'</td></tr>')
 			}
 		}
+	})
+
+	// project selecting functionality
+	$(document).on('click', '.projects', function(){
+		$('.projects').prop('checked', false)
+		$(this).prop('checked', true)
+		projectid = $(this).val() 
+		load_bids_on_post(projectid)
 	})
 
 	$(document).on('click', '.btn.btn-default.bid', function(){
@@ -90,4 +88,27 @@ function post_project(e) {
 			}
 		}
 	)
+}
+
+function load_bids_on_post(project_id){
+	$('#bids-on-post').empty()
+	$.get('/getprojectbids/' + project_id, function(data){
+		console.log(data)
+		jr = data['json-result']
+		count = jr['count']
+		if (count > 0){
+			bids = jr['items']
+			for (var b in bids){
+				$('#bids-on-post').append('<li>' + bids[b].descr + ' ' 
+					+ '($' + bids[b].bid_amount + ') ' + 
+					'<button class="btn btn-default bid"' + 
+					' project_id = "' + project_id  + '" user_id = "' 
+					+ bids[b].provider_userid + '" >Pick</button>' + '</li>'
+				)
+			}	
+		}
+		else {
+			$('#bids-on-post').append('<li>No Bids</li>')
+		}
+	})	
 }
