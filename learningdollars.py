@@ -3,7 +3,7 @@
 import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
-    DashboardPage, MailBoxPage, MyBidsPage, MyPostsPage, MilestonesPage
+    DashboardPage, MailboxPage, MyBidsPage, MyPostsPage, MilestonesPage
 from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
     SendMessage, BidOnProject, PostNewProject, RetractBid, GetMilestoneList, \
     AcceptBid
