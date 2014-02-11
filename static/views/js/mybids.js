@@ -22,7 +22,7 @@ $(document).ready(function(){
 				$('#all_placed_bids').append(
 					'<tr>' + '<td>' + bid.projectname + '</td>' + 
 					'<td>' + bid.bidcount + '</td>' + 
-					'<td><a href = "' + bid.projecturl + '">Link</a></td>' + 
+					'<td><a href = "' + bid.projecturl + '">Freelancer Website</a></td>' + 
 					'<td>' + bid.enddate + '</td>' + 
 					'<td><button type="Submit" state = "1" projectid="' + 
 					bid.projectid + 
