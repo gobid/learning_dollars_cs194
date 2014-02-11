@@ -48,8 +48,8 @@ function getMessages(url) {
 			for (var m in messages) {
 				project_id = messages[m].projectid
 				text = messages[m].text
-				project_name = messages[m].project_name
-				project_url = message[m].project_url
+				project_name = messages[m].projectname
+				project_url = messages[m].projecturl
  				username = ''
 				if (url == 'inboxMessages') username = messages[m].fromusername
 				else username = messages[m].tousername

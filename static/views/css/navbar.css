@@ -28,7 +28,10 @@ th, td {
 	overflow-y:scroll; 
 }
 
-.post_project {
+.post_project_div {
 	margin: 10px;
 }
 
+.milestone_div {
+	margin: 10px;
+}
