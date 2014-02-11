@@ -38,6 +38,8 @@ $(document).ready(function(){
 		}
 	})
 
+
+
 	// Accept Bid Won
 	$(document).on('click', '.btn.btn-default.accept_bid', function() {
 		projectid = $(this).attr('projectid')
@@ -53,3 +55,19 @@ $(document).ready(function(){
 	})
 
 })
+
+function accept_bid(accepted, projectid, state) {
+	$('#log_message').remove()
+	$.get('/acceptbid/' + projectid + '/' + state, function(data){
+		response = data['json-result']
+		console.log(response)
+		if(response) {
+			status = response['statusconfirmation']
+			$("#create_milestone").after('<h2 id="log_message">' +
+				'Bid acceptance/decline submitted successfully.</h2>')
+		} else {
+			$("#create_milestone").after('<h3 id="log_message">' + 
+				'Error, submit again</h3>')
+		}
+	})
+}
