@@ -18,7 +18,6 @@ class UpdateModules(webapp2.RequestHandler):
         categories = jac.get_categories()
         y = youtube.Youtube()
         ocws = ocwsearch.OCWSearch()
-
         for c in categories:
             # retrieve items from API's
             c_id = int(c['id'])
@@ -49,7 +48,7 @@ class UpdateModules(webapp2.RequestHandler):
                         match.yt_type = y_type
                         match.courses = course_list
                         match.put()
-        
+    
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(categories)) 
 
