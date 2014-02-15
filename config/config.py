@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Whether production
-PROD = 0 
+PROD = 1 
 
 # Conditional
 if PROD:
-	WEBSITE = 'https://learningdollars.com/'
+	WEBSITE = 'https://learningdollars.appspot.com/'
 else:
 	WEBSITE = 'http://127.0.0.1:8080/'
 
