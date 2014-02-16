@@ -11,7 +11,7 @@ class OCWSearch:
     f = urllib.urlopen(query)
     s = f.read()
     json_conv = json.loads(s)
-    return_courses = ["", "", ""]
+    return_courses = [""] * 20
     for subheading in json_conv:
       if subheading == 'Results':
         for r in json_conv['Results']:
