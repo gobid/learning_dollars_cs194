@@ -17,5 +17,6 @@ class OCWSearch:
         for r in json_conv['Results']:
           num = int(r)
           return_courses[num-1] = json_conv['Results'][r]
+          return_courses[num-1]['scoreRanking'] = 20 - num;
     f.close()
     return return_courses

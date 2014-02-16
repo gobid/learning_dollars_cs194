@@ -151,10 +151,15 @@
                           <br />
                           <a target = '_blank' href="{{ course.DownloadPageLink }}">Course Materials</a>
                           </div>
+                          <br />
+                          <button id="helpful"  class="btn btn-default btn-lg">This course was helpful!</button>
+                          <button id="nothelpful"  class="btn btn-default btn-lg">This course wasn't relevant...</button>
                           {% set count = count+1 %}
                           </div>
+
                         {% endif %}
                       {% endif %}
+
                     {% endfor %}
                     </div>
                     <a class="carousel-control left" href="#carousel-courses" data-slide="prev" id="coursesleft">
