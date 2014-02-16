@@ -15,8 +15,7 @@ class OCWSearch:
     for subheading in json_conv:
       if subheading == 'Results':
         for r in json_conv['Results']:
-          if r == '1': return_courses[0] = json_conv['Results']['1']
-          if r == '2': return_courses[1] = json_conv['Results']['2']
-          if r == '3': return_courses[2] = json_conv['Results']['3']
+          num = int(r)
+          return_courses[num-1] = json_conv['Results'][r]
     f.close()
     return return_courses
