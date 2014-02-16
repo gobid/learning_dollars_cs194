@@ -42,8 +42,8 @@ class Youtube:
       print search_result 
  
     if len(playlists) > 0:
-      return playlists[:3], "playlist"
+      return playlists[:20], "playlist"
     elif len(videos) > 0:
-      return videos[:3], "video"
+      return videos[:20], "video"
     else:
       return '', "blank"
