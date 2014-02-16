@@ -25,16 +25,19 @@
                 <div class = "col-md-4">
                     <h1>Jobs</h1>
                         {% for job in jobs %}
-                            <b><a target = '_blank' href = "{{job.projecturl}}"" >
+                            <b><a target = '_blank' href = "{{job.projecturl}}" >
                             {{ job.projectname }}</a></b>
                             {% if job.averagebid != False %}<b>${{ job.averagebid }}</b>
                             {% endif %}
-                            <div class="place-bid">
+                            <button type="button" class="btn btn-default btn-small bid_submit" id="job_container_toggle{job.projectid}" jobid="{{job.projectid}}">Bid
+                            <span class="caret"></span>
+                            </button>
+                            <div id="job_container{{job.projectid}}" style="display: none">
                                 Amount: <input class="form-control" type="number" id="amount{{job.projectid}}" placeholder="greater than $250">
                                 Days: <input class="form-control" type="number" id="days{{job.projectid}}">
                                 Description: <textarea class="form-control" id="description{{job.projectid}}"></textarea>
                                 <br>
-                                <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='{{job.projectid}}' id='{{job.projectid}}'>
+                                <button type="button" class="btn btn-default btn-small bid_submit" projectid ='{{job.projectid}}' id='{{job.projectid}}'>
                                 Place Bid
                                 </button>
                             </div>

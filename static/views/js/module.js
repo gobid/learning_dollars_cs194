@@ -8,6 +8,22 @@ $(document).ready(function() {
 function initializePage() {
     $(".bid_submit").click(make_bid_request);
     $(".bid_retract").click(retract_bid);
+    $("[id^=job_container_toggle]").click(function() {
+    	var jobid = $(this).attr("jobid");
+    	console.log(jobid);
+    	if($("#job_container"+jobid).attr("style") == "")
+    	{
+    		console.log("hit1");
+    		$("#job_container"+jobid).attr("style", "display: none");
+    	} else {
+    		console.log("hit2");
+    		$("#job_container"+jobid).attr("style", "");
+    	}
+    });
+}
+
+function toggle_form(e) {
+	this.set
 }
 
 function make_bid_request(e) {

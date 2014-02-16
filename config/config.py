@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Whether production
-PROD = 1 
+PROD = 0
 
 # Conditional
 if PROD:
