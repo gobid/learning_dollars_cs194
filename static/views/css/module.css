@@ -1,0 +1,49 @@
+.carousel-control.left{
+	background-image:none;
+	background-image:none;
+}
+
+.carousel-control.right{
+	background-image:none;
+	background-image:none;
+}
+
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  	color:#000;
+}
+
+#carousel-ytvids {
+  margin-bottom: 40px;
+}
+
+#carousel-jobs {
+  margin-bottom: 40px;
+  height:320px;
+}
+
+.carousel-indicators {
+	bottom: -30px;
+}
+.carousel-indicators li {
+	border: 1px solid #000;
+}
+
+.carousel-indicators .active {
+	background-color:#000;
+}
+
+#jobsleft, #jobsright {
+	margin-top:1px;
+}
+
+.place-bid{
+	margin-top:30px;
+	margin-left:60px;
+	margin-right:60px;
+}
+
+.courseinfo {
+	margin-left:110px;
+	margin-right:110px;
+}

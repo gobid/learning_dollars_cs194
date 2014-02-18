@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-{% autoescape true %}
-<html lang="en">
-    <head>
-        {% include 'templates/header.html' %}
-    </head>
-    <body>
-        <div class="container">
-            {% include 'templates/navbar.html' %}
-            <div class = "row">
-                <div class = "col-md-8">
-                    <h1>{{ name }}</h1>
-                    {% if yt_type == "video" %}
-                    {% for video in youtube %}
-                    <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video }}" frameborder="0" allowfullscreen></iframe>
-                    {% endfor %}
-                    {% else %}
-                    {% if yt_type == "playlist" %}
-                    {% for pl in youtube %}
-                    <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ pl }}" frameborder="0" allowfullscreen></iframe>
-                    {% endfor %}
-                    {% endif %}
-                    {% endif %}
-                </div>
-                <div class = "col-md-4">
+<!-- <<<<<<< HEAD
                     <h1>Jobs</h1>
                         {% for job in jobs %}
                             <b><a target = '_blank' href = "{{job.projecturl}}" >
@@ -38,43 +14,187 @@
                                 Description: <textarea class="form-control" id="description{{job.projectid}}"></textarea>
                                 <br>
                                 <button type="button" class="btn btn-default btn-small bid_submit" projectid ='{{job.projectid}}' id='{{job.projectid}}'>
-                                Place Bid
-                                </button>
-                            </div>
-                            <hr>
+======= -->
+
+<!DOCTYPE html>
+{% autoescape true %}
+<html lang="en">
+    <head>
+        {% include 'templates/header.html' %}
+        <link href="static/views/css/module.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            {% include 'templates/navbar.html' %}
+      
+            <div class = "row">
+                <div align="center"> 
+                  <h1>{{ name }}</h1>
+                </div>
+                <div class = "col-md-8">
+                    <div align="center">
+                      <h2>Tutorials</h2>
+                    </div>
+                    <div id="carousel-ytvids" class="carousel slide" data-ride="carousel" data-interval="false">
+                      <ol class="carousel-indicators">
+                      {% set count = 0 %}
+                      {% for video in youtube %}
+                        {% if count == 0 %}
+                          <li data-target="#carousel-ytvids" data-slide-to="{{ count }}" class="active">
+                        {% else %}
+                          <li data-target="#carousel-ytvids" data-slide-to="{{ count }}">
+                        {% endif %}
+                        </li>
+                        {% set count = count +1 %}
+                      {% endfor %}
+                      </ol>
+                      {% set count = 0 %}
+                      <div class="carousel-inner">
+                        {% for video in youtube %}
+                          {% if count == 0 %}
+                            <div class="item active" align="center">
+                          {% else %}
+                            <div class="item" align="center">
+                          {% endif %}
+
+                          {% if yt_type == "video" %}
+                            <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video }}" frameborder="0" allowfullscreen></iframe>
+                          {% else %}
+                            {% if yt_type == "playlist" %}
+                              <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ video }}" frameborder="0" allowfullscreen></iframe>
+                            {% endif %}
+                          {% endif %}
+                          </div>
+                          {% set count = count+1 %}
                         {% endfor %}
+                      </div>
+                      <a class="carousel-control left" href="#carousel-ytvids" data-slide="prev" >
+                        <span class="glyphicon glyphicon-chevron-left" ></span>
+                      </a>
+                      <a class="carousel-control right" href="#carousel-ytvids" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                      </a>
+                    </div>
+                </div>
+                <div class = "col-md-4">
+                    <div align="center">
+                      <h2>Jobs</h2>
+                    </div>
+                    <div id="carousel-jobs" class="carousel slide" data-ride="carousel" data-interval="false">
+                      <ol class="carousel-indicators">
+                      {% set count = 0 %}
+                      {% for job in jobs %}
+                        {% if count == 0 %}
+                          <li data-target="#carousel-jobs" data-slide-to="{{ count }}" class="active">
+                        {% else %}
+                          <li data-target="#carousel-jobs" data-slide-to="{{ count }}">
+                        {% endif %}
+                        </li>
+                        {% set count = count +1 %}
+                      {% endfor %}
+                      </ol>
+                      {% set count = 0 %}
+                      <div class="carousel-inner">
+                      {% for job in jobs %}
+                        {% if count == 0 %}
+                          <div class="item active" align="center">
+                        {% else %}
+                          <div class="item" align="center">
+                        {% endif %}
+                        <div class="place-bid">
+                          <b><a target = '_blank' href = "{{job.projecturl}}" >{{ job.projectname }}</a></b>
+                          {% if job.averagebid != False %}
+                            <b>${{ job.averagebid }}</b>
+                          {% endif %}
+                          <br />
+                          Amount: <input class="form-control" type="number" id="amount{{job.projectid}}" placeholder="greater than $250">
+                          Days: <input class="form-control" type="number" id="days{{job.projectid}}">
+                          Description: <textarea class="form-control" id="description{{job.projectid}}"></textarea>
+                          <br />
+                          <button type="button" class="btn btn-default btn-lg bid_submit" projectid ='{{job.projectid}}' id='{{job.projectid}}'>
+                                Place Bid
+                          </button>
+                        </div>
+                        </div>
+                        {% set count = count + 1 %}
+                      {% endfor %}
+                      </div>
+                      <a class="carousel-control left" href="#carousel-jobs" data-slide="prev" id="jobsleft">
+                        <span class="glyphicon glyphicon-chevron-left" ></span>
+                      </a>
+                      <a class="carousel-control right" href="#carousel-jobs" data-slide="next"  id="jobsright">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                      </a>
+                    </div>
                 </div>
             </div>
-            <h2>Courses</h2>
-            <table>
-                {% for course in courses %}
-                {% if course != "" %}
-                {% if course.Title %}
-                <tr>
-                    <td><a target = '_blank' href="{{ course.CourseURL }}">{{ course.Title }}</a></td>
-                </tr>
-                <tr>
-                    <td>{{ course.Institution }} ({{ course.TeachingDate }}) </td>
-                </tr>
-                <tr>
-                    <td>Instructors: {{ course.Instructors }}</td>
-                </tr>
-                <tr>
-                    <td>Description: {{ course.Description }} </td>
-                </tr>
-                <tr>
-                    <td><a target = '_blank' href="{{ course.DownloadPageLink }}">Course Materials</a></td>
-                </tr>
-                <tr>
-                    <td>&nbsp</td>
-                </tr>
-                {% endif %}
-                {% endif %}
-                {% endfor %} 
-            </table>
+            <div class="row">
+              <div class="col-md-12">
+                <div align="center"><h2>Courses</h2></div>
+                  <div id="carousel-courses" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <ol class="carousel-indicators">
+                    {% set count = 0 %}
+                    {% for course in courses %}
+                      {% if course != "" %}
+                        {% if course.Title %}
+                          {% if count == 0 %}
+                            <li data-target="#carousel-courses" data-slide-to="{{ count }}" class="active">
+                          {% else %}
+                            <li data-target="#carousel-courses" data-slide-to="{{ count }}">
+                          {% endif %}
+                          </li>
+                          {% set count = count +1 %}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                    </ol>
+                    {% set count = 0 %}
+                    <div class="carousel-inner">
+                    {% for course in courses %}
+                      {% if course != "" %}
+                        {% if course.Title %}
+                          {% if count == 0 %}
+                            <div class="item active" align="center">
+                          {% else %}
+                            <div class="item" align="center">
+                          {% endif %}
+                          <div class="courseinfo">
+                          <a target = '_blank' href="{{ course.CourseURL }}">{{ course.Title }}</a>
+                          <br />
+                          {{ course.Institution }} ({{ course.TeachingDate }})
+                          <br />
+                          Instructors: {{ course.Instructors }}
+                          <br />
+                          Description: {{ course.Description }} 
+                          <br />
+                          <a target = '_blank' href="{{ course.DownloadPageLink }}">Course Materials</a>
+                          </div>
+                          <br />
+                          <button id="helpful"  class="btn btn-default btn-lg">This course was helpful!</button>
+                          <button id="nothelpful"  class="btn btn-default btn-lg">This course wasn't relevant...</button>
+                          {% set count = count+1 %}
+                          </div>
+
+                        {% endif %}
+                      {% endif %}
+
+                    {% endfor %}
+                    </div>
+                    <a class="carousel-control left" href="#carousel-courses" data-slide="prev" id="coursesleft">
+                        <span class="glyphicon glyphicon-chevron-left" ></span>
+                    </a>
+                    <a class="carousel-control right" href="#carousel-courses" data-slide="next" id="coursesright">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a> 
+               </div>
+              </div>
+            </div>
         </div>
         {% include 'templates/footer.html' %}
         <script src = 'static/views/js/module.js'></script>
     </body>
 </html>
 {% endautoescape %}
+
+
+

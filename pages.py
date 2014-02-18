@@ -8,7 +8,7 @@ from google.appengine.ext import ndb
 from config import config
 from models import Module, Account
 from functions import freelancer_auth, get_access_token, basicinfo
-from info import AccountInfo, ModuleInfo, ModulesInfo
+from info import AccountInfo, ModuleInfo, ModulesInfo, GetProjectDetails
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -107,5 +107,17 @@ class MilestonesPage(webapp2.RequestHandler):
         template_values = basicinfo(users.get_current_user(), self)
         template_values['title'] = 'Milestones'
         template = JINJA_ENVIRONMENT.get_template('templates/milestones.html')
+        self.response.write(template.render(template_values))
+
+class ProjectPage(webapp2.RequestHandler):
+
+    def get(self, project_id):
+        template_values = basicinfo(users.get_current_user(), self)
+        projectDetails = GetProjectDetails()
+        project = projectDetails.get_info(project_id)
+        projectInfo = project['json-result']
+        template_values['title'] = projectInfo['name']
+        template_values['projectname'] = projectInfo['name']
+        template = JINJA_ENVIRONMENT.get_template('templates/project.html')
         self.response.write(template.render(template_values))
 
