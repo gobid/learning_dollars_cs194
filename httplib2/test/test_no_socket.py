@@ -8,7 +8,9 @@ import unittest
 
 import httplib2
 
+
 class MissingSocketTest(unittest.TestCase):
+
     def setUp(self):
         self._oldsocks = httplib2.socks
         httplib2.socks = None

@@ -1,0 +1,21 @@
+!!! 5
+html(lang='en')
+head
+    include header.jade
+  body
+    .container
+      include navbar.jade
+      h1 Modules
+      hr
+      // the table isn't working perfectly but leo is making responsive 
+      // anyway, will merge that version
+      table
+        each module, m in modules
+          if (m % 5 == 0)
+            tr
+              td
+                a(href=module.key) #{module.name}
+          else 
+              td
+                a(href=module.key) #{module.name}
+    include footer.jade

@@ -24,6 +24,7 @@ LogLevel Info
 
 
 class FunctionalProxyHttpTest(unittest.TestCase):
+
     def setUp(self):
         if not socks:
             raise nose.SkipTest('socks module unavailable')

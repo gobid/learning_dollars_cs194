@@ -7,11 +7,11 @@ setup(name="freelancer",
       author="E. Cooper",
       author_email="strangerthanus@gmail.com",
       url="http://github.com/ecooper/python-freelancer",
-      packages = find_packages(),
-      install_requires = ['httplib2', 'oauth2'],
+      packages=find_packages(),
+      install_requires=['httplib2', 'oauth2'],
       entry_points="""
       # -*- Entry points: -*-
       [console_scripts]
       freelancer=freelancer.cli:main
       """,
-      license = "GNU General Public License v3")
+      license="GNU General Public License v3")
