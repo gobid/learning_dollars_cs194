@@ -116,8 +116,15 @@ class ProjectPage(webapp2.RequestHandler):
         projectDetails = GetProjectDetails()
         project = projectDetails.get_info(project_id)
         projectInfo = project['json-result']
+        bidStats = projectInfo['bids_stats']
+        print projectInfo
         template_values['title'] = projectInfo['name']
         template_values['projectname'] = projectInfo['name']
+        template_values['description'] = projectInfo['short_descr']
+        template_values['end_date'] = projectInfo['end_date']
+        template_values['username'] = projectInfo['username']
+        template_values['num_bids'] = bidStats['count']
+        template_values['avg_bid'] = bidStats['avg']
         template = JINJA_ENVIRONMENT.get_template('templates/project.html')
         self.response.write(template.render(template_values))
 
