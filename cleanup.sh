@@ -1,6 +1,29 @@
 #!/bin/bash
 
 # JADE
+
+echo "=> Converting jade to compiled js runtime functions"
+cd templates
+bash compile_jade.sh
+cd ..
+clear
+echo "======================="
+echo "Finished compiling jade"
+echo "======================="
+printf "\n"
+
+
+read -n1 -p "=> Proceed? [y,n] " doit 
+printf "\n"
+case $doit in 
+	y|Y) ;; 
+	*) 
+		echo "ERROR: (Control/Command-C to exit and fix it)"
+		printf "\n"
+		exit ;; 
+	esac
+printf "\n"
+
 echo "=> Checking that jade templates have wrapped lines"
 for file in $(find templates -name "*.jade"); do
 	echo "Unwrapped lines in" $file ":"
@@ -9,10 +32,17 @@ for file in $(find templates -name "*.jade"); do
 done
 printf "\n"
 
-echo "=> Converting jade to compiled js runtime functions"
-cd templates
-bash compile_jade.sh
-cd ..
+read -n1 -p "=> Did you follow HTML CSS and Bootstrap Rules in Setup Instructions and
+Code Review Guidelines? [y,n] " doit 
+printf "\n"
+case $doit in 
+	y|Y) ;; 
+	*) 
+		echo "ERROR: (Control/Command-C to exit and fix it)"
+		printf "\n"
+		exit ;; 
+	esac
+printf "\n"
 
 # CSS
 echo "=> Checking that css files have wrapped lines"
@@ -47,6 +77,18 @@ printf "\n"
 # JS
 echo "=> Remove any unnecessary instances of console.log in js files:"
 grep "console.log" static/views/js/*.js
+printf "\n"
+
+read -n1 -p "=> Did you follow jQuery Coding Rules in Setup Instructions and
+Code Review Guidelines? [y,n] " doit 
+printf "\n"
+case $doit in 
+	y|Y) ;; 
+	*) 
+		echo "ERROR: (Control/Command-C to exit and fix it)"
+		printf "\n"
+		exit ;; 
+	esac
 printf "\n"
 
 read -n1 -p "=> Does JSHint have any complaints? [y,n] " doit 

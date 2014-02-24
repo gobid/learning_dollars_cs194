@@ -56,7 +56,7 @@ jade_debug.unshift({ lineno: 9, filename: "jade/mybids/mybids.jade" });
 buf.push("<th>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 9, filename: jade_debug[0].filename });
-buf.push("View on freelancer.com");
+buf.push("End date");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</th>");
@@ -65,15 +65,6 @@ jade_debug.unshift({ lineno: 10, filename: "jade/mybids/mybids.jade" });
 buf.push("<th>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 10, filename: jade_debug[0].filename });
-buf.push("End date");
-jade_debug.shift();
-jade_debug.shift();
-buf.push("</th>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 11, filename: "jade/mybids/mybids.jade" });
-buf.push("<th>");
-jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 11, filename: jade_debug[0].filename });
 buf.push("Accept/Decline");
 jade_debug.shift();
 jade_debug.shift();
@@ -93,7 +84,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h3 My Bids\n    table#all_placed_bids.table.table-hover\n      tr\n        th Project Name\n        th Current Bid Count\n        th View on freelancer.com\n        th End date\n        th Accept/Decline");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h3 My Bids\n    table#all_placed_bids.table.table-hover\n      tr\n        th Project Name\n        th Current Bid Count\n        th End date\n        th Accept/Decline\n");
 }
 }
 };

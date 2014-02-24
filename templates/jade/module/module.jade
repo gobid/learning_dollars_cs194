@@ -2,69 +2,172 @@
   .row
     .col-md-8
       h1 #{name}
-      if (yt_type == "video")
-        for video in youtube
-          iframe(width='560', 
-            height='315', 
-            src='//www.youtube.com/embed/#{video}', 
-            frameborder='0', 
-            allowfullscreen='allowfullscreen'
-          )
-      if (yt_type == "playlist")
-        for pl in youtube
-          iframe(
-            width='560', 
-            height='315', 
-            src='//www.youtube.com/embed/videoseries?list=' + pl, 
-            frameborder='0', 
-            allowfullscreen='allowfullscreen'
-          )
+      #carousel-ytvids.carousel.slide(
+        data-ride='carousel', 
+        data-interval='false'
+      )
+        ol.carousel-indicators
+          - var count = 0
+          for video in youtube
+            if count == 0
+              li.active(
+                data-target='#carousel-ytvids', 
+                data-slide-to=count
+              )
+            else
+              li(
+                data-target='#carousel-ytvids', 
+                data-slide-to=count
+              )  
+            - count = count + 1   
+        .carousel-inner
+          - count = 0
+          for video in youtube
+            if count == 0
+              .item.active
+                if yt_type == "video"
+                  iframe(
+                    width='560', 
+                    height='315', 
+                    src='//www.youtube.com/embed/#{video}', 
+                    frameborder='0', 
+                    allowfullscreen='allowfullscreen'
+                  )
+                if yt_type == "playlist"
+                  iframe(
+                    width='560', 
+                    height='315', 
+                    src='//www.youtube.com/embed/videoseries?list=#{video}', 
+                    frameborder='0', 
+                    allowfullscreen='allowfullscreen'
+                  )
+            else
+              .item
+                if yt_type == "video"
+                  iframe(
+                    width='560', 
+                    height='315', 
+                    src='//www.youtube.com/embed/#{video}', 
+                    frameborder='0', 
+                    allowfullscreen='allowfullscreen'
+                  )
+                else if yt_type == "playlist"
+                  iframe(
+                    width='560', 
+                    height='315', 
+                    src='//www.youtube.com/embed/videoseries?list=#{video}', 
+                    frameborder='0', 
+                    allowfullscreen='allowfullscreen'
+                  )
+        a.carousel-control.left(href='#carousel-ytvids', data-slide='prev')
+          span.glyphicon.glyphicon-chevron-left
+        a.carousel-control.right(href='#carousel-ytvids', data-slide='next')
+          span.glyphicon.glyphicon-chevron-right
     .col-md-4
-      h1 Jobs
-      for job in jobs
-        b
-          a(target='_blank', href='#{job.projecturl}') #{job.projectname}
-        if (job.averagebid)
-          b $#{job.averagebid}
-        .place-bid
-          | Amount:
-          input.form-control(
-            id = 'amount#{job.projectid}', 
-            type='number', 
-            placeholder='greater than $250'
-          )
-          | Days:
-          input.form-control(type='number', id='days#{job.projectid}')
-          | Description:
-          textarea.form-control(id = '#description#{job.projectid}')
-          br
-          button.btn.btn-default.btn-lg.bid_submit(
-            id = '#{job.projectid}', 
-            type='button', 
-            projectid='#{job.projectid}'
-          ) Place Bid
-          hr
+      div(align='center')
+        h2 Jobs
+      // hardcoded height!! fix 
+      div(style='overflow: scroll; height: 320px;')
+        for job in jobs
+          .place-bid
+            b
+              a(target='_blank', href=job.projecturl) #{job.projectname} 
+              if job.averagebid != false
+                b $#{job.averagebid}
+            br
+            button.btn.btn-default.btn-small(
+              id = 'job_container_toggle#{job.projectid}',
+              type='button', 
+              jobid='#{job.projecti}'
+            ) Bid on this project
+              span.caret
+            div(
+              class = 'job_container#{job.projectid}', 
+              style='display: none;'
+            )
+              | Amount:
+              input.form-control(
+                id = 'amount#{job.projectid}'
+                type='number', 
+                placeholder='greater than $250'
+              )
+              | Days:
+              input.form-control(
+                id = 'days#{job.projectid}',
+                type='number'
+              )
+              | Description:
+              textarea.form-control(
+                id = 'description#{job.projectid}'
+              )
+              br
+              button.btn.btn-default.btn-small.bid_submit(
+                id = '#{job.projectid}'
+                type='button', 
+                projectid='#{job.projectid}'
+              )
+              | Place Bid
   .row
     .col-md-12
-  h2 Courses
-  table
-    for course in courses
-      if (course != "")
-        if (course.Title)
-          tr
-            td
-              a(target='_blank', href='#{course.CourseURL}') #{course.Title}
-          tr
-            td #{course.Institution} (#{course.TeachingDate}) 
-          tr
-            td Instructors: #{course.Instructors}
-          tr
-            td Description: #{course.Description} 
-          tr
-            td
-              a(
-                target='_blank', 
-                href='#{course.DownloadPageLink}'
-              ) Course Materials
-          tr
-            td &nbsp
+      div(align='center')
+        h2 Courses
+      #carousel-courses.carousel.slide(
+        data-ride='carousel', 
+        data-interval='false'
+      )
+        ol.carousel-indicators
+          - count = 0
+          for course in courses
+            if course != ""
+              if course.Title
+                if count == 0
+                  li.active(
+                    data-target='#carousel-courses', 
+                    data-slide-to='#{count}'
+                  )
+                else
+                  li(
+                    data-target='#carousel-courses', 
+                    data-slide-to='#{count}'
+                  )
+            - count = count + 1
+        - count = 0
+        .carousel-inner
+          for course in courses
+            if course != ""
+              if course.Title
+                if count == 0
+                  .item.active(align='center')
+                    .courseinfo
+                      a(target='_blank', href=course.CourseURL) #{course.Title}
+                      br
+                      | #{course.Institution} (#{course.TeachingDate})
+                      br
+                      | Instructors: #{course.Instructors}
+                      br
+                      | Description: #{course.Description}
+                      br
+                      a(target='_blank', href=course.DownloadPageLink) Course Materials
+                      br
+                    button#helpful.btn.btn-default.btn-lg This course was helpful!
+                    button#nothelpful.btn.btn-default.btn-lg This course wasn't relevant...
+                else
+                  .item(align='center')
+                    .courseinfo
+                      a(target='_blank', href=course.CourseURL) #{course.Title}
+                      br
+                      | #{course.Institution} (#{course.TeachingDate})
+                      br
+                      | Instructors: #{course.Instructors}
+                      br
+                      | Description: #{course.Description}
+                      br
+                      a(target='_blank', href=course.DownloadPageLink) Course Materials
+                    br
+                    button#helpful.btn.btn-default.btn-lg This course was helpful!
+                    button#nothelpful.btn.btn-default.btn-lg This course wasn't relevant...
+              - count = count + 1 
+          a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')
+            span.glyphicon.glyphicon-chevron-left
+          a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')
+            span.glyphicon.glyphicon-chevron-right

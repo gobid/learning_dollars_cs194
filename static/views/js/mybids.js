@@ -13,9 +13,8 @@ $(document).ready(function(){
 			for (var b in bids){
 				bid = bids[b]
 				$('#all_placed_bids').append(
-					'<tr>' + '<td>' + bid.projectname + '</td>' + 
+					'<tr>' + '<td><a href = "' + bid.projecturl + '">' + bid.projectname + '</a></td>'  + 
 					'<td>' + bid.bidcount + '</td>' + 
-					'<td><a href = "' + bid.projecturl + '">Freelancer Website</a></td>' + 
 					'<td>' + bid.enddate + '</td>' + 
 					'<td><button type="Submit" state = "1" projectid="' + 
 					bid.projectid + 
