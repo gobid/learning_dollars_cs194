@@ -5,17 +5,20 @@ except:
 
 from exceptions import Exception
 
+
 class FreelancerResponseError(Exception):
     pass
 
+
 class FreelancerResponse(object):
+
     """
     Base class for Freelancer API response decoders. Requires the 'formats'
     attribute and __new__ method to be defined. formats is a tuple of strings
     describing the formats the class can handle.
 
     Example:
-    
+
         # First, let's create our new response handler. It should subclass
         # FreelancerResponse, but technically doesn't need to.
         class MyCustomDecoderRing(FreelancerResponse):
@@ -54,6 +57,7 @@ class FreelancerResponse(object):
 
     def __new__(self, content, *args, **kwargs):
         return content
+
 
 class FreelancerJsonResponse(FreelancerResponse):
 

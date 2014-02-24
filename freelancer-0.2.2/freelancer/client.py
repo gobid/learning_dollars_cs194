@@ -1,6 +1,8 @@
 from oauth2 import Consumer, Token, Client
 
+
 class FreelancerClient(Client):
+
     """
     Creates a new worker to make signed Oauth requests to freelancer.com api.
     Requires a tuple or list of a consumer key and consumer secret, and a
@@ -40,4 +42,5 @@ class FreelancerClient(Client):
         if (isinstance(token, tuple) or isinstance(token, list)) and len(token) == 2:
             return token
 
-        raise ValueError('Invalid token, expecting a tuple, list, or oauth2 object')
+        raise ValueError(
+            'Invalid token, expecting a tuple, list, or oauth2 object')

@@ -1,0 +1,46 @@
+.container
+  script(src = 'static/views/templates/js/navbar.js')
+  .panel.panel-default
+    .panel-heading
+      h3 My Posts
+    .row
+      .col-md-6
+        .post_project_div
+          h2 Post New Project
+            | Name:
+            input#name.form-control(type='text')
+            | Job Type:
+            input#type.form-control(type='text', placeholder='ex: \'Java\' ')
+            | Description:
+            textarea#description.form-control
+            | Budget Option:
+            select#budget_option.form-control
+              option(value='1') $250-750
+              option(value='2') $750-1500
+              option(value='3') $1500-3000
+              option(value='4') $3000-5000
+              option(value='5') $30-$250
+              option(value='5') &gt$5000
+            | Duration (Max 60 days):
+            input#duration.form-control(type='text')
+            br
+            button#post_project.btn.btn-default.btn-lg(type='button')
+              | Post Project
+      .col-md-6
+        h2 Bids on Post
+        ul#bids-on-post(postid='8')
+        // eventually load postid with jquery
+    br
+    .row
+      .col-md-12
+        .post_project_div
+          h2 Posted Projects
+          table#posted_projects.table.table-hover
+            tr
+              th Name
+              th Status
+              th Average bid
+              th Bid count
+              th End date
+              th Project id
+              th Url

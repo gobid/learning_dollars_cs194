@@ -54,17 +54,21 @@ from client import FreelancerClient
 from exceptions import Exception
 
 import sys
-# import readline (removed this import because GAE doesn't seem to support it, doesn't seem to be used)
+# import readline (removed this import because GAE doesn't seem to support
+# it, doesn't seem to be used)
 
 from config import config
 
 CONSUMER = (config.CONSUMER_KEY, config.CONSUMER_SECRET)
 
+
 class IncompatibleShell(Exception):
     pass
 
+
 class InvalidCommand(Exception):
     pass
+
 
 class FreelancerShell(object):
 
@@ -81,7 +85,9 @@ class FreelancerShell(object):
     def exit(self, type=0):
         raise SystemExit(type)
 
+
 class Command(object):
+
     """Within the shell, please use the help function (i.e., admin.help()) of each
 module to get information about available commands.
 
@@ -91,17 +97,19 @@ module to get information about available commands.
     mock -- gives mock access to the freelancer.com API
     oauth -- contains the Oauth related commands for interactive shell
     """
+
     def __init__(self, chain, shell):
         if not hasattr(shell, 'msg') or not hasattr(shell, 'prompt'):
-            raise IncompatibleShell('Incompatible shell class passed to command')
+            raise IncompatibleShell(
+                'Incompatible shell class passed to command')
         self.shell = shell
-        
+
         self.chain, self.args = self.parse_cmd_from_list(chain)
 
     def do(self):
         if len(self.chain) < 2:
             return BadCommand(self.chain, self.shell).do()
-        
+
         try:
             getattr(self, self.chain[1])(**self.args)
             return self.shell
@@ -110,17 +118,17 @@ module to get information about available commands.
 
     def help(self):
         pass
-    
+
     def parse_cmd_from_list(self, chain):
         if len(chain) > 3:
-            return((),())
-        
+            return((), ())
+
         last = chain.pop()
         start_args = last.find('(')
         end_args = last.find(')')
 
-        if start_args in [-1,0] or end_args in [-1,0,1]:
-            return (chain,{})
+        if start_args in [-1, 0] or end_args in [-1, 0, 1]:
+            return (chain, {})
 
         chain.append(last[0:start_args])
 
@@ -128,21 +136,25 @@ module to get information about available commands.
             if start_args + 1 == end_args:
                 args = {}
             else:
-                args = eval(last[start_args+1:end_args],{"__builtins__":None},{})
+                args = eval(
+                    last[start_args + 1:end_args], {"__builtins__": None}, {})
         except NameError:
-            return ((),{})
+            return ((), {})
         except SyntaxError:
             return ((), {})
 
         if not isinstance(args, dict):
-            return ((),{})
-        
+            return ((), {})
+
         return (chain, args)
 
+
 class BadCommand(Command):
+
     def __init__(self, chain, shell):
         if not hasattr(shell, 'msg') or not hasattr(shell, 'prompt'):
-            raise IncompatibleShell('Incompatible shell class passed to command')
+            raise IncompatibleShell(
+                'Incompatible shell class passed to command')
         self.shell = shell
 
     def do(self):
@@ -151,19 +163,24 @@ class BadCommand(Command):
 
         return self.shell
 
+
 class EmptyCommand(Command):
+
     def __init__(self, chain, shell):
         self.shell = shell
 
     def do(self):
         return self.shell
 
+
 class ExitCommand(EmptyCommand):
 
     def do(self):
         AdminCommand(['admin', 'exit()'], self.shell).exit()
 
+
 class AdminCommand(Command):
+
     """
     Contains the administrative commands for the freelancer interactive shell
 
@@ -183,7 +200,9 @@ class AdminCommand(Command):
     def reset(self):
         self.shell.options = DEFAULT_OPTIONS
 
+
 class OauthCommand(Command):
+
     """
     Contains the Oauth related commands for the freelancer interactive shell
 
@@ -205,13 +224,15 @@ class OauthCommand(Command):
         file -- full path and filename of token file to be opened
     * oauth.help() -- print this help text
     """
+
     def setConsumer(self, **kwargs):
         if not kwargs.get('consumer_key', False) or not kwargs.get('consumer_secret', False):
             msg = "Unable to set consumer key and secret. See oauth.help() for more."
             self.shell.msg(msg)
         else:
-            self.shell.options['consumer'] = (kwargs.get('consumer_key', False), kwargs.get('consumer_secret', False))
-    
+            self.shell.options['consumer'] = (
+                kwargs.get('consumer_key', False), kwargs.get('consumer_secret', False))
+
         return self.shell
 
     def setToken(self, **kwargs):
@@ -219,29 +240,35 @@ class OauthCommand(Command):
             msg = "Shit! Unable to set token key and secret. See oauth.help() for more."
             self.shell.msg(msg)
         else:
-            self.shell.options['token'] = (kwargs.get('token', False), kwargs.get('token_secret', False))
+            self.shell.options['token'] = (
+                kwargs.get('token', False), kwargs.get('token_secret', False))
 
         return self.shell
 
     def getToken(self):
-        self.shell.msg("Visit this url to authorize this application: %s" % get_authorize_url(self.shell.options['consumer'], 'oob', config.SANDBOX_APP, domain=config.SANDBOX))
+        self.shell.msg("Visit this url to authorize this application: %s" % get_authorize_url(
+            self.shell.options['consumer'], 'oob', config.SANDBOX_APP, domain=config.SANDBOX))
         self.shell.msg('')
 
         oauth_token = self.shell.prompt('What is your oauth token? ')
         verifier = self.shell.prompt('What is your verifier? ')
         try:
-            self.shell.options['token'] = get_access_token(self.shell.options['consumer'], oauth_token, verifier, domain=config.SANDBOX)
+            self.shell.options['token'] = get_access_token(
+                self.shell.options['consumer'], oauth_token, verifier, domain=config.SANDBOX)
         except ValueError:
             msg = 'Unable to retrieve access tokens. Try again.'
             self.shell.msg(msg)
             return self.shell
 
         self.shell.msg('')
-        self.shell.msg("You can now use these access tokens to access the API:")
+        self.shell.msg(
+            "You can now use these access tokens to access the API:")
         self.shell.msg("     oauth_token: %s" % self.shell.options['token'][0])
-        self.shell.msg("     oauth_token_secret: %s" % self.shell.options['token'][1])
+        self.shell.msg("     oauth_token_secret: %s" %
+                       self.shell.options['token'][1])
         self.shell.msg('')
-        self.shell.msg('To save this token for use with oauth.load(), save it with oauth.save()')
+        self.shell.msg(
+            'To save this token for use with oauth.load(), save it with oauth.save()')
 
         return self.shell
 
@@ -252,20 +279,22 @@ class OauthCommand(Command):
             return self.shell
 
         try:
-            file = open(kwargs.get('file', self.shell.options['token_file']), 'w')
+            file = open(
+                kwargs.get('file', self.shell.options['token_file']), 'w')
             print >> file, self.shell.options['token'][0]
             print >> file, self.shell.options['token'][1]
             file.close()
-            self.shell.msg('Token successfully saved to %s' % (kwargs.get('file', self.shell.options['token_file'])))
+            self.shell.msg('Token successfully saved to %s' %
+                           (kwargs.get('file', self.shell.options['token_file'])))
         except KeyError:
             msg = 'Unable to save token to file. You need a token first'
             self.shell.msg(msg)
         except:
             msg = "Unable to save token to file."
             self.shell.msg(msg)
-            
+
         return self.shell
-            
+
     def load(self, **kwargs):
         if not kwargs.get('file', False) and not self.shell.options['token_file']:
             msg = "Unable to load token from file, missing file to load from.\nSee oauth.help() for more."
@@ -274,8 +303,10 @@ class OauthCommand(Command):
 
         try:
             file = open(kwargs.get('file', self.shell.options['token_file']))
-            self.shell.options['token'] = (file.readline().strip(), file.readline().strip())
-            self.shell.msg('Token successfully loaded from %s' % (kwargs.get('file', self.shell.options['token_file'])))
+            self.shell.options['token'] = (
+                file.readline().strip(), file.readline().strip())
+            self.shell.msg('Token successfully loaded from %s' %
+                           (kwargs.get('file', self.shell.options['token_file'])))
         except:
             msg = "Unable to load token from file."
             self.shell.msg(msg)
@@ -285,7 +316,9 @@ class OauthCommand(Command):
     def help(self):
         self.shell.msg(OauthCommand.__doc__)
 
+
 class ApiCommand(Command):
+
     """
     Gives direct access to the freelancer.com API. Methods are directly bound
     to freelancer.com. All API call parameters need to be passed as a valid
@@ -316,17 +349,19 @@ class ApiCommand(Command):
             return self.shell
 
         try:
-            client = FreelancerClient(self.shell.options['consumer'], self.shell.options['token'])
+            client = FreelancerClient(
+                self.shell.options['consumer'], self.shell.options['token'])
         except ValueError:
             self.shell.msg('Unable to initalized client, bad tokens.')
             return self.shell
-        
+
         freelancer = Freelancer(client, config.SANDBOX)
 
         for link in self.chain[1:]:
             freelancer = getattr(freelancer, link)
 
-        self.shell.msg("\nMaking request to %s://%s/%s.%s\n" % (freelancer.protocol, freelancer.domain, freelancer.uri, freelancer.format))
+        self.shell.msg("\nMaking request to %s://%s/%s.%s\n" %
+                       (freelancer.protocol, freelancer.domain, freelancer.uri, freelancer.format))
 
         resp = freelancer(self.args)
         self.shell.msg("%s\n" % resp)
@@ -336,7 +371,9 @@ class ApiCommand(Command):
     def help(self):
         self.shell.msg(ApiCommand.__doc__)
 
+
 class MockCommand(Command):
+
     """
     Gives mock access to the freelancer.com API to allow exploring the API
     without making actual API calls. Methods are directly bound
@@ -368,7 +405,8 @@ class MockCommand(Command):
         for link in self.chain[1:]:
             freelancer = getattr(freelancer, link)
 
-        self.shell.msg("\nRequest to %s://%s/%s.%s\n" % (freelancer.protocol, freelancer.domain, freelancer.uri, freelancer.format))
+        self.shell.msg("\nRequest to %s://%s/%s.%s\n" %
+                       (freelancer.protocol, freelancer.domain, freelancer.uri, freelancer.format))
         self.shell.msg('Call parameters (as a dict): %s\n' % self.args)
 
         return self.shell
@@ -390,6 +428,7 @@ DEFAULT_OPTIONS = {
     'token_file': ''
 }
 
+
 def cmd_to_action(cmd, shell):
     cmd = cmd.strip()
 
@@ -405,6 +444,7 @@ def cmd_to_action(cmd, shell):
     action = handler(cmd_chain, shell)
 
     return action
+
 
 def main(args=sys.argv[1:]):
     options = DEFAULT_OPTIONS
@@ -437,4 +477,4 @@ def main(args=sys.argv[1:]):
             shell.exit()
 
 if __name__ == "__main__":
-    main();
+    main()

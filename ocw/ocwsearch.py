@@ -2,6 +2,7 @@ import urllib
 import json
 from oauth2client.tools import argparser
 
+
 class OCWSearch:
 
   def search(self, search_str):
