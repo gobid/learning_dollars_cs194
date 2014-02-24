@@ -128,3 +128,10 @@ class ProjectPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/project_copy.html')
         self.response.write(template.render(template_values))
 
+class TimPage(webapp2.RequestHandler):
+
+    def get(self):
+        template_values = basicinfo(users.get_current_user(), self)
+        template = JINJA_ENVIRONMENT.get_template('templates/timpage.html')
+        self.response.write(template.render(template_values))
+

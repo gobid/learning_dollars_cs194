@@ -3,7 +3,7 @@
 import webapp2
 
 from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
-    DashboardPage, MailboxPage, MyBidsPage, MyPostsPage, MilestonesPage, ProjectPage
+    DashboardPage, MailboxPage, MyBidsPage, MyPostsPage, MilestonesPage, ProjectPage, TimPage
 
 from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
     SendMessage, BidOnProject, PostNewProject, RetractBid, AcceptBid
@@ -71,6 +71,12 @@ application = webapp2.WSGIApplication([
     webapp2.Route(
         '/project/<project_id:\d+>',
         handler=ProjectPage,
+        name='projectpage'
+    ),
+
+    webapp2.Route(
+        '/timsite',
+        handler=TimPage,
         name='projectpage'
     ),
 
