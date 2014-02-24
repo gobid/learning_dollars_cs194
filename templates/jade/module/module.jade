@@ -1,0 +1,70 @@
+.container
+  .row
+    .col-md-8
+      h1 #{name}
+      if (yt_type == "video")
+        for video in youtube
+          iframe(width='560', 
+            height='315', 
+            src='//www.youtube.com/embed/#{video}', 
+            frameborder='0', 
+            allowfullscreen='allowfullscreen'
+          )
+      if (yt_type == "playlist")
+        for pl in youtube
+          iframe(
+            width='560', 
+            height='315', 
+            src='//www.youtube.com/embed/videoseries?list=' + pl, 
+            frameborder='0', 
+            allowfullscreen='allowfullscreen'
+          )
+    .col-md-4
+      h1 Jobs
+      for job in jobs
+        b
+          a(target='_blank', href='#{job.projecturl}') #{job.projectname}
+        if (job.averagebid)
+          b $#{job.averagebid}
+        .place-bid
+          | Amount:
+          input.form-control(
+            id = 'amount#{job.projectid}', 
+            type='number', 
+            placeholder='greater than $250'
+          )
+          | Days:
+          input.form-control(type='number', id='days#{job.projectid}')
+          | Description:
+          textarea.form-control(id = '#description#{job.projectid}')
+          br
+          button.btn.btn-default.btn-lg.bid_submit(
+            id = '#{job.projectid}', 
+            type='button', 
+            projectid='#{job.projectid}'
+          ) Place Bid
+          hr
+  .row
+    .col-md-12
+  h2 Courses
+  table
+    for course in courses
+      if (course != "")
+        if (course.Title)
+          tr
+            td
+              a(target='_blank', href='#{course.CourseURL}') #{course.Title}
+          tr
+            td #{course.Institution} (#{course.TeachingDate}) 
+          tr
+            td Instructors: #{course.Instructors}
+          tr
+            td Description: #{course.Description} 
+          tr
+            td
+              a(
+                target='_blank', 
+                href='#{course.DownloadPageLink}'
+              ) Course Materials
+          tr
+            td &nbsp

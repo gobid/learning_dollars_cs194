@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+	// initialize runtime js template
+	$("body").append(Templates.mybids());
+
+	/* START jQuery Methods */
+	
 	$.get('/getplacedbids', function(data){
 		data = jQuery.parseJSON(data)
 		bids = data['json-result']['items']
@@ -26,8 +31,6 @@ $(document).ready(function(){
 		}
 	})
 
-
-
 	// Accept Bid Won
 	$(document).on('click', '.btn.btn-default.accept_bid', function() {
 		projectid = $(this).attr('projectid')
@@ -41,6 +44,8 @@ $(document).ready(function(){
 		state = $(this).attr('state')
 		accept_bid(0, projectid, state)
 	})
+
+	/* END jQuery Methods*/
 
 })
 

@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <!--meta tags-->
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='description' content=''>
+    <meta name='author' content=''>
+    <!--favicon-->
+    <link rel='shortcut icon' href='static/bootstrap/docs/assets/ico/favicon.ico'>
+    <!--css-->
+    <link href='static/bootstrap/docs/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='static/views/css/navbar.css' rel='stylesheet'>
+    <!--runtime scripts -->
+    <script src = "static/views/compilers/runtime.js"></script>
+    <script src = "static/views/compilers/modules.js"></script>
+    <script src = "static/views/compiled-templates/{{ compiled_template }}"></script>
+    <script src = "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src = "static/views/js/{{ javascript }}"></script>
+    <script src='static/bootstrap/docs/dist/js/bootstrap.min.js'></script>
+    <title>{{ title }}</title>  
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <input type = "hidden" id = "datalink" name = "datalink" value = "{{ datalink }}"/>
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Learning Dollars</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/modules">Modules</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboard<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/mailbox">Mailbox</a></li>
+                <li><a href="/mybids">My Bids</a></li>
+                <li><a href="/myposts">My Posts</a></li>
+                <li><a href="/milestones">Milestones</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if nickname %}
+              <li><a href="./">{{ nickname }}</a></li>
+            {% endif %}
+            <li><a href="{{ url|safe }}">{{ url_linktext }}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</head>

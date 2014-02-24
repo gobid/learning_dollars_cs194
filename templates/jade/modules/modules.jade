@@ -1,0 +1,9 @@
+.container
+  h1 Modules
+  hr
+  table
+    each row in modules
+      .row
+        each module in row
+          .col-md-3
+            a(href=module.key) #{module.name}

@@ -9,8 +9,21 @@ for file in $(find templates -name "*.jade"); do
 done
 printf "\n"
 
-# JS
-read -n1 -p "=> JSHint has no complaints on any js files, right? [y,n] " doit 
+echo "=> Converting jade to compiled js runtime functions"
+cd templates
+bash compile_jade.sh
+cd ..
+
+# CSS
+echo "=> Checking that css files have wrapped lines"
+for file in $(find static/views/css -name "*.css"); do
+	echo "Unwrapped lines in" $file ":"
+	awk "length($0) > 79" $file
+	printf "\n"
+done
+printf "\n"
+
+read -n1 -p "=> Does CSSLint have any complaints? [y,n] " doit 
 printf "\n"
 case $doit in 
 	n|N) ;; 
@@ -20,9 +33,31 @@ case $doit in
 		exit ;; 
 	esac
 
+read -n1 -p "=> Are you sure? [y,n] " doit 
+printf "\n"
+case $doit in 
+	y|Y) ;; 
+	*) 
+		echo "ERROR: (Control/Command-C to exit and fix it)"
+		printf "\n"
+		exit ;; 
+	esac
+printf "\n"
+
+# JS
 echo "=> Remove any unnecessary instances of console.log in js files:"
 grep "console.log" static/views/js/*.js
 printf "\n"
+
+read -n1 -p "=> Does JSHint have any complaints? [y,n] " doit 
+printf "\n"
+case $doit in 
+	n|N) ;; 
+	*)
+		echo "ERROR: (Control/Command-C to exit and fix it)"
+		printf "\n"
+		exit ;; 
+	esac
 
 read -n1 -p "=> Are you sure? [y,n] " doit 
 printf "\n"

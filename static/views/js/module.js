@@ -1,6 +1,17 @@
 $(document).ready(function() {
-    initializePage();
-})
+    // initialize page
+	var datalink = $("#datalink").val();
+	$.get(datalink, function(data){
+		console.log(data);
+		$("body").append(Templates.module(data));
+		
+		/* START jQuery Methods */
+
+		initializePage();
+		
+		/* END jQuery Methods */
+	});
+});
 
 /*
  * Function that is called when the document is ready.

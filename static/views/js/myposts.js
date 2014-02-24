@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+	// initialize page
+	$("body").append(Templates.myposts());
+
 	$.get('/postsinfo', function(data){
 		console.log(data)
 		numPosts = data['json-result']['count']

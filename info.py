@@ -50,11 +50,8 @@ class ModuleInfo(webapp2.RequestHandler):
 
 class ModulesInfo(webapp2.RequestHandler):
 
-    def get_modules(self):
-        return [m.to_dict() for m in Module.query().fetch()]
-
     def get(self):
-        modules = self.get_modules()
+        modules = [m.to_dict() for m in Module.query().fetch()]
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(modules))
 

@@ -1,6 +1,9 @@
-"use strict";
-
 $(document).ready(function() {
+
+	// initialize runtime js template
+	$("body").append(Templates.mailbox());
+
+	/* START jQuery Methods */
 
 	$("#messageTabs a").click(function (e) {
 		e.preventDefault();
@@ -21,7 +24,7 @@ $(document).ready(function() {
 		$.get(url, function(data) {
 			var result = data["json-result"];
 			if(result){
-				$("#newMessage").append("<h4 class=\"response\">SEND!</h4>");
+				$("#newMessage").append(Templates.sending_success());
 				setTimeout(function(){
 					$("#newMessage").find("form")[0].reset();
 				}, 3000);
@@ -36,6 +39,9 @@ $(document).ready(function() {
 			}, 3000);
 		});
 	});
+
+	/* END jQuery Methods */
+
 });
 
 // Helper Functions
