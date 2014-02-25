@@ -79,7 +79,6 @@ function load_bids_on_post(project_id){
 			var bids = jr.items;
 			for (var b in bids){
 				var object = {"bid": bids[b], "projectid": project_id};
-				console.log(object);
 				$("#bids-on-post").append(Templates.bids_on_posts(object));
 				// $("#bids-on-post").append("<li>" + bids[b].descr+" "+
 				// 	"($" + bids[b].bid_amount + ") " +
