@@ -1,4 +1,44 @@
 var Templates = {
+"bids_on_posts":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/myposts/bids_on_posts.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined,descr = locals_.descr,bid_amount = locals_.bid_amount,proider_userid = locals_.proider_userid;
+jade_debug.unshift({ lineno: 0, filename: "jade/myposts/bids_on_posts.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/myposts/bids_on_posts.jade" });
+buf.push("<li>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 1, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = descr) == null ? '' : jade.interp)) + " ($" + (jade.escape((jade.interp = bid_amount) == null ? '' : jade.interp)) + ")");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 2, filename: "jade/myposts/bids_on_posts.jade" });
+buf.push("<button" + (jade.attr("user_id", proider_userid, true, false)) + " class=\"btn btn-default bid\">");
+jade_debug.unshift({ lineno: 3, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 3, filename: jade_debug[0].filename });
+buf.push("Pick");
+jade_debug.shift();
+buf.push("\n");
+jade_debug.unshift({ lineno: 4, filename: jade_debug[0].filename });
+buf.push("");
+jade_debug.shift();
+buf.push("\n");
+jade_debug.unshift({ lineno: 5, filename: jade_debug[0].filename });
+buf.push("");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</button>");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</li>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "li #{descr} ($#{bid_amount})\n  button(class=\"btn btn-default bid\", user_id=proider_userid).\n    Pick\n\n\n");
+}
+},
+
 "myposts":
   function template(locals) {
 var jade_debug = [{ lineno: 1, filename: "jade/myposts/myposts.jade" }];
@@ -302,6 +342,115 @@ jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
   jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  script(src = 'static/views/templates/js/navbar.js')\n  .panel.panel-default\n    .panel-heading\n      h3 My Posts\n    .row\n      .col-md-6\n        .post_project_div\n          h2 Post New Project\n            | Name:\n            input#name.form-control(type='text')\n            | Job Type:\n            input#type.form-control(type='text', placeholder='ex: \\'Java\\' ')\n            | Description:\n            textarea#description.form-control\n            | Budget Option:\n            select#budget_option.form-control\n              option(value='1') $250-750\n              option(value='2') $750-1500\n              option(value='3') $1500-3000\n              option(value='4') $3000-5000\n              option(value='5') $30-$250\n              option(value='5') &gt$5000\n            | Duration (Max 60 days):\n            input#duration.form-control(type='text')\n            br\n            button#post_project.btn.btn-default.btn-lg(type='button')\n              | Post Project\n      .col-md-6\n        h2 Bids on Post\n        ul#bids-on-post(postid='8')\n        // eventually load postid with jquery\n    br\n    .row\n      .col-md-12\n        .post_project_div\n          h2 Posted Projects\n          table#posted_projects.table.table-hover\n            tr\n              th Name\n              th Status\n              th Average bid\n              th Bid count\n              th End date\n              th Project id\n              th Url");
+}
+},
+
+"post_success":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/myposts/post_success.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined,projecturl = locals_.projecturl;
+jade_debug.unshift({ lineno: 0, filename: "jade/myposts/post_success.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/myposts/post_success.jade" });
+buf.push("<h2 id=\"log_message\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 2, filename: "jade/myposts/post_success.jade" });
+buf.push("Project sucessfully posted, see url to view on freelancer: " + (jade.escape((jade.interp = projecturl) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</h2>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "h2(id=\"log_message\")\n  |Project sucessfully posted, see url to view on freelancer: #{projecturl}\n  \n\n\n");
+}
+},
+
+"posted_projects":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/myposts/posted_projects.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined,projectid = locals_.projectid,projectname = locals_.projectname,additionalstatus = locals_.additionalstatus,averagebid = locals_.averagebid,bidcount = locals_.bidcount,enddate = locals_.enddate,projecturl = locals_.projecturl;
+jade_debug.unshift({ lineno: 0, filename: "jade/myposts/posted_projects.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<tr>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 2, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 3, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<input" + (jade.attr("value", projectid, true, false)) + " type=\"radio\" class=\"projects\"/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 4, filename: "jade/myposts/posted_projects.jade" });
+buf.push("" + (jade.escape((jade.interp = projectname) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 5, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 5, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = additionalstatus) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 6, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 6, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = averagebid) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 7, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 7, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = bidcount) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 8, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 8, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = enddate) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 9, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 9, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = projectid) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 10, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 10, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = projecturl) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</tr>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr\n  td\n    input.projects(value=projectid, type=\"radio\")\n    | #{projectname}\n  td #{additionalstatus}\n  td #{averagebid}\n  td #{bidcount}\n  td #{enddate}\n  td #{projectid}\n  td #{projecturl}");
 }
 }
 };

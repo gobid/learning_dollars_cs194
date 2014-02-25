@@ -12,20 +12,10 @@ $(document).ready(function(){
 		if(count !== 0) {
 			for (var b in bids){
 				var bid = bids[b];
-				$("#all_placed_bids").append(
-					"<tr>" + "<td><a href = '" + bid.projecturl + "'>" +
-					bid.projectname + "</a></td>"+"<td>" + bid.bidcount +
-					"</td>"+"<td>" + bid.enddate + "</td>" +
-					"<td><button type='Submit' state = '1' projectid='" +
-					bid.projectid+
-					"' class='btn btn-default accept_bid'>Accept</button> " +
-					"<button value='Submit' state = '0' projectid='" +
-					bid.projectid +
-					"' class='btn btn-default decline_bid'>Decline</button>"+
-					"</td></tr>");
+				$("#all_placed_bids").append(Templates.all_bids(bid));
 			}
 		} else {
-			$("#my_bids_hdr").after("<p>You have no bids at this time</p>");
+			$("#my_bids_hdr").after(no_bids());
 		}
 	});
 

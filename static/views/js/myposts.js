@@ -9,14 +9,7 @@ $(document).ready(function() {
 			var posts = data["json-result"].items;
 			for (var p in posts){
 				var project = posts[p];
-				$("#posted_projects").append("<tr><td>"+
-					"<input value = '"+project.projectid+"' type='radio' "+
-					" class = 'projects'> " + project.projectname +
-					"</td><td>"+project.additionalstatus + "</td><td>"+
-					project.averagebid+"</td><td>"+ project.bidcount+
-					"</td><td>"+project.enddate+"</td><td>"+
-					project.projectid + "</td><td>"+ project.projecturl+
-					"</td></tr>");
+				$("#posted_projects").append(Templates.posted_projects(project));
 			}
 		}
 	});
@@ -55,9 +48,11 @@ function post_project(e) {
 			var response = data["json-result"];
 			if(response) {
 				var url = response.projecturl;
-				$("#post_project").after("<h2 id='log_message'>Project " +
-					"sucessfully posted, see url to view on freelancer: " +
-					 url + "</h2>");
+				console.log(response);
+				$("#post_project").after(Templates.post_success(response));
+				// $("#post_project").after("<h2 id='log_message'>Project " +
+				// 	"sucessfully posted, see url to view on freelancer: " +
+				// 	 url + "</h2>");
 			} else {
 				response = data.errors;
 				if (!response) response = data.error;
@@ -85,14 +80,20 @@ function load_bids_on_post(project_id){
 		if (count !== 0){
 			var bids = jr.items;
 			for (var b in bids){
-				$("#bids-on-post").append("<li>" + bids[b].descr+" "+
-					"($" + bids[b].bid_amount + ") " +
-					"<button class='btn btn-default bid'" +
-					" project_id = '" + project_id  + "' user_id = '"+
-					bids[b].provider_userid + "'' >Pick</button>" + "</li>");
+				$("#bids-on-post").append(Templates.bids_on_posts(bids[b], project_id));
+				// $("#bids-on-post").append("<li>" + bids[b].descr+" "+
+				// 	"($" + bids[b].bid_amount + ") " +
+				// 	"<button class='btn btn-default bid'" +
+				// 	" project_id = '" + project_id  + "' user_id = '"+
+				// 	bids[b].provider_userid + "'' >Pick</button>" + "</li>");
 			}
 		} else {
 			$("#bids-on-post").append("<li>No Bids</li>");
 		}
 	});
 }
+
+
+// li #{descr} ($#{bid_amount})
+//   button(class="btn btn-default bid", project_id=project_id, user_id=proider_userid).
+//   	Pick
