@@ -1,7 +1,8 @@
 .container
-  h1 Project:
-  h2 Description:
-  h3 Project Creator:
-  h3 Number of bids:
-  h3 Average bid:
-  h3 End date:
+  h1 Project: #{name}
+  h2 Description: #{short_descr}
+  h3 Project Creator: #{buyer.username}
+  h3 Number of bids: #{bid_stats.count}
+  h3 Average bid: #{bid_stats.avg}
+  h3 End date: #{end_date}
+  h3 Budget: $#{budget.min} - $#{budget.max}

@@ -47,8 +47,6 @@ function post_project(e) {
 		budget_option + "/" + duration, function(data){
 			var response = data["json-result"];
 			if(response) {
-				var url = response.projecturl;
-				console.log(response);
 				$("#post_project").after(Templates.post_success(response));
 				// $("#post_project").after("<h2 id='log_message'>Project " +
 				// 	"sucessfully posted, see url to view on freelancer: " +
@@ -80,12 +78,14 @@ function load_bids_on_post(project_id){
 		if (count !== 0){
 			var bids = jr.items;
 			for (var b in bids){
-				$("#bids-on-post").append(Templates.bids_on_posts(bids[b], project_id));
+				var object = {"bid": bids[b], "projectid": project_id};
+				console.log(object);
+				$("#bids-on-post").append(Templates.bids_on_posts(object));
 				// $("#bids-on-post").append("<li>" + bids[b].descr+" "+
 				// 	"($" + bids[b].bid_amount + ") " +
 				// 	"<button class='btn btn-default bid'" +
 				// 	" project_id = '" + project_id  + "' user_id = '"+
-				// 	bids[b].provider_userid + "'' >Pick</button>" + "</li>");
+				// 	bids[b].provider_userid + "'' >Pick</button>" + "</li>"
 			}
 		} else {
 			$("#bids-on-post").append("<li>No Bids</li>");
@@ -95,5 +95,6 @@ function load_bids_on_post(project_id){
 
 
 // li #{descr} ($#{bid_amount})
-//   button(class="btn btn-default bid", project_id=project_id, user_id=proider_userid).
-//   	Pick
+//   button(class="btn btn-default bid", 
+//project_id=project_id, user_id=proider_userid).
+// Pick

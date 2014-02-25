@@ -1,4 +1,41 @@
 var Templates = {
+"accept_bid_error":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/mybids/accept_bid_error.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined;
+jade_debug.unshift({ lineno: 0, filename: "jade/mybids/accept_bid_error.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/mybids/accept_bid_error.jade" });
+buf.push("<h3 id=\"log_message\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 1, filename: jade_debug[0].filename });
+buf.push("Error, submit again");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</h3>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "h3(id=\"log_message\") Error, submit again");
+}
+},
+
+"accept_bid_success":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/mybids/accept_bid_success.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+
+jade_debug.unshift({ lineno: 0, filename: "jade/mybids/accept_bid_success.jade" });
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "");
+}
+},
+
 "all_bids":
   function template(locals) {
 var jade_debug = [{ lineno: 1, filename: "jade/mybids/all_bids.jade" }];

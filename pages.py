@@ -120,20 +120,7 @@ class ProjectPage(webapp2.RequestHandler):
         template_values['title'] = 'project'
         template_values['compiled_template'] = 'project.js'
         template_values['javascript'] = 'project.js'
-        project_id = self.request.get("id")
-        projectDetails = GetProjectDetails()
-        project = projectDetails.get_info(project_id)
-        print project
-        projectInfo = project['json-result']
-        bidStats = projectInfo['bid_stats']
-        template_values['projectname'] = projectInfo['name']
-        template_values['description'] = projectInfo['short_descr']
-        template_values['end_date'] = projectInfo['end_date']
-        template_values['username'] = projectInfo['buyer']['username']
-        template_values['num_bids'] = bidStats['count']
-        template_values['avg_bid'] = bidStats['avg']
-        # MUST LOAD THE ABOVE INFO VIA JQUERY (in static/views/js/project.js) NOW 
-        # USE info.py as is done for i.e. ModulesPage 
+        template_values['datalink'] = 'projectDetails/' + self.request.get('id')
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
 

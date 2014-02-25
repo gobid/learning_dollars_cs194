@@ -5,19 +5,19 @@ var jade_debug = [{ lineno: 1, filename: "jade/myposts/bids_on_posts.jade" }];
 try {
 var buf = [];
 var jade_mixins = {};
-var locals_ = (locals || {}),undefined = locals_.undefined,descr = locals_.descr,bid_amount = locals_.bid_amount,proider_userid = locals_.proider_userid;
+var locals_ = (locals || {}),undefined = locals_.undefined,bid = locals_.bid,projectid = locals_.projectid;
 jade_debug.unshift({ lineno: 0, filename: "jade/myposts/bids_on_posts.jade" });
 jade_debug.unshift({ lineno: 1, filename: "jade/myposts/bids_on_posts.jade" });
 buf.push("<li>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 1, filename: jade_debug[0].filename });
-buf.push("" + (jade.escape((jade.interp = descr) == null ? '' : jade.interp)) + " ($" + (jade.escape((jade.interp = bid_amount) == null ? '' : jade.interp)) + ")");
+buf.push("" + (jade.escape((jade.interp = bid.descr) == null ? '' : jade.interp)) + " ($" + (jade.escape((jade.interp = bid.bid_amount) == null ? '' : jade.interp)) + ")");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 2, filename: "jade/myposts/bids_on_posts.jade" });
-buf.push("<button" + (jade.attr("user_id", proider_userid, true, false)) + " class=\"btn btn-default bid\">");
+buf.push("<button" + (jade.attr("project_id", projectid, true, false)) + (jade.attr("user_id", bid.provider_userid, true, false)) + " class=\"btn btn-default bid\">");
 jade_debug.unshift({ lineno: 3, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 3, filename: jade_debug[0].filename });
-buf.push("Pick");
+buf.push("Pick" + (jade.escape((jade.interp = projectid) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 buf.push("\n");
 jade_debug.unshift({ lineno: 4, filename: jade_debug[0].filename });
@@ -35,7 +35,7 @@ buf.push("</li>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "li #{descr} ($#{bid_amount})\n  button(class=\"btn btn-default bid\", user_id=proider_userid).\n    Pick\n\n\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "li #{bid.descr} ($#{bid.bid_amount})\n  button(class=\"btn btn-default bid\", project_id=projectid, user_id=bid.provider_userid).\n    Pick#{projectid}\n\n\n");
 }
 },
 
@@ -374,7 +374,7 @@ var jade_debug = [{ lineno: 1, filename: "jade/myposts/posted_projects.jade" }];
 try {
 var buf = [];
 var jade_mixins = {};
-var locals_ = (locals || {}),undefined = locals_.undefined,projectid = locals_.projectid,projectname = locals_.projectname,additionalstatus = locals_.additionalstatus,averagebid = locals_.averagebid,bidcount = locals_.bidcount,enddate = locals_.enddate,projecturl = locals_.projecturl;
+var locals_ = (locals || {}),undefined = locals_.undefined,projectid = locals_.projectid,projectname = locals_.projectname,additionalstatus = locals_.additionalstatus,averagebid = locals_.averagebid,bidcount = locals_.bidcount,enddate = locals_.enddate;
 jade_debug.unshift({ lineno: 0, filename: "jade/myposts/posted_projects.jade" });
 jade_debug.unshift({ lineno: 1, filename: "jade/myposts/posted_projects.jade" });
 buf.push("<tr>");
@@ -439,8 +439,14 @@ jade_debug.shift();
 jade_debug.unshift({ lineno: 10, filename: "jade/myposts/posted_projects.jade" });
 buf.push("<td>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 10, filename: jade_debug[0].filename });
-buf.push("" + (jade.escape((jade.interp = projecturl) == null ? '' : jade.interp)) + "");
+jade_debug.unshift({ lineno: 11, filename: "jade/myposts/posted_projects.jade" });
+buf.push("<a" + (jade.attr("href", "project?id=" + (projectid) + "", true, false)) + ">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 11, filename: jade_debug[0].filename });
+buf.push("View more details");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</a>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</td>");
@@ -450,7 +456,7 @@ buf.push("</tr>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr\n  td\n    input.projects(value=projectid, type=\"radio\")\n    | #{projectname}\n  td #{additionalstatus}\n  td #{averagebid}\n  td #{bidcount}\n  td #{enddate}\n  td #{projectid}\n  td #{projecturl}");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr\n  td\n    input.projects(value=projectid, type=\"radio\")\n    | #{projectname}\n  td #{additionalstatus}\n  td #{averagebid}\n  td #{bidcount}\n  td #{enddate}\n  td #{projectid}\n  td\n    a(href=\"project?id=#{projectid}\") View more details");
 }
 }
 };

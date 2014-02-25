@@ -15,7 +15,7 @@ $(document).ready(function(){
 				$("#all_placed_bids").append(Templates.all_bids(bid));
 			}
 		} else {
-			$("#my_bids_hdr").after(no_bids());
+			$("#my_bids_hdr").after(Templates.no_bids);
 		}
 	});
 
@@ -43,11 +43,9 @@ function accept_bid(accepted, projectid, state) {
 		var response = data["json-result"];
 		if(response) {
 			//var status = response['statusconfirmation']
-			$("#create_milestone").after("<h2 id='log_message'>" +
-				"Bid acceptance/decline submitted successfully.</h2>");
+			$("#create_milestone").after(Templates.accept_bid_success);
 		} else {
-			$("#create_milestone").after("<h3 id='log_message'>" +
-				"Error, submit again</h3>");
+			$("#create_milestone").after(Templates.accept_bid_error);
 		}
 	});
 }
