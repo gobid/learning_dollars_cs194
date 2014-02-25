@@ -27,7 +27,7 @@ printf "\n"
 echo "=> Checking that jade templates have wrapped lines"
 for file in $(find templates -name "*.jade"); do
 	echo "Unwrapped lines in" $file ":"
-	awk "length($0) > 79" $file
+	grep -in '.\{80,\}' $file
 	printf "\n"
 done
 printf "\n"
@@ -48,7 +48,7 @@ printf "\n"
 echo "=> Checking that css files have wrapped lines"
 for file in $(find static/views/css -name "*.css"); do
 	echo "Unwrapped lines in" $file ":"
-	awk "length($0) > 79" $file
+	grep -in '.\{80,\}' $file
 	printf "\n"
 done
 printf "\n"
