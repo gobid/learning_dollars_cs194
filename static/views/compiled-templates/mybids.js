@@ -22,6 +22,29 @@ jade_debug.shift();;return buf.join("");
 }
 },
 
+"accept_bid_good":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/mybids/accept_bid_good.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined;
+jade_debug.unshift({ lineno: 0, filename: "jade/mybids/accept_bid_good.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/mybids/accept_bid_good.jade" });
+buf.push("<h2 id=\"log_message\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 1, filename: jade_debug[0].filename });
+buf.push("Bid acceptance/decline submitted successfully.");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</h2>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "h2(id=\"log_message\") Bid acceptance/decline submitted successfully.");
+}
+},
+
 "accept_bid_success":
   function template(locals) {
 var jade_debug = [{ lineno: 1, filename: "jade/mybids/accept_bid_success.jade" }];

@@ -73,12 +73,16 @@ function post_project(e) {
 function load_bids_on_post(project_id){
 	$("#bids-on-post").empty();
 	$.get("/getprojectbids/" + project_id, function(data){
-		var jr = data["json-result"];
+		var jr = data['json-result'];
 		var count = jr.count;
 		if (count !== 0){
 			var bids = jr.items;
 			for (var b in bids){
-				var object = {"bid": bids[b], "projectid": project_id};
+				var object = {
+					"bid": bids[b], 
+					"projectid": project_id
+				};
+				console.log(object);
 				$("#bids-on-post").append(Templates.bids_on_posts(object));
 				// $("#bids-on-post").append("<li>" + bids[b].descr+" "+
 				// 	"($" + bids[b].bid_amount + ") " +
