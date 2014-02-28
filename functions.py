@@ -38,7 +38,6 @@ def get_access_token(self):
 # For Views:
 # Retrieves basic info, completes a session check.
 
-
 def basicinfo(user, self):
     if user:
         url = users.create_logout_url(self.request.uri)
@@ -74,7 +73,6 @@ def basicinfo(user, self):
 
 # For Controllers:
 # Completes session check without redirecting for login on no session.
-
 
 def get_account():
     user = users.get_current_user()

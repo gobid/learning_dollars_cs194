@@ -11,6 +11,11 @@
     <!--css-->
     <link href='static/bootstrap/docs/dist/css/bootstrap.min.css' rel='stylesheet'>
     <link href='static/views/css/navbar.css' rel='stylesheet'>
+    {% if extra_css %}
+      {% for file in extra_css %}
+        <link href = '{{ file }}' rel = 'stylesheet'>
+      {% endfor %}
+    {% endif %}
     <!--runtime scripts -->
     <script src = "static/views/compilers/runtime.js"></script>
     <script src = "static/views/compilers/modules.js"></script>
@@ -18,6 +23,11 @@
     <script src = "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src = "static/views/js/{{ javascript }}"></script>
     <script src='static/bootstrap/docs/dist/js/bootstrap.min.js'></script>
+    {% if extra_js %}
+      {% for file in extra_js %}
+        <script src = '{{ file }}'></script>
+      {% endfor %}
+    {% endif %}
     <title>{{ title }}</title>  
     <!--[if lt IE 9]>
       <script src="../../assets/js/ie8-responsive-file-warning.js"></script>

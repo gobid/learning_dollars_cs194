@@ -69,6 +69,7 @@ class ModulePage(webapp2.RequestHandler):
         template_values['compiled_template'] = 'module.js'
         template_values['datalink'] = 'moduleinfo/' + module_id
         template_values['javascript'] = 'module.js'
+        template_values['extra_css'] = ['static/views/css/module.css'] 
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
 
