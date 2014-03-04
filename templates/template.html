@@ -57,17 +57,15 @@
             <li><a href="/team">Team</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/modules">Modules</a></li>
-            {% if url_linktext == "Logout" %}
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboard<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/mailbox">Mailbox</a></li>
-                  <li><a href="/mybids">My Bids</a></li>
-                  <li><a href="/myposts">My Posts</a></li>
-                  <li><a href="/milestones">Milestones</a></li>
-                </ul>
-              </li>
-            {% endif %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboard<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/mailbox">Mailbox</a></li>
+                <li><a href="/mybids">My Bids</a></li>
+                <li><a href="/myposts">My Posts</a></li>
+                <li><a href="/milestones">Milestones</a></li>
+              </ul>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if nickname %}

@@ -144,8 +144,8 @@ class GetProjectDetails(webapp2.RequestHandler):
         if jac:
             response = jac.get_project_details(project_id)
         else:
-            response = {'error': 'User has no associated account. '
-                        + 'Try logging out and logging in again.'}
+            response = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
@@ -154,8 +154,8 @@ class GetProjectDetails(webapp2.RequestHandler):
         if jac:
             projectDetails = jac.get_project_details(project_id)
         else:
-            projectDetails = {'error': 'User has no associated account. '
-                              + 'Try logging out and logging in again.'}
+            projectDetails = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
         return projectDetails
 
 
@@ -184,7 +184,6 @@ class GetIncomingMilestoneList(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
-
 class GetOutgoingMilestoneList(webapp2.RequestHandler):
 
     def get(self):
@@ -192,7 +191,8 @@ class GetOutgoingMilestoneList(webapp2.RequestHandler):
         if jac:
             response = jac.get_project_info()
         else:
-            response = {'error': 'User has no associated account. '
-                        + 'Try logging out and logging in again.'}
+            response = {'error':'User has no associated account. ' \
+            + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
+        self.response.write(json.dumps(response)) 
+
