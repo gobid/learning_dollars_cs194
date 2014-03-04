@@ -1,11 +1,11 @@
 tr
   td
     input.projects(value=projectid, type="radio")
-    | #{projectname}
+    a(href="project?id=#{projectid}")
+      |   #{projectname}
   td #{additionalstatus}
   td #{averagebid}
-  td #{bidcount}
-  td #{enddate}
-  td #{projectid}
   td
-    a(href="project?id=#{projectid}") View more details
+    a(href="project?id=#{projectid}")
+      |#{bidcount}
+  td #{enddate}
