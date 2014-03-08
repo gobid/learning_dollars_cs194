@@ -1,8 +1,10 @@
 tr
   td
-    a(href=projecturl)
+    a(href="project?id=#{projectid}")
       |#{projectname}
-  td #{bidcount}
+  td
+    a(href="project?id=#{projectid}")
+      |#{bidcount}
   td #{enddate}
   td
     button(type="Submit", state="1", projectid=projectid, class="btn btn-default accept_bid").
