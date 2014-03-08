@@ -5,11 +5,19 @@ $(document).ready(function() {
 
 	$.get("/postsinfo", function(data){
 		var numPosts = data["json-result"].count;
+		var m_names = new Array("January", "February", "March",
+			"April", "May", "June", "July", "August", "September",
+			"October", "November", "December");
 		if(numPosts > 0) {
 			var posts = data["json-result"].items;
 			$("#projects_loader").remove();
 			for (var p in posts){
 				var project = posts[p];
+				var date_obj = new Date(project.enddate);
+				var date_str = m_names[date_obj.getMonth()]+" "+
+				date_obj.getDay()+", "+date_obj.getFullYear()+" at "+
+				date_obj.getHours() + ":" + date_obj.getMinutes() + " GMT";
+				project.enddate = date_str;
 				$("#posted_projects").append(
 					Templates.posted_projects(project)
 				);
