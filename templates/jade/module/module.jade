@@ -151,11 +151,18 @@
                       a(target='_blank', href=course.DownloadPageLink) Course Materials
                       br
                     br
-                    | #{course.scoreRanking} people found this course helpful.
+                    .coursescore
+                      | #{course.scoreRanking} people found this course helpful.
                     br
-                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up
+                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
+                      courseTitle='#{course.Title}',
+                      moduleID='#{category}'
+                    )
                     | &nbsp; &nbsp; &nbsp;
-                    button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down
+                    button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
+                      courseTitle='#{course.Title}',
+                      moduleID='#{category}'
+                    )
                 else
                   .item(align='center')
                     .courseinfo
@@ -170,11 +177,18 @@
                       a(target='_blank', href=course.DownloadPageLink) Course Materials
                       br
                     br
-                    | #{course.scoreRanking} people found this course helpful.
+                    .coursescore
+                      | #{course.scoreRanking} people found this course helpful.
                     br
-                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up
+                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
+                      courseTitle='#{course.Title}',
+                      moduleID='#{category}'
+                    )
                     | &nbsp; &nbsp; &nbsp;
-                    button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down
+                    button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
+                      courseTitle='#{course.Title}',
+                      moduleID='#{category}'
+                    )
               - count = count + 1 
           a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')
             span.glyphicon.glyphicon-chevron-left

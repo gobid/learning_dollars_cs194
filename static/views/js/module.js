@@ -13,7 +13,46 @@ $(document).ready(function() {
 	});
 
 	// Course was helpful method goes here
+	$(document).on("click", ".btn.btn-default#helpful", function() {
+		var moduleID = $(this).attr("moduleID");
+		var courseTitle = $(this).attr("courseTitle");
+		console.log(moduleID);
+		console.log(courseTitle);
+		upvote(moduleID, courseTitle);
+	});
+
+	$(document).on("click", ".btn.btn-default#nothelpful", function() {
+		var moduleID = $(this).attr("moduleID");
+		var courseTitle = $(this).attr("courseTitle");
+		downvote(moduleID, courseTitle);
+	});
+
 });
+
+function upvote(moduleID, courseTitle) {
+	$.get("/upvote/" + moduleID+ "/" + courseTitle, function(data){
+		var response = data["success"];
+		if(response) {
+			//var status = response['statusconfirmation']
+			$(".coursescore").after(data["success"]);
+		} else {
+			$(".coursescore").after(data["error"]);
+		}
+	});
+}
+
+
+function downvote(moduleID, courseTitle) {
+	$.get("/downvote/" + moduleID + "/" + courseTitle, function(data){
+		var response = data["success"];
+		if(response) {
+			//var status = response['statusconfirmation']
+			$(".coursescore").after(data["success"]);
+		} else {
+			$(".coursescore").after(data["error"]);
+		}
+	});
+}
 
 /*
  * Function that is called when the document is ready.

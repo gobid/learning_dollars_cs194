@@ -20,14 +20,23 @@ class Module(ModelUtils, ndb.Model):
     category = ndb.IntegerProperty()  # freelancer category id
 
 
+
 class Account(ModelUtils, ndb.Model):
     guser = ndb.UserProperty()
     modules_completed = ndb.IntegerProperty(repeated=True)  # module ids
     projects_completed = ndb.IntegerProperty(repeated=True)  
     projects_posted = ndb.IntegerProperty(repeated=True)
+    courses_voted = ndb.JsonProperty(repeated=True) #list of courses they've voted on
 
 class Project(ModelUtils, ndb.Model):
     bidders = ndb.IntegerProperty(repeated=True)
     winner = ndb.IntegerProperty()
     price = ndb.FloatProperty()
-    name = ndb.StringProperty()
+    name = ndb.StringProperty()    
+
+class Message(ModelUtils, ndb.Model):
+    fromuser = ndb.UserProperty()
+    touser = ndb.UserProperty()
+    subject = ndb.StringProperty()
+    message = ndb.StringProperty()
+    datetime = ndb.DateTimeProperty()

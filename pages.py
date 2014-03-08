@@ -18,6 +18,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 # Views Classes
 
+
 class MainPage(webapp2.RequestHandler):
 
     def get(self):
@@ -27,6 +28,7 @@ class MainPage(webapp2.RequestHandler):
         template_values['javascript'] = 'index.js'
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
+
 
 class AboutPage(webapp2.RequestHandler):
 
@@ -38,6 +40,7 @@ class AboutPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
 
+
 class TeamPage(webapp2.RequestHandler):
 
     def get(self):
@@ -47,6 +50,7 @@ class TeamPage(webapp2.RequestHandler):
         template_values['javascript'] = 'team.js'
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
+
 
 class ModulesPage(webapp2.RequestHandler):
 
@@ -59,6 +63,7 @@ class ModulesPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
 
+
 class ModulePage(webapp2.RequestHandler):
 
     def get(self, module_id):
@@ -69,7 +74,7 @@ class ModulePage(webapp2.RequestHandler):
         template_values['compiled_template'] = 'module.js'
         template_values['datalink'] = 'moduleinfo/' + module_id
         template_values['javascript'] = 'module.js'
-        template_values['extra_css'] = ['static/views/css/module.css'] 
+        template_values['extra_css'] = ['static/views/css/module.css']
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
 
@@ -84,6 +89,7 @@ class MailboxPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
 
+
 class MyBidsPage(webapp2.RequestHandler):
 
     def get(self):
@@ -93,6 +99,7 @@ class MyBidsPage(webapp2.RequestHandler):
         template_values['javascript'] = 'mybids.js'
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
+
 
 class MyPostsPage(webapp2.RequestHandler):
 
@@ -104,6 +111,7 @@ class MyPostsPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
 
+
 class MilestonesPage(webapp2.RequestHandler):
 
     def get(self):
@@ -113,6 +121,7 @@ class MilestonesPage(webapp2.RequestHandler):
         template_values['javascript'] = 'milestones.js'
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
+
 
 class ProjectPage(webapp2.RequestHandler):
 
@@ -124,4 +133,3 @@ class ProjectPage(webapp2.RequestHandler):
         template_values['datalink'] = 'projectDetails/' + project_id
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
-
