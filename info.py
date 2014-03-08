@@ -138,16 +138,7 @@ class GetPlacedBids(webapp2.RequestHandler):
 class GetProjectDetails(webapp2.RequestHandler):
 
     def get(self, project_id):
-<<<<<<< HEAD
-        jac = get_personal_jac()
-        if jac:
-            response = jac.get_project_details(project_id)
-        else:
-            response = {'error': 'User has no associated account. '
-                        + 'Try logging out and logging in again.'}
-=======
         response = self.get_info(project_id)
->>>>>>> 80c71b30111fcd9f109426431ebd20d635bcd46a
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 

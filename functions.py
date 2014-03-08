@@ -5,11 +5,6 @@ from models import Module, Account
 
 # For Views:
 # Retrieves basic info, completes a session check.
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 80c71b30111fcd9f109426431ebd20d635bcd46a
 def basicinfo(user, self):
     if user:
         url = users.create_logout_url(self.request.uri)
@@ -39,11 +34,6 @@ def basicinfo(user, self):
 
 # For Controllers:
 # Completes session check without redirecting for login on no session.
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 80c71b30111fcd9f109426431ebd20d635bcd46a
 def get_account():
     user = users.get_current_user()
     if user:

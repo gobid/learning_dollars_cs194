@@ -130,11 +130,6 @@ class ProjectPage(webapp2.RequestHandler):
         template_values['title'] = 'Project'
         template_values['compiled_template'] = 'project.js'
         template_values['javascript'] = 'project.js'
-<<<<<<< HEAD
-        template_values['datalink'] = 'projectDetails/' + \
-            self.request.get('id')
-=======
         template_values['datalink'] = 'projectDetails/' + project_id
->>>>>>> 80c71b30111fcd9f109426431ebd20d635bcd46a
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
