@@ -2,9 +2,7 @@ import webapp2
 import json
 
 from config import config
-from freelancer import job_api_calls, oauth
 from models import Module, Account
-from functions import get_personal_jac
 
 # Info Classes (JSON response)
 
@@ -140,12 +138,7 @@ class GetPlacedBids(webapp2.RequestHandler):
 class GetProjectDetails(webapp2.RequestHandler):
 
     def get(self, project_id):
-        jac = get_personal_jac()
-        if jac:
-            response = jac.get_project_details(project_id)
-        else:
-            response = {'error': 'User has no associated account. '
-                        + 'Try logging out and logging in again.'}
+        response = self.get_info(project_id)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
@@ -157,6 +150,19 @@ class GetProjectDetails(webapp2.RequestHandler):
             projectDetails = {'error': 'User has no associated account. '
                               + 'Try logging out and logging in again.'}
         return projectDetails
+
+
+class GetUserDetails(webapp2.RequestHandler):
+
+    def get(self, user_id):
+        jac = get_personal_jac()
+        if jac:
+            response = jac.get_user_info(user_id)
+        else:
+            response = {'error': 'User has no associated account. '
+                        + 'Try logging out and logging in again.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
 
 
 class GetOutgoingMilestoneList(webapp2.RequestHandler):

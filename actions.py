@@ -5,9 +5,7 @@ import HTMLParser
 from config import config
 from ocw import youtube
 from ocw import ocwsearch
-from freelancer import job_api_calls, oauth
 from models import Module, Account
-from functions import get_personal_jac
 
 # Action Classes (JSON response)
 
