@@ -1,11 +1,16 @@
-tr
+tr    
   td
-    input.projects(value=projectid, type="radio")
-    a(href="project?id=#{projectid}")
-      |   #{projectname}
-  td #{additionalstatus}
-  td #{averagebid}
-  td
-    a(href="project?id=#{projectid}")
-      |#{bidcount}
-  td #{enddate}
+    a(href="project/#{projectid}") 
+      b #{projectname}
+    br
+    ul.bulletless
+      li Status: 
+        b #{additionalstatus}
+      if averagebid
+        li Average Bid: 
+          b $#{averagebid}
+      li Bids: 
+        a(href="project/#{projectid}")
+          b #{bidcount}
+      li End Date: 
+        b #{enddate}

@@ -5,9 +5,7 @@ import HTMLParser
 from config import config
 from ocw import youtube
 from ocw import ocwsearch
-from freelancer import job_api_calls, oauth
 from models import Module, Account
-from functions import get_personal_jac
 
 # Action Classes (JSON response)
 
@@ -57,24 +55,29 @@ class UpdateModules(webapp2.RequestHandler):
 
 class CreateModule(webapp2.RequestHandler):
 
-    def get(self, name):
-        match = Module.query(Module.name == name).fetch()
+    def get(self, modulename):
+        print "hit createmodule!!!"
+
+        match = Module.query(Module.name == modulename).fetch()
         if len(match) > 0:
-            print "module already exists"
+             response = {'response' : 'module exists'}
         else:
             y = youtube.Youtube()
             ocws = ocwsearch.OCWSearch()
-            search_name = name + " tutorial"
+            search_name = modulename + " tutorial"
             y_list, y_type = y.search(search_name)
-            course_list = ocws.search(name)
+            course_list = ocws.search(modulename)
             module = Module(
-                name=name,
+                name=modulename,
                 youtube=y_list,
                 yt_type=y_type, courses=course_list
             )
             module.put()
+            response = {'response' : 'successfully stored'}
+            print "success!"
+        print response
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(categories))
+        self.response.write(json.dumps(response))
 
 
 
@@ -207,3 +210,60 @@ class SendMessage(webapp2.RequestHandler):
                         + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+
+#Upvote/downvote course
+
+class Upvote(webapp2.RequestHandler):
+
+    def get(self, moduleID, courseURL):
+        user = users.get_current_user()
+        courseVoteList = user.courses_voted
+        idURLPair = moduleID+"+"+courseURL
+        if idURLPair not in courseVoteList.keys() or courseVoteList[idURLPair] == 'N':
+            case = "votedNo"
+            if idURLPair not in courseVoteList.keys(): case = "notVoted"
+            courseVoteList[idURLPair]='Y'
+            user.coursesVoted = courses_voted
+            user.put()
+            match = Module.query(Module.ID == moduleID).fetch()
+            match = match[0]
+            moduleCourses = match.courses
+            for course in moduleCourses:
+                if course["CourseURL"] == courseURL:
+                    if case == "notVoted": course["scoreRanking"] = course["scoreRanking"] + 1
+                    else: course["scoreRanking"] = course["scoreRanking"] + 2
+            match.courses = moduleCourses
+            match.put()
+            response = {'success': 'Vote submitted successfully.'}
+        else:
+            response = {'error': 'You are not logged in. '}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+class Downvote(webapp2.RequestHandler):
+
+    def get(self, moduleID, courseURL):
+        user = users.get_current_user()
+        courseVoteList = user.courses_voted
+        idURLPair = moduleID+"+"+courseURL
+        if idURLPair not in courseVoteList.keys() or courseVoteList[idURLPair] == 'Y':
+            case = "votedYes"
+            if idURLPair not in courseVoteList.keys(): case = "notVoted"
+            courseVoteList[idURLPair]='N'
+            user.coursesVoted = courses_voted
+            user.put()
+            match = Module.query(Module.ID == moduleID).fetch()
+            match = match[0]
+            moduleCourses = match.courses
+            for course in moduleCourses:
+                if course["CourseURL"] == courseURL:
+                    if case == "notVoted": course["scoreRanking"] = course["scoreRanking"] - 1
+                    else: course["scoreRanking"] = course["scoreRanking"] - 2
+            match.courses = moduleCourses
+            match.put()
+            response = {'success': 'Vote submitted successfully.'}
+        else:
+            response = {'error': 'You are not logged in. '}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+

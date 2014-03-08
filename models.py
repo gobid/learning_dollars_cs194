@@ -23,7 +23,6 @@ class Module(ModelUtils, ndb.Model):
 
 class Account(ModelUtils, ndb.Model):
     guser = ndb.UserProperty()
-    freelancer_at_key = ndb.StringProperty()  # freelancer access token key
-    freelancer_at_secret = ndb.StringProperty()  # access token secret
-    tutorials_completed = ndb.IntegerProperty(repeated=True)  # module ids
-    jobs_completed = ndb.IntegerProperty(repeated=True)  # freelancer job ids
+    modules_completed = ndb.IntegerProperty(repeated=True)  # module ids
+    projects_completed = ndb.IntegerProperty(repeated=True)  # freelancer job ids
+    courses_voted = ndb.JsonProperty(repeated=True) #list of courses they've voted on
