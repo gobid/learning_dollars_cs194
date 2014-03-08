@@ -1,7 +1,7 @@
 .container
   .row
     .col-md-8
-      h1 #{name}
+      h1(align='center') #{name}
       #carousel-ytvids.carousel.slide(
         data-ride='carousel', 
         data-interval='false'
@@ -19,12 +19,12 @@
                 data-target='#carousel-ytvids', 
                 data-slide-to=count
               )  
-            - count = count + 1   
+            - count = count + 1
         .carousel-inner
           - count = 0
           for video in youtube
             if count == 0
-              .item.active
+              .item.active(align='center')
                 if yt_type == "video"
                   iframe(
                     width='560', 
@@ -42,7 +42,7 @@
                     allowfullscreen='allowfullscreen'
                   )
             else
-              .item
+              .item(align='center')
                 if yt_type == "video"
                   iframe(
                     width='560', 
@@ -59,6 +59,7 @@
                     frameborder='0', 
                     allowfullscreen='allowfullscreen'
                   )
+            - count = count + 1
         a.carousel-control.left(href='#carousel-ytvids', data-slide='prev')
           span.glyphicon.glyphicon-chevron-left
         a.carousel-control.right(href='#carousel-ytvids', data-slide='next')
@@ -149,8 +150,12 @@
                       br
                       a(target='_blank', href=course.DownloadPageLink) Course Materials
                       br
-                    button#helpful.btn.btn-default.btn-lg This course was helpful!
-                    button#nothelpful.btn.btn-default.btn-lg This course wasn't relevant...
+                    br
+                    | #{course.scoreRanking} people found this course helpful.
+                    br
+                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up
+                    | &nbsp; &nbsp; &nbsp;
+                    button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down
                 else
                   .item(align='center')
                     .courseinfo
@@ -163,9 +168,13 @@
                       | Description: #{course.Description}
                       br
                       a(target='_blank', href=course.DownloadPageLink) Course Materials
+                      br
                     br
-                    button#helpful.btn.btn-default.btn-lg This course was helpful!
-                    button#nothelpful.btn.btn-default.btn-lg This course wasn't relevant...
+                    | #{course.scoreRanking} people found this course helpful.
+                    br
+                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up
+                    | &nbsp; &nbsp; &nbsp;
+                    button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down
               - count = count + 1 
           a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')
             span.glyphicon.glyphicon-chevron-left

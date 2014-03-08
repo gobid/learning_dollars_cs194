@@ -64,10 +64,11 @@ application = webapp2.WSGIApplication([
         name='milestonespage'
     ),
     webapp2.Route(
-        '/project/<project_id:\d+>',
+        '/project',
         handler=ProjectPage,
         name='projectpage'
     ),
+
 
     # Info
     webapp2.Route(
@@ -139,54 +140,47 @@ application = webapp2.WSGIApplication([
         handler=CreateMilestonePayment,
         name='createmilestonepayment'
     ),
-
     webapp2.Route(
         '/requestreleasemilestone/<transaction_id:\d+>',
         handler=RequestReleaseMilestone,
         name='requestreleasemilestone'
     ),
-
     webapp2.Route(
         '/releasemilestone/<transaction_id:\d+>/<fullname:[^/]+>',
         handler=ReleaseMilestone,
         name='releasemilestone'
     ),
-
     webapp2.Route(
         '/acceptbid/<project_id:\d+>/<state:\d+>',
         handler=AcceptBid,
         name='acceptbid'
     ),
-
     webapp2.Route(
         '/bidonproject/<project_id:\d+>/<amount:[^/]+>/<days:\d+>/' +
         '<description:[^/]+>',
         handler=BidOnProject,
         name='bidonproject'
     ),
-
     webapp2.Route(
         '/retractbid/<project_id:\d+>',
         handler=RetractBid,
         name='retractbid'
     ),
-
     webapp2.Route(
         '/postnewproject/<projectname:[^/]+>/<projectdesc:[^/]+>/' +
         '<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>',
         handler=PostNewProject,
         name='postnewproject'
     ),
-
     webapp2.Route(
         '/sendMessage/<project_id:\d+>/<message_text:[^/]+>/<user_name:\w+>',
         handler=SendMessage,
         name='sendMessage'
     ),
-
     webapp2.Route(
         '/getplacedbids',
         handler=GetPlacedBids,
         name='getPlacedBids'
     ),
+
 ], debug=True)

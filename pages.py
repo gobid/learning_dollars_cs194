@@ -1,6 +1,7 @@
 import os
 import webapp2
 import jinja2
+import urlparse
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -68,6 +69,7 @@ class ModulePage(webapp2.RequestHandler):
         template_values['compiled_template'] = 'module.js'
         template_values['datalink'] = 'moduleinfo/' + module_id
         template_values['javascript'] = 'module.js'
+        template_values['extra_css'] = ['static/views/css/module.css'] 
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
 
@@ -114,24 +116,12 @@ class MilestonesPage(webapp2.RequestHandler):
 
 class ProjectPage(webapp2.RequestHandler):
 
-    def get(self, project_id):
+    def get(self):
         template_values = basicinfo(users.get_current_user(), self)
-        template_values['title'] = projectInfo['name']
+        template_values['title'] = 'project'
         template_values['compiled_template'] = 'project.js'
         template_values['javascript'] = 'project.js'
-        #projectDetails = GetProjectDetails()
-        #project = projectDetails.get_info(project_id)
-        #projectInfo = project['json-result']
-        #bidStats = projectInfo['bid_stats']
-        #print projectInfo
-        #template_values['projectname'] = projectInfo['name']
-        #template_values['description'] = projectInfo['short_descr']
-        #template_values['end_date'] = projectInfo['end_date']
-        #template_values['username'] = projectInfo['buyer']['username']
-        #template_values['num_bids'] = bidStats['count']
-        #template_values['avg_bid'] = bidStats['avg']
-        
-        # MUST LOAD THE ABOVE INFO VIA JQUERY (in static/views/js/project.js) NOW 
-        # USE info.py as is done for i.e. ModulesPage 
-        template = JINJA_ENVIRONMENT.get_template('templates/project_copy.html')
+        template_values['datalink'] = 'projectDetails/' + self.request.get('id')
+        template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))
+

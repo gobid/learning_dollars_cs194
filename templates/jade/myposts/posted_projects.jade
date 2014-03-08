@@ -1,0 +1,11 @@
+tr
+  td
+    input.projects(value=projectid, type="radio")
+    a(href="project?id=#{projectid}")
+      |   #{projectname}
+  td #{additionalstatus}
+  td #{averagebid}
+  td
+    a(href="project?id=#{projectid}")
+      |#{bidcount}
+  td #{enddate}

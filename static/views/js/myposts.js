@@ -3,103 +3,110 @@ $(document).ready(function() {
 	// initialize page
 	$("body").append(Templates.myposts());
 
-	$.get('/postsinfo', function(data){
-		console.log(data)
-		numPosts = data['json-result']['count']
+	$.get("/postsinfo", function(data){
+		var numPosts = data["json-result"].count;
+		var m_names = new Array("January", "February", "March",
+			"April", "May", "June", "July", "August", "September",
+			"October", "November", "December");
 		if(numPosts > 0) {
-			posts = data['json-result']['items']
+			var posts = data["json-result"].items;
 			for (var p in posts){
-				project = posts[p]
-				console.log(project.projectname)
-				$('#posted_projects').append('<tr><td>'+ 
-					'<input value = "' + project.projectid + '" type="radio" '
-					+ ' class = "projects"> ' + project.projectname +
-					'</td><td>'+ project.additionalstatus + '</td><td>'+ 
-					project.averagebid+'</td><td>' + project.bidcount+ 
-					'</td><td>'+project.enddate+'</td><td>'+project.projectid + 
-					'</td><td>'+ project.projecturl+'</td></tr>')
+				var project = posts[p];
+				var date_obj = new Date(project.enddate);
+				var date_str = m_names[date_obj.getMonth()]+" "+
+				date_obj.getDay()+", "+date_obj.getFullYear()+" at "+
+				date_obj.getHours() + ":" + date_obj.getMinutes() + " GMT";
+				project.enddate = date_str;
+				$("#posted_projects").append(Templates.posted_projects
+											(project));
 			}
 		}
-	})
+	});
 
 	// project selecting functionality
-	$(document).on('click', '.projects', function(){
-		$('.projects').prop('checked', false)
-		$(this).prop('checked', true)
-		projectid = $(this).val() 
-		load_bids_on_post(projectid)
-	})
+	$(document).on("click", ".projects", function(){
+		$(".projects").prop("checked", false);
+		$(this).prop("checked", true);
+		var projectid = $(this).val();
+		load_bids_on_post(projectid);
+	});
 
-	$(document).on('click', '.btn.btn-default.bid', function(){
-		bid_button = $(this)
-		project_id = bid_button.attr('project_id')
-		user_id = bid_button.attr('user_id')
-		console.log(project_id, user_id)
-		$.get('/selectwinner/' + project_id + '/' + user_id, function(resp){
-			bid_button.css('display', 'none')
-			console.log(resp)
-		})
-	})
+	$(document).on("click", ".btn.btn-default.bid", function(){
+		var bid_button = $(this);
+		var project_id = bid_button.attr("project_id");
+		var user_id = bid_button.attr("user_id");
+		$.get("/selectwinner/" + project_id + "/" + user_id, function(resp){
+			bid_button.css("display", "none");
+		});
+	});
 
-	$("#post_project").click(post_project)
+	$("#post_project").click(post_project);
 
-})
+});
 
 
 function post_project(e) {
-	$('#log_message').remove()
-	name = $("#name").val()
-	description = $("#description").val()
-	type = $("#type").val()
-	budget_option = $("#budget_option option:selected").attr("value")
-	duration = $("#duration").val()
-	$.get('/postnewproject/' + name + '/' + description + '/' + type + '/' + 
-		budget_option + '/' + duration, function(data){
-			response = data['json-result']
+	$("#log_message").remove();
+	var name = $("#name").val();
+	var description = $("#description").val();
+	var type = $("#type").val();
+	var budget_option = $("#budget_option option:selected").attr("value");
+	var duration = $("#duration").val();
+	$.get("/postnewproject/" + name + "/" + description + "/" + type + "/" +
+		budget_option + "/" + duration, function(data){
+			var response = data["json-result"];
 			if(response) {
-				url = response['projecturl']
-				$("#post_project").after("<h2 id='log_message'>Project " + 
-					"sucessfully posted, see url to view on freelancer: " +
-					 url + "</h2>")
+				$("#post_project").after(Templates.post_success(response));
+				// $("#post_project").after("<h2 id='log_message'>Project " +
+				// 	"sucessfully posted, see url to view on freelancer: " +
+				// 	 url + "</h2>");
 			} else {
-				response = data['errors'];
-				if (!response) response = data['error'];
-				else response = response['error']['longmsg'];
-				if (!($('.alert.alert-warning')[0])) {
-					var alertDiv = document.createElement('div');
-					alertDiv.className ='alert alert-warning';
-					var spaceMe = document.createElement('hr');
-					document.getElementsByClassName('post_project')[0].appendChild(spaceMe);
-					document.getElementsByClassName('post_project')[0].appendChild(alertDiv);
+				response = data.errors;
+				if (!response) response = data.error;
+				else response = response.error.longmsg;
+				if (!($(".alert.alert-warning")[0])) {
+					var alertDiv = document.createElement("div");
+					alertDiv.className ="alert alert-warning";
+					var spaceMe = document.createElement("hr");
+					document.getElementsByClassName("post_project")[0]
+					.appendChild(spaceMe);
+					document.getElementsByClassName("post_project")[0].
+					appendChild(alertDiv);
 				}
-				$('.alert.alert-warning').html(response);
+				$(".alert.alert-warning").html(response);
 			}
 		}
-	)
+	);
 }
 
 function load_bids_on_post(project_id){
-	$('#bids-on-post').empty()
-	$.get('/getprojectbids/' + project_id, function(data){
-		console.log(data)
-		jr = data['json-result']
-		count = jr['count']
-		console.log("here")
-		if (count != 0){
-			console.log('here')
-			bids = jr['items']
+	$("#bids-on-post").empty();
+	$.get("/getprojectbids/" + project_id, function(data){
+		var jr = data['json-result'];
+		var count = jr.count;
+		if (count !== 0){
+			var bids = jr.items;
 			for (var b in bids){
-				$('#bids-on-post').append('<li>' + bids[b].descr + ' ' 
-					+ '($' + bids[b].bid_amount + ') ' + 
-					'<button class="btn btn-default bid"' + 
-					' project_id = "' + project_id  + '" user_id = "' 
-					+ bids[b].provider_userid + '" >Pick</button>' + '</li>'
-				)
-			}	
+				var object = {
+					"bid": bids[b], 
+					"projectid": project_id
+				};
+				console.log(object);
+				$("#bids-on-post").append(Templates.bids_on_posts(object));
+				// $("#bids-on-post").append("<li>" + bids[b].descr+" "+
+				// 	"($" + bids[b].bid_amount + ") " +
+				// 	"<button class='btn btn-default bid'" +
+				// 	" project_id = '" + project_id  + "' user_id = '"+
+				// 	bids[b].provider_userid + "'' >Pick</button>" + "</li>"
+			}
+		} else {
+			$("#bids-on-post").append("<li>No Bids</li>");
 		}
-		else {
-			console.log("not here")
-			$('#bids-on-post').append('<li>No Bids</li>')
-		}
-	})	
+	});
 }
+
+
+// li #{descr} ($#{bid_amount})
+//   button(class="btn btn-default bid", 
+//project_id=project_id, user_id=proider_userid).
+// Pick

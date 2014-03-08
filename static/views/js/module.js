@@ -11,6 +11,8 @@ $(document).ready(function() {
 		
 		/* END jQuery Methods */
 	});
+
+	// Course was helpful method goes here
 });
 
 /*

@@ -1,0 +1,17 @@
+.container
+  .panel.panel-default
+    .panel-heading
+      h3 Project: #{name}
+    .row
+      .col-md-6
+        p Description: #{short_descr}
+        p Project Creator: #{buyer.username}
+        p Number of bids: #{bid_stats.count}
+        p Average bid: #{bid_stats.avg}
+        p End date: #{end_date}
+        p Budget: $#{budget.min} - $#{budget.max}
+        p Created: #{start_date}
+        p Job Types:
+        ul
+        each job in jobs
+          li #{job}
