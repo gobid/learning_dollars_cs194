@@ -54,6 +54,30 @@ class UpdateModules(webapp2.RequestHandler):
         self.response.write(json.dumps(categories))
 
 
+
+class CreateModule(webapp2.RequestHandler):
+
+    def get(self, name):
+        match = Module.query(Module.name == name).fetch()
+        if len(match) > 0:
+            print "module already exists"
+        else:
+            y = youtube.Youtube()
+            ocws = ocwsearch.OCWSearch()
+            search_name = name + " tutorial"
+            y_list, y_type = y.search(search_name)
+            course_list = ocws.search(name)
+            module = Module(
+                name=name,
+                youtube=y_list,
+                yt_type=y_type, courses=course_list
+            )
+            module.put()
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(categories))
+
+
+
 class SelectWinner(webapp2.RequestHandler):
 
     def get(self, project_id, winner_id):

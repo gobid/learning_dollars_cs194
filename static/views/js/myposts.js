@@ -14,7 +14,7 @@ $(document).ready(function() {
 				var project = posts[p];
 				var date_obj = new Date(project.enddate);
 				var date_str = m_names[date_obj.getMonth()]+" "+
-				date_obj.getDay()+", "+date_obj.getFullYear()+" at "+
+				date_obj.getDate()+", "+date_obj.getFullYear()+" at "+
 				date_obj.getHours() + ":" + date_obj.getMinutes() + " GMT";
 				project.enddate = date_str;
 				$("#posted_projects").append(Templates.posted_projects

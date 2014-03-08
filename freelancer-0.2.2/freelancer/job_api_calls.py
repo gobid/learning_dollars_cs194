@@ -1,4 +1,4 @@
-from oauth import get_authorize_url, get_access_token
+Refrom oauth import get_authorize_url, get_access_token
 from api import Freelancer
 from client import FreelancerClient
 from response import FreelancerResponse
@@ -96,7 +96,6 @@ class JobApiCalls(object):
 
     def post_new_project(self, projectname, projectdesc, jobtypecsv,
                          budgetoption, duration):
-        print 'hitttttt!!!'
         response = self.freelancer.Employer.postNewProject({
             'projectname': projectname,
             'projectdesc': projectdesc,

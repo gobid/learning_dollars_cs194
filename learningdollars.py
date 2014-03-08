@@ -14,7 +14,7 @@ from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
 
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
     BidOnProject, PostNewProject, RetractBid, RequestReleaseMilestone, \
-    ReleaseMilestone
+    ReleaseMilestone, CreateModule
 
 application = webapp2.WSGIApplication([
     # Views
@@ -123,6 +123,11 @@ application = webapp2.WSGIApplication([
     ),
 
     # Actions
+    webapp2.Route(
+        '/createmodule',
+        handler=CreateModule,
+        name='createmodule'
+    ),
     webapp2.Route(
         '/updatemodules',
         handler=UpdateModules,
