@@ -15,10 +15,8 @@ def basicinfo(user, self):
         if len(accounts) == 0:  # if no Account object exists for user
             new_account = Account(
                 guser=user,
-                freelancer_at_key=fr_at[0],
-                freelancer_at_secret=fr_at[1],
-                tutorials_completed=[],
-                jobs_completed=[]
+                modules_completed=[],
+                projects_completed=[]
             )
             new_account.put()
     else:
