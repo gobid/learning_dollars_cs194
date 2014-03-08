@@ -22,8 +22,9 @@
     <script src = "/static/views/compilers/modules.js"></script>
     <script src = "/static/views/compiled-templates/{{ compiled_template }}"></script>
     <script src = "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src = "/static/views/js/{{ javascript }}"></script>
-    <script src='/static/bootstrap/docs/dist/js/bootstrap.min.js'></script>
+    <script src = 'http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js'></script>
+    <script src = "static/views/js/{{ javascript }}"></script>
+    <script src='static/bootstrap/docs/dist/js/bootstrap.min.js'></script>
     {% if extra_js %}
       {% for file in extra_js %}
         <script src = '{{ file }}'></script>
