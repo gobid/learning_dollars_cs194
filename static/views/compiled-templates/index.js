@@ -44,7 +44,7 @@ jade_debug.unshift({ lineno: 8, filename: "jade/index/index.jade" });
 buf.push("<p>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 9, filename: "jade/index/index.jade" });
-buf.push("<a role=\"button\" href=\"/modules\" class=\"btn btn-primary btn-lg\">");
+buf.push("<a role=\"button\" href=\"/modules\" class=\"btn btn-primary btn-lg indexBtn\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 9, filename: jade_debug[0].filename });
 buf.push("Explore Modules");
@@ -74,7 +74,7 @@ jade_debug.unshift({ lineno: 12, filename: "jade/index/index.jade" });
 buf.push("<p>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 13, filename: "jade/index/index.jade" });
-buf.push("<a role=\"button\" href=\"/myposts\" class=\"btn btn-primary btn-lg\">");
+buf.push("<a role=\"button\" href=\"/myposts\" class=\"btn btn-primary btn-lg indexBtn\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 13, filename: jade_debug[0].filename });
 buf.push("My Posts");
@@ -99,7 +99,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .jumbotron\n    h1 Welcome to Learning Dollars!\n    br\n    .row\n      .col-md-6\n        p If you are looking to learn and get employed, you can start exploring the different modules here:\n        p\n          a.btn.btn-primary.btn-lg(role='button', href='/modules') Explore Modules\n      .col-md-6\n        p If you are an employer looking to post a project on Freelancer, you can post it here:\n        p\n          a.btn.btn-primary.btn-lg(role='button', href='/myposts') My Posts");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .jumbotron\n    h1 Welcome to Learning Dollars!\n    br\n    .row\n      .col-md-6\n        p If you are looking to learn and get employed, you can start exploring the different modules here:\n        p\n          a.btn.btn-primary.btn-lg.indexBtn(role='button', href='/modules') Explore Modules\n      .col-md-6\n        p If you are an employer looking to post a project on Freelancer, you can post it here:\n        p\n          a.btn.btn-primary.btn-lg.indexBtn(role='button', href='/myposts') My Posts");
 }
 }
 };

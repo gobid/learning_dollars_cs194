@@ -28,8 +28,7 @@ class ModuleInfo(webapp2.RequestHandler):
     def get_info(self, module_id):
         module_id = int(module_id)
         module = Module.get_by_id(module_id)
-        jac = job_api_calls.JobApiCalls()
-        jobs = jac.get_jobs(module.name)['json-result']['items']
+        jobs = []
         info = {
             'name': module.name,
             'youtube': module.youtube,
@@ -50,6 +49,10 @@ class ModulesInfo(webapp2.RequestHandler):
 
     def get(self):
         modules = [m.to_dict() for m in Module.query().fetch()]
+        modules = sorted(
+            modules, 
+            key = lambda module: module['name'].lower()
+        )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(modules))
 

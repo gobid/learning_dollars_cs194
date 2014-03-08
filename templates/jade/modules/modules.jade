@@ -13,9 +13,17 @@
     type='button'
   ) Add module
   hr
-  table
-    each row in modules
-      .row
-        each module in row
-          .col-md-3
-            a(href=module.key) #{module.name}
+  .input-group.searchbox
+    input#moduleName.form-control.typeahead(type='text', placeholder='Module Name')
+    span.input-group-btn
+      button#searchBtn.btn.btn-default(type='button') Search
+  br
+  each row in modules
+    .row
+      each module in row
+        .col-md-3
+          a(href=module.key) #{module.name}
+script(
+  src = 'http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js', 
+  type='text/javascript'
+)

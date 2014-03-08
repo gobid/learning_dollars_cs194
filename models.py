@@ -26,3 +26,10 @@ class Account(ModelUtils, ndb.Model):
     modules_completed = ndb.IntegerProperty(repeated=True)  # module ids
     projects_completed = ndb.IntegerProperty(repeated=True)  # freelancer job ids
     courses_voted = ndb.JsonProperty(repeated=True) #list of courses they've voted on
+
+class Message(ModelUtils, ndb.Model):
+    fromuser = ndb.UserProperty()
+    touser = ndb.UserProperty()
+    subject = ndb.StringProperty()
+    message = ndb.StringProperty()
+    datetime = ndb.DateTimeProperty()
