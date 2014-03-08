@@ -26,3 +26,10 @@ class Account(ModelUtils, ndb.Model):
     freelancer_at_secret = ndb.StringProperty()  # access token secret
     tutorials_completed = ndb.IntegerProperty(repeated=True)  # module ids
     jobs_completed = ndb.IntegerProperty(repeated=True)  # freelancer job ids
+
+class Message(ModelUtils, ndb.Model):
+    fromuser = ndb.UserProperty()
+    touser = ndb.UserProperty()
+    subject = ndb.StringProperty()
+    message = ndb.StringProperty()
+    datetime = ndb.DateTimeProperty()
