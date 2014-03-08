@@ -13,7 +13,44 @@ $(document).ready(function() {
 	});
 
 	// Course was helpful method goes here
+	$(document).on("click", ".btn.btn-default#helpful", function() {
+		var moduleID = $(this).prop('moduleID');
+		var courseURL = $(this).prop('courseURL');
+		upvote(moduleID, courseURL);
+	});
+
+	$(document).on("click", ".btn.btn-default#nothelpful", function() {
+		var moduleID = $(this).prop('moduleID');
+		var courseURL = $(this).prop('courseURL');
+		downvote(moduleID, courseURL);
+	});
+
 });
+
+function upvote(moduleName, courseTitle) {
+	$.get("/upvote/" + moduleName + "/" + courseTitle, function(data){
+		var response = data["json-result"];
+		if(response) {
+			//var status = response['statusconfirmation']
+			$(".coursescore").after("eat my dick");
+		} else {
+			$(".coursescore").after("lol");
+		}
+	});
+}
+
+
+function downvote(moduleName, courseTitle) {
+	$.get("/downvote/" + moduleName + "/" + courseTitle, function(data){
+		var response = data["json-result"];
+		if(response) {
+			//var status = response['statusconfirmation']
+			$(".coursescore").after("eat my dick");
+		} else {
+			$(".coursescore").after("lol");
+		}
+	});
+}
 
 /*
  * Function that is called when the document is ready.

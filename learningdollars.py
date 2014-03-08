@@ -10,7 +10,8 @@ from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
 
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
     PostsInfo, InboxMessages, SentMessages, GetPlacedBids, \
-    GetProjectDetails, GetIncomingMilestoneList, GetOutgoingMilestoneList
+    GetProjectDetails, GetIncomingMilestoneList, GetOutgoingMilestoneList, \
+    GetUserDetails
 
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
     BidOnProject, PostNewProject, RetractBid, RequestReleaseMilestone, \
@@ -64,7 +65,7 @@ application = webapp2.WSGIApplication([
         name='milestonespage'
     ),
     webapp2.Route(
-        '/project',
+        '/project/<project_id:\d+>',
         handler=ProjectPage,
         name='projectpage'
     ),
@@ -120,6 +121,11 @@ application = webapp2.WSGIApplication([
         '/projectDetails/<project_id:\d+>',
         handler=GetProjectDetails,
         name='getProjectDetails'
+    ),
+    webapp2.Route(
+        '/userDetails/<user_id:\d+>',
+        handler=GetUserDetails,
+        name='getUserDetails'
     ),
 
     # Actions

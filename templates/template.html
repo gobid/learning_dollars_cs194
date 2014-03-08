@@ -7,19 +7,20 @@
     <meta name='description' content=''>
     <meta name='author' content=''>
     <!--favicon-->
-    <link rel='shortcut icon' href='static/bootstrap/docs/assets/ico/favicon.ico'>
+    <link rel='shortcut icon' href='/static/bootstrap/docs/assets/ico/favicon.ico'>
     <!--css-->
-    <link href='static/bootstrap/docs/dist/css/bootstrap.min.css' rel='stylesheet'>
-    <link href='static/views/css/navbar.css' rel='stylesheet'>
+    <link href='/static/bootstrap/docs/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='/static/views/css/navbar.css' rel='stylesheet'>
+    <link href='/static/views/css/general.css' rel='stylesheet'>
     {% if extra_css %}
       {% for file in extra_css %}
         <link href = '{{ file }}' rel = 'stylesheet'>
       {% endfor %}
     {% endif %}
     <!--runtime scripts -->
-    <script src = "static/views/compilers/runtime.js"></script>
-    <script src = "static/views/compilers/modules.js"></script>
-    <script src = "static/views/compiled-templates/{{ compiled_template }}"></script>
+    <script src = "/static/views/compilers/runtime.js"></script>
+    <script src = "/static/views/compilers/modules.js"></script>
+    <script src = "/static/views/compiled-templates/{{ compiled_template }}"></script>
     <script src = "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src = 'http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js'></script>
     <script src = "static/views/js/{{ javascript }}"></script>
@@ -40,7 +41,7 @@
     <![endif]-->
   </head>
   <body>
-    <input type = "hidden" id = "datalink" name = "datalink" value = "{{ datalink }}"/>
+    <input type = "hidden" id = "datalink" name = "datalink" value = "/{{ datalink }}"/>
     <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
