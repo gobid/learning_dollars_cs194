@@ -5,7 +5,8 @@ import HTMLParser
 from config import config
 from ocw import youtube
 from ocw import ocwsearch
-from models import Module, Account
+from models import Module, Account, Project
+from functions import get_account
 
 # Action Classes (JSON response)
 
@@ -123,6 +124,7 @@ class BidOnProject(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
+
 # This is retracting a bid from a project
 
 
@@ -181,3 +183,57 @@ class SendMessage(webapp2.RequestHandler):
                         + 'Try logging out and logging in again.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+
+
+# Projects
+class CreateProject(webapp2.RequestHandler):
+
+    def get(self, name, price):
+        project = Project(
+            name=name,
+            price=float(price)
+        )
+        project.put() # do error checking on puts later
+        account = get_account()
+        if account == None:
+            response = 'No logged in account.'
+        else:
+            response = 'Logged in account found. Project Posted'
+        account.projects_posted.append(project)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+class AddBidderToProject(webapp2.RequestHandler):
+
+    def get(self, project_id):
+        project = Project.get_by_id(int(project_id))
+        if project:
+            account = int(get_account().key.id()) # must do redirect for session checks
+            if account not in project.bidders:
+                project.bidders.append(account)
+                project.put()
+                response = {'success': 'Bidder added.'}
+            else:
+                response = {'error': 'Bidder already added.'}
+        else:
+            response = {'error': 'No project of given id.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+class ChooseWinner(webapp2.RequestHandler):
+
+    def get(self, project_id, bidder_id):
+        project = Project.get_by_id(int(project_id))
+        if project:
+            bidder_id = int(bidder_id)
+            if bidder_id in project.bidders:
+                project.winner = bidder_id
+                project.put()
+                response = {'success': 'Winner chosen.'}
+            else:
+                response = {'error': 'Winner not in bidders list.'}
+        else:
+            response = {'error': 'No project of given id.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+

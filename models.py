@@ -23,4 +23,11 @@ class Module(ModelUtils, ndb.Model):
 class Account(ModelUtils, ndb.Model):
     guser = ndb.UserProperty()
     modules_completed = ndb.IntegerProperty(repeated=True)  # module ids
-    projects_completed = ndb.IntegerProperty(repeated=True)  # freelancer job ids
+    projects_completed = ndb.IntegerProperty(repeated=True)  
+    projects_posted = ndb.IntegerProperty(repeated=True)
+
+class Project(ModelUtils, ndb.Model):
+    bidders = ndb.IntegerProperty(repeated=True)
+    winner = ndb.IntegerProperty()
+    price = ndb.FloatProperty()
+    name = ndb.StringProperty()

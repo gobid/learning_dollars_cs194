@@ -15,7 +15,7 @@ from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
 
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
     BidOnProject, PostNewProject, RetractBid, RequestReleaseMilestone, \
-    ReleaseMilestone
+    ReleaseMilestone, CreateProject, AddBidderToProject, ChooseWinner
 
 application = webapp2.WSGIApplication([
     # Views
@@ -187,6 +187,21 @@ application = webapp2.WSGIApplication([
         '/getplacedbids',
         handler=GetPlacedBids,
         name='getPlacedBids'
+    ),
+    webapp2.Route(
+        '/createproject/<name:[^/]+>/<price:[^/]+>',
+        handler=CreateProject,
+        name='createProject'
+    ),
+    webapp2.Route(
+        '/addbiddertoproject/<project_id:\d+>',
+        handler=AddBidderToProject,
+        name='addBidderToProject'
+    ),
+    webapp2.Route(
+        '/choosewinner/<project_id:\d+>/<bidder_id:\d+>',
+        handler=ChooseWinner,
+        name='chooseWinner'
     ),
 
 ], debug=True)
