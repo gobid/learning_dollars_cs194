@@ -151,9 +151,12 @@
                       a(target='_blank', href=course.DownloadPageLink) Course Materials
                       br
                     br
-                    | #{course.scoreRanking} people found this course helpful.
+                    .coursescore
+                      | #{course.scoreRanking} people found this course helpful.
                     br
-                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up
+                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
+                      propertyname=course.Title
+                    )
                     | &nbsp; &nbsp; &nbsp;
                     button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down
                 else
@@ -170,7 +173,8 @@
                       a(target='_blank', href=course.DownloadPageLink) Course Materials
                       br
                     br
-                    | #{course.scoreRanking} people found this course helpful.
+                    .coursescore
+                      | #{course.scoreRanking} people found this course helpful.
                     br
                     button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up
                     | &nbsp; &nbsp; &nbsp;

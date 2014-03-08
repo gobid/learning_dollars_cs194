@@ -47,12 +47,14 @@ def _tarball_filename_for(directory):
 
 def _create_tarball(directory):
     print("Creating tarball of {}...".format(directory))
-    run(['tar', '-czf', _tarball_filename_for(directory), '-C', dirname(directory), basename(directory)])
+    run(['tar', '-czf', _tarball_filename_for(directory),
+        '-C', dirname(directory), basename(directory)])
 
 
 def _extract_tarball(directory):
     print("Extracting tarball of {}...".format(directory))
-    run(['tar', '-xzf', _tarball_filename_for(directory), '-C', dirname(directory)])
+    run(['tar', '-xzf', _tarball_filename_for(directory),
+        '-C', dirname(directory)])
 
 
 def download(directory):
@@ -71,7 +73,8 @@ def download(directory):
 
 def upload(directory):
     _create_tarball(directory)
-    print("Uploading {} tarball to S3... ({})".format(friendly_name, _tarball_size(directory)))
+    print("Uploading {} tarball to S3... ({})".format(
+        friendly_name, _tarball_size(directory)))
     key.set_contents_from_filename(_tarball_filename_for(directory))
     print("{} cache successfully updated.".format(friendly_name))
     _delete_file_quietly(NEED_TO_UPLOAD_MARKER)
@@ -83,7 +86,8 @@ if __name__ == '__main__':
     #   AWS_SECRET_ACCESS_KEY -- AWS Secret Access Key
     argv.pop(0)
     if len(argv) != 4:
-        raise SystemExit("USAGE: s3_cache.py <download | upload> <friendly name> <dependencies file> <directory>")
+        raise SystemExit(
+            "USAGE: s3_cache.py <download | upload> <friendly name> <dependencies file> <directory>")
     mode, friendly_name, dependencies_file, directory = argv
 
     conn = S3Connection()
