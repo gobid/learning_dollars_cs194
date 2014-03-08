@@ -1,6 +1,17 @@
 $(document).ready(function() {
-    initializePage();
-})
+    // initialize page
+	var datalink = $("#datalink").val();
+	$.get(datalink, function(data){
+		console.log(data);
+		$("body").append(Templates.module(data));
+		
+		/* START jQuery Methods */
+
+		initializePage();
+		
+		/* END jQuery Methods */
+	});
+});
 
 /*
  * Function that is called when the document is ready.
@@ -8,6 +19,20 @@ $(document).ready(function() {
 function initializePage() {
     $(".bid_submit").click(make_bid_request);
     $(".bid_retract").click(retract_bid);
+    $("[id=job_container_toggle]").click(function() {
+    	var jobid = $(this).attr("jobid");
+    	if($("#job_container"+jobid).attr("style") == "")
+    	{
+    		console.log("hit1");
+    		$("#job_container"+jobid).attr("style", "display: none");
+    	} else {
+    		$("#job_container"+jobid).attr("style", "");
+    	}
+    });
+}
+
+function toggle_form(e) {
+	this.set
 }
 
 function make_bid_request(e) {

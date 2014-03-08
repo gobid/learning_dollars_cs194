@@ -5,15 +5,20 @@ from oauth2 import Token
 from api import Freelancer
 from exceptions import Exception
 
+
 class FreelancerOauthError(Exception):
+
     """Exception raised during Oauth errors during exchanges with freelancer.com"""
+
     def __init__(self, msg=''):
-         self.msg = msg
+        self.msg = msg
 
     def __str__(self):
         return ('Oauth request failed: %s' % (self.msg))
-        
+
+
 class FreelancerOauth(FreelancerClient):
+
     """
     FreelancerOauth is a utility class to simplify Oauth exchanges with freelancer.com
 
@@ -55,6 +60,7 @@ class FreelancerOauth(FreelancerClient):
         # the 'domain' keyword argument is also accepted here.
         access_token = oauth->upgrade_to_access_token(verifier, request_token)
     """
+
     def __init__(self, consumer, token=None):
         """
         Creates a new utility class to make Oauth exchanges with freelancer.com
@@ -76,10 +82,12 @@ class FreelancerOauth(FreelancerClient):
         method_chain -- api call translated to list or tuple to access request token
         oauth_callback -- callback url to pass to freelancer.com
         """
-        method_chain, kwargs = self.__pop_from_dict('method_chain', kwargs, ('RequestRequestToken','requestRequestToken'))
+        method_chain, kwargs = self.__pop_from_dict(
+            'method_chain', kwargs, ('RequestRequestToken', 'requestRequestToken'))
 
-        api_call_qs, kwargs = self.__pop_from_dict('oauth_callback', kwargs, 'oob')
-        kwargs['api_call_qs'] = {'oauth_callback': api_call_qs }
+        api_call_qs, kwargs = self.__pop_from_dict(
+            'oauth_callback', kwargs, 'oob')
+        kwargs['api_call_qs'] = {'oauth_callback': api_call_qs}
 
         resp = self.__api_call_from_chain(method_chain, **kwargs)
         self.request_token = self.__oauth_tuple_from_qs(resp)
@@ -94,7 +102,8 @@ class FreelancerOauth(FreelancerClient):
         request_token -- string of a oauth token or a tuple or list of oauth token and secret
         app_url -- base url to use for authorization
         """
-        self.request_token = self.__is_valid_token(request_token if request_token else self.request_token)
+        self.request_token = self.__is_valid_token(
+            request_token if request_token else self.request_token)
         return "%s?oauth_token=%s" % (app_url, self.request_token[0])
 
     def get_token_verifier(self, verifier, request_token=False, **kwargs):
@@ -108,16 +117,18 @@ class FreelancerOauth(FreelancerClient):
         Keyword Arguments:
         method_chain -- api call translated to list or tuple to access request token
         """
-        method_chain, kwargs = self.__pop_from_dict('method_chain', kwargs, ('RequestAccessToken','getRequestTokenVerifier'))
+        method_chain, kwargs = self.__pop_from_dict(
+            'method_chain', kwargs, ('RequestAccessToken', 'getRequestTokenVerifier'))
 
-        self.request_token = self.__is_valid_token(request_token if request_token else self.request_token)
+        self.request_token = self.__is_valid_token(
+            request_token if request_token else self.request_token)
         token = Token(self.request_token[0], self.request_token[1])
 
         if verifier and isinstance(verifier, str):
             token.set_verifier(verifier)
         else:
             raise ValueError('Incorrect verifier type, expecting string')
-        
+
         FreelancerClient.__init__(self, self.consumer, token)
         resp = self.__api_call_from_chain(method_chain, **kwargs)
         access_verifier = self.__oauth_verifier_from_qs(resp)
@@ -136,9 +147,11 @@ class FreelancerOauth(FreelancerClient):
         Keyword Arguments:
         method_chain -- api call translated to list or tuple to access request token
         """
-        method_chain, kwargs = self.__pop_from_dict('method_chain', kwargs, ('RequestAccessToken', 'requestAccessToken'))
-        
-        self.request_token = self.__is_valid_token(request_token if request_token else self.request_token)
+        method_chain, kwargs = self.__pop_from_dict(
+            'method_chain', kwargs, ('RequestAccessToken', 'requestAccessToken'))
+
+        self.request_token = self.__is_valid_token(
+            request_token if request_token else self.request_token)
         token = Token(self.request_token[0], self.request_token[1])
         token.set_verifier(verifier)
         FreelancerClient.__init__(self, self.consumer, token)
@@ -160,14 +173,16 @@ class FreelancerOauth(FreelancerClient):
         method_chain -- api call translated to list or tuple to access request token
         """
         method_chain = kwargs.get('method_chain',
-            (('RequestAccessToken','getRequestTokenVerifier'),
-            ('RequestAccessToken', 'requestAccessToken')))
+                                  (('RequestAccessToken', 'getRequestTokenVerifier'),
+                                   ('RequestAccessToken', 'requestAccessToken')))
         kwargs['method_chain'] = method_chain[0]
 
-        access_verifier = self.get_token_verifier(verifier, request_token, **kwargs)
-        
+        access_verifier = self.get_token_verifier(
+            verifier, request_token, **kwargs)
+
         kwargs['method_chain'] = method_chain[1]
-        access_token = self.get_access_token(access_verifier, request_token, **kwargs)
+        access_token = self.get_access_token(
+            access_verifier, request_token, **kwargs)
 
         token = Token(access_token[0], access_token[1])
         FreelancerClient.__init__(self, self.consumer, token)
@@ -220,19 +235,23 @@ class FreelancerOauth(FreelancerClient):
 
     def __is_valid_token(self, token):
         if not token or token == None:
-            raise ValueError('Invalid token, expecting a single token a tuple or list of 2')
+            raise ValueError(
+                'Invalid token, expecting a single token a tuple or list of 2')
 
         if not (isinstance(token, tuple) or isinstance(token, list)):
             token = (token, '')
 
         if len(token) > 2 or len(token) < 1:
-            raise ValueError('Invalid token, expecting a single token a tuple or list of 2')
+            raise ValueError(
+                'Invalid token, expecting a single token a tuple or list of 2')
         elif len(token) == 1:
             token = (token[0], '')
 
         return token
 
-def get_authorize_url(consumer, callback='oob', app_url='api.sandbox.freelancer.com', **kwargs): #http://www.freelancer.com/users/api-token/auth.php', **kwargs):
+
+# http://www.freelancer.com/users/api-token/auth.php', **kwargs):
+def get_authorize_url(consumer, callback='oob', app_url='api.sandbox.freelancer.com', **kwargs):
     """
     Returns authorization url for an application
 
@@ -250,6 +269,7 @@ def get_authorize_url(consumer, callback='oob', app_url='api.sandbox.freelancer.
     request_token = flo.get_request_token(**kwargs)
 
     return flo.get_authorize_url(request_token, app_url)
+
 
 def get_access_token(consumer, request_token, verifier, **kwargs):
     """

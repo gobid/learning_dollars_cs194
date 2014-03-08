@@ -2,9 +2,12 @@ from exceptions import Exception
 from urllib import urlencode
 from response import *
 
+
 class FreelancerError(Exception):
+
     """Exception raised during initialization errors of FreelancerMethod"""
     pass
+
 
 class FreelancerMethod(object):
 
@@ -21,7 +24,8 @@ class FreelancerMethod(object):
         self.response = kwargs.get('response', FreelancerJsonResponse)
 
         if not hasattr(self.response, 'formats'):
-            raise FreelancerError('Response handlers need to specify a formats attribute')
+            raise FreelancerError(
+                'Response handlers need to specify a formats attribute')
 
     def __getattr__(self, name):
         try:
@@ -40,13 +44,14 @@ class FreelancerMethod(object):
 
         if not len(kwargs) and len(args) == 1 and isinstance(args[0], dict):
             kwargs = args[0]
-            
+
         method = kwargs.get('method', 'GET')
         if kwargs.get('method', False):
             del kwargs['method']
-            
+
         qs = urlencode(kwargs)
-        url = "%s://%s/%s.%s?%s" % (self.protocol, self.domain, self.uri, self.format, qs)
+        url = "%s://%s/%s.%s?%s" % (self.protocol,
+                                    self.domain, self.uri, self.format, qs)
 
         resp, content = self.client.request(url, method)
 
@@ -55,7 +60,9 @@ class FreelancerMethod(object):
         else:
             return self.response(content, resp=resp, uri=self.uri, format=self.format, query=kwargs)
 
+
 class Freelancer(FreelancerMethod):
+
     """
     python-freelancer is a flexible and simple Python wrapper for the
     Freelancer.com API targeted at the minimalist within us all.
@@ -93,6 +100,7 @@ class Freelancer(FreelancerMethod):
         # If you need to POST your call, add it as a parameter via 'method'
         freelancer.Project.searchProjects(status='Open', method='POST')
     """
+
     def __init__(self, client, domain='api.freelancer.com', uri='', *args, **kwargs):
         """
         Creates a new interface to the freelancer.com api

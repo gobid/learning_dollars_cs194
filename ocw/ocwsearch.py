@@ -2,6 +2,7 @@ import urllib
 import json
 from oauth2client.tools import argparser
 
+
 class OCWSearch:
 
   def search(self, search_str):
@@ -11,12 +12,12 @@ class OCWSearch:
     f = urllib.urlopen(query)
     s = f.read()
     json_conv = json.loads(s)
-    return_courses = ["", "", ""]
+    return_courses = [""] * 20
     for subheading in json_conv:
       if subheading == 'Results':
         for r in json_conv['Results']:
-          if r == '1': return_courses[0] = json_conv['Results']['1']
-          if r == '2': return_courses[1] = json_conv['Results']['2']
-          if r == '3': return_courses[2] = json_conv['Results']['3']
+          num = int(r)
+          return_courses[num-1] = json_conv['Results'][r]
+          return_courses[num-1]['scoreRanking'] = 20 - num;
     f.close()
     return return_courses

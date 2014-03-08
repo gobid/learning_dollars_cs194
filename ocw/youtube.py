@@ -2,13 +2,14 @@ from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 
-# Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered 
+# Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered
 # apps tab of https://cloud.google.com/console
 # Please ensure that you have enabled the YouTube Data API for your project.
 
 from config import config
 
 MAX_RESULTS = 25
+
 
 class Youtube:
 
@@ -42,8 +43,8 @@ class Youtube:
       print search_result 
  
     if len(playlists) > 0:
-      return playlists[:3], "playlist"
+      return playlists[:20], "playlist"
     elif len(videos) > 0:
-      return videos[:3], "video"
+      return videos[:20], "video"
     else:
       return '', "blank"

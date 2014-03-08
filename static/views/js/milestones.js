@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+	// initialize runtime js template
+	$("body").append(Templates.milestones());
+		
+	/* START jQuery Methods */
+
 	// Load incoming milestones
 	$.get('/getincomingmilestonelist', function(data){
 		milestones = data['json-result']['items']
@@ -60,6 +65,8 @@ $(document).ready(function() {
 	})
 
 	$("#create_milestone_payment").click(create_milestone_payment)
+
+	/* END jQuery Methods */
 })
 
 function create_milestone_payment(e) {
