@@ -6,7 +6,7 @@ from pages import MainPage, AboutPage, TeamPage, ModulesPage, ModulePage, \
     MailboxPage, MyBidsPage, MyPostsPage, MilestonesPage, ProjectPage
 
 from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
-    SendMessage, BidOnProject, PostNewProject, RetractBid, AcceptBid
+    SendMessage, BidOnProject, PostNewProject, RetractBid, AcceptBid, CreateModule
 
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
     PostsInfo, InboxMessages, SentMessages, GetPlacedBids, \
@@ -14,7 +14,8 @@ from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
 
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
     BidOnProject, PostNewProject, RetractBid, RequestReleaseMilestone, \
-    ReleaseMilestone, Upvote, Downvote
+    ReleaseMilestone, CreateProject, AddBidderToProject, ChooseWinner, \
+    Upvote, Downvote
 
 application = webapp2.WSGIApplication([
     # Views
@@ -124,6 +125,11 @@ application = webapp2.WSGIApplication([
 
     # Actions
     webapp2.Route(
+        '/createmodule/<modulename:[^/]+>',
+        handler=CreateModule,
+        name='createmodule'
+    ),
+    webapp2.Route(
         '/updatemodules',
         handler=UpdateModules,
         name='updatemodules'
@@ -181,6 +187,21 @@ application = webapp2.WSGIApplication([
         '/getplacedbids',
         handler=GetPlacedBids,
         name='getPlacedBids'
+    ),
+    webapp2.Route(
+        '/createproject/<name:[^/]+>/<price:[^/]+>',
+        handler=CreateProject,
+        name='createProject'
+    ),
+    webapp2.Route(
+        '/addbiddertoproject/<project_id:\d+>',
+        handler=AddBidderToProject,
+        name='addBidderToProject'
+    ),
+    webapp2.Route(
+        '/choosewinner/<project_id:\d+>/<bidder_id:\d+>',
+        handler=ChooseWinner,
+        name='chooseWinner'
     ),
     webapp2.Route(
         '/upvote/<moduleID:\d+>/<courseTitle:[^/]+>',
