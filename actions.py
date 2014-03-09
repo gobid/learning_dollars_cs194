@@ -6,6 +6,7 @@ from config import config
 from ocw import youtube
 from ocw import ocwsearch
 from models import Module, Account
+from functions import get_account
 
 # Action Classes (JSON response)
 
@@ -168,32 +169,29 @@ class PostNewProject(webapp2.RequestHandler):
 
 class SendMessage(webapp2.RequestHandler):
 
-    def get(self, project_id, message_text, user_name):
-        jac = get_personal_jac()
-        if jac:
-            response = jac.send_message(
-                project_id,
-                message_text,
-                user_name
-            )
-        else:
-            response = {'error': 'User has no associated account. '
-                        + 'Try logging out and logging in again.'}
+    def get(self, subject_text, message_text, to_email):
+        accounts = Account.query(guser == to_email).fetch()
+        if accounts > 0:
+            account_to = accounts[0]
+            touserid = account_to.key.id()
+        fromuserid = get_account
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
-#Upvote/downvote course
+# Upvote/downvote course
+
 
 class Upvote(webapp2.RequestHandler):
 
     def get(self, moduleID, courseURL):
         user = users.get_current_user()
         courseVoteList = user.courses_voted
-        idURLPair = moduleID+"+"+courseURL
+        idURLPair = moduleID + "+" + courseURL
         if idURLPair not in courseVoteList.keys() or courseVoteList[idURLPair] == 'N':
             case = "votedNo"
-            if idURLPair not in courseVoteList.keys(): case = "notVoted"
-            courseVoteList[idURLPair]='Y'
+            if idURLPair not in courseVoteList.keys():
+                case = "notVoted"
+            courseVoteList[idURLPair] = 'Y'
             user.coursesVoted = courses_voted
             user.put()
             match = Module.query(Module.ID == moduleID).fetch()
@@ -201,8 +199,10 @@ class Upvote(webapp2.RequestHandler):
             moduleCourses = match.courses
             for course in moduleCourses:
                 if course["CourseURL"] == courseURL:
-                    if case == "notVoted": course["scoreRanking"] = course["scoreRanking"] + 1
-                    else: course["scoreRanking"] = course["scoreRanking"] + 2
+                    if case == "notVoted":
+                        course["scoreRanking"] = course["scoreRanking"] + 1
+                    else:
+                        course["scoreRanking"] = course["scoreRanking"] + 2
             match.courses = moduleCourses
             match.put()
             response = {'success': 'Vote submitted successfully.'}
@@ -210,17 +210,19 @@ class Upvote(webapp2.RequestHandler):
             response = {'error': 'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+
 
 class Downvote(webapp2.RequestHandler):
 
     def get(self, moduleID, courseURL):
         user = users.get_current_user()
         courseVoteList = user.courses_voted
-        idURLPair = moduleID+"+"+courseURL
+        idURLPair = moduleID + "+" + courseURL
         if idURLPair not in courseVoteList.keys() or courseVoteList[idURLPair] == 'Y':
             case = "votedYes"
-            if idURLPair not in courseVoteList.keys(): case = "notVoted"
-            courseVoteList[idURLPair]='N'
+            if idURLPair not in courseVoteList.keys():
+                case = "notVoted"
+            courseVoteList[idURLPair] = 'N'
             user.coursesVoted = courses_voted
             user.put()
             match = Module.query(Module.ID == moduleID).fetch()
@@ -228,8 +230,10 @@ class Downvote(webapp2.RequestHandler):
             moduleCourses = match.courses
             for course in moduleCourses:
                 if course["CourseURL"] == courseURL:
-                    if case == "notVoted": course["scoreRanking"] = course["scoreRanking"] - 1
-                    else: course["scoreRanking"] = course["scoreRanking"] - 2
+                    if case == "notVoted":
+                        course["scoreRanking"] = course["scoreRanking"] - 1
+                    else:
+                        course["scoreRanking"] = course["scoreRanking"] - 2
             match.courses = moduleCourses
             match.put()
             response = {'success': 'Vote submitted successfully.'}
@@ -237,4 +241,3 @@ class Downvote(webapp2.RequestHandler):
             response = {'error': 'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
-
