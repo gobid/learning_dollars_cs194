@@ -183,7 +183,8 @@ class SendMessage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
-#Upvote/downvote course
+# Upvote/downvote course
+
 
 class Upvote(webapp2.RequestHandler):
 
@@ -192,12 +193,13 @@ class Upvote(webapp2.RequestHandler):
         if account:
             courseVoteList = dict(account.courses_voted)
             print courseVoteList
-            idTitlePair = moduleID+"+"+courseTitle
+            idTitlePair = moduleID + "+" + courseTitle
             if idTitlePair not in courseVoteList.keys() or courseVoteList[idTitlePair] == 'N':
                 case = "votedNo"
-                if idTitlePair not in courseVoteList.keys(): case = "notVoted"
+                if idTitlePair not in courseVoteList.keys():
+                    case = "notVoted"
                 print case
-                courseVoteList[idTitlePair]='Y'
+                courseVoteList[idTitlePair] = 'Y'
                 account.courses_voted = courseVoteList.items()
                 print account
                 account.put()
@@ -207,8 +209,10 @@ class Upvote(webapp2.RequestHandler):
                 moduleCourses = match.courses
                 for course in moduleCourses:
                     if course["Title"] == courseTitle:
-                        if case == "notVoted": course["scoreRanking"] = course["scoreRanking"] + 1
-                        else: course["scoreRanking"] = course["scoreRanking"] + 2
+                        if case == "notVoted":
+                            course["scoreRanking"] = course["scoreRanking"] + 1
+                        else:
+                            course["scoreRanking"] = course["scoreRanking"] + 2
                 match.courses = moduleCourses
                 match.put()
                 response = {'success': 'Vote submitted successfully.'}
@@ -219,17 +223,19 @@ class Upvote(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
+
 class Downvote(webapp2.RequestHandler):
 
     def get(self, moduleID, courseTitle):
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
-            idTitlePair = moduleID+"+"+courseTitle
+            idTitlePair = moduleID + "+" + courseTitle
             if idTitlePair not in courseVoteList.keys() or courseVoteList[idTitlePair] == 'Y':
                 case = "votedYes"
-                if idTitlePair not in courseVoteList.keys(): case = "notVoted"
-                courseVoteList[idTitlePair]='N'
+                if idTitlePair not in courseVoteList.keys():
+                    case = "notVoted"
+                courseVoteList[idTitlePair] = 'N'
                 account.courses_voted = courseVoteList.items()
                 account.put()
                 moduleID = int(moduleID)
@@ -238,8 +244,10 @@ class Downvote(webapp2.RequestHandler):
                 moduleCourses = match.courses
                 for course in moduleCourses:
                     if course["Title"] == courseTitle:
-                        if case == "notVoted": course["scoreRanking"] = course["scoreRanking"] - 1
-                        else: course["scoreRanking"] = course["scoreRanking"] - 2
+                        if case == "notVoted":
+                            course["scoreRanking"] = course["scoreRanking"] - 1
+                        else:
+                            course["scoreRanking"] = course["scoreRanking"] - 2
                 match.courses = moduleCourses
                 match.put()
                 response = {'success': 'Vote submitted successfully.'}
@@ -249,4 +257,3 @@ class Downvote(webapp2.RequestHandler):
             response = {'error': 'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
-
