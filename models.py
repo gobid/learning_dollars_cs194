@@ -27,6 +27,7 @@ class Account(ModelUtils, ndb.Model):
     projects_bidded_on = ndb.IntegerProperty(repeated=True)
     courses_voted = ndb.JsonProperty(repeated=True) #list of courses they've voted on
 
+
 class Project(ModelUtils, ndb.Model):
     bidders = ndb.IntegerProperty(repeated=True)
     winner = ndb.IntegerProperty()
@@ -34,8 +35,8 @@ class Project(ModelUtils, ndb.Model):
     name = ndb.StringProperty()    
 
 class Message(ModelUtils, ndb.Model):
-    fromuser = ndb.UserProperty()
-    touser = ndb.UserProperty()
+    fromuserid = ndb.IntegerProperty()
+    touserid = ndb.IntegerProperty()
     subject = ndb.StringProperty()
     message = ndb.StringProperty()
     datetime = ndb.DateTimeProperty()

@@ -3,6 +3,7 @@ import json
 
 from config import config
 from models import Module, Account
+from functions import get_account
 
 # Info Classes (JSON response)
 
@@ -50,8 +51,8 @@ class ModulesInfo(webapp2.RequestHandler):
     def get(self):
         modules = [m.to_dict() for m in Module.query().fetch()]
         modules = sorted(
-            modules, 
-            key = lambda module: module['name'].lower()
+            modules,
+            key=lambda module: module['name'].lower()
         )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(modules))
@@ -87,22 +88,12 @@ class ProjectBidsInfo(webapp2.RequestHandler):
 class InboxMessages(webapp2.RequestHandler):
 
     def get(self):
-        jac = get_personal_jac()
-        if jac:
-            messages = jac.get_inbox_messages()
-            count = messages['json-result']['count']
-            if count > 0:
-                items = messages['json-result']['items']
-                for i in xrange(len(items)):
-                    id = items[i]['projectid']
-                    projectDetails = jac.get_project_details(id)
-                    name = projectDetails['json-result']['name']
-                    url = projectDetails['json-result']['url']
-                    items[i]['projectname'] = name
-                    items[i]['projecturl'] = url
-        else:
-            messages = {'error': 'User has no associated account. '
-                        + 'Try logging out and logging in again.'}
+        userid = get_account.key.id()
+        messages = Message.query(touserid == userid).fetch()
+        messages = sorted(
+            messages,
+            key=lambda message: message['datetime']
+        )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(messages))
 
@@ -110,22 +101,12 @@ class InboxMessages(webapp2.RequestHandler):
 class SentMessages(webapp2.RequestHandler):
 
     def get(self):
-        jac = get_personal_jac()
-        if jac:
-            messages = jac.get_sent_messages()
-            count = messages['json-result']['count']
-            if count > 0:
-                items = messages['json-result']['items']
-                for i in xrange(len(items)):
-                    id = items[i]['projectid']
-                    projectDetails = jac.get_project_details(id)
-                    name = projectDetails['json-result']['name']
-                    url = projectDetails['json-result']['url']
-                    items[i]['projectname'] = name
-                    items[i]['projecturl'] = url
-        else:
-            messages = {'error': 'User has no associated account. '
-                        + 'Try logging out and logging in again.'}
+        userid = get_account.key.id()
+        messages = Message.query(fromuserid == userid).fetch()
+        messages = sorted(
+            messages,
+            key=lambda message: message['datetime']
+        )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(messages))
 

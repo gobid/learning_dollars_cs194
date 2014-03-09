@@ -194,3 +194,14 @@
             span.glyphicon.glyphicon-chevron-left
           a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')
             span.glyphicon.glyphicon-chevron-right
+  .row
+    .col-md-12
+      div(align='center')
+        | None of these courses helpful? 
+        a(id="suggestcourse", data-toggle="popover", data-content="") Suggest a course!
+          div(class="hide", id="popover-head")
+            | Suggest A Course
+          div(class="hide", id="popover-content")
+            div(class="form")
+              input(type="text", class="form-control", placeholder="Course URL")
+            button#submitsuggestion.btn.btn-default.btn-lg Submit
