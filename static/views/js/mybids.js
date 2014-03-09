@@ -9,9 +9,17 @@ $(document).ready(function(){
 		data = jQuery.parseJSON(data);
 		var bids = data["json-result"].items;
 		var count = data["json-result"].count;
+		var m_names = new Array("January", "February", "March",
+			"April", "May", "June", "July", "August", "September",
+			"October", "November", "December");
 		if(count !== 0) {
 			for (var b in bids){
 				var bid = bids[b];
+				var date_obj = new Date(bid.enddate);
+				var date_str = m_names[date_obj.getMonth()]+" "+
+				date_obj.getDate()+", "+date_obj.getFullYear()+" at "+
+				date_obj.getHours() + ":" + date_obj.getMinutes() + " GMT";
+				bid.enddate = date_str;
 				$("#all_placed_bids").append(Templates.all_bids(bid));
 			}
 		} else {

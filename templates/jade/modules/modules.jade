@@ -1,5 +1,17 @@
 .container
   h1 Modules
+  div
+    | Create a new module:
+    input.form-control(
+      id = 'module_input'
+      type='text', 
+      placeholder='Javascript'
+      maxlength="15"
+  )
+  button.btn.btn-default.btn-small.bid_submit(
+    id = 'submit_new_module',
+    type='button'
+  ) Add module
   hr
   .input-group.searchbox
     input#moduleName.form-control.typeahead(type='text', placeholder='Module Name')

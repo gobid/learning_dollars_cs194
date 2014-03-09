@@ -29,8 +29,7 @@ class ModuleInfo(webapp2.RequestHandler):
     def get_info(self, module_id):
         module_id = int(module_id)
         module = Module.get_by_id(module_id)
-        jac = job_api_calls.JobApiCalls()
-        jobs = jac.get_jobs(module.name)['json-result']['items']
+        jobs = []
         info = {
             'name': module.name,
             'youtube': module.youtube,

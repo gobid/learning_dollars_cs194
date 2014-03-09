@@ -14,40 +14,42 @@ $(document).ready(function() {
 
 	// Course was helpful method goes here
 	$(document).on("click", ".btn.btn-default#helpful", function() {
-		var moduleID = $(this).prop('moduleID');
-		var courseURL = $(this).prop('courseURL');
-		upvote(moduleID, courseURL);
+		var moduleID = $(this).attr("moduleID");
+		var courseTitle = $(this).attr("courseTitle");
+		console.log(moduleID);
+		console.log(courseTitle);
+		upvote(moduleID, courseTitle);
 	});
 
 	$(document).on("click", ".btn.btn-default#nothelpful", function() {
-		var moduleID = $(this).prop('moduleID');
-		var courseURL = $(this).prop('courseURL');
-		downvote(moduleID, courseURL);
+		var moduleID = $(this).attr("moduleID");
+		var courseTitle = $(this).attr("courseTitle");
+		downvote(moduleID, courseTitle);
 	});
 
 });
 
-function upvote(moduleName, courseTitle) {
-	$.get("/upvote/" + moduleName + "/" + courseTitle, function(data){
-		var response = data["json-result"];
+function upvote(moduleID, courseTitle) {
+	$.get("/upvote/" + moduleID+ "/" + courseTitle, function(data){
+		var response = data["success"];
 		if(response) {
 			//var status = response['statusconfirmation']
-			$(".coursescore").after("eat my dick");
+			$(".coursescore").after(data["success"]);
 		} else {
-			$(".coursescore").after("lol");
+			$(".coursescore").after(data["error"]);
 		}
 	});
 }
 
 
-function downvote(moduleName, courseTitle) {
-	$.get("/downvote/" + moduleName + "/" + courseTitle, function(data){
-		var response = data["json-result"];
+function downvote(moduleID, courseTitle) {
+	$.get("/downvote/" + moduleID + "/" + courseTitle, function(data){
+		var response = data["success"];
 		if(response) {
 			//var status = response['statusconfirmation']
-			$(".coursescore").after("eat my dick");
+			$(".coursescore").after(data["success"]);
 		} else {
-			$(".coursescore").after("lol");
+			$(".coursescore").after(data["error"]);
 		}
 	});
 }

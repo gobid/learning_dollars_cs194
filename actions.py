@@ -5,7 +5,7 @@ import HTMLParser
 from config import config
 from ocw import youtube
 from ocw import ocwsearch
-from models import Module, Account
+from models import Module, Account, Project
 from functions import get_account
 
 # Action Classes (JSON response)
@@ -51,6 +51,35 @@ class UpdateModules(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(categories))
+
+
+
+class CreateModule(webapp2.RequestHandler):
+
+    def get(self, modulename):
+        print "hit createmodule!!!"
+
+        match = Module.query(Module.name == modulename).fetch()
+        if len(match) > 0:
+             response = {'response' : 'module exists'}
+        else:
+            y = youtube.Youtube()
+            ocws = ocwsearch.OCWSearch()
+            search_name = modulename + " tutorial"
+            y_list, y_type = y.search(search_name)
+            course_list = ocws.search(modulename)
+            module = Module(
+                name=modulename,
+                youtube=y_list,
+                yt_type=y_type, courses=course_list
+            )
+            module.put()
+            response = {'response' : 'successfully stored'}
+            print "success!"
+        print response
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
 
 
 class SelectWinner(webapp2.RequestHandler):
@@ -124,6 +153,7 @@ class BidOnProject(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
+
 # This is retracting a bid from a project
 
 
@@ -178,34 +208,89 @@ class SendMessage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
-# Upvote/downvote course
+# Projects
+class CreateProject(webapp2.RequestHandler):
 
+    def get(self, name, price):
+        project = Project(
+            name=name,
+            price=float(price)
+        )
+        project.put() # do error checking on puts later
+        account = get_account()
+        if account == None:
+            response = 'No logged in account.'
+        else:
+            response = 'Logged in account found. Project Posted'
+        account.projects_posted.append(project)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+class AddBidderToProject(webapp2.RequestHandler):
+
+    def get(self, project_id):
+        project = Project.get_by_id(int(project_id))
+        if project:
+            account = int(get_account().key.id()) # must do redirect for session checks
+            if account not in project.bidders:
+                project.bidders.append(account)
+                project.put()
+                response = {'success': 'Bidder added.'}
+            else:
+                response = {'error': 'Bidder already added.'}
+        else:
+            response = {'error': 'No project of given id.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+class ChooseWinner(webapp2.RequestHandler):
+
+    def get(self, project_id, bidder_id):
+        project = Project.get_by_id(int(project_id))
+        if project:
+            bidder_id = int(bidder_id)
+            if bidder_id in project.bidders:
+                project.winner = bidder_id
+                project.put()
+                response = {'success': 'Winner chosen.'}
+            else:
+                response = {'error': 'Winner not in bidders list.'}
+        else:
+            response = {'error': 'No project of given id.'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+#Upvote/downvote course
 
 class Upvote(webapp2.RequestHandler):
 
-    def get(self, moduleID, courseURL):
-        user = users.get_current_user()
-        courseVoteList = user.courses_voted
-        idURLPair = moduleID + "+" + courseURL
-        if idURLPair not in courseVoteList.keys() or courseVoteList[idURLPair] == 'N':
-            case = "votedNo"
-            if idURLPair not in courseVoteList.keys():
-                case = "notVoted"
-            courseVoteList[idURLPair] = 'Y'
-            user.coursesVoted = courses_voted
-            user.put()
-            match = Module.query(Module.ID == moduleID).fetch()
-            match = match[0]
-            moduleCourses = match.courses
-            for course in moduleCourses:
-                if course["CourseURL"] == courseURL:
-                    if case == "notVoted":
-                        course["scoreRanking"] = course["scoreRanking"] + 1
-                    else:
-                        course["scoreRanking"] = course["scoreRanking"] + 2
-            match.courses = moduleCourses
-            match.put()
-            response = {'success': 'Vote submitted successfully.'}
+    def get(self, moduleID, courseTitle):
+        account = get_account()
+        if account:
+            courseVoteList = dict(account.courses_voted)
+            print courseVoteList
+            idTitlePair = moduleID+"+"+courseTitle
+            if idTitlePair not in courseVoteList.keys() or courseVoteList[idTitlePair] == 'N':
+                case = "votedNo"
+                if idTitlePair not in courseVoteList.keys(): case = "notVoted"
+                print case
+                courseVoteList[idTitlePair]='Y'
+                account.courses_voted = courseVoteList.items()
+                print account
+                account.put()
+                moduleID = int(moduleID)
+                match = Module.query(Module.category == moduleID).fetch()
+                match = match[0]
+                moduleCourses = match.courses
+                for course in moduleCourses:
+                    if course["Title"] == courseTitle:
+                        if case == "notVoted": course["scoreRanking"] = course["scoreRanking"] + 1
+                        else: course["scoreRanking"] = course["scoreRanking"] + 2
+                match.courses = moduleCourses
+                match.put()
+                response = {'success': 'Vote submitted successfully.'}
+            else:
+                response = {'error': 'No.'}
         else:
             response = {'error': 'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
@@ -214,29 +299,30 @@ class Upvote(webapp2.RequestHandler):
 
 class Downvote(webapp2.RequestHandler):
 
-    def get(self, moduleID, courseURL):
-        user = users.get_current_user()
-        courseVoteList = user.courses_voted
-        idURLPair = moduleID + "+" + courseURL
-        if idURLPair not in courseVoteList.keys() or courseVoteList[idURLPair] == 'Y':
-            case = "votedYes"
-            if idURLPair not in courseVoteList.keys():
-                case = "notVoted"
-            courseVoteList[idURLPair] = 'N'
-            user.coursesVoted = courses_voted
-            user.put()
-            match = Module.query(Module.ID == moduleID).fetch()
-            match = match[0]
-            moduleCourses = match.courses
-            for course in moduleCourses:
-                if course["CourseURL"] == courseURL:
-                    if case == "notVoted":
-                        course["scoreRanking"] = course["scoreRanking"] - 1
-                    else:
-                        course["scoreRanking"] = course["scoreRanking"] - 2
-            match.courses = moduleCourses
-            match.put()
-            response = {'success': 'Vote submitted successfully.'}
+    def get(self, moduleID, courseTitle):
+        account = get_account()
+        if account:
+            courseVoteList = dict(account.courses_voted)
+            idTitlePair = moduleID+"+"+courseTitle
+            if idTitlePair not in courseVoteList.keys() or courseVoteList[idTitlePair] == 'Y':
+                case = "votedYes"
+                if idTitlePair not in courseVoteList.keys(): case = "notVoted"
+                courseVoteList[idTitlePair]='N'
+                account.courses_voted = courseVoteList.items()
+                account.put()
+                moduleID = int(moduleID)
+                match = Module.query(Module.category == moduleID).fetch()
+                match = match[0]
+                moduleCourses = match.courses
+                for course in moduleCourses:
+                    if course["Title"] == courseTitle:
+                        if case == "notVoted": course["scoreRanking"] = course["scoreRanking"] - 1
+                        else: course["scoreRanking"] = course["scoreRanking"] - 2
+                match.courses = moduleCourses
+                match.put()
+                response = {'success': 'Vote submitted successfully.'}
+            else:
+                response = {'error': 'No.'}
         else:
             response = {'error': 'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
