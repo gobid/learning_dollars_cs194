@@ -4,17 +4,11 @@ $(document).ready(function() {
 	$("body").append(Templates.myposts());
 
 	$.get("/postsinfo", function(data){
-		console.log(data);
 		var numPosts = data.length;
-		console.log("num posts: " + numPosts);
-		var m_names = new Array("January", "February", "March",
-			"April", "May", "June", "July", "August", "September",
-			"October", "November", "December");
 		if(numPosts > 0) {
 			$("#projects_loader").remove();
 			for (var p in data){
 				var project = data[p];
-				console.log("POST" + project.additionalstatus);
 				// var date_obj = new Date(project.enddate);
 				// var date_str = m_names[date_obj.getMonth()]+" "+
 				// date_obj.getDate()+", "+date_obj.getFullYear()+" at "+
@@ -28,6 +22,22 @@ $(document).ready(function() {
 	});
 
 	$("#post_project").click(post_project);
+	var modulesArray = new Array();
+	$.get("/modulesinfo", function(modules){
+		
+		for(var i = 0; i < modules.length; i++) {
+			modulesArray.push(modules[i].name)
+		}
+		console.log(modulesArray);
+	});
+	var testArray = ["test", "shit"];
+	// $("#test").typeahead({source: testArray});
+	$(function(){
+          $('.typeahead').typeahead({
+             items:4,a
+             source: ['Aaaa', 'Abbb', 'Accc']
+          });
+     });
 
 });
 
@@ -42,7 +52,7 @@ function post_project(e) {
 		budget_option + "/" + duration, function(data){
 			console.log("hit" + data);
 			if(data) {
-				$("#post_project").after(Templates.post_success);
+				$("#log_message_div").after(Templates.post_success);
 			} else {
 				response = data.errors;
 				if (!response) response = data.error;

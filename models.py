@@ -36,6 +36,7 @@ class Project(ModelUtils, ndb.Model):
     description = ndb.StringProperty()
     job_type = ndb.StringProperty()
     end_date = ndb.DateProperty()
+    complete = ndb.StringProperty()
 
 class Message(ModelUtils, ndb.Model):
     fromuserid = ndb.IntegerProperty()

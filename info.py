@@ -71,7 +71,7 @@ class PostsInfo(webapp2.RequestHandler):
             if frmtd_end_date is not None:
                 frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
             if project.winner is not None:
-                project_open = "closed"
+                project_open = "closed(Winner selected)"
             newProjectJSON = {
                 'projectid': project_id,
                 'projectname':project.name,
@@ -80,7 +80,8 @@ class PostsInfo(webapp2.RequestHandler):
                 'price':project.price,
                 'bidcount':len(project.bidders),
                 'enddate':frmtd_end_date,
-                'additionalstatus': project_open
+                'additionalstatus': project_open,
+                'complete': project.complete
             }
             posted_projects.append(newProjectJSON)
 
@@ -147,9 +148,27 @@ class GetPlacedBids(webapp2.RequestHandler):
 class GetProjectDetails(webapp2.RequestHandler):
 
     def get(self, project_id):
-        response = self.get_info(project_id)
+        project = Project.get_by_id(project_id)
+        project_open = "open"
+        frmtd_end_date = project.end_date
+        # print project.end_date.strftime('We are the %d, %b %Y')
+        if frmtd_end_date is not None:
+            frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
+        if project.winner is not None:
+            project_open = "closed(Winner selected)"
+        newProjectJSON = {
+            'projectid': project_id,
+            'projectname':project.name,
+            'bidders':project.bidders,
+            'winner':project.winner,
+            'price':project.price,
+            'bidcount':len(project.bidders),
+            'enddate':frmtd_end_date,
+            'additionalstatus': project_open,
+            'complete': project.complete
+        }
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
+        self.response.write(json.dumps(newProjectJSON))
 
     def get_info(self, project_id):
         jac = get_personal_jac()
