@@ -1,6 +1,7 @@
 import webapp2
 import json
 import HTMLParser
+import datetime
 
 from config import config
 from ocw import youtube
@@ -187,12 +188,26 @@ class PostNewProject(webapp2.RequestHandler):
 
     def get(self, projectname, projectdesc, jobtypecsv, budgetoption,
             duration):
-        jac = get_personal_jac()
-        if jac:
-            response = jac.post_new_project(
-                projectname, projectdesc, jobtypecsv, budgetoption, duration)
+        end_date = datetime.datetime.now()
+        end_date = end_date + datetime.timedelta(days = int(duration))
+        print end_date
+        project = Project(
+            name=projectname,
+            price=budgetoption,
+            description=projectdesc,
+            job_type=jobtypecsv,
+            end_date=end_date
+        )
+        print project
+        project.put() # do error checking on puts later
+        account = get_account()
+        account.projects_posted.append(project.key.id())
+        account.put()
+        if account == None:
+            response = 'No logged in account.'
         else:
-            response = {'error': 'You are not logged in. '}
+            response = 'Logged in account found. Project Posted'
+        account.projects_posted.append(project)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 

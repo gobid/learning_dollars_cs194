@@ -31,10 +31,11 @@ class Account(ModelUtils, ndb.Model):
 class Project(ModelUtils, ndb.Model):
     bidders = ndb.IntegerProperty(repeated=True)
     winner = ndb.IntegerProperty()
-    price = ndb.FloatProperty()
+    price = ndb.StringProperty()
     name = ndb.StringProperty()
     description = ndb.StringProperty()
     job_type = ndb.StringProperty()
+    end_date = ndb.DateProperty()
 
 class Message(ModelUtils, ndb.Model):
     fromuserid = ndb.IntegerProperty()

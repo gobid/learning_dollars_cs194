@@ -2,7 +2,7 @@ import webapp2
 import json
 
 from config import config
-from models import Module, Account
+from models import Module, Account, Project
 from functions import get_account
 
 # Info Classes (JSON response)
@@ -61,14 +61,28 @@ class ModulesInfo(webapp2.RequestHandler):
 class PostsInfo(webapp2.RequestHandler):
 
     def get(self):
-        print "hit"
-        projects = get_account().projects_posted;
-        print get_account()
-        posted_projects = [];
+        projects = get_account().projects_posted
+        posted_projects = []
         for project_id in projects:
             project = Project.get_by_id(project_id)
-            print project
-            posted_projects.append(project)
+            project_open = "open"
+            frmtd_end_date = project.end_date
+            # print project.end_date.strftime('We are the %d, %b %Y')
+            if frmtd_end_date is not None:
+                frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
+            if project.winner is not None:
+                project_open = "closed"
+            newProjectJSON = {
+                'projectid': project_id,
+                'projectname':project.name,
+                'bidders':project.bidders,
+                'winner':project.winner,
+                'price':project.price,
+                'bidcount':len(project.bidders),
+                'enddate':frmtd_end_date,
+                'additionalstatus': project_open
+            }
+            posted_projects.append(newProjectJSON)
 
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(posted_projects))

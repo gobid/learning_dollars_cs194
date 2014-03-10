@@ -4,20 +4,22 @@ $(document).ready(function() {
 	$("body").append(Templates.myposts());
 
 	$.get("/postsinfo", function(data){
-		var numPosts = data["json-result"].count;
+		console.log(data);
+		var numPosts = data.length;
+		console.log("num posts: " + numPosts);
 		var m_names = new Array("January", "February", "March",
 			"April", "May", "June", "July", "August", "September",
 			"October", "November", "December");
 		if(numPosts > 0) {
-			var posts = data["json-result"].items;
 			$("#projects_loader").remove();
-			for (var p in posts){
-				var project = posts[p];
-				var date_obj = new Date(project.enddate);
-				var date_str = m_names[date_obj.getMonth()]+" "+
-				date_obj.getDate()+", "+date_obj.getFullYear()+" at "+
-				date_obj.getHours() + ":" + date_obj.getMinutes() + " GMT";
-				project.enddate = date_str;
+			for (var p in data){
+				var project = data[p];
+				console.log("POST" + project.additionalstatus);
+				// var date_obj = new Date(project.enddate);
+				// var date_str = m_names[date_obj.getMonth()]+" "+
+				// date_obj.getDate()+", "+date_obj.getFullYear()+" at "+
+				// date_obj.getHours() + ":" + date_obj.getMinutes() + " GMT";
+				//project.enddate = date_str;
 				$("#posted_projects").append(
 					Templates.posted_projects(project)
 				);
@@ -34,13 +36,13 @@ function post_project(e) {
 	var name = $("#name").val();
 	var description = $("#description").val();
 	var type = $("#type").val();
-	var budget_option = $("#budget_option option:selected").attr("value");
+	var budget_option = $("#budget_option option:selected").text();
 	var duration = $("#duration").val();
 	$.get("/postnewproject/" + name + "/" + description + "/" + type + "/" + 
 		budget_option + "/" + duration, function(data){
-			var response = data["json-result"];
-			if(response) {
-				$("#post_project").after(Templates.post_success(response));
+			console.log("hit" + data);
+			if(data) {
+				$("#post_project").after(Templates.post_success);
 			} else {
 				response = data.errors;
 				if (!response) response = data.error;
