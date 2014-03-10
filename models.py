@@ -33,7 +33,9 @@ class Project(ModelUtils, ndb.Model):
     bidders = ndb.IntegerProperty(repeated=True)
     winner = ndb.IntegerProperty()
     price = ndb.FloatProperty()
-    name = ndb.StringProperty()    
+    name = ndb.StringProperty()
+    description = ndb.StringProperty()
+    job_type = ndb.StringProperty()
 
 class Message(ModelUtils, ndb.Model):
     fromuserid = ndb.IntegerProperty()

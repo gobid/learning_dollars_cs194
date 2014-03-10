@@ -61,14 +61,25 @@ class ModulesInfo(webapp2.RequestHandler):
 class PostsInfo(webapp2.RequestHandler):
 
     def get(self):
-        jac = get_personal_jac()
-        if jac:
-            posts = jac.get_posts()
-        else:
-            posts = {'error': 'User has no associated account. '
-                     + 'Try logging out and logging in again.'}
+        print "hit"
+        projects = get_account().projects_posted;
+        print get_account()
+        posted_projects = [];
+        for project_id in projects:
+            project = Project.get_by_id(project_id)
+            print project
+            posted_projects.append(project)
+
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(posts))
+        self.response.write(json.dumps(posted_projects))
+
+        # jac = get_personal_jac()
+        # if jac:
+        #     posts = jac.get_posts()
+        # else:
+        #     posts = {'error': 'User has no associated account. '
+        #              + 'Try logging out and logging in again.'}
+       
 
 
 class ProjectBidsInfo(webapp2.RequestHandler):
