@@ -19,13 +19,12 @@ class Module(ModelUtils, ndb.Model):
     courses = ndb.JsonProperty(repeated=True)  # OCW courses
     category = ndb.IntegerProperty()  # freelancer category id
 
-
-
 class Account(ModelUtils, ndb.Model):
     guser = ndb.UserProperty()
     modules_completed = ndb.IntegerProperty(repeated=True)  # module ids
     projects_completed = ndb.IntegerProperty(repeated=True)  
     projects_posted = ndb.IntegerProperty(repeated=True)
+    projects_bidded_on = ndb.IntegerProperty(repeated=True)
     courses_voted = ndb.JsonProperty(repeated=True) #list of courses they've voted on
 
 

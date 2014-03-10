@@ -218,6 +218,8 @@ class CreateProject(webapp2.RequestHandler):
         )
         project.put() # do error checking on puts later
         account = get_account()
+        account.projects_posted.append(project.key.id())
+        account.put()
         if account == None:
             response = 'No logged in account.'
         else:
@@ -229,12 +231,18 @@ class CreateProject(webapp2.RequestHandler):
 class AddBidderToProject(webapp2.RequestHandler):
 
     def get(self, project_id):
-        project = Project.get_by_id(int(project_id))
+        project_id = int(project_id)
+        project = Project.get_by_id(project_id)
+        print project
         if project:
-            account = int(get_account().key.id()) # must do redirect for session checks
-            if account not in project.bidders:
-                project.bidders.append(account)
+            account = get_account()
+            account_id = int(account.key.id()) # must do redirect for session checks
+            print account_id
+            if account_id not in project.bidders:
+                project.bidders.append(account_id)
                 project.put()
+                account.projects_bidded_on.append(project_id)
+                account.put()
                 response = {'success': 'Bidder added.'}
             else:
                 response = {'error': 'Bidder already added.'}
@@ -246,7 +254,8 @@ class AddBidderToProject(webapp2.RequestHandler):
 class ChooseWinner(webapp2.RequestHandler):
 
     def get(self, project_id, bidder_id):
-        project = Project.get_by_id(int(project_id))
+        project_id = int(project_id)
+        project = Project.get_by_id(project_id)
         if project:
             bidder_id = int(bidder_id)
             if bidder_id in project.bidders:
