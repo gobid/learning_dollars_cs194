@@ -2,7 +2,7 @@ import webapp2
 import json
 
 from config import config
-from models import Module, Account
+from models import Module, Account, Project
 from functions import get_account
 
 # Info Classes (JSON response)
@@ -114,26 +114,24 @@ class SentMessages(webapp2.RequestHandler):
 class GetPlacedBids(webapp2.RequestHandler):
 
     def get(self):
-        jac = get_personal_jac()
-        placed_bids = jac.get_placed_bids()
+        account = get_account()
+        placed_bids_ids = account.projects_bidded_on
+        placed_bids = []
+        for i in placed_bids_ids:
+            project_id = int(i)
+            project = Project.get_by_id(project_id)
+            placed_bids.append(project.to_dict())
+        self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(placed_bids))
 
 
 class GetProjectDetails(webapp2.RequestHandler):
 
     def get(self, project_id):
-        response = self.get_info(project_id)
+        project_id = int(project_id)
+        project = Project.get_by_id(project_id).to_dict()
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
-
-    def get_info(self, project_id):
-        jac = get_personal_jac()
-        if jac:
-            projectDetails = jac.get_project_details(project_id)
-        else:
-            projectDetails = {'error': 'User has no associated account. '
-                              + 'Try logging out and logging in again.'}
-        return projectDetails
+        self.response.write(json.dumps(project))
 
 
 class GetUserDetails(webapp2.RequestHandler):

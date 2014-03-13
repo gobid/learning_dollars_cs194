@@ -1,9 +1,10 @@
 $(document).ready(function(){
 	var datalink = $("#datalink").val();
-	$.get(datalink, function(data){
-		var info = data["json-result"];
+	$.get(datalink, function(info){
 		$("body").append(Templates.project(info));
-		
+		// end_date won't work until tim's model changes come in
+		// then do in reverse end date order
+
 		/* START jQuery Methods */
 		
 		var project_id = info.id;
