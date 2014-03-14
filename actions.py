@@ -8,6 +8,7 @@ from ocw import youtube
 from ocw import ocwsearch
 from models import Module, Account, Project
 from functions import get_account
+import datetime
 
 # Action Classes (JSON response)
 
@@ -226,10 +227,14 @@ class SendMessage(webapp2.RequestHandler):
 
 class CreateProject(webapp2.RequestHandler):
 
-    def get(self, name, price):
+    def get(self, name, price, description, date, month, year, job_type):
+        end_date = datetime.datetime(int(year), int(month), int(date))
         project = Project(
             name=name,
-            price=float(price)
+            price=price,
+            description=description,
+            end_date=end_date,
+            job_type=job_type
         )
         project.put()  # do error checking on puts later
         account = get_account()

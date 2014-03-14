@@ -189,7 +189,8 @@ application = webapp2.WSGIApplication([
         name='getPlacedBids'
     ),
     webapp2.Route(
-        '/createproject/<name:[^/]+>/<price:[^/]+>',
+        '/createproject/<name:[^/]+>/<price:[^/]+>/<description:[^/]+>/' + 
+        '<date:\d+>/<month:\d+>/<year:\d+>/<job_type:\d+>',
         handler=CreateProject,
         name='createProject'
     ),
