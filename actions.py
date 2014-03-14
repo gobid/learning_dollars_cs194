@@ -54,7 +54,6 @@ class UpdateModules(webapp2.RequestHandler):
         self.response.write(json.dumps(categories))
 
 
-
 class CreateModule(webapp2.RequestHandler):
 
     def get(self, modulename):
@@ -62,7 +61,7 @@ class CreateModule(webapp2.RequestHandler):
 
         match = Module.query(Module.name == modulename).fetch()
         if len(match) > 0:
-             response = {'response' : 'module exists'}
+            response = {'response': 'module exists'}
         else:
             y = youtube.Youtube()
             ocws = ocwsearch.OCWSearch()
@@ -75,12 +74,11 @@ class CreateModule(webapp2.RequestHandler):
                 yt_type=y_type, courses=course_list
             )
             module.put()
-            response = {'response' : 'successfully stored'}
+            response = {'response': 'successfully stored'}
             print "success!"
         print response
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
-
 
 
 class SelectWinner(webapp2.RequestHandler):
@@ -189,7 +187,7 @@ class PostNewProject(webapp2.RequestHandler):
     def get(self, projectname, projectdesc, jobtypecsv, budgetoption,
             duration):
         end_date = datetime.datetime.now()
-        end_date = end_date + datetime.timedelta(days = int(duration))
+        end_date = end_date + datetime.timedelta(days=int(duration))
         print end_date
         project = Project(
             name=projectname,
@@ -199,7 +197,7 @@ class PostNewProject(webapp2.RequestHandler):
             end_date=end_date
         )
         print project
-        project.put() # do error checking on puts later
+        project.put()  # do error checking on puts later
         account = get_account()
         account.projects_posted.append(project.key.id())
         account.put()
@@ -224,6 +222,8 @@ class SendMessage(webapp2.RequestHandler):
         self.response.write(json.dumps(response))
 
 # Projects
+
+
 class CreateProject(webapp2.RequestHandler):
 
     def get(self, name, price):
@@ -231,7 +231,7 @@ class CreateProject(webapp2.RequestHandler):
             name=name,
             price=float(price)
         )
-        project.put() # do error checking on puts later
+        project.put()  # do error checking on puts later
         account = get_account()
         account.projects_posted.append(project.key.id())
         account.put()
@@ -243,6 +243,7 @@ class CreateProject(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
+
 class AddBidderToProject(webapp2.RequestHandler):
 
     def get(self, project_id):
@@ -251,7 +252,8 @@ class AddBidderToProject(webapp2.RequestHandler):
         print project
         if project:
             account = get_account()
-            account_id = int(account.key.id()) # must do redirect for session checks
+            # must do redirect for session checks
+            account_id = int(account.key.id())
             print account_id
             if account_id not in project.bidders:
                 project.bidders.append(account_id)
@@ -265,6 +267,7 @@ class AddBidderToProject(webapp2.RequestHandler):
             response = {'error': 'No project of given id.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+
 
 class ChooseWinner(webapp2.RequestHandler):
 

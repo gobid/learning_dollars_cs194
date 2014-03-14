@@ -2,7 +2,6 @@ $(document).ready(function() {
 
 	// initialize page
 	$("body").append(Templates.myposts());
-
 	$.get("/postsinfo", function(data){
 		var numPosts = data.length;
 		if(numPosts > 0) {
@@ -26,18 +25,17 @@ $(document).ready(function() {
 	$.get("/modulesinfo", function(modules){
 		
 		for(var i = 0; i < modules.length; i++) {
-			modulesArray.push(modules[i].name)
+			modulesArray.push(modules[i].name);
 		}
-		console.log(modulesArray);
 	});
 	var testArray = ["test", "shit"];
-	// $("#test").typeahead({source: testArray});
-	$(function(){
-          $('.typeahead').typeahead({
-             items:4,a
-             source: ['Aaaa', 'Abbb', 'Accc']
-          });
-     });
+	$("#test").typeahead({source: testArray});
+	// $(function(){
+ //          $('.typeahead').typeahead({
+ //             items:4,a
+ //             source: ['Aaaa', 'Abbb', 'Accc']
+ //          });
+ //     });
 
 });
 

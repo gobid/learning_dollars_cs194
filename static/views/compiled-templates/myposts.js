@@ -80,7 +80,7 @@ jade_debug.unshift({ lineno: 17, filename: "jade/myposts/myposts.jade" });
 buf.push("<input id=\"type\" type=\"text\" placeholder=\"Category\" class=\"form-control\"/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 21, filename: "jade/myposts/myposts.jade" });
-buf.push("<input type=\"text\" class=\"typeahead\"/>");
+buf.push("<input id=\"test\" data-provide=\"typeahead\" class=\"typeahead\"/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 22, filename: "jade/myposts/myposts.jade" });
 buf.push("<br/>");
@@ -241,7 +241,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h1 My Posts\n    .row\n      .col-md-6\n        br\n        table.table.table-striped#posted_projects\n          .text-center#projects_loader\n            img(src = '/static/views/img/ajax-loader.gif')\n      .col-md-6\n        .post_project_div\n\n          h2 Post New Project\n          input#name.form-control(type='text', placeholder='Name')\n          br\n          input#type.form-control(\n            type='text', \n            placeholder='Category'\n          )\n          input.typeahead(type=\"text\")\n          br\n          textarea#description.form-control(placeholder = 'Description')\n          br\n          label Budget Option:\n          select#budget_option.form-control\n            option(value='1') $250-750\n            option(value='2') $750-1500\n            option(value='3') $1500-3000\n            option(value='4') $3000-5000\n            option(value='5') $30-250\n            option(value='5') &gt$5000\n          br\n          label Duration (Max 60 days):\n          select#duration.form-control\n            - for (var i = 1; i <= 60; i++)\n              option(value=i) #{i}\n          br\n          button#post_project.btn.btn-default.pull-right(\n            type='button'\n          ) Post Project\n          br\n          br\n          br\n          div#log_message_div\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h1 My Posts\n    .row\n      .col-md-6\n        br\n        table.table.table-striped#posted_projects\n          .text-center#projects_loader\n            img(src = '/static/views/img/ajax-loader.gif')\n      .col-md-6\n        .post_project_div\n\n          h2 Post New Project\n          input#name.form-control(type='text', placeholder='Name')\n          br\n          input#type.form-control(\n            type='text', \n            placeholder='Category'\n          )\n          input.typeahead(id=\"test\", data-provide=\"typeahead\")\n          br\n          textarea#description.form-control(placeholder = 'Description')\n          br\n          label Budget Option:\n          select#budget_option.form-control\n            option(value='1') $250-750\n            option(value='2') $750-1500\n            option(value='3') $1500-3000\n            option(value='4') $3000-5000\n            option(value='5') $30-250\n            option(value='5') &gt$5000\n          br\n          label Duration (Max 60 days):\n          select#duration.form-control\n            - for (var i = 1; i <= 60; i++)\n              option(value=i) #{i}\n          br\n          button#post_project.btn.btn-default.pull-right(\n            type='button'\n          ) Post Project\n          br\n          br\n          br\n          div#log_message_div\n");
 }
 },
 

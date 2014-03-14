@@ -74,12 +74,12 @@ class PostsInfo(webapp2.RequestHandler):
                 project_open = "closed(Winner selected)"
             newProjectJSON = {
                 'projectid': project_id,
-                'projectname':project.name,
-                'bidders':project.bidders,
-                'winner':project.winner,
-                'price':project.price,
-                'bidcount':len(project.bidders),
-                'enddate':frmtd_end_date,
+                'projectname': project.name,
+                'bidders': project.bidders,
+                'winner': project.winner,
+                'price': project.price,
+                'bidcount': len(project.bidders),
+                'enddate': frmtd_end_date,
                 'additionalstatus': project_open,
                 'complete': project.complete
             }
@@ -94,7 +94,6 @@ class PostsInfo(webapp2.RequestHandler):
         # else:
         #     posts = {'error': 'User has no associated account. '
         #              + 'Try logging out and logging in again.'}
-       
 
 
 class ProjectBidsInfo(webapp2.RequestHandler):
@@ -158,12 +157,12 @@ class GetProjectDetails(webapp2.RequestHandler):
             project_open = "closed(Winner selected)"
         newProjectJSON = {
             'projectid': project_id,
-            'projectname':project.name,
-            'bidders':project.bidders,
-            'winner':project.winner,
-            'price':project.price,
-            'bidcount':len(project.bidders),
-            'enddate':frmtd_end_date,
+            'projectname': project.name,
+            'bidders': project.bidders,
+            'winner': project.winner,
+            'price': project.price,
+            'bidcount': len(project.bidders),
+            'enddate': frmtd_end_date,
             'additionalstatus': project_open,
             'complete': project.complete
         }
