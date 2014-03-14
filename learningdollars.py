@@ -65,7 +65,7 @@ application = webapp2.WSGIApplication([
         name='milestonespage'
     ),
     webapp2.Route(
-        '/project',
+        '/project/<project_id:\d+>',
         handler=ProjectPage,
         name='projectpage'
     ),

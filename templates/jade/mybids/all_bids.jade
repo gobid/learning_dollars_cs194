@@ -1,14 +1,20 @@
 tr
   td
-    a(href="project?id=#{projectid}")
-      |#{projectname}
-  td
-    a(href="project?id=#{projectid}")
-      |#{bidcount}
+    a(href="project/#{key}")
+      |#{name}
   td #{enddate}
   td
-    button(type="Submit", state="1", projectid=projectid, class="btn btn-default accept_bid").
-      Accept
-    button(type="Submit", state="0", projectid=projectid, class="btn btn-default decline_bid").
-      Decline
+    button(
+      type="Submit", 
+      state="1", 
+      projectid=projectid, 
+      class="btn btn-default accept_bid"
+    ) Accept
+    | 
+    button(
+      type="Submit", 
+      state="0", 
+      projectid=projectid, 
+      class="btn btn-default decline_bid"
+    ) Decline
 

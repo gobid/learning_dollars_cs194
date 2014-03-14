@@ -139,8 +139,14 @@ class SentMessages(webapp2.RequestHandler):
 class GetPlacedBids(webapp2.RequestHandler):
 
     def get(self):
-        jac = get_personal_jac()
-        placed_bids = jac.get_placed_bids()
+        account = get_account()
+        placed_bids_ids = account.projects_bidded_on
+        placed_bids = []
+        for i in placed_bids_ids:
+            project_id = int(i)
+            project = Project.get_by_id(project_id)
+            placed_bids.append(project.to_dict())
+        self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(placed_bids))
 
 
