@@ -106,7 +106,14 @@ class ProjectBidsInfo(webapp2.RequestHandler):
     def get(self, project_id):
         project_id = int(project_id)
         project = Project.get_by_id(project_id)
-        print project.winner
+
+        account = get_account()
+        projects_posted = account.projects_posted
+
+        is_owner = False
+        if project_id in projects_posted: 
+            is_owner = True
+
         if project.winner == None:
             bidders = project.bidders
             bidders_expanded = []
@@ -114,7 +121,8 @@ class ProjectBidsInfo(webapp2.RequestHandler):
                 bidder = Account.get_by_id(bidder_id).guser.email()
                 bidders_expanded.append({
                     'id': bidder_id,
-                    'email': bidder
+                    'email': bidder,
+                    'is_owner': is_owner
                 })
             response = bidders_expanded
         else:

@@ -5,7 +5,7 @@ var jade_debug = [{ lineno: 1, filename: "jade/project/bids_on_post.jade" }];
 try {
 var buf = [];
 var jade_mixins = {};
-var locals_ = (locals || {}),undefined = locals_.undefined,bidder = locals_.bidder,projectid = locals_.projectid,bidder_id = locals_.bidder_id;
+var locals_ = (locals || {}),undefined = locals_.undefined,bidder = locals_.bidder,is_owner = locals_.is_owner,projectid = locals_.projectid,bidder_id = locals_.bidder_id;
 jade_debug.unshift({ lineno: 0, filename: "jade/project/bids_on_post.jade" });
 jade_debug.unshift({ lineno: 1, filename: "jade/project/bids_on_post.jade" });
 buf.push("<tr>");
@@ -17,13 +17,34 @@ jade_debug.unshift({ lineno: 2, filename: jade_debug[0].filename });
 buf.push("" + (jade.escape((jade.interp = bidder) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 3, filename: "jade/project/bids_on_post.jade" });
+if ( is_owner)
+{
+jade_debug.unshift({ lineno: 4, filename: "jade/project/bids_on_post.jade" });
+jade_debug.unshift({ lineno: 4, filename: "jade/project/bids_on_post.jade" });
 buf.push("<button" + (jade.attr("project_id", projectid, true, false)) + (jade.attr("bidder_id", bidder_id, true, false)) + " class=\"btn btn-default bid pull-right\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 6, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 7, filename: jade_debug[0].filename });
 buf.push("Pick ");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</button>");
+jade_debug.shift();
+jade_debug.shift();
+}
+else
+{
+jade_debug.unshift({ lineno: 9, filename: "jade/project/bids_on_post.jade" });
+jade_debug.unshift({ lineno: 9, filename: "jade/project/bids_on_post.jade" });
+buf.push("<div class=\"pull-right\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 9, filename: jade_debug[0].filename });
+buf.push("You didn't post this project.");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</div>");
+jade_debug.shift();
+jade_debug.shift();
+}
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</td>");
@@ -33,7 +54,7 @@ buf.push("</tr>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr\n  td #{bidder}\n    button.btn.btn-default.bid.pull-right(\n      project_id=projectid,\n      bidder_id=bidder_id\n    ) Pick ");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr\n  td #{bidder}\n    if is_owner\n      button.btn.btn-default.bid.pull-right(\n        project_id=projectid,\n        bidder_id=bidder_id\n      ) Pick \n    else\n      .pull-right You didn't post this project.");
 }
 },
 
