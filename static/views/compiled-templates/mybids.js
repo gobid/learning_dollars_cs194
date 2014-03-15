@@ -65,7 +65,7 @@ var jade_debug = [{ lineno: 1, filename: "jade/mybids/all_bids.jade" }];
 try {
 var buf = [];
 var jade_mixins = {};
-var locals_ = (locals || {}),undefined = locals_.undefined,projectid = locals_.projectid,projectname = locals_.projectname,enddate = locals_.enddate,additionalstatus = locals_.additionalstatus,winner = locals_.winner;
+var locals_ = (locals || {}),undefined = locals_.undefined,projectid = locals_.projectid,projectname = locals_.projectname,enddate = locals_.enddate,additionalstatus = locals_.additionalstatus,winner_email = locals_.winner_email;
 jade_debug.unshift({ lineno: 0, filename: "jade/mybids/all_bids.jade" });
 jade_debug.unshift({ lineno: 1, filename: "jade/mybids/all_bids.jade" });
 buf.push("<tr>");
@@ -116,7 +116,7 @@ jade_debug.unshift({ lineno: 9, filename: "jade/mybids/all_bids.jade" });
 buf.push("<td>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 9, filename: jade_debug[0].filename });
-buf.push("" + (jade.escape((jade.interp = winner) == null ? '' : jade.interp)) + "");
+buf.push("Winner: " + (jade.escape((jade.interp = winner_email) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</td>");
@@ -129,7 +129,7 @@ buf.push("</tr>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr\n  td\n    a(href=\"project/#{projectid}\")\n      |#{projectname}\n  td #{enddate}\n  if additionalstatus == 'open'\n    td #{additionalstatus}\n  else\n    td #{winner}\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr\n  td\n    a(href=\"project/#{projectid}\")\n      |#{projectname}\n  td #{enddate}\n  if additionalstatus == 'open'\n    td #{additionalstatus}\n  else\n    td Winner: #{winner_email}\n");
 }
 },
 
@@ -228,8 +228,20 @@ jade_debug.unshift({ lineno: 2, filename: "jade/mybids/no_bids.jade" });
 buf.push("<td>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 2, filename: jade_debug[0].filename });
-buf.push("You have no bids at this time");
+buf.push("No bids made yet.");
 jade_debug.shift();
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 3, filename: "jade/mybids/no_bids.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 4, filename: "jade/mybids/no_bids.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
 buf.push("</td>");
 jade_debug.shift();
@@ -238,7 +250,7 @@ buf.push("</tr>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr \n  td You have no bids at this time");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr\n  td No bids made yet.\n  td\n  td");
 }
 }
 };

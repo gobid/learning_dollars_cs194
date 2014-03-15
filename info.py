@@ -162,16 +162,20 @@ class GetPlacedBids(webapp2.RequestHandler):
             print project
             project_open = "open"
             frmtd_end_date = project.end_date
-            print project.end_date.strftime('We are the %d, %b %Y')
+            winner_email = None
             if frmtd_end_date is not None:
                 frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
             if project.winner is not None:
                 project_open = "Closed (Winner selected)"
+                winner_account = Account.get_by_id(int(project.winner))
+                if winner_account:
+                    winner_email = winner_account.guser.email()
             projectJSON = {
                 'projectid': project_id,
                 'projectname': project.name,
                 'bidders': project.bidders,
                 'winner': project.winner,
+                'winner_email': winner_email,
                 'price': project.price,
                 'bidcount': len(project.bidders),
                 'enddate': frmtd_end_date,

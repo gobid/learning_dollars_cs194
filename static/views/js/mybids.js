@@ -21,7 +21,7 @@ $(document).ready(function(){
 				$("#all_placed_bids").append(Templates.all_bids(bid));
 			}
 		} else {
-			$("#all_placed_bids").after(Templates.no_bids());
+			$("#all_placed_bids").append(Templates.no_bids());
 		}
 	});
 
