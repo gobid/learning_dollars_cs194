@@ -126,7 +126,7 @@ class ProjectBidsInfo(webapp2.RequestHandler):
 class InboxMessages(webapp2.RequestHandler):
 
     def get(self):
-        userid = get_account.key.id()
+        userid = get_account().key.id()
         messages = Message.query(touserid == userid).fetch()
         messages = sorted(
             messages,
@@ -139,7 +139,7 @@ class InboxMessages(webapp2.RequestHandler):
 class SentMessages(webapp2.RequestHandler):
 
     def get(self):
-        userid = get_account.key.id()
+        userid = get_account().key.id()
         messages = Message.query(fromuserid == userid).fetch()
         messages = sorted(
             messages,
