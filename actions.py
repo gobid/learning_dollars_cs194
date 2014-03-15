@@ -1,6 +1,7 @@
 import webapp2
 import json
 import HTMLParser
+import datetime
 
 from config import config
 from ocw import youtube
@@ -204,7 +205,18 @@ class SendMessage(webapp2.RequestHandler):
         if accounts > 0:
             account_to = accounts[0]
             touserid = account_to.key.id()
-        fromuserid = get_account
+            fromuserid = get_account.key.id()
+            message = Message(
+                fromuserid=fromuserid,
+                touserid=touserid,
+                subject=subject_text,
+                message=message_text,
+                datetime=datetime.datetime.now()
+            )
+            message.put()
+            response = {'success!'}
+        else:
+            response = {'error': 'the email does not exist'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
