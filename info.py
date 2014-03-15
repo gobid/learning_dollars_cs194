@@ -2,7 +2,7 @@ import webapp2
 import json
 
 from config import config
-from models import Module, Account
+from models import Module, Account, Project
 from functions import get_account
 
 # Info Classes (JSON response)
@@ -61,14 +61,39 @@ class ModulesInfo(webapp2.RequestHandler):
 class PostsInfo(webapp2.RequestHandler):
 
     def get(self):
-        jac = get_personal_jac()
-        if jac:
-            posts = jac.get_posts()
-        else:
-            posts = {'error': 'User has no associated account. '
-                     + 'Try logging out and logging in again.'}
+        projects = get_account().projects_posted
+        posted_projects = []
+        for project_id in projects:
+            project = Project.get_by_id(project_id)
+            project_open = "open"
+            frmtd_end_date = project.end_date
+            # print project.end_date.strftime('We are the %d, %b %Y')
+            if frmtd_end_date is not None:
+                frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
+            if project.winner is not None:
+                project_open = "closed(Winner selected)"
+            newProjectJSON = {
+                'projectid': project_id,
+                'projectname': project.name,
+                'bidders': project.bidders,
+                'winner': project.winner,
+                'price': project.price,
+                'bidcount': len(project.bidders),
+                'enddate': frmtd_end_date,
+                'additionalstatus': project_open,
+                'complete': project.complete
+            }
+            posted_projects.append(newProjectJSON)
+
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(posts))
+        self.response.write(json.dumps(posted_projects))
+
+        # jac = get_personal_jac()
+        # if jac:
+        #     posts = jac.get_posts()
+        # else:
+        #     posts = {'error': 'User has no associated account. '
+        #              + 'Try logging out and logging in again.'}
 
 
 class ProjectBidsInfo(webapp2.RequestHandler):
@@ -79,10 +104,23 @@ class ProjectBidsInfo(webapp2.RequestHandler):
         return bids
 
     def get(self, project_id):
-        jac = job_api_calls.JobApiCalls()
-        bids = jac.get_project_bids(project_id)
+        project_id = int(project_id)
+        project = Project.get_by_id(project_id)
+        print project.winner
+        if project.winner == None:
+            bidders = project.bidders
+            bidders_expanded = []
+            for bidder_id in bidders: 
+                bidder = Account.get_by_id(bidder_id).guser.email()
+                bidders_expanded.append({
+                    'id': bidder_id,
+                    'email': bidder
+                })
+            response = bidders_expanded
+        else:
+            response = {'winner': project.winner}
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(bids))
+        self.response.write(json.dumps(response))
 
 
 class InboxMessages(webapp2.RequestHandler):
@@ -114,17 +152,62 @@ class SentMessages(webapp2.RequestHandler):
 class GetPlacedBids(webapp2.RequestHandler):
 
     def get(self):
-        jac = get_personal_jac()
-        placed_bids = jac.get_placed_bids()
+        account = get_account()
+        placed_bids_ids = account.projects_bidded_on
+        placed_bids = []
+        for i in placed_bids_ids:
+            project_id = int(i)
+            print project_id
+            project = Project.get_by_id(project_id)
+            print project
+            project_open = "open"
+            frmtd_end_date = project.end_date
+            print project.end_date.strftime('We are the %d, %b %Y')
+            if frmtd_end_date is not None:
+                frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
+            if project.winner is not None:
+                project_open = "Closed (Winner selected)"
+            projectJSON = {
+                'projectid': project_id,
+                'projectname': project.name,
+                'bidders': project.bidders,
+                'winner': project.winner,
+                'price': project.price,
+                'bidcount': len(project.bidders),
+                'enddate': frmtd_end_date,
+                'additionalstatus': project_open,
+                'complete': project.complete
+            }
+            placed_bids.append(projectJSON)
+        self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(placed_bids))
 
 
 class GetProjectDetails(webapp2.RequestHandler):
 
     def get(self, project_id):
-        response = self.get_info(project_id)
+        project_id = int(project_id)
+        project = Project.get_by_id(project_id)
+        project_open = "open"
+        frmtd_end_date = project.end_date
+        print project.end_date.strftime('We are the %d, %b %Y')
+        if frmtd_end_date is not None:
+            frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
+        if project.winner is not None:
+            project_open = "Closed (Winner selected)"
+        newProjectJSON = {
+            'projectid': project_id,
+            'projectname': project.name,
+            'bidders': project.bidders,
+            'winner': project.winner,
+            'price': project.price,
+            'bidcount': len(project.bidders),
+            'enddate': frmtd_end_date,
+            'additionalstatus': project_open,
+            'complete': project.complete
+        }
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
+        self.response.write(json.dumps(newProjectJSON))
 
     def get_info(self, project_id):
         jac = get_personal_jac()

@@ -1,11 +1,6 @@
 tr
-  td #{bid.descr} ($#{bid.bid_amount}) 
-    if winner
-      .pull-right Picked
-        if awardStatus == "pending"
-          , awaiting response
-    else
-      button.btn.btn-default.bid.pull-right(
-        project_id=projectid, 
-        user_id=bid.provider_userid
-      ) Pick 
+  td #{bidder}
+    button.btn.btn-default.bid.pull-right(
+      project_id=projectid,
+      bidder_id=bidder_id
+    ) Pick 

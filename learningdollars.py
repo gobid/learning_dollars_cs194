@@ -65,7 +65,7 @@ application = webapp2.WSGIApplication([
         name='milestonespage'
     ),
     webapp2.Route(
-        '/project',
+        '/project/<project_id:\d+>',
         handler=ProjectPage,
         name='projectpage'
     ),
@@ -174,7 +174,7 @@ application = webapp2.WSGIApplication([
     ),
     webapp2.Route(
         '/postnewproject/<projectname:[^/]+>/<projectdesc:[^/]+>/' +
-        '<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>',
+        '<jobtypecsv:[^/]+>/<budgetoption:[^/]+>/<duration:\d+>',
         handler=PostNewProject,
         name='postnewproject'
     ),
@@ -189,7 +189,8 @@ application = webapp2.WSGIApplication([
         name='getPlacedBids'
     ),
     webapp2.Route(
-        '/createproject/<name:[^/]+>/<price:[^/]+>',
+        '/createproject/<name:[^/]+>/<price:[^/]+>/<description:[^/]+>/' + 
+        '<date:\d+>/<month:\d+>/<year:\d+>/<job_type:\d+>',
         handler=CreateProject,
         name='createProject'
     ),

@@ -22,6 +22,10 @@
   height:320px;
 }
 
+#carousel-courses {
+  margin-bottom: 40px;
+}
+
 .carousel-indicators {
 	bottom: -30px;
 }

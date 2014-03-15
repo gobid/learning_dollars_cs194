@@ -1,34 +1,17 @@
 .container
   .panel.panel-default
     .panel-heading
-      h1 #{name}
+      h1 #{projectname}
     .panel-body
       .row
         .col-md-6
           table.table.table-striped
             tr
-              td #{short_descr}
-            tr
-              td Number of bids: 
-                b.pull-right #{bid_stats.count}
-            if bid_stats.avg
-              tr
-                td Average bid: 
-                  b.pull-right $#{bid_stats.avg}
-            tr
               td Budget: 
-                b.pull-right $#{budget.min} - $#{budget.max}
-            tr
-              td Created: 
-                b.pull-right #{start_date}
+                b.pull-right $#{price}
             tr
               td End date: 
-                b.pull-right #{end_date}
-            tr
-              td Requirements
-                ul
-                  each job in jobs
-                    li #{job}
+                b.pull-right #{enddate}
         .col-md-6
           table.table.table-striped#bids
             tr

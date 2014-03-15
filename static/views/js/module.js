@@ -12,12 +12,9 @@ $(document).ready(function() {
 		/* END jQuery Methods */
 	});
 
-	// Course was helpful method goes here
 	$(document).on("click", ".btn.btn-default#helpful", function() {
 		var moduleID = $(this).attr("moduleID");
 		var courseTitle = $(this).attr("courseTitle");
-		console.log(moduleID);
-		console.log(courseTitle);
 		upvote(moduleID, courseTitle);
 	});
 
@@ -29,12 +26,26 @@ $(document).ready(function() {
 
 });
 
+$(function () {
+        $("body").popover({
+            selector: "[data-toggle='popover']",
+            html: true,
+            title: function() {
+            	return $("#popover-head").html();
+            },
+            content: function() {
+            	return $("#popover-content").html();
+            }
+        });
+
+ });
+
 function upvote(moduleID, courseTitle) {
-	$.get("/upvote/" + moduleID+ "/" + courseTitle, function(data){
-		var response = data["success"];
+    $.get("/upvote/" + moduleID+ "/" + courseTitle, function(data){
+        var response = data["success"];
 		if(response) {
 			//var status = response['statusconfirmation']
-			$(".coursescore").after(data["success"]);
+            $(".coursescore").after(data["success"]);
 		} else {
 			$(".coursescore").after(data["error"]);
 		}
