@@ -4,8 +4,8 @@ $(document).ready(function() {
 	$("body").append(Templates.myposts());
 	$.get("/postsinfo", function(data){
 		var numPosts = data.length;
+		$("#projects_loader").remove();
 		if(numPosts > 0) {
-			$("#projects_loader").remove();
 			for (var p in data){
 				var project = data[p];
 				// var date_obj = new Date(project.enddate);
@@ -17,6 +17,11 @@ $(document).ready(function() {
 					Templates.posted_projects(project)
 				);
 			}
+		}
+		else {
+			$("#posted_projects").append(
+				Templates.no_posts()
+			);
 		}
 	});
 

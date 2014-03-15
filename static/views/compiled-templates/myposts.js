@@ -245,6 +245,38 @@ jade_debug.shift();;return buf.join("");
 }
 },
 
+"no_posts":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/myposts/no_posts.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined;
+jade_debug.unshift({ lineno: 0, filename: "jade/myposts/no_posts.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/myposts/no_posts.jade" });
+buf.push("<tr>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 1, filename: jade_debug[0].filename });
+buf.push("   ");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 2, filename: "jade/myposts/no_posts.jade" });
+buf.push("<td>");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 2, filename: jade_debug[0].filename });
+buf.push("No posts made yet.");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</td>");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</tr>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr    \n  td No posts made yet.");
+}
+},
+
 "post_success":
   function template(locals) {
 var jade_debug = [{ lineno: 1, filename: "jade/myposts/post_success.jade" }];
