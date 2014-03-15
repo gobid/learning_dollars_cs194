@@ -2,7 +2,7 @@ import webapp2
 import json
 
 from config import config
-from models import Module, Account, Project
+from models import Module, Account, Project, Message
 from functions import get_account
 
 # Info Classes (JSON response)
@@ -134,12 +134,22 @@ class ProjectBidsInfo(webapp2.RequestHandler):
 class InboxMessages(webapp2.RequestHandler):
 
     def get(self):
-        userid = get_account.key.id()
-        messages = Message.query(touserid == userid).fetch()
+        userid = get_account().key.id()
+        messages = Message.query(Message.touserid == userid).fetch()
         messages = sorted(
             messages,
-            key=lambda message: message['datetime']
+            key=lambda message: message.datetime
         )
+        messages_out = []
+        for m in messages:
+            m_out = {
+                'fromuserid' : m.fromuserid,
+                'touserid' : m.touserid,
+                'subject' : m.subject,
+                'message' : m.message,
+                'datetime' : m.datetime.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            messages_out.append(m_out)
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(messages))
 
@@ -147,14 +157,24 @@ class InboxMessages(webapp2.RequestHandler):
 class SentMessages(webapp2.RequestHandler):
 
     def get(self):
-        userid = get_account.key.id()
-        messages = Message.query(fromuserid == userid).fetch()
+        userid = get_account().key.id()
+        messages = Message.query(Message.fromuserid == userid).fetch()
         messages = sorted(
             messages,
-            key=lambda message: message['datetime']
+            key=lambda message: message.datetime
         )
+        messages_out = []
+        for m in messages:
+            m_out = {
+                'fromuserid' : m.fromuserid,
+                'touserid' : m.touserid,
+                'subject' : m.subject,
+                'message' : m.message,
+                'datetime' : m.datetime.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            messages_out.append(m_out)
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(messages))
+        self.response.write(json.dumps(messages_out))
 
 
 class GetPlacedBids(webapp2.RequestHandler):

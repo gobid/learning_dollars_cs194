@@ -179,7 +179,7 @@ application = webapp2.WSGIApplication([
         name='postnewproject'
     ),
     webapp2.Route(
-        '/sendMessage/<project_id:\d+>/<message_text:[^/]+>/<user_name:\w+>',
+        '/sendMessage/<subject_text:[^/]+>/<message_text:[^/]+>/<to_email:[^/]+>',
         handler=SendMessage,
         name='sendMessage'
     ),

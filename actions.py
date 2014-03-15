@@ -3,10 +3,11 @@ import json
 import HTMLParser
 import datetime
 
+from google.appengine.api import users
 from config import config
 from ocw import youtube
 from ocw import ocwsearch
-from models import Module, Account, Project
+from models import Module, Account, Project, Message
 from functions import get_account
 import datetime
 
@@ -210,15 +211,28 @@ class PostNewProject(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
+# Messages
 
 class SendMessage(webapp2.RequestHandler):
 
     def get(self, subject_text, message_text, to_email):
-        accounts = Account.query(guser == to_email).fetch()
-        if accounts > 0:
+        user = users.User(to_email)
+        accounts = Account.query(Account.guser == user).fetch()
+        if len(accounts) > 0:
             account_to = accounts[0]
             touserid = account_to.key.id()
-        fromuserid = get_account
+            fromuserid = get_account().key.id()
+            message = Message(
+                fromuserid=fromuserid,
+                touserid=touserid,
+                subject=subject_text,
+                message=message_text,
+                datetime=datetime.datetime.now()
+            )
+            message.put()
+            response = {'response':'success!'}
+        else:
+            response = {'error': 'the email does not exist'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
