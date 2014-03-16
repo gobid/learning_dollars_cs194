@@ -152,12 +152,13 @@ class BidOnProject(webapp2.RequestHandler):
             response = 'Not logged into account.'
         account_id = account.key.id()
         project = Project.get_by_id(project_id)
-
+        print "hit bid on project"
         if project:
             #check to see if already bid on
             if account_id in project.bidders:
                 response = 'User already bid on this project'
             else:
+                print "hit successfully submitted"
                 project.bidders.append(account_id)
                 project.put()
                 response = 'Success'

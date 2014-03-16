@@ -80,29 +80,19 @@ function toggle_form(e) {
 
 function make_bid_request(elementid) {
 	console.log(elementid);
-	projectid = $("#" + elementid).attr("jobid");
+	console.log("button fired!!!!!!");
+
+	var projectid = $("#" + elementid).attr("jobid");
 	$.get('/bidonproject/' + projectid, function(response){
-		if(response === "success") {
+		if(response === "Success") {
 			console.log("SUCESSSSS");
-			responseGood = response['statusconfirmation'];
-			// if ($("#r" + id).size() == 0) {
-			// 	$("#" + id).text('Update bid');
-			// 	$("#" + id).after("<button type='button' class='btn" + 
-			// 		" btn-default btn-lg bid_retract' projectid ='" + id +
-			// 		"' id='r" + id + "'>Retract Bid</button>");
-			// 	initializePage();
-			// }
+			var string = "#bid_submit" + elementid;
+			console.log("this is the element id:" + elementid);
+			$("#bid_submit" + projectid).remove();
+			$(".projectstatus" + projectid).append("<div class='alert alert-success'>Already placed</div>");
+			//remove button. say bid already placed
 		} else {
 			console.log(response);
-			// response = data['errors'];
-			// if (!response) response = data['error'];
-			// else response = response['error']['longmsg'];
-			// if (!($('.alert.alert-warning')[0])) {
-			// 	// nothing + id gives button
-			// 	console.log('id ' + id)
-			// 	$('#' + id).after('<div class = "alert alert-warning">' + 
-			// 		response + '</div>') 
-			// }
 		}
 	});
 }
