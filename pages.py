@@ -85,6 +85,7 @@ class MailboxPage(webapp2.RequestHandler):
         template_values = basicinfo(users.get_current_user(), self)
         template_values['title'] = 'Mailbox'
         template_values['compiled_template'] = 'mailbox.js'
+        template_values['datalink'] = 'messagesinfo'
         template_values['javascript'] = 'mailbox.js'
         template = JINJA_ENVIRONMENT.get_template('templates/template.html')
         self.response.write(template.render(template_values))

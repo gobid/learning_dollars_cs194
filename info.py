@@ -123,51 +123,48 @@ class ProjectBidsInfo(webapp2.RequestHandler):
         self.response.write(json.dumps(response))
 
 
-class InboxMessages(webapp2.RequestHandler):
+class MessagesInfo(webapp2.RequestHandler):
 
     def get(self):
         userid = get_account().key.id()
-        messages = Message.query(Message.touserid == userid).fetch()
-        messages = sorted(
-            messages,
-            key=lambda message: message.datetime
+        # inbox messages
+        inboxMessages = Message.query(Message.touserid == userid).fetch()
+        inboxMessages = sorted(
+            inboxMessages,
+            key=lambda inboxMessage: inboxMessage.datetime
         )
-        messages_out = []
-        for m in messages:
-            m_out = {
-                'fromuserid' : m.fromuserid,
-                'touserid' : m.touserid,
-                'subject' : m.subject,
-                'message' : m.message,
-                'datetime' : m.datetime.strftime("%Y-%m-%d %H:%M:%S")
+        inbox_messages_out = []
+        for im in inboxMessages:
+            im_out = {
+                'fromuserid' : im.fromuserid,
+                'touserid' : im.touserid,
+                'subject' : im.subject,
+                'message' : im.message,
+                'datetime' : im.datetime.strftime("%Y-%m-%d %H:%M:%S")
             }
-            messages_out.append(m_out)
+            inbox_messages_out.append(im_out)
+        # sent messages
+        sentMessages = Message.query(Message.fromuserid == userid).fetch()
+        sentMessages = sorted(
+            sentMessages,
+            key=lambda sentMessage: sentMessage.datetime
+        )
+        sent_messages_out = []
+        for sm in sentMessages:
+            sm_out = {
+                'fromuserid' : sm.fromuserid,
+                'touserid' : sm.touserid,
+                'subject' : sm.subject,
+                'message' : sm.message,
+                'datetime' : sm.datetime.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            sent_messages_out.append(sm_out)
+        messages = {
+            'inbox_messages' : inbox_messages_out,
+            'sent_messages' : sent_messages_out
+        }
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(messages))
-
-
-class SentMessages(webapp2.RequestHandler):
-
-    def get(self):
-        userid = get_account().key.id()
-        messages = Message.query(Message.fromuserid == userid).fetch()
-        messages = sorted(
-            messages,
-            key=lambda message: message.datetime
-        )
-        messages_out = []
-        for m in messages:
-            m_out = {
-                'fromuserid' : m.fromuserid,
-                'touserid' : m.touserid,
-                'subject' : m.subject,
-                'message' : m.message,
-                'datetime' : m.datetime.strftime("%Y-%m-%d %H:%M:%S")
-            }
-            messages_out.append(m_out)
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(messages_out))
-
 
 class GetPlacedBids(webapp2.RequestHandler):
 

@@ -9,7 +9,7 @@ from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
     SendMessage, BidOnProject, PostNewProject, RetractBid, AcceptBid, CreateModule
 
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
-    PostsInfo, InboxMessages, SentMessages, GetPlacedBids, \
+    PostsInfo, MessagesInfo, GetPlacedBids, \
     GetProjectDetails, GetIncomingMilestoneList, GetOutgoingMilestoneList
 
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
@@ -108,14 +108,9 @@ application = webapp2.WSGIApplication([
         name='getincomingmilestones'
     ),
     webapp2.Route(
-        '/inboxMessages',
-        handler=InboxMessages,
-        name='getInboxMessages'
-    ),
-    webapp2.Route(
-        '/sentMessages',
-        handler=SentMessages,
-        name='getSentMessages'
+        '/messagesinfo',
+        handler=MessagesInfo,
+        name='getmessages'
     ),
     webapp2.Route(
         '/projectDetails/<project_id:\d+>',
