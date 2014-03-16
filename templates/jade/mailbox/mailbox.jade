@@ -20,10 +20,10 @@
               th Date/Time
             each message in inboxMessages
               tr
-                td message.fromuserid
-                td message.subject
-                td message.message
-                td message.datetime
+                td #{message.fromuseremail}
+                td #{message.subject}
+                td #{message.message}
+                td #{message.datetime}
         #sent.tab-pane.fade
           table#sentMessages.table.table-hover
             tr
@@ -33,10 +33,10 @@
               th Date/Time
             each message in sentMessages
               tr
-                td message.fromuserid
-                td message.subject
-                td message.message
-                td message.datetime
+                td #{message.touseremail}
+                td #{message.subject}
+                td #{message.message}
+                td #{message.datetime}
         #newMessage.tab-pane.fade
           form.newMessageForm
             .form-group

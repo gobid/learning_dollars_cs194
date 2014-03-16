@@ -143,9 +143,9 @@ class MessagesInfo(webapp2.RequestHandler):
         )
         inbox_messages_out = []
         for im in inboxMessages:
+            fromuseremail = Account.get_by_id(im.fromuserid).guser.email();
             im_out = {
-                'fromuserid' : im.fromuserid,
-                'touserid' : im.touserid,
+                'fromuseremail' : fromuseremail,
                 'subject' : im.subject,
                 'message' : im.message,
                 'datetime' : im.datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -159,9 +159,9 @@ class MessagesInfo(webapp2.RequestHandler):
         )
         sent_messages_out = []
         for sm in sentMessages:
+            touseremail = Account.get_by_id(sm.touserid).guser.email()
             sm_out = {
-                'fromuserid' : sm.fromuserid,
-                'touserid' : sm.touserid,
+                'touseremail' : touseremail,
                 'subject' : sm.subject,
                 'message' : sm.message,
                 'datetime' : sm.datetime.strftime("%Y-%m-%d %H:%M:%S")
