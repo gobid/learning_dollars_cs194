@@ -72,42 +72,13 @@
         for job in jobs
           .place-bid
             b
-              a(target='_blank', href=job.projecturl) #{job.projectname} 
-              if job.averagebid != false
-                b $#{job.averagebid}
+              a(target='_blank', href="project/#{job.projectid}") #{job.projectname}
             br
             button.btn.btn-default.btn-small(
-              id = 'job_container_toggle#{job.projectid}',
+              id = 'bid_submit#{job.projectid}',
               type='button', 
-              jobid='#{job.projecti}'
+              jobid='#{job.projectid}'
             ) Bid on this project
-              span.caret
-            div(
-              class = 'job_container#{job.projectid}', 
-              style='display: none;'
-            )
-              | Amount:
-              input.form-control(
-                id = 'amount#{job.projectid}'
-                type='number', 
-                placeholder='greater than $250'
-              )
-              | Days:
-              input.form-control(
-                id = 'days#{job.projectid}',
-                type='number'
-              )
-              | Description:
-              textarea.form-control(
-                id = 'description#{job.projectid}'
-              )
-              br
-              button.btn.btn-default.btn-small.bid_submit(
-                id = '#{job.projectid}'
-                type='button', 
-                projectid='#{job.projectid}'
-              )
-              | Place Bid
   .row
     .col-md-12
       div(align='center')

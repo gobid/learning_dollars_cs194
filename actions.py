@@ -144,13 +144,23 @@ class ReleaseMilestone(webapp2.RequestHandler):
 
 class BidOnProject(webapp2.RequestHandler):
 
-    def get(self, project_id, amount, days, description):
-        jac = get_personal_jac()
-        if jac:
-            response = jac.place_bid_on_project(
-                project_id, amount, days, description)
-        else:
-            response = {'error': 'You are not logged in. '}
+    def get(self, project_id):
+        project_id = int(project_id)
+        account = get_account()
+        response = 'error'
+        if account == None:
+            response = 'Not logged into account.'
+        account_id = account.key.id()
+        project = Project.get_by_id(project_id)
+
+        if project:
+            #check to see if already bid on
+            if account_id in project.bidders:
+                response = 'User already bid on this project'
+            else:
+                project.bidders.append(account_id)
+                project.put()
+                response = 'Success'
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
@@ -239,28 +249,28 @@ class SendMessage(webapp2.RequestHandler):
 # Projects
 
 
-class CreateProject(webapp2.RequestHandler):
+# class CreateProject(webapp2.RequestHandler):
 
-    def get(self, name, price, description, date, month, year, job_type):
-        end_date = datetime.datetime(int(year), int(month), int(date))
-        project = Project(
-            name=name,
-            price=price,
-            description=description,
-            end_date=end_date,
-            job_type=job_type
-        )
-        project.put()  # do error checking on puts later
-        account = get_account()
-        account.projects_posted.append(project.key.id())
-        account.put()
-        if account == None:
-            response = 'No logged in account.'
-        else:
-            response = 'Logged in account found. Project Posted'
-        account.projects_posted.append(project)
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
+#     def get(self, name, price, description, date, month, year, job_type):
+#         end_date = datetime.datetime(int(year), int(month), int(date))
+#         project = Project(
+#             name=name,
+#             price=price,
+#             description=description,
+#             end_date=end_date,
+#             job_type=job_type
+#         )
+#         project.put()  # do error checking on puts later
+#         account = get_account()
+#         account.projects_posted.append(project.key.id())
+#         account.put()
+#         if account == None:
+#             response = 'No logged in account.'
+#         else:
+#             response = 'Logged in account found. Project Posted'
+#         account.projects_posted.append(project)
+#         self.response.headers['Content-Type'] = 'application/json'
+#         self.response.write(json.dumps(response))
 
 
 class AddBidderToProject(webapp2.RequestHandler):

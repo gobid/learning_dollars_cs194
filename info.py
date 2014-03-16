@@ -26,17 +26,45 @@ class AccountInfo(webapp2.RequestHandler):
 
 class ModuleInfo(webapp2.RequestHandler):
 
+    def convert_to_project_JSON(self, project):
+        account_id = get_account().key.id()
+        print account_id
+        frmtd_end_date = project.end_date
+        if frmtd_end_date is not None:
+            frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
+        alreadyBidOn = False
+        if account_id in project.bidders:
+            alreadyBidOn = True
+            print "already bid on!!!!!"
+        newProjectJSON = {
+            'projectid': project.key.id(),
+            'projectname': project.name,
+            'bidders': project.bidders,
+            'winner': project.winner,
+            'price': project.price,
+            'bidcount': len(project.bidders),
+            'enddate': frmtd_end_date,
+            'complete': project.complete,
+            'alreadyBidOn' : alreadyBidOn
+        }
+        return newProjectJSON
+
     def get_info(self, module_id):
         module_id = int(module_id)
         module = Module.get_by_id(module_id)
-        jobs = []
+        newJobsJSON = []
+        jobs = Project.query(Project.job_type == module.name).fetch()
+        print jobs
+        for job in jobs:
+            newProject = self.convert_to_project_JSON(job);
+            newJobsJSON.append(newProject)
         info = {
             'name': module.name,
             'youtube': module.youtube,
             'yt_type': module.yt_type,
             'courses': module.courses,
             'category': module.category,
-            'jobs': jobs
+            'jobs': newJobsJSON
         }
         return info
 

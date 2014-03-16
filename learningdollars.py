@@ -14,7 +14,7 @@ from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
 
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
     BidOnProject, PostNewProject, RetractBid, RequestReleaseMilestone, \
-    ReleaseMilestone, CreateProject, AddBidderToProject, ChooseWinner, \
+    ReleaseMilestone, AddBidderToProject, ChooseWinner, \
     Upvote, Downvote
 
 application = webapp2.WSGIApplication([
@@ -157,8 +157,7 @@ application = webapp2.WSGIApplication([
         name='acceptbid'
     ),
     webapp2.Route(
-        '/bidonproject/<project_id:\d+>/<amount:[^/]+>/<days:\d+>/' +
-        '<description:[^/]+>',
+        '/bidonproject/<project_id:\d+>',
         handler=BidOnProject,
         name='bidonproject'
     ),
@@ -183,12 +182,12 @@ application = webapp2.WSGIApplication([
         handler=GetPlacedBids,
         name='getPlacedBids'
     ),
-    webapp2.Route(
-        '/createproject/<name:[^/]+>/<price:[^/]+>/<description:[^/]+>/' + 
-        '<date:\d+>/<month:\d+>/<year:\d+>/<job_type:\d+>',
-        handler=CreateProject,
-        name='createProject'
-    ),
+    # webapp2.Route(
+    #     '/createproject/<name:[^/]+>/<price:[^/]+>/<description:[^/]+>/' + 
+    #     '<date:\d+>/<month:\d+>/<year:\d+>/<job_type:\d+>',
+    #     handler=CreateProject,
+    #     name='createProject'
+    # ),
     webapp2.Route(
         '/addbiddertoproject/<project_id:\d+>',
         handler=AddBidderToProject,
