@@ -24,6 +24,7 @@ $(document).ready(function(){
 							'bidder_id': bidder.id,
 							'bidder': bidder.email,
 							'projectid': project_id,
+							'is_owner': bidder.is_owner
 						})
 					);
 				}
