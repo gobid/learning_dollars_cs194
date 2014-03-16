@@ -14,12 +14,6 @@
           h2 Post New Project
           input#name.form-control(type='text', placeholder='Name')
           br
-          input#type.form-control(
-            type='text', 
-            placeholder='Category'
-          )
-          input.typeahead(id="test", data-provide="typeahead")
-          br
           textarea#description.form-control(placeholder = 'Description')
           br
           label Budget Option:
@@ -35,6 +29,12 @@
           select#duration.form-control
             - for (var i = 1; i <= 60; i++)
               option(value=i) #{i}
+          br
+          div#test
+            input.form-control.typeahead#job_type(
+              data-provide = "typeahead", 
+              placeholder = "Category"
+            )
           br
           button#post_project.btn.btn-default.pull-right(
             type='button'
