@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
 	// initialize runtime js template
-	$("body").append(Templates.mailbox());
 	var datalink = $("#datalink").val();
 	$.get(datalink, function(data){
 		$("body").append(Templates.mailbox({
