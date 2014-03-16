@@ -88,6 +88,11 @@ application = webapp2.WSGIApplication([
         name='modules'
     ),
     webapp2.Route(
+        '/modulesinfo.json',
+        handler=ModulesInfo,
+        name='modules'
+    ),
+    webapp2.Route(
         '/getprojectbids/<project_id:\d+>',
         handler=ProjectBidsInfo,
         name='projectbids'
