@@ -137,59 +137,60 @@
           for course in courses
             if course != ""
               if course.Title
-                if count == 0
-                  .item.active(align='center')
-                    .courseinfo
-                      a(target='_blank', href=course.CourseURL) #{course.Title}
+                if course.scoreRanking > 0
+                  if count == 0
+                    .item.active(align='center')
+                      .courseinfo
+                        a(target='_blank', href=course.CourseURL) #{course.Title}
+                        br
+                        | #{course.Institution} (#{course.TeachingDate})
+                        br
+                        | Instructors: #{course.Instructors}
+                        br
+                        | Description: #{course.Description}
+                        br
+                        a(target='_blank', href=course.DownloadPageLink) Course Materials
+                        br
                       br
-                      | #{course.Institution} (#{course.TeachingDate})
+                      .coursescore
+                        | #{course.scoreRanking} people found this course helpful.
                       br
-                      | Instructors: #{course.Instructors}
+                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
+                        courseTitle='#{course.Title}',
+                        moduleID='#{category}'
+                      )
+                      | &nbsp; &nbsp; &nbsp;
+                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
+                        courseTitle='#{course.Title}',
+                        moduleID='#{category}'
+                      )
+                  else
+                    .item(align='center')
+                      .courseinfo
+                        a(target='_blank', href=course.CourseURL) #{course.Title}
+                        br
+                        | #{course.Institution} (#{course.TeachingDate})
+                        br
+                        | Instructors: #{course.Instructors}
+                        br
+                        | Description: #{course.Description}
+                        br
+                        a(target='_blank', href=course.DownloadPageLink) Course Materials
+                        br
                       br
-                      | Description: #{course.Description}
+                      .coursescore
+                        | #{course.scoreRanking} people found this course helpful.
                       br
-                      a(target='_blank', href=course.DownloadPageLink) Course Materials
-                      br
-                    br
-                    .coursescore
-                      | #{course.scoreRanking} people found this course helpful.
-                    br
-                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
-                      courseTitle='#{course.Title}',
-                      moduleID='#{category}'
-                    )
-                    | &nbsp; &nbsp; &nbsp;
-                    button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
-                      courseTitle='#{course.Title}',
-                      moduleID='#{category}'
-                    )
-                else
-                  .item(align='center')
-                    .courseinfo
-                      a(target='_blank', href=course.CourseURL) #{course.Title}
-                      br
-                      | #{course.Institution} (#{course.TeachingDate})
-                      br
-                      | Instructors: #{course.Instructors}
-                      br
-                      | Description: #{course.Description}
-                      br
-                      a(target='_blank', href=course.DownloadPageLink) Course Materials
-                      br
-                    br
-                    .coursescore
-                      | #{course.scoreRanking} people found this course helpful.
-                    br
-                    button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
-                      courseTitle='#{course.Title}',
-                      moduleID='#{category}'
-                    )
-                    | &nbsp; &nbsp; &nbsp;
-                    button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
-                      courseTitle='#{course.Title}',
-                      moduleID='#{category}'
-                    )
-              - count = count + 1 
+                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
+                        courseTitle='#{course.Title}',
+                        moduleID='#{category}'
+                      )
+                      | &nbsp; &nbsp; &nbsp;
+                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
+                        courseTitle='#{course.Title}',
+                        moduleID='#{category}'
+                      )
+                - count = count + 1 
           a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')
             span.glyphicon.glyphicon-chevron-left
           a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')
@@ -197,11 +198,20 @@
   .row
     .col-md-12
       div(align='center')
-        | None of these courses helpful? 
-        a(id="suggestcourse", data-toggle="popover", data-content="") Suggest a course!
-          div(class="hide", id="popover-head")
-            | Suggest A Course
-          div(class="hide", id="popover-content")
-            div(class="form")
-              input(type="text", class="form-control", placeholder="Course URL")
-            button#submitsuggestion.btn.btn-default.btn-lg Submit
+        form.suggestCourseForm
+          .form-group
+            input#suggestURL.form-control(type="text", name="suggestURL", placeholder="Course URL")
+          .form-group
+            input#suggestTitle.form-control(type="text", name="suggestTitle", placeholder="Title")
+          .form-group
+            input#suggestInstitution.form-control(type="text", name="suggestInstitution", placeholder="Institution")
+          .form-group
+            input#suggestTeachDate.form-control(type="text", name="suggestTeachDate", placeholder="Teaching Date")
+          .form-group
+            input#suggestInstructors.form-control(type="text", name="suggestInstructors", placeholder="Instructors")
+          .form-group
+            textarea#suggestDesc.form-control(rows="3", name="suggestDesc", placeholder="Description")
+          .form-group
+            input#suggestMaterials.form-control(type="text", name="suggestMaterials", placeholder="Course Materials Link")      
+          .form-group
+            button#submitSuggestion.btn.btn-default.btn-lg(type="button", value="Submit", moduleID='#{category}') Submit

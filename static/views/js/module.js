@@ -8,9 +8,13 @@ $(document).ready(function() {
 		/* START jQuery Methods */
 
 		initializePage();
+
+	});
+
+
 		
 		/* END jQuery Methods */
-	});
+});
 
 	$(document).on("click", ".btn.btn-default#helpful", function() {
 		var moduleID = $(this).attr("moduleID");
@@ -24,7 +28,19 @@ $(document).ready(function() {
 		downvote(moduleID, courseTitle);
 	});
 
-});
+	$(document).on("click", "#submitSuggestion", function() {
+		var moduleID = $(this).attr("moduleID");
+		var courseURL = $("#suggestURL").val();
+		var title = $("#suggestTitle").val();
+		var institution = $("#suggestInstitution").val();
+		var teachDate = $("#suggestTeachDate").val();
+		var instructors = $("#suggestInstructors").val();
+		var description = $("#suggestDesc").val();
+		var materials = $("#suggestMaterials").val();
+		alert("here");
+		addCourse(moduleID, courseURL, title, institution, teachDate, instructors, description, materials);
+	})
+
 
 $(function () {
         $("body").popover({
@@ -39,6 +55,18 @@ $(function () {
         });
 
  });
+
+
+function addCourse(moduleID, courseURL, title, institution, teachDate, instructors, description, materials) {
+    $.get("/addcourse/" + moduleID + "/" + encodeURIComponent(courseURL) + "/" + title + "/" + institution + "/" + teachDate + "/" + instructors + "/" + description + "/" + encodeURIComponent(materials), function(data){
+        var response = data["success"];
+		if(response) {
+			alert("submitted successfully");
+		} else {
+			alert("no");
+		}
+	});
+}
 
 function upvote(moduleID, courseTitle) {
     $.get("/upvote/" + moduleID+ "/" + courseTitle, function(data){

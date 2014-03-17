@@ -343,3 +343,30 @@ class Downvote(webapp2.RequestHandler):
             response = {'error': 'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+
+class AddCourse(webapp2.RequestHandler):
+
+    def get(self, moduleID, courseURL, title, institution, teachDate, instructors, description, materials):
+        account = get_account()
+        if account:
+            newCourse = dict()
+            newCourse["CourseURL"] = HTMLParser.HTMLParser().unescape(courseURL);
+            newCourse["Title"] = title;
+            newCourse["Institution"] = institution;
+            newCourse["TeachingDate"] = teachDate;
+            newCourse["Instructors"] = instructors;
+            newCourse["Description"] = description;
+            newCourse["DownloadPageLink"] = HTMLParser.HTMLParser().unescape(materials);
+            newCourse["scoreRanking"] = 1;
+            moduleID = int(moduleID)
+            match = Module.query(Module.category == moduleID).fetch()
+            match = match[0]
+            moduleCourses = match.courses
+            moduleCourses.append(newCourse)
+            match.courses = moduleCourses
+            match.put()
+            response = {'success': 'Course submitted successfully.'}
+        else:
+            response = {'error': 'You are not logged in. '}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
