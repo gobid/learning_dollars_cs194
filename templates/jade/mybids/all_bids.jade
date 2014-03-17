@@ -1,14 +1,9 @@
 tr
   td
-    a(href="project?id=#{projectid}")
+    a(href="project/#{projectid}")
       |#{projectname}
-  td
-    a(href="project?id=#{projectid}")
-      |#{bidcount}
   td #{enddate}
-  td
-    button(type="Submit", state="1", projectid=projectid, class="btn btn-default accept_bid").
-      Accept
-    button(type="Submit", state="0", projectid=projectid, class="btn btn-default decline_bid").
-      Decline
-
+  if additionalstatus == 'open'
+    td #{additionalstatus}
+  else
+    td Winner: #{winner_email}

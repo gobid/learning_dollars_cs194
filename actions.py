@@ -1,12 +1,15 @@
 import webapp2
 import json
 import HTMLParser
+import datetime
 
+from google.appengine.api import users
 from config import config
 from ocw import youtube
 from ocw import ocwsearch
-from models import Module, Account, Project
+from models import Module, Account, Project, Message
 from functions import get_account
+import datetime
 
 # Action Classes (JSON response)
 
@@ -53,7 +56,6 @@ class UpdateModules(webapp2.RequestHandler):
         self.response.write(json.dumps(categories))
 
 
-
 class CreateModule(webapp2.RequestHandler):
 
     def get(self, modulename):
@@ -61,7 +63,7 @@ class CreateModule(webapp2.RequestHandler):
 
         match = Module.query(Module.name == modulename).fetch()
         if len(match) > 0:
-             response = {'response' : 'module exists'}
+            response = {'response': 'module exists'}
         else:
             y = youtube.Youtube()
             ocws = ocwsearch.OCWSearch()
@@ -74,12 +76,11 @@ class CreateModule(webapp2.RequestHandler):
                 yt_type=y_type, courses=course_list
             )
             module.put()
-            response = {'response' : 'successfully stored'}
+            response = {'response': 'successfully stored'}
             print "success!"
         print response
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
-
 
 
 class SelectWinner(webapp2.RequestHandler):
@@ -143,13 +144,22 @@ class ReleaseMilestone(webapp2.RequestHandler):
 
 class BidOnProject(webapp2.RequestHandler):
 
-    def get(self, project_id, amount, days, description):
-        jac = get_personal_jac()
-        if jac:
-            response = jac.place_bid_on_project(
-                project_id, amount, days, description)
-        else:
-            response = {'error': 'You are not logged in. '}
+    def get(self, project_id):
+        project_id = int(project_id)
+        account = get_account()
+        response = 'error'
+        if account == None:
+            response = 'Not logged into account.'
+        account_id = account.key.id()
+        project = Project.get_by_id(project_id)
+        if project:
+            # check to see if already bid on
+            if account_id in project.bidders:
+                response = 'User already bid on this project'
+            else:
+                project.bidders.append(account_id)
+                project.put()
+                response = 'Success'
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
@@ -187,36 +197,18 @@ class PostNewProject(webapp2.RequestHandler):
 
     def get(self, projectname, projectdesc, jobtypecsv, budgetoption,
             duration):
-        jac = get_personal_jac()
-        if jac:
-            response = jac.post_new_project(
-                projectname, projectdesc, jobtypecsv, budgetoption, duration)
-        else:
-            response = {'error': 'You are not logged in. '}
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
-
-
-class SendMessage(webapp2.RequestHandler):
-
-    def get(self, subject_text, message_text, to_email):
-        accounts = Account.query(guser == to_email).fetch()
-        if accounts > 0:
-            account_to = accounts[0]
-            touserid = account_to.key.id()
-        fromuserid = get_account
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
-
-# Projects
-class CreateProject(webapp2.RequestHandler):
-
-    def get(self, name, price):
+        user_id = get_account().key.id()
+        end_date = datetime.datetime.now()
+        end_date = end_date + datetime.timedelta(days=int(duration))
         project = Project(
-            name=name,
-            price=float(price)
+            name=projectname,
+            price=budgetoption,
+            description=projectdesc,
+            job_type=jobtypecsv,
+            end_date=end_date,
+            owner=user_id
         )
-        project.put() # do error checking on puts later
+        project.put()  # do error checking on puts later
         account = get_account()
         account.projects_posted.append(project.key.id())
         account.put()
@@ -228,6 +220,59 @@ class CreateProject(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
+# Messages
+
+
+class SendMessage(webapp2.RequestHandler):
+
+    def get(self, subject_text, message_text, to_email):
+        user = users.User(to_email)
+        accounts = Account.query(Account.guser == user).fetch()
+        if len(accounts) > 0:
+            account_to = accounts[0]
+            touserid = account_to.key.id()
+            fromuserid = get_account().key.id()
+            message = Message(
+                fromuserid=fromuserid,
+                touserid=touserid,
+                subject=subject_text,
+                message=message_text,
+                datetime=datetime.datetime.now()
+            )
+            message.put()
+            response = {'response': 'success!'}
+        else:
+            response = {'error': 'the email does not exist'}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+# Projects
+
+
+# class CreateProject(webapp2.RequestHandler):
+
+#     def get(self, name, price, description, date, month, year, job_type):
+#         end_date = datetime.datetime(int(year), int(month), int(date))
+#         project = Project(
+#             name=name,
+#             price=price,
+#             description=description,
+#             end_date=end_date,
+#             job_type=job_type
+#         )
+# project.put()  # do error checking on puts later
+#         account = get_account()
+#         account.projects_posted.append(project.key.id())
+#         account.put()
+#         if account == None:
+#             response = 'No logged in account.'
+#         else:
+#             response = 'Logged in account found. Project Posted'
+#         account.projects_posted.append(project)
+#         self.response.headers['Content-Type'] = 'application/json'
+#         self.response.write(json.dumps(response))
+
+
 class AddBidderToProject(webapp2.RequestHandler):
 
     def get(self, project_id):
@@ -236,7 +281,8 @@ class AddBidderToProject(webapp2.RequestHandler):
         print project
         if project:
             account = get_account()
-            account_id = int(account.key.id()) # must do redirect for session checks
+            # must do redirect for session checks
+            account_id = int(account.key.id())
             print account_id
             if account_id not in project.bidders:
                 project.bidders.append(account_id)
@@ -250,6 +296,7 @@ class AddBidderToProject(webapp2.RequestHandler):
             response = {'error': 'No project of given id.'}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+
 
 class ChooseWinner(webapp2.RequestHandler):
 

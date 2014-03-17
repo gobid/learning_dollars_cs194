@@ -9,12 +9,12 @@ from actions import UpdateModules, CreateMilestonePayment, SelectWinner, \
     SendMessage, BidOnProject, PostNewProject, RetractBid, AcceptBid, CreateModule
 
 from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
-    PostsInfo, InboxMessages, SentMessages, GetPlacedBids, \
+    PostsInfo, MessagesInfo, GetPlacedBids, \
     GetProjectDetails, GetIncomingMilestoneList, GetOutgoingMilestoneList
 
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
     BidOnProject, PostNewProject, RetractBid, RequestReleaseMilestone, \
-    ReleaseMilestone, CreateProject, AddBidderToProject, ChooseWinner, \
+    ReleaseMilestone, AddBidderToProject, ChooseWinner, \
     Upvote, Downvote, AddCourse
 
 application = webapp2.WSGIApplication([
@@ -65,7 +65,7 @@ application = webapp2.WSGIApplication([
         name='milestonespage'
     ),
     webapp2.Route(
-        '/project',
+        '/project/<project_id:\d+>',
         handler=ProjectPage,
         name='projectpage'
     ),
@@ -84,6 +84,11 @@ application = webapp2.WSGIApplication([
     ),
     webapp2.Route(
         '/modulesinfo',
+        handler=ModulesInfo,
+        name='modules'
+    ),
+    webapp2.Route(
+        '/modulesinfo.json',
         handler=ModulesInfo,
         name='modules'
     ),
@@ -108,14 +113,9 @@ application = webapp2.WSGIApplication([
         name='getincomingmilestones'
     ),
     webapp2.Route(
-        '/inboxMessages',
-        handler=InboxMessages,
-        name='getInboxMessages'
-    ),
-    webapp2.Route(
-        '/sentMessages',
-        handler=SentMessages,
-        name='getSentMessages'
+        '/messagesinfo',
+        handler=MessagesInfo,
+        name='getmessages'
     ),
     webapp2.Route(
         '/projectDetails/<project_id:\d+>',
@@ -162,8 +162,7 @@ application = webapp2.WSGIApplication([
         name='acceptbid'
     ),
     webapp2.Route(
-        '/bidonproject/<project_id:\d+>/<amount:[^/]+>/<days:\d+>/' +
-        '<description:[^/]+>',
+        '/bidonproject/<project_id:\d+>',
         handler=BidOnProject,
         name='bidonproject'
     ),
@@ -174,12 +173,12 @@ application = webapp2.WSGIApplication([
     ),
     webapp2.Route(
         '/postnewproject/<projectname:[^/]+>/<projectdesc:[^/]+>/' +
-        '<jobtypecsv:[^/]+>/<budgetoption:\d+>/<duration:\d+>',
+        '<jobtypecsv:[^/]+>/<budgetoption:[^/]+>/<duration:\d+>',
         handler=PostNewProject,
         name='postnewproject'
     ),
     webapp2.Route(
-        '/sendMessage/<project_id:\d+>/<message_text:[^/]+>/<user_name:\w+>',
+        '/sendMessage/<subject_text:[^/]+>/<message_text:[^/]+>/<to_email:[^/]+>',
         handler=SendMessage,
         name='sendMessage'
     ),
@@ -188,11 +187,12 @@ application = webapp2.WSGIApplication([
         handler=GetPlacedBids,
         name='getPlacedBids'
     ),
-    webapp2.Route(
-        '/createproject/<name:[^/]+>/<price:[^/]+>',
-        handler=CreateProject,
-        name='createProject'
-    ),
+    # webapp2.Route(
+    #     '/createproject/<name:[^/]+>/<price:[^/]+>/<description:[^/]+>/' +
+    #     '<date:\d+>/<month:\d+>/<year:\d+>/<job_type:\d+>',
+    #     handler=CreateProject,
+    #     name='createProject'
+    # ),
     webapp2.Route(
         '/addbiddertoproject/<project_id:\d+>',
         handler=AddBidderToProject,

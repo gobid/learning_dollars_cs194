@@ -15,22 +15,36 @@
           table#inboxMessages.table.table-hover
             tr
               th From
+              th Subject
               th Message
-              th Project Name (ID)
+              th Date/Time
+            each message in inboxMessages
+              tr
+                td #{message.fromuseremail}
+                td #{message.subject}
+                td #{message.message}
+                td #{message.datetime}
         #sent.tab-pane.fade
           table#sentMessages.table.table-hover
             tr
-              th To
+              th From
+              th Subject
               th Message
-              th Project Name (ID)
+              th Date/Time
+            each message in sentMessages
+              tr
+                td #{message.touseremail}
+                td #{message.subject}
+                td #{message.message}
+                td #{message.datetime}
         #newMessage.tab-pane.fade
           form.newMessageForm
             .form-group
               label To:
-              input#to_user_name.form-control(type='text', placeholder='User Name')
+              input#to_user_email.form-control(type='text', placeholder='Email')
             .form-group
-              label Project ID Number:
-              input#project_id.form-control(type='number', placeholder='Project ID #')
+              label Subject:
+              input#subject_text.form-control(type='text', placeholder='Subject')
             .form-group
               label Message:
               textarea#message_text.form-control(rows='3', placeholder='Enter Message Here')
