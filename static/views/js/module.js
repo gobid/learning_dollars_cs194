@@ -44,21 +44,6 @@ $(document).ready(function() {
 	})
 
 
-$(function () {
-        $("body").popover({
-            selector: "[data-toggle='popover']",
-            html: true,
-            title: function() {
-            	return $("#popover-head").html();
-            },
-            content: function() {
-            	return $("#popover-content").html();
-            }
-        });
-
- });
-
-
 function addCourse(moduleID, courseURL, title, institution, teachDate, instructors, description, materials) {
     $.get("/addcourse/" + moduleID + "/" + encodeURIComponent(courseURL) + "/" + title + "/" + institution + "/" + teachDate + "/" + instructors + "/" + description + "/" + encodeURIComponent(materials), function(data){
         var response = data["success"];
@@ -70,6 +55,8 @@ function addCourse(moduleID, courseURL, title, institution, teachDate, instructo
 		setTimeout(function(){
 			$(".alert").fadeOut();
 		}, 3000);
+	}).fail(function(){
+		$("#suggestionText").append(Templates.course_failure);
 	});
 }
 
@@ -90,6 +77,8 @@ function upvote(moduleID, courseTitle, count) {
 					$(".alert").fadeOut();
 			}, 1000);
 		}
+	}).fail(function(){
+		$(".coursescore#"+count).append(Templates.vote_general_failure);
 	});
 }
 
@@ -111,6 +100,8 @@ function downvote(moduleID, courseTitle, count) {
 					$(".alert").fadeOut();
 			}, 1000);
 		}
+	}).fail(function(){
+		$(".coursescore#"+count).append(Templates.vote_general_failure);
 	});
 }
 
