@@ -63,10 +63,13 @@ function addCourse(moduleID, courseURL, title, institution, teachDate, instructo
     $.get("/addcourse/" + moduleID + "/" + encodeURIComponent(courseURL) + "/" + title + "/" + institution + "/" + teachDate + "/" + instructors + "/" + description + "/" + encodeURIComponent(materials), function(data){
         var response = data["success"];
 		if(response) {
-			alert("submitted successfully");
+			$("#suggestionText").append(Templates.course_success());
 		} else {
-			alert("no");
+			$("#suggestionText").append(Templates.course_failure());
 		}
+		setTimeout(function(){
+			$(".alert").fadeOut();
+		}, 3000);
 	});
 }
 
@@ -75,7 +78,11 @@ function upvote(moduleID, courseTitle, count) {
         var response = data["success"];
 		if(response) {
 			var newScore = data["newScore"];
-            $(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+			if (newScore == 1) {
+				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> person found this course helpful.");
+			} else {
+				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+			}
             $("#rank"+count).attr("class", "text-success");
         } else {
 			$(".coursescore#"+count).append(Templates.vote_failure());
@@ -92,7 +99,11 @@ function downvote(moduleID, courseTitle, count) {
 		var response = data["success"];
 		if(response) {
 			var newScore = data["newScore"];
-			$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+			if (newScore == 1) {
+				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> person found this course helpful.");
+			} else {
+				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+			}
 			$("#rank"+count).attr("class", "text-danger");
 		} else {
 			$(".coursescore#"+count).append(Templates.vote_failure());
