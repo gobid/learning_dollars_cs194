@@ -54,6 +54,10 @@ class ModuleInfo(webapp2.RequestHandler):
     def get_info(self, module_id):
         module_id = int(module_id)
         module = Module.get_by_id(module_id)
+        votedCourses = {}
+        account = get_account()
+        if account: votedCourses = account.courses_voted
+        votedCourses = dict(votedCourses)
         newJobsJSON = []
         jobs = Project.query(Project.job_type == module.name).fetch()
         for job in jobs:
@@ -65,7 +69,8 @@ class ModuleInfo(webapp2.RequestHandler):
             'yt_type': module.yt_type,
             'courses': module.courses,
             'category': module.category,
-            'jobs': newJobsJSON
+            'jobs': newJobsJSON,
+            'votedCourses': votedCourses
         }
         return info
 

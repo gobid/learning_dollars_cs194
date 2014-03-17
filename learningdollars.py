@@ -15,7 +15,7 @@ from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
     BidOnProject, PostNewProject, RetractBid, RequestReleaseMilestone, \
     ReleaseMilestone, ChooseWinner, \
-    Upvote, Downvote, AddCourse
+    Upvote, Downvote, AddCourse, GetUserVoteList
 
 application = webapp2.WSGIApplication([
     # Views
@@ -213,6 +213,11 @@ application = webapp2.WSGIApplication([
         '/addcourse/<moduleID:\d+>/<courseURL:[^/]+>/<title:[^/]+>/<institution:[^/]+>/<teachDate:[^/]+>/<instructors:[^/]+>/<description:[^/]+>/<materials:[^/]+>',
         handler=AddCourse,
         name='addcourse'
+    ),
+    webapp2.Route(
+        '/uservotelist',
+        handler=GetUserVoteList,
+        name='uservotelist'
     )
 
 ], debug=True)

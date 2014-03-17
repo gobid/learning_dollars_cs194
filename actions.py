@@ -405,3 +405,15 @@ class AddCourse(webapp2.RequestHandler):
             response = {'error': 'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
+
+class GetUserVoteList(webapp2.RequestHandler):
+
+    def get(self):
+        account = get_account()
+        if account:
+            courseVoteList = dict(account.courses_voted)
+            response = {'success': 'Votes retrieved successfully.', 'voteList': courseVoteList}
+        else:
+            response = {'error': 'You are not logged in. '}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))

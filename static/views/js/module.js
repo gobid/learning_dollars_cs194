@@ -7,13 +7,8 @@ $(document).ready(function() {
 		/* START jQuery Methods */
 
 		initializePage();
-
 	});
 
-
-	$("#rank").attr("class", "text-success");
-
-		
 		/* END jQuery Methods */
 });
 

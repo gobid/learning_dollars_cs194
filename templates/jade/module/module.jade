@@ -130,10 +130,25 @@
                         br
                       br
                       div(class="coursescore", id="#{count}")
+                        - voteStr = category + "+" + course.Title
                         if course.scoreRanking == 1
-                          | <span id="rank#{count}">#{course.scoreRanking}</span> person found this course helpful.
+                          if voteStr in votedCourses
+                            if votedCourses[voteStr] == "Y"
+                              | <span id="rank#{count}" class="text-success">
+                            else
+                              | <span id="rank#{count}" class="text-danger">
+                          else
+                            | <span id="rank#{count}">
+                          | #{course.scoreRanking}</span> person found this course helpful.
                         else 
-                          | <span id="rank#{count}">#{course.scoreRanking}</span> people found this course helpful.
+                          if voteStr in votedCourses
+                            if votedCourses[voteStr] == "Y"
+                              | <span id="rank#{count}" class="text-success">
+                            else
+                              | <span id="rank#{count}" class="text-danger">
+                          else
+                            | <span id="rank#{count}">
+                          | #{course.scoreRanking}</span> people found this course helpful.
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
                         courseTitle='#{course.Title}',
@@ -161,10 +176,25 @@
                         br
                       br 
                       div(class="coursescore", id="#{count}")
+                        - voteStr = category + "+" + course.Title
                         if course.scoreRanking == 1
-                          | <span id="rank#{count}">#{course.scoreRanking}</span> person found this course helpful.
+                          if voteStr in votedCourses
+                            if votedCourses[voteStr] == "Y"
+                              | <span id="rank#{count}" class="text-success">
+                            else
+                              | <span id="rank#{count}" class="text-danger">
+                          else
+                            | <span id="rank#{count}">
+                          | #{course.scoreRanking}</span> person found this course helpful.
                         else 
-                          | <span id="rank#{count}">#{course.scoreRanking}</span> people found this course helpful.
+                          if voteStr in votedCourses
+                            if votedCourses[voteStr] == "Y"
+                              | <span id="rank#{count}" class="text-success">
+                            else
+                              | <span id="rank#{count}" class="text-danger">
+                          else
+                            | <span id="rank#{count}">
+                          | #{course.scoreRanking}</span> people found this course helpful.
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
                         courseTitle='#{course.Title}',
