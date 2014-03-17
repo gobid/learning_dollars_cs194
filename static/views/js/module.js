@@ -78,7 +78,10 @@ function upvote(moduleID, courseTitle, count) {
             $(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
             $("#rank"+count).attr("class", "text-success");
         } else {
-			alert("no");
+			$(".coursescore#"+count).append(Templates.vote_failure());
+			setTimeout(function(){
+					$(".alert").fadeOut();
+			}, 1000);
 		}
 	});
 }
@@ -92,7 +95,10 @@ function downvote(moduleID, courseTitle, count) {
 			$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
 			$("#rank"+count).attr("class", "text-danger");
 		} else {
-			alert("no");
+			$(".coursescore#"+count).append(Templates.vote_failure());
+			setTimeout(function(){
+					$(".alert").fadeOut();
+			}, 1000);
 		}
 	});
 }
