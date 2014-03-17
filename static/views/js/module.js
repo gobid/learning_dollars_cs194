@@ -68,10 +68,11 @@ function upvote(moduleID, courseTitle, count) {
         var response = data["success"];
 		if(response) {
 			var newScore = data["newScore"];
+			data["count"] = count;
 			if (newScore == 1) {
-				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> person found this course helpful.");
+				$(".coursescore#"+count).html(Templates.post_voting_single(data));
 			} else {
-				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+				$(".coursescore#"+count).html(Templates.post_voting_multiple(data));
 			}
             $("#rank"+count).attr("class", "text-success");
         } else {
@@ -94,10 +95,11 @@ function downvote(moduleID, courseTitle, count) {
 		var response = data["success"];
 		if(response) {
 			var newScore = data["newScore"];
+			data["count"] = count;
 			if (newScore == 1) {
-				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> person found this course helpful.");
+				$(".coursescore#"+count).html(Templates.post_voting_single(data));
 			} else {
-				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+				$(".coursescore#"+count).html(Templates.post_voting_multiple(data));
 			}
 			$("#rank"+count).attr("class", "text-danger");
 		} else {

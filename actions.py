@@ -329,6 +329,7 @@ class Upvote(webapp2.RequestHandler):
                             course["scoreRanking"] = course["scoreRanking"] + 2
                         newScore = course["scoreRanking"]
                 match.courses = moduleCourses
+                match.courses = sorted(match.courses, key=lambda k:k['scoreRanking'], reverse=True)
                 match.put()
                 response = {'success': 'Vote submitted successfully.', 'newScore': newScore}
             else:
@@ -367,6 +368,7 @@ class Downvote(webapp2.RequestHandler):
                             course["scoreRanking"] = course["scoreRanking"] - 2
                         newScore = course["scoreRanking"]
                 match.courses = moduleCourses
+                match.courses = sorted(match.courses, key=lambda k:k['scoreRanking'], reverse=True)
                 match.put()
                 response = {'success': 'Vote submitted successfully.', 'newScore': newScore}
             else:
@@ -396,6 +398,7 @@ class AddCourse(webapp2.RequestHandler):
             moduleCourses = match.courses
             moduleCourses.append(newCourse)
             match.courses = moduleCourses
+            match.courses = sorted(match.courses, key=lambda k:k['scoreRanking'], reverse=True)
             match.put()
             response = {'success': 'Course submitted successfully.'}
         else:
