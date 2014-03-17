@@ -97,17 +97,18 @@
           for course in courses
             if course != ""
               if course.Title
-                if count == 0
-                  li.active(
-                    data-target='#carousel-courses', 
-                    data-slide-to='#{count}'
-                  )
-                else
-                  li(
-                    data-target='#carousel-courses', 
-                    data-slide-to='#{count}'
-                  )
-            - count = count + 1
+                if course.scoreRanking > 0
+                  if count == 0
+                    li.active(
+                      data-target='#carousel-courses', 
+                      data-slide-to='#{count}'
+                    )
+                  else
+                    li(
+                      data-target='#carousel-courses', 
+                      data-slide-to='#{count}'
+                    )
+                  - count = count + 1
         - count = 0
         .carousel-inner
           for course in courses
@@ -129,10 +130,25 @@
                         br
                       br
                       div(class="coursescore", id="#{count}")
+                        - voteStr = category + "+" + course.Title
                         if course.scoreRanking == 1
-                          | <span id="rank#{count}">#{course.scoreRanking}</span> person found this course helpful.
+                          if voteStr in votedCourses
+                            if votedCourses[voteStr] == "Y"
+                              | <span id="rank#{count}" class="text-success">
+                            else
+                              | <span id="rank#{count}" class="text-danger">
+                          else
+                            | <span id="rank#{count}">
+                          | #{course.scoreRanking}</span> person found this course helpful.
                         else 
-                          | <span id="rank#{count}">#{course.scoreRanking}</span> people found this course helpful.
+                          if voteStr in votedCourses
+                            if votedCourses[voteStr] == "Y"
+                              | <span id="rank#{count}" class="text-success">
+                            else
+                              | <span id="rank#{count}" class="text-danger">
+                          else
+                            | <span id="rank#{count}">
+                          | #{course.scoreRanking}</span> people found this course helpful.
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
                         courseTitle='#{course.Title}',
@@ -160,10 +176,25 @@
                         br
                       br 
                       div(class="coursescore", id="#{count}")
+                        - voteStr = category + "+" + course.Title
                         if course.scoreRanking == 1
-                          | <span id="rank#{count}">#{course.scoreRanking}</span> person found this course helpful.
+                          if voteStr in votedCourses
+                            if votedCourses[voteStr] == "Y"
+                              | <span id="rank#{count}" class="text-success">
+                            else
+                              | <span id="rank#{count}" class="text-danger">
+                          else
+                            | <span id="rank#{count}">
+                          | #{course.scoreRanking}</span> person found this course helpful.
                         else 
-                          | <span id="rank#{count}">#{course.scoreRanking}</span> people found this course helpful.
+                          if voteStr in votedCourses
+                            if votedCourses[voteStr] == "Y"
+                              | <span id="rank#{count}" class="text-success">
+                            else
+                              | <span id="rank#{count}" class="text-danger">
+                          else
+                            | <span id="rank#{count}">
+                          | #{course.scoreRanking}</span> people found this course helpful.
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
                         courseTitle='#{course.Title}',
@@ -176,10 +207,10 @@
                         count="#{count}"
                       )
                   - count = count + 1 
-          a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')
-            span.glyphicon.glyphicon-chevron-left
-          a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')
-            span.glyphicon.glyphicon-chevron-right
+        a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')
+          span.glyphicon.glyphicon-chevron-left
+        a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')
+          span.glyphicon.glyphicon-chevron-right
   .row
     .col-md-12
       div(align='center', id="suggestionText")

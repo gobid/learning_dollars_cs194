@@ -7,13 +7,8 @@ $(document).ready(function() {
 		/* START jQuery Methods */
 
 		initializePage();
-
 	});
 
-
-	$("#rank").attr("class", "text-success");
-
-		
 		/* END jQuery Methods */
 });
 
@@ -57,6 +52,9 @@ function addCourse(moduleID, courseURL, title, institution, teachDate, instructo
 		}, 3000);
 	}).fail(function(){
 		$("#suggestionText").append(Templates.course_failure);
+		setTimeout(function(){
+			$(".alert").fadeOut();
+		}, 3000);
 	});
 }
 
@@ -65,10 +63,11 @@ function upvote(moduleID, courseTitle, count) {
         var response = data["success"];
 		if(response) {
 			var newScore = data["newScore"];
+			data["count"] = count;
 			if (newScore == 1) {
-				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> person found this course helpful.");
+				$(".coursescore#"+count).html(Templates.post_voting_single(data));
 			} else {
-				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+				$(".coursescore#"+count).html(Templates.post_voting_multiple(data));
 			}
             $("#rank"+count).attr("class", "text-success");
         } else {
@@ -79,6 +78,9 @@ function upvote(moduleID, courseTitle, count) {
 		}
 	}).fail(function(){
 		$(".coursescore#"+count).append(Templates.vote_general_failure);
+		setTimeout(function(){
+			$(".alert").fadeOut();
+		}, 3000);
 	});
 }
 
@@ -88,10 +90,11 @@ function downvote(moduleID, courseTitle, count) {
 		var response = data["success"];
 		if(response) {
 			var newScore = data["newScore"];
+			data["count"] = count;
 			if (newScore == 1) {
-				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> person found this course helpful.");
+				$(".coursescore#"+count).html(Templates.post_voting_single(data));
 			} else {
-				$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+				$(".coursescore#"+count).html(Templates.post_voting_multiple(data));
 			}
 			$("#rank"+count).attr("class", "text-danger");
 		} else {
@@ -102,6 +105,9 @@ function downvote(moduleID, courseTitle, count) {
 		}
 	}).fail(function(){
 		$(".coursescore#"+count).append(Templates.vote_general_failure);
+		setTimeout(function(){
+			$(".alert").fadeOut();
+		}, 3000);
 	});
 }
 
