@@ -17,7 +17,7 @@ class Module(ModelUtils, ndb.Model):
     youtube = ndb.StringProperty(repeated=True)  # youtube playlist/video ids
     yt_type = ndb.StringProperty()  # whether it's a YT playlist/video
     courses = ndb.JsonProperty(repeated=True)  # OCW courses
-    category = ndb.IntegerProperty()  # freelancer category id
+    category = ndb.IntegerProperty()  # category ID; used for voting
 
 
 class Account(ModelUtils, ndb.Model):

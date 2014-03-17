@@ -57,6 +57,9 @@ function addCourse(moduleID, courseURL, title, institution, teachDate, instructo
 		}, 3000);
 	}).fail(function(){
 		$("#suggestionText").append(Templates.course_failure);
+		setTimeout(function(){
+			$(".alert").fadeOut();
+		}, 3000);
 	});
 }
 
@@ -79,6 +82,9 @@ function upvote(moduleID, courseTitle, count) {
 		}
 	}).fail(function(){
 		$(".coursescore#"+count).append(Templates.vote_general_failure);
+		setTimeout(function(){
+			$(".alert").fadeOut();
+		}, 3000);
 	});
 }
 
@@ -102,6 +108,9 @@ function downvote(moduleID, courseTitle, count) {
 		}
 	}).fail(function(){
 		$(".coursescore#"+count).append(Templates.vote_general_failure);
+		setTimeout(function(){
+			$(".alert").fadeOut();
+		}, 3000);
 	});
 }
 

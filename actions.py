@@ -78,6 +78,8 @@ class CreateModule(webapp2.RequestHandler):
             )
             module.put()
             response = {'response': 'successfully stored'}
+            module.category = module.key.id()
+            module.put()
             print "success!"
         print response
         self.response.headers['Content-Type'] = 'application/json'
@@ -304,7 +306,6 @@ class Upvote(webapp2.RequestHandler):
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
-            print courseVoteList
             idTitlePair = moduleID + "+" + courseTitle
             if idTitlePair not in courseVoteList.keys() or courseVoteList[idTitlePair] == 'N':
                 case = "votedNo"
