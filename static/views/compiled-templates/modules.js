@@ -270,6 +270,35 @@ jade_debug.shift();;return buf.join("");
 }
 },
 
+"new_module_failure":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/modules/new_module_failure.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined;
+jade_debug.unshift({ lineno: 0, filename: "jade/modules/new_module_failure.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/modules/new_module_failure.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 2, filename: "jade/modules/new_module_failure.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 3, filename: "jade/modules/new_module_failure.jade" });
+buf.push("<div id=\"module_alert\" class=\"alert alert-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 3, filename: jade_debug[0].filename });
+buf.push("Failure. Reload page, fill in new module name, and repost.");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</div>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "br\nbr\ndiv(class=\"alert alert-danger\" id=\"module_alert\") Failure. Reload page, fill in new module name, and repost.");
+}
+},
+
 "new_module_success":
   function template(locals) {
 var jade_debug = [{ lineno: 1, filename: "jade/modules/new_module_success.jade" }];

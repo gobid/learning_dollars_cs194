@@ -73,8 +73,7 @@ function post_project(e) {
 	var duration = $("#duration").val();
 	var job_type = $("#job_type").val()
 	$.get("/postnewproject/" + name + "/" + description + "/" + job_type 
-		+ "/" + budget_option + "/" + duration, function(data){
-			console.log("hit" + data);
+		+ "/" + budget_option + "/" + duration, function(data, err){
 			if(data) {
 				$("#log_message_div").after(Templates.post_success);
 			} else {
@@ -93,5 +92,7 @@ function post_project(e) {
 				$(".alert.alert-warning").html(response);
 			}
 		}
-	);
+	).fail(function(){
+		$("#log_message_div").after(Templates.post_failure);
+	});
 }

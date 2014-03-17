@@ -34,14 +34,14 @@ jade_debug.unshift({ lineno: 1, filename: "jade/module/bid_success.jade" });
 buf.push("<div id=\"log_message\" class=\"alert alert-success\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 2, filename: "jade/module/bid_success.jade" });
-buf.push("Already placed");
+buf.push("Placed");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "div(class=\"alert alert-success\" id=\"log_message\")\n  | Already placed");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "div(class=\"alert alert-success\" id=\"log_message\")\n  | Placed");
 }
 },
 
