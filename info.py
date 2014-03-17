@@ -46,8 +46,8 @@ class ModuleInfo(webapp2.RequestHandler):
             'bidcount': len(project.bidders),
             'enddate': frmtd_end_date,
             'complete': project.complete,
-            'alreadyBidOn' : alreadyBidOn,
-            'owner' : owner
+            'alreadyBidOn': alreadyBidOn,
+            'owner': owner
         }
         return newProjectJSON
 
@@ -57,7 +57,7 @@ class ModuleInfo(webapp2.RequestHandler):
         newJobsJSON = []
         jobs = Project.query(Project.job_type == module.name).fetch()
         for job in jobs:
-            newProject = self.convert_to_project_JSON(job);
+            newProject = self.convert_to_project_JSON(job)
             newJobsJSON.append(newProject)
         info = {
             'name': module.name,
@@ -140,13 +140,13 @@ class ProjectBidsInfo(webapp2.RequestHandler):
         projects_posted = account.projects_posted
 
         is_owner = False
-        if project_id in projects_posted: 
+        if project_id in projects_posted:
             is_owner = True
 
         if project.winner == None:
             bidders = project.bidders
             bidders_expanded = []
-            for bidder_id in bidders: 
+            for bidder_id in bidders:
                 bidder = Account.get_by_id(bidder_id).guser.email()
                 bidders_expanded.append({
                     'id': bidder_id,
@@ -172,12 +172,12 @@ class MessagesInfo(webapp2.RequestHandler):
         )
         inbox_messages_out = []
         for im in inboxMessages:
-            fromuseremail = Account.get_by_id(im.fromuserid).guser.email();
+            fromuseremail = Account.get_by_id(im.fromuserid).guser.email()
             im_out = {
-                'fromuseremail' : fromuseremail,
-                'subject' : im.subject,
-                'message' : im.message,
-                'datetime' : im.datetime.strftime("%Y-%m-%d %H:%M:%S")
+                'fromuseremail': fromuseremail,
+                'subject': im.subject,
+                'message': im.message,
+                'datetime': im.datetime.strftime("%Y-%m-%d %H:%M:%S")
             }
             inbox_messages_out.append(im_out)
         # sent messages
@@ -190,18 +190,19 @@ class MessagesInfo(webapp2.RequestHandler):
         for sm in sentMessages:
             touseremail = Account.get_by_id(sm.touserid).guser.email()
             sm_out = {
-                'touseremail' : touseremail,
-                'subject' : sm.subject,
-                'message' : sm.message,
-                'datetime' : sm.datetime.strftime("%Y-%m-%d %H:%M:%S")
+                'touseremail': touseremail,
+                'subject': sm.subject,
+                'message': sm.message,
+                'datetime': sm.datetime.strftime("%Y-%m-%d %H:%M:%S")
             }
             sent_messages_out.append(sm_out)
         messages = {
-            'inbox_messages' : inbox_messages_out,
-            'sent_messages' : sent_messages_out
+            'inbox_messages': inbox_messages_out,
+            'sent_messages': sent_messages_out
         }
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(messages))
+
 
 class GetPlacedBids(webapp2.RequestHandler):
 

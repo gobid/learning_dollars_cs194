@@ -153,7 +153,7 @@ class BidOnProject(webapp2.RequestHandler):
         account_id = account.key.id()
         project = Project.get_by_id(project_id)
         if project:
-            #check to see if already bid on
+            # check to see if already bid on
             if account_id in project.bidders:
                 response = 'User already bid on this project'
             else:
@@ -206,7 +206,7 @@ class PostNewProject(webapp2.RequestHandler):
             description=projectdesc,
             job_type=jobtypecsv,
             end_date=end_date,
-            owner= user_id
+            owner=user_id
         )
         project.put()  # do error checking on puts later
         account = get_account()
@@ -221,6 +221,7 @@ class PostNewProject(webapp2.RequestHandler):
         self.response.write(json.dumps(response))
 
 # Messages
+
 
 class SendMessage(webapp2.RequestHandler):
 
@@ -239,7 +240,7 @@ class SendMessage(webapp2.RequestHandler):
                 datetime=datetime.datetime.now()
             )
             message.put()
-            response = {'response':'success!'}
+            response = {'response': 'success!'}
         else:
             response = {'error': 'the email does not exist'}
         self.response.headers['Content-Type'] = 'application/json'
@@ -259,7 +260,7 @@ class SendMessage(webapp2.RequestHandler):
 #             end_date=end_date,
 #             job_type=job_type
 #         )
-#         project.put()  # do error checking on puts later
+# project.put()  # do error checking on puts later
 #         account = get_account()
 #         account.projects_posted.append(project.key.id())
 #         account.put()

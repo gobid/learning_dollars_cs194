@@ -33,11 +33,11 @@ class Account(ModelUtils, ndb.Model):
 class Project(ModelUtils, ndb.Model):
     bidders = ndb.IntegerProperty(repeated=True)
     winner = ndb.IntegerProperty()
-    price = ndb.StringProperty() # included on creation
-    name = ndb.StringProperty() # included on creation
-    description = ndb.StringProperty() # included on creation
-    job_type = ndb.StringProperty() # included on creation (module id)
-    end_date = ndb.DateProperty() # included on creation
+    price = ndb.StringProperty()  # included on creation
+    name = ndb.StringProperty()  # included on creation
+    description = ndb.StringProperty()  # included on creation
+    job_type = ndb.StringProperty()  # included on creation (module id)
+    end_date = ndb.DateProperty()  # included on creation
     complete = ndb.StringProperty()
     owner = ndb.IntegerProperty()
 
