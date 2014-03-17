@@ -128,17 +128,19 @@
                         a(target='_blank', href=course.DownloadPageLink) Course Materials
                         br
                       br
-                      .coursescore
-                        | #{course.scoreRanking} people found this course helpful.
+                      div(class="coursescore", id="#{count}")
+                        | <span id="rank#{count}">#{course.scoreRanking}</span> people found this course helpful.
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
                         courseTitle='#{course.Title}',
-                        moduleID='#{category}'
+                        moduleID='#{category}',
+                        count="#{count}"
                       )
                       | &nbsp; &nbsp; &nbsp;
                       button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
                         courseTitle='#{course.Title}',
-                        moduleID='#{category}'
+                        moduleID='#{category}',
+                        count="#{count}"
                       )
                   else
                     .item(align='center')
@@ -153,18 +155,19 @@
                         br
                         a(target='_blank', href=course.DownloadPageLink) Course Materials
                         br
-                      br
-                      .coursescore
-                        | #{course.scoreRanking} people found this course helpful.
+                      br 
+                      div(class="coursescore", id="#{count}")
+                        | <span id="rank#{count}">#{course.scoreRanking}</span> people found this course helpful.
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
                         courseTitle='#{course.Title}',
-                        moduleID='#{category}'
-                      )
+                        moduleID='#{category}',
+                        count="#{count}"                      )
                       | &nbsp; &nbsp; &nbsp;
                       button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
                         courseTitle='#{course.Title}',
-                        moduleID='#{category}'
+                        moduleID='#{category}',
+                        count="#{count}"
                       )
                 - count = count + 1 
           a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')

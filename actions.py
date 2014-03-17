@@ -2,6 +2,7 @@ import webapp2
 import json
 import HTMLParser
 import datetime
+import urlparse
 
 from google.appengine.api import users
 from config import config
@@ -322,6 +323,7 @@ class ChooseWinner(webapp2.RequestHandler):
 class Upvote(webapp2.RequestHandler):
 
     def get(self, moduleID, courseTitle):
+        courseTitle=urlparse.unquote(courseTitle);
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
@@ -340,15 +342,17 @@ class Upvote(webapp2.RequestHandler):
                 match = Module.query(Module.category == moduleID).fetch()
                 match = match[0]
                 moduleCourses = match.courses
+                newScore = 0
                 for course in moduleCourses:
                     if course["Title"] == courseTitle:
                         if case == "notVoted":
                             course["scoreRanking"] = course["scoreRanking"] + 1
                         else:
                             course["scoreRanking"] = course["scoreRanking"] + 2
+                        newScore = course["scoreRanking"]
                 match.courses = moduleCourses
                 match.put()
-                response = {'success': 'Vote submitted successfully.'}
+                response = {'success': 'Vote submitted successfully.', 'newScore': newScore}
             else:
                 response = {'error': 'No.'}
         else:
@@ -360,6 +364,7 @@ class Upvote(webapp2.RequestHandler):
 class Downvote(webapp2.RequestHandler):
 
     def get(self, moduleID, courseTitle):
+        courseTitle=urlparse.unquote(courseTitle);
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
@@ -375,15 +380,17 @@ class Downvote(webapp2.RequestHandler):
                 match = Module.query(Module.category == moduleID).fetch()
                 match = match[0]
                 moduleCourses = match.courses
+                newScore = 0
                 for course in moduleCourses:
                     if course["Title"] == courseTitle:
                         if case == "notVoted":
                             course["scoreRanking"] = course["scoreRanking"] - 1
                         else:
                             course["scoreRanking"] = course["scoreRanking"] - 2
+                        newScore = course["scoreRanking"]
                 match.courses = moduleCourses
                 match.put()
-                response = {'success': 'Vote submitted successfully.'}
+                response = {'success': 'Vote submitted successfully.', 'newScore': newScore}
             else:
                 response = {'error': 'No.'}
         else:
@@ -397,13 +404,13 @@ class AddCourse(webapp2.RequestHandler):
         account = get_account()
         if account:
             newCourse = dict()
-            newCourse["CourseURL"] = HTMLParser.HTMLParser().unescape(courseURL);
+            newCourse["CourseURL"] = urlparse.unquote(courseURL);
             newCourse["Title"] = title;
             newCourse["Institution"] = institution;
             newCourse["TeachingDate"] = teachDate;
             newCourse["Instructors"] = instructors;
             newCourse["Description"] = description;
-            newCourse["DownloadPageLink"] = HTMLParser.HTMLParser().unescape(materials);
+            newCourse["DownloadPageLink"] = urlparse.unquote(materials);
             newCourse["scoreRanking"] = 1;
             moduleID = int(moduleID)
             match = Module.query(Module.category == moduleID).fetch()

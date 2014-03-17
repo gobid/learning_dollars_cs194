@@ -11,6 +11,8 @@ $(document).ready(function() {
 	});
 
 
+	$("#rank").attr("class", "text-success");
+
 		
 		/* END jQuery Methods */
 });
@@ -18,13 +20,15 @@ $(document).ready(function() {
 	$(document).on("click", ".btn.btn-default#helpful", function() {
 		var moduleID = $(this).attr("moduleID");
 		var courseTitle = $(this).attr("courseTitle");
-		upvote(moduleID, courseTitle);
+		var count = $(this).attr("count");
+		upvote(moduleID, courseTitle, count);
 	});
 
 	$(document).on("click", ".btn.btn-default#nothelpful", function() {
 		var moduleID = $(this).attr("moduleID");
 		var courseTitle = $(this).attr("courseTitle");
-		downvote(moduleID, courseTitle);
+		var count = $(this).attr("count");
+		downvote(moduleID, courseTitle, count);
 	});
 
 	$(document).on("click", "#submitSuggestion", function() {
@@ -36,7 +40,6 @@ $(document).ready(function() {
 		var instructors = $("#suggestInstructors").val();
 		var description = $("#suggestDesc").val();
 		var materials = $("#suggestMaterials").val();
-		alert("here");
 		addCourse(moduleID, courseURL, title, institution, teachDate, instructors, description, materials);
 	})
 
@@ -67,27 +70,29 @@ function addCourse(moduleID, courseURL, title, institution, teachDate, instructo
 	});
 }
 
-function upvote(moduleID, courseTitle) {
-    $.get("/upvote/" + moduleID+ "/" + courseTitle, function(data){
+function upvote(moduleID, courseTitle, count) {
+    $.get("/upvote/" + moduleID+ "/" + encodeURIComponent(courseTitle), function(data){
         var response = data["success"];
 		if(response) {
-			//var status = response['statusconfirmation']
-            $(".coursescore").after(data["success"]);
-		} else {
-			$(".coursescore").after(data["error"]);
+			var newScore = data["newScore"];
+            $(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+            $("#rank"+count).attr("class", "text-success");
+        } else {
+			alert("no");
 		}
 	});
 }
 
 
-function downvote(moduleID, courseTitle) {
-	$.get("/downvote/" + moduleID + "/" + courseTitle, function(data){
+function downvote(moduleID, courseTitle, count) {
+	$.get("/downvote/" + moduleID + "/" + encodeURIComponent(courseTitle), function(data){
 		var response = data["success"];
 		if(response) {
-			//var status = response['statusconfirmation']
-			$(".coursescore").after(data["success"]);
+			var newScore = data["newScore"];
+			$(".coursescore#"+count).html("<span id='rank" + count + "'>" + newScore + "</span> people found this course helpful.");
+			$("#rank"+count).attr("class", "text-danger");
 		} else {
-			$(".coursescore").after(data["error"]);
+			alert("no");
 		}
 	});
 }
