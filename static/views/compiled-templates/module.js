@@ -676,10 +676,14 @@ if ( course.Title)
 {
 jade_debug.unshift({ lineno: 100, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 100, filename: "jade/module/module.jade" });
-if ( count == 0)
+if ( course.scoreRanking > 0)
 {
 jade_debug.unshift({ lineno: 101, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 101, filename: "jade/module/module.jade" });
+if ( count == 0)
+{
+jade_debug.unshift({ lineno: 102, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 102, filename: "jade/module/module.jade" });
 buf.push("<li data-target=\"#carousel-courses\"" + (jade.attr("data-slide-to", '' + (count) + '', true, false)) + " class=\"active\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -689,8 +693,8 @@ jade_debug.shift();
 }
 else
 {
-jade_debug.unshift({ lineno: 106, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 106, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 107, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 107, filename: "jade/module/module.jade" });
 buf.push("<li data-target=\"#carousel-courses\"" + (jade.attr("data-slide-to", '' + (count) + '', true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -699,14 +703,17 @@ jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
-jade_debug.shift();
-}
-jade_debug.shift();
-jade_debug.shift();
-}
-jade_debug.shift();
-jade_debug.unshift({ lineno: 110, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 111, filename: "jade/module/module.jade" });
 count = count + 1
+jade_debug.shift();
+jade_debug.shift();
+}
+jade_debug.shift();
+jade_debug.shift();
+}
+jade_debug.shift();
+jade_debug.shift();
+}
 jade_debug.shift();
 jade_debug.shift();
     }
@@ -726,10 +733,14 @@ if ( course.Title)
 {
 jade_debug.unshift({ lineno: 100, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 100, filename: "jade/module/module.jade" });
-if ( count == 0)
+if ( course.scoreRanking > 0)
 {
 jade_debug.unshift({ lineno: 101, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 101, filename: "jade/module/module.jade" });
+if ( count == 0)
+{
+jade_debug.unshift({ lineno: 102, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 102, filename: "jade/module/module.jade" });
 buf.push("<li data-target=\"#carousel-courses\"" + (jade.attr("data-slide-to", '' + (count) + '', true, false)) + " class=\"active\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -739,8 +750,8 @@ jade_debug.shift();
 }
 else
 {
-jade_debug.unshift({ lineno: 106, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 106, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 107, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 107, filename: "jade/module/module.jade" });
 buf.push("<li data-target=\"#carousel-courses\"" + (jade.attr("data-slide-to", '' + (count) + '', true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -749,14 +760,17 @@ jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
-jade_debug.shift();
-}
-jade_debug.shift();
-jade_debug.shift();
-}
-jade_debug.shift();
-jade_debug.unshift({ lineno: 110, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 111, filename: "jade/module/module.jade" });
 count = count + 1
+jade_debug.shift();
+jade_debug.shift();
+}
+jade_debug.shift();
+jade_debug.shift();
+}
+jade_debug.shift();
+jade_debug.shift();
+}
 jade_debug.shift();
 jade_debug.shift();
     }
@@ -768,13 +782,13 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</ol>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 111, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 112, filename: "jade/module/module.jade" });
 count = 0
 jade_debug.shift();
-jade_debug.unshift({ lineno: 112, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 113, filename: "jade/module/module.jade" });
 buf.push("<div class=\"carousel-inner\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 113, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 114, filename: "jade/module/module.jade" });
 // iterate courses
 ;(function(){
   var $$obj = courses;
@@ -783,93 +797,93 @@ jade_debug.unshift({ lineno: 113, filename: "jade/module/module.jade" });
     for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
       var course = $$obj[$index];
 
-jade_debug.unshift({ lineno: 113, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 114, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 115, filename: "jade/module/module.jade" });
 if ( course != "")
 {
-jade_debug.unshift({ lineno: 115, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 115, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 116, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 116, filename: "jade/module/module.jade" });
 if ( course.Title)
 {
-jade_debug.unshift({ lineno: 116, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 116, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 117, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 117, filename: "jade/module/module.jade" });
 if ( course.scoreRanking > 0)
 {
-jade_debug.unshift({ lineno: 117, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 117, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 118, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 118, filename: "jade/module/module.jade" });
 if ( count == 0)
 {
-jade_debug.unshift({ lineno: 118, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 118, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 119, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 119, filename: "jade/module/module.jade" });
 buf.push("<div align=\"center\" class=\"item active\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 119, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 120, filename: "jade/module/module.jade" });
 buf.push("<div class=\"courseinfo\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 120, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 121, filename: "jade/module/module.jade" });
 buf.push("<a target=\"_blank\"" + (jade.attr("href", course.CourseURL, true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 120, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 121, filename: jade_debug[0].filename });
 buf.push("" + (jade.escape((jade.interp = course.Title) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</a>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 121, filename: "jade/module/module.jade" });
-buf.push("<br/>");
-jade_debug.shift();
 jade_debug.unshift({ lineno: 122, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.Institution) == null ? '' : jade.interp)) + " (" + (jade.escape((jade.interp = course.TeachingDate) == null ? '' : jade.interp)) + ")");
+buf.push("<br/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 123, filename: "jade/module/module.jade" });
-buf.push("<br/>");
+buf.push("" + (jade.escape((jade.interp = course.Institution) == null ? '' : jade.interp)) + " (" + (jade.escape((jade.interp = course.TeachingDate) == null ? '' : jade.interp)) + ")");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 124, filename: "jade/module/module.jade" });
-buf.push("Instructors: " + (jade.escape((jade.interp = course.Instructors) == null ? '' : jade.interp)) + "");
+buf.push("<br/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 125, filename: "jade/module/module.jade" });
-buf.push("<br/>");
+buf.push("Instructors: " + (jade.escape((jade.interp = course.Instructors) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 126, filename: "jade/module/module.jade" });
-buf.push("Description: " + (jade.escape((jade.interp = course.Description) == null ? '' : jade.interp)) + "");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 127, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
+jade_debug.unshift({ lineno: 127, filename: "jade/module/module.jade" });
+buf.push("Description: " + (jade.escape((jade.interp = course.Description) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
 jade_debug.unshift({ lineno: 128, filename: "jade/module/module.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 129, filename: "jade/module/module.jade" });
 buf.push("<a target=\"_blank\"" + (jade.attr("href", course.DownloadPageLink, true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 128, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 129, filename: jade_debug[0].filename });
 buf.push("Course Materials");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</a>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 129, filename: "jade/module/module.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.shift();
-buf.push("</div>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 130, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
+jade_debug.shift();
+buf.push("</div>");
+jade_debug.shift();
 jade_debug.unshift({ lineno: 131, filename: "jade/module/module.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 132, filename: "jade/module/module.jade" });
 buf.push("<div" + (jade.attr("id", "" + (count) + "", true, false)) + " class=\"coursescore\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 132, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 133, filename: "jade/module/module.jade" });
 if ( course.scoreRanking == 1)
 {
-jade_debug.unshift({ lineno: 133, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 133, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 134, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 134, filename: "jade/module/module.jade" });
 buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> person found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
 else
 {
-jade_debug.unshift({ lineno: 135, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 135, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 136, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 136, filename: "jade/module/module.jade" });
 buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> people found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
@@ -878,19 +892,19 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 136, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 137, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 137, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 138, filename: "jade/module/module.jade" });
 buf.push("<button id=\"helpful\"" + (jade.attr("courseTitle", '' + (course.Title) + '', true, false)) + (jade.attr("moduleID", '' + (category) + '', true, false)) + (jade.attr("count", "" + (count) + "", true, false)) + " class=\"btn btn-default btn-lg glyphicon glyphicon-thumbs-up\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
 buf.push("</button>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 142, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 143, filename: "jade/module/module.jade" });
 buf.push("&nbsp; &nbsp; &nbsp;");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 143, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 144, filename: "jade/module/module.jade" });
 buf.push("<button id=\"nothelpful\"" + (jade.attr("courseTitle", '' + (course.Title) + '', true, false)) + (jade.attr("moduleID", '' + (category) + '', true, false)) + (jade.attr("count", "" + (count) + "", true, false)) + " class=\"btn btn-default btn-lg glyphicon glyphicon-thumbs-down\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -903,77 +917,77 @@ jade_debug.shift();
 }
 else
 {
-jade_debug.unshift({ lineno: 149, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 149, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
 buf.push("<div align=\"center\" class=\"item\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 151, filename: "jade/module/module.jade" });
 buf.push("<div class=\"courseinfo\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 151, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 152, filename: "jade/module/module.jade" });
 buf.push("<a target=\"_blank\"" + (jade.attr("href", course.CourseURL, true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 151, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 152, filename: jade_debug[0].filename });
 buf.push("" + (jade.escape((jade.interp = course.Title) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</a>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 152, filename: "jade/module/module.jade" });
-buf.push("<br/>");
-jade_debug.shift();
 jade_debug.unshift({ lineno: 153, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.Institution) == null ? '' : jade.interp)) + " (" + (jade.escape((jade.interp = course.TeachingDate) == null ? '' : jade.interp)) + ")");
+buf.push("<br/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 154, filename: "jade/module/module.jade" });
-buf.push("<br/>");
+buf.push("" + (jade.escape((jade.interp = course.Institution) == null ? '' : jade.interp)) + " (" + (jade.escape((jade.interp = course.TeachingDate) == null ? '' : jade.interp)) + ")");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 155, filename: "jade/module/module.jade" });
-buf.push("Instructors: " + (jade.escape((jade.interp = course.Instructors) == null ? '' : jade.interp)) + "");
+buf.push("<br/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 156, filename: "jade/module/module.jade" });
-buf.push("<br/>");
+buf.push("Instructors: " + (jade.escape((jade.interp = course.Instructors) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 157, filename: "jade/module/module.jade" });
-buf.push("Description: " + (jade.escape((jade.interp = course.Description) == null ? '' : jade.interp)) + "");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 158, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
+jade_debug.unshift({ lineno: 158, filename: "jade/module/module.jade" });
+buf.push("Description: " + (jade.escape((jade.interp = course.Description) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
 jade_debug.unshift({ lineno: 159, filename: "jade/module/module.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 160, filename: "jade/module/module.jade" });
 buf.push("<a target=\"_blank\"" + (jade.attr("href", course.DownloadPageLink, true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 159, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 160, filename: jade_debug[0].filename });
 buf.push("Course Materials");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</a>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 160, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 161, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 161, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 162, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 162, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 163, filename: "jade/module/module.jade" });
 buf.push("<div" + (jade.attr("id", "" + (count) + "", true, false)) + " class=\"coursescore\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 163, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 164, filename: "jade/module/module.jade" });
 if ( course.scoreRanking == 1)
 {
-jade_debug.unshift({ lineno: 164, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 164, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 165, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 165, filename: "jade/module/module.jade" });
 buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> person found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
 else
 {
-jade_debug.unshift({ lineno: 166, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 166, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 167, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 167, filename: "jade/module/module.jade" });
 buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> people found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
@@ -982,19 +996,19 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 167, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 168, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 168, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 169, filename: "jade/module/module.jade" });
 buf.push("<button id=\"helpful\"" + (jade.attr("courseTitle", '' + (course.Title) + '', true, false)) + (jade.attr("moduleID", '' + (category) + '', true, false)) + (jade.attr("count", "" + (count) + "", true, false)) + " class=\"btn btn-default btn-lg glyphicon glyphicon-thumbs-up\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
 buf.push("</button>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 172, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 173, filename: "jade/module/module.jade" });
 buf.push("&nbsp; &nbsp; &nbsp;");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 173, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 174, filename: "jade/module/module.jade" });
 buf.push("<button id=\"nothelpful\"" + (jade.attr("courseTitle", '' + (course.Title) + '', true, false)) + (jade.attr("moduleID", '' + (category) + '', true, false)) + (jade.attr("count", "" + (count) + "", true, false)) + " class=\"btn btn-default btn-lg glyphicon glyphicon-thumbs-down\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -1006,7 +1020,7 @@ jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
-jade_debug.unshift({ lineno: 178, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 179, filename: "jade/module/module.jade" });
 count = count + 1 
 jade_debug.shift();
 jade_debug.shift();
@@ -1026,93 +1040,93 @@ jade_debug.shift();
     for (var $index in $$obj) {
       $$l++;      var course = $$obj[$index];
 
-jade_debug.unshift({ lineno: 113, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 114, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 115, filename: "jade/module/module.jade" });
 if ( course != "")
 {
-jade_debug.unshift({ lineno: 115, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 115, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 116, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 116, filename: "jade/module/module.jade" });
 if ( course.Title)
 {
-jade_debug.unshift({ lineno: 116, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 116, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 117, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 117, filename: "jade/module/module.jade" });
 if ( course.scoreRanking > 0)
 {
-jade_debug.unshift({ lineno: 117, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 117, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 118, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 118, filename: "jade/module/module.jade" });
 if ( count == 0)
 {
-jade_debug.unshift({ lineno: 118, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 118, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 119, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 119, filename: "jade/module/module.jade" });
 buf.push("<div align=\"center\" class=\"item active\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 119, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 120, filename: "jade/module/module.jade" });
 buf.push("<div class=\"courseinfo\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 120, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 121, filename: "jade/module/module.jade" });
 buf.push("<a target=\"_blank\"" + (jade.attr("href", course.CourseURL, true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 120, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 121, filename: jade_debug[0].filename });
 buf.push("" + (jade.escape((jade.interp = course.Title) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</a>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 121, filename: "jade/module/module.jade" });
-buf.push("<br/>");
-jade_debug.shift();
 jade_debug.unshift({ lineno: 122, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.Institution) == null ? '' : jade.interp)) + " (" + (jade.escape((jade.interp = course.TeachingDate) == null ? '' : jade.interp)) + ")");
+buf.push("<br/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 123, filename: "jade/module/module.jade" });
-buf.push("<br/>");
+buf.push("" + (jade.escape((jade.interp = course.Institution) == null ? '' : jade.interp)) + " (" + (jade.escape((jade.interp = course.TeachingDate) == null ? '' : jade.interp)) + ")");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 124, filename: "jade/module/module.jade" });
-buf.push("Instructors: " + (jade.escape((jade.interp = course.Instructors) == null ? '' : jade.interp)) + "");
+buf.push("<br/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 125, filename: "jade/module/module.jade" });
-buf.push("<br/>");
+buf.push("Instructors: " + (jade.escape((jade.interp = course.Instructors) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 126, filename: "jade/module/module.jade" });
-buf.push("Description: " + (jade.escape((jade.interp = course.Description) == null ? '' : jade.interp)) + "");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 127, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
+jade_debug.unshift({ lineno: 127, filename: "jade/module/module.jade" });
+buf.push("Description: " + (jade.escape((jade.interp = course.Description) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
 jade_debug.unshift({ lineno: 128, filename: "jade/module/module.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 129, filename: "jade/module/module.jade" });
 buf.push("<a target=\"_blank\"" + (jade.attr("href", course.DownloadPageLink, true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 128, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 129, filename: jade_debug[0].filename });
 buf.push("Course Materials");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</a>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 129, filename: "jade/module/module.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.shift();
-buf.push("</div>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 130, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
+jade_debug.shift();
+buf.push("</div>");
+jade_debug.shift();
 jade_debug.unshift({ lineno: 131, filename: "jade/module/module.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 132, filename: "jade/module/module.jade" });
 buf.push("<div" + (jade.attr("id", "" + (count) + "", true, false)) + " class=\"coursescore\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 132, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 133, filename: "jade/module/module.jade" });
 if ( course.scoreRanking == 1)
 {
-jade_debug.unshift({ lineno: 133, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 133, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 134, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 134, filename: "jade/module/module.jade" });
 buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> person found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
 else
 {
-jade_debug.unshift({ lineno: 135, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 135, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 136, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 136, filename: "jade/module/module.jade" });
 buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> people found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
@@ -1121,19 +1135,19 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 136, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 137, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 137, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 138, filename: "jade/module/module.jade" });
 buf.push("<button id=\"helpful\"" + (jade.attr("courseTitle", '' + (course.Title) + '', true, false)) + (jade.attr("moduleID", '' + (category) + '', true, false)) + (jade.attr("count", "" + (count) + "", true, false)) + " class=\"btn btn-default btn-lg glyphicon glyphicon-thumbs-up\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
 buf.push("</button>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 142, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 143, filename: "jade/module/module.jade" });
 buf.push("&nbsp; &nbsp; &nbsp;");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 143, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 144, filename: "jade/module/module.jade" });
 buf.push("<button id=\"nothelpful\"" + (jade.attr("courseTitle", '' + (course.Title) + '', true, false)) + (jade.attr("moduleID", '' + (category) + '', true, false)) + (jade.attr("count", "" + (count) + "", true, false)) + " class=\"btn btn-default btn-lg glyphicon glyphicon-thumbs-down\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -1146,77 +1160,77 @@ jade_debug.shift();
 }
 else
 {
-jade_debug.unshift({ lineno: 149, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 149, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
 buf.push("<div align=\"center\" class=\"item\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 151, filename: "jade/module/module.jade" });
 buf.push("<div class=\"courseinfo\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 151, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 152, filename: "jade/module/module.jade" });
 buf.push("<a target=\"_blank\"" + (jade.attr("href", course.CourseURL, true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 151, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 152, filename: jade_debug[0].filename });
 buf.push("" + (jade.escape((jade.interp = course.Title) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</a>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 152, filename: "jade/module/module.jade" });
-buf.push("<br/>");
-jade_debug.shift();
 jade_debug.unshift({ lineno: 153, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.Institution) == null ? '' : jade.interp)) + " (" + (jade.escape((jade.interp = course.TeachingDate) == null ? '' : jade.interp)) + ")");
+buf.push("<br/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 154, filename: "jade/module/module.jade" });
-buf.push("<br/>");
+buf.push("" + (jade.escape((jade.interp = course.Institution) == null ? '' : jade.interp)) + " (" + (jade.escape((jade.interp = course.TeachingDate) == null ? '' : jade.interp)) + ")");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 155, filename: "jade/module/module.jade" });
-buf.push("Instructors: " + (jade.escape((jade.interp = course.Instructors) == null ? '' : jade.interp)) + "");
+buf.push("<br/>");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 156, filename: "jade/module/module.jade" });
-buf.push("<br/>");
+buf.push("Instructors: " + (jade.escape((jade.interp = course.Instructors) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.unshift({ lineno: 157, filename: "jade/module/module.jade" });
-buf.push("Description: " + (jade.escape((jade.interp = course.Description) == null ? '' : jade.interp)) + "");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 158, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
+jade_debug.unshift({ lineno: 158, filename: "jade/module/module.jade" });
+buf.push("Description: " + (jade.escape((jade.interp = course.Description) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
 jade_debug.unshift({ lineno: 159, filename: "jade/module/module.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 160, filename: "jade/module/module.jade" });
 buf.push("<a target=\"_blank\"" + (jade.attr("href", course.DownloadPageLink, true, false)) + ">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 159, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 160, filename: jade_debug[0].filename });
 buf.push("Course Materials");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</a>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 160, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 161, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 161, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 162, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 162, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 163, filename: "jade/module/module.jade" });
 buf.push("<div" + (jade.attr("id", "" + (count) + "", true, false)) + " class=\"coursescore\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 163, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 164, filename: "jade/module/module.jade" });
 if ( course.scoreRanking == 1)
 {
-jade_debug.unshift({ lineno: 164, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 164, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 165, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 165, filename: "jade/module/module.jade" });
 buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> person found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
 else
 {
-jade_debug.unshift({ lineno: 166, filename: "jade/module/module.jade" });
-jade_debug.unshift({ lineno: 166, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 167, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 167, filename: "jade/module/module.jade" });
 buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> people found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
@@ -1225,19 +1239,19 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 167, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 168, filename: "jade/module/module.jade" });
 buf.push("<br/>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 168, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 169, filename: "jade/module/module.jade" });
 buf.push("<button id=\"helpful\"" + (jade.attr("courseTitle", '' + (course.Title) + '', true, false)) + (jade.attr("moduleID", '' + (category) + '', true, false)) + (jade.attr("count", "" + (count) + "", true, false)) + " class=\"btn btn-default btn-lg glyphicon glyphicon-thumbs-up\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
 buf.push("</button>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 172, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 173, filename: "jade/module/module.jade" });
 buf.push("&nbsp; &nbsp; &nbsp;");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 173, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 174, filename: "jade/module/module.jade" });
 buf.push("<button id=\"nothelpful\"" + (jade.attr("courseTitle", '' + (course.Title) + '', true, false)) + (jade.attr("moduleID", '' + (category) + '', true, false)) + (jade.attr("count", "" + (count) + "", true, false)) + " class=\"btn btn-default btn-lg glyphicon glyphicon-thumbs-down\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -1249,7 +1263,7 @@ jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
-jade_debug.unshift({ lineno: 178, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 179, filename: "jade/module/module.jade" });
 count = count + 1 
 jade_debug.shift();
 jade_debug.shift();
@@ -1268,10 +1282,13 @@ jade_debug.shift();
 }).call(this);
 
 jade_debug.shift();
-jade_debug.unshift({ lineno: 179, filename: "jade/module/module.jade" });
+jade_debug.shift();
+buf.push("</div>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 180, filename: "jade/module/module.jade" });
 buf.push("<a id=\"coursesleft\" href=\"#carousel-courses\" data-slide=\"prev\" class=\"carousel-control left\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 180, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 181, filename: "jade/module/module.jade" });
 buf.push("<span class=\"glyphicon glyphicon-chevron-left\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -1280,10 +1297,10 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</a>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 181, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 182, filename: "jade/module/module.jade" });
 buf.push("<a id=\"coursesright\" href=\"#carousel-courses\" data-slide=\"next\" class=\"carousel-control right\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 182, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 183, filename: "jade/module/module.jade" });
 buf.push("<span class=\"glyphicon glyphicon-chevron-right\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -1301,46 +1318,43 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.shift();
-buf.push("</div>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 183, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 184, filename: "jade/module/module.jade" });
 buf.push("<div class=\"row\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 184, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 185, filename: "jade/module/module.jade" });
 buf.push("<div class=\"col-md-12\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 185, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 186, filename: "jade/module/module.jade" });
 buf.push("<div align=\"center\" id=\"suggestionText\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 186, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 187, filename: "jade/module/module.jade" });
 buf.push("None of these courses helpful? ");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 187, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 188, filename: "jade/module/module.jade" });
 buf.push("<button data-toggle=\"modal\" data-target=\"#suggestCourseDiv\" class=\"btn btn-small\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 187, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 188, filename: jade_debug[0].filename });
 buf.push("Suggest a course!");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</button>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 188, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 189, filename: "jade/module/module.jade" });
 buf.push("<div id=\"suggestCourseDiv\" tabindex=\"-1\" aria-labelledby=\"suggestLabel\" aria-hidden=\"true\" class=\"modal bs-example-modal-sm\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 189, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 190, filename: "jade/module/module.jade" });
 buf.push("<div class=\"modal-dialog modal-sm\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 190, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 191, filename: "jade/module/module.jade" });
 buf.push("<div class=\"modal-content\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 191, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 192, filename: "jade/module/module.jade" });
 buf.push("<div class=\"modal-header\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 192, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 193, filename: "jade/module/module.jade" });
 buf.push("<h3 id=\"suggestLabel\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 193, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 194, filename: "jade/module/module.jade" });
 buf.push("Suggest A Course");
 jade_debug.shift();
 jade_debug.shift();
@@ -1349,61 +1363,61 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 194, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 195, filename: "jade/module/module.jade" });
 buf.push("<div class=\"modal-body\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 195, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 196, filename: "jade/module/module.jade" });
 buf.push("<form id=\"suggestCourseForm\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 196, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 197, filename: "jade/module/module.jade" });
 buf.push("<div class=\"form-group\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 197, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 198, filename: "jade/module/module.jade" });
 buf.push("<input id=\"suggestURL\" type=\"text\" name=\"suggestURL\" placeholder=\"Course URL\" class=\"form-control\"/>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 198, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 199, filename: "jade/module/module.jade" });
 buf.push("<div class=\"form-group\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 199, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 200, filename: "jade/module/module.jade" });
 buf.push("<input id=\"suggestTitle\" type=\"text\" name=\"suggestTitle\" placeholder=\"Title\" class=\"form-control\"/>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 200, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 201, filename: "jade/module/module.jade" });
 buf.push("<div class=\"form-group\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 201, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 202, filename: "jade/module/module.jade" });
 buf.push("<input id=\"suggestInstitution\" type=\"text\" name=\"suggestInstitution\" placeholder=\"Institution\" class=\"form-control\"/>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 202, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 203, filename: "jade/module/module.jade" });
 buf.push("<div class=\"form-group\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 203, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 204, filename: "jade/module/module.jade" });
 buf.push("<input id=\"suggestTeachDate\" type=\"text\" name=\"suggestTeachDate\" placeholder=\"Teaching Date\" class=\"form-control\"/>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 204, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 205, filename: "jade/module/module.jade" });
 buf.push("<div class=\"form-group\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 205, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 206, filename: "jade/module/module.jade" });
 buf.push("<input id=\"suggestInstructors\" type=\"text\" name=\"suggestInstructors\" placeholder=\"Instructors\" class=\"form-control\"/>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 206, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 207, filename: "jade/module/module.jade" });
 buf.push("<div class=\"form-group\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 207, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 208, filename: "jade/module/module.jade" });
 buf.push("<textarea id=\"suggestDesc\" rows=\"3\" name=\"suggestDesc\" placeholder=\"Description\" class=\"form-control\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.shift();
@@ -1412,22 +1426,22 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 208, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 209, filename: "jade/module/module.jade" });
 buf.push("<div class=\"form-group\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 209, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 210, filename: "jade/module/module.jade" });
 buf.push("<input id=\"suggestMaterials\" type=\"text\" name=\"suggestMaterials\" placeholder=\"Course Materials Link\" class=\"form-control\"/>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 210, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 211, filename: "jade/module/module.jade" });
 buf.push("<div class=\"form-group\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 211, filename: "jade/module/module.jade" });
+jade_debug.unshift({ lineno: 212, filename: "jade/module/module.jade" });
 buf.push("<button id=\"submitSuggestion\" type=\"button\" value=\"Submit\"" + (jade.attr("moduleID", '' + (category) + '', true, false)) + " data-dismiss=\"modal\" class=\"btn btn-default btn-lg\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 211, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 212, filename: jade_debug[0].filename });
 buf.push("Submit");
 jade_debug.shift();
 jade_debug.shift();
@@ -1465,7 +1479,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .row\n    .col-md-8\n      h1(align='center') #{name}\n      #carousel-ytvids.carousel.slide(\n        data-ride='carousel', \n        data-interval='false'\n      )\n        ol.carousel-indicators\n          - var count = 0\n          for video in youtube\n            if count == 0\n              li.active(\n                data-target='#carousel-ytvids', \n                data-slide-to=count\n              )\n            else\n              li(\n                data-target='#carousel-ytvids', \n                data-slide-to=count\n              )  \n            - count = count + 1\n        .carousel-inner\n          - count = 0\n          for video in youtube\n            if count == 0\n              .item.active(align='center')\n                if yt_type == \"video\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n                if yt_type == \"playlist\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/videoseries?list=#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n            else\n              .item(align='center')\n                if yt_type == \"video\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n                else if yt_type == \"playlist\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/videoseries?list=#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n            - count = count + 1\n        a.carousel-control.left(href='#carousel-ytvids', data-slide='prev')\n          span.glyphicon.glyphicon-chevron-left\n        a.carousel-control.right(href='#carousel-ytvids', data-slide='next')\n          span.glyphicon.glyphicon-chevron-right\n    .col-md-4\n      div(align='center')\n        h2 Jobs\n      // hardcoded height!! fix \n      div(style='overflow: scroll; height: 320px;')\n        for job in jobs\n          if !job.owner\n            .place-bid\n              b\n                a(target='_blank', href=\"project/#{job.projectid}\") #{job.projectname}\n              br\n              div(class='projectstatus#{job.projectid}')\n                if job.alreadyBidOn\n                  div.alert.alert-success Already placed\n                else\n                  button.btn.btn-default.btn-small(\n                    id = 'bid_submit#{job.projectid}',\n                    type='button', \n                    jobid='#{job.projectid}'\n                  ) Bid on this project\n  .row\n    .col-md-12\n      div(align='center')\n        h2 Courses\n      #carousel-courses.carousel.slide(\n        data-ride='carousel', \n        data-interval='false'\n      )\n        ol.carousel-indicators\n          - count = 0\n          for course in courses\n            if course != \"\"\n              if course.Title\n                if count == 0\n                  li.active(\n                    data-target='#carousel-courses', \n                    data-slide-to='#{count}'\n                  )\n                else\n                  li(\n                    data-target='#carousel-courses', \n                    data-slide-to='#{count}'\n                  )\n            - count = count + 1\n        - count = 0\n        .carousel-inner\n          for course in courses\n            if course != \"\"\n              if course.Title\n                if course.scoreRanking > 0\n                  if count == 0\n                    .item.active(align='center')\n                      .courseinfo\n                        a(target='_blank', href=course.CourseURL) #{course.Title}\n                        br\n                        | #{course.Institution} (#{course.TeachingDate})\n                        br\n                        | Instructors: #{course.Instructors}\n                        br\n                        | Description: #{course.Description}\n                        br\n                        a(target='_blank', href=course.DownloadPageLink) Course Materials\n                        br\n                      br\n                      div(class=\"coursescore\", id=\"#{count}\")\n                        if course.scoreRanking == 1\n                          | <span id=\"rank#{count}\">#{course.scoreRanking}</span> person found this course helpful.\n                        else \n                          | <span id=\"rank#{count}\">#{course.scoreRanking}</span> people found this course helpful.\n                      br\n                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(\n                        courseTitle='#{course.Title}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                      | &nbsp; &nbsp; &nbsp;\n                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(\n                        courseTitle='#{course.Title}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                  else\n                    .item(align='center')\n                      .courseinfo\n                        a(target='_blank', href=course.CourseURL) #{course.Title}\n                        br\n                        | #{course.Institution} (#{course.TeachingDate})\n                        br\n                        | Instructors: #{course.Instructors}\n                        br\n                        | Description: #{course.Description}\n                        br\n                        a(target='_blank', href=course.DownloadPageLink) Course Materials\n                        br\n                      br \n                      div(class=\"coursescore\", id=\"#{count}\")\n                        if course.scoreRanking == 1\n                          | <span id=\"rank#{count}\">#{course.scoreRanking}</span> person found this course helpful.\n                        else \n                          | <span id=\"rank#{count}\">#{course.scoreRanking}</span> people found this course helpful.\n                      br\n                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(\n                        courseTitle='#{course.Title}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"                      )\n                      | &nbsp; &nbsp; &nbsp;\n                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(\n                        courseTitle='#{course.Title}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                  - count = count + 1 \n          a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')\n            span.glyphicon.glyphicon-chevron-left\n          a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')\n            span.glyphicon.glyphicon-chevron-right\n  .row\n    .col-md-12\n      div(align='center', id=\"suggestionText\")\n        | None of these courses helpful? \n        button.btn.btn-small(data-toggle=\"modal\", data-target=\"#suggestCourseDiv\") Suggest a course!\n        div(class=\"modal bs-example-modal-sm\", id=\"suggestCourseDiv\", tabindex=\"-1\", aria-labelledby=\"suggestLabel\", aria-hidden=\"true\")\n          .modal-dialog.modal-sm\n            .modal-content\n              .modal-header\n                h3#suggestLabel\n                  | Suggest A Course\n              .modal-body\n                form#suggestCourseForm\n                  .form-group\n                    input#suggestURL.form-control(type=\"text\", name=\"suggestURL\", placeholder=\"Course URL\")\n                  .form-group\n                    input#suggestTitle.form-control(type=\"text\", name=\"suggestTitle\", placeholder=\"Title\")\n                  .form-group\n                    input#suggestInstitution.form-control(type=\"text\", name=\"suggestInstitution\", placeholder=\"Institution\")\n                  .form-group\n                    input#suggestTeachDate.form-control(type=\"text\", name=\"suggestTeachDate\", placeholder=\"Teaching Date\")\n                  .form-group\n                    input#suggestInstructors.form-control(type=\"text\", name=\"suggestInstructors\", placeholder=\"Instructors\")\n                  .form-group\n                    textarea#suggestDesc.form-control(rows=\"3\", name=\"suggestDesc\", placeholder=\"Description\")\n                  .form-group\n                    input#suggestMaterials.form-control(type=\"text\", name=\"suggestMaterials\", placeholder=\"Course Materials Link\")      \n                  .form-group\n                    button#submitSuggestion.btn.btn-default.btn-lg(type=\"button\", value=\"Submit\", moduleID='#{category}', data-dismiss=\"modal\") Submit");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .row\n    .col-md-8\n      h1(align='center') #{name}\n      #carousel-ytvids.carousel.slide(\n        data-ride='carousel', \n        data-interval='false'\n      )\n        ol.carousel-indicators\n          - var count = 0\n          for video in youtube\n            if count == 0\n              li.active(\n                data-target='#carousel-ytvids', \n                data-slide-to=count\n              )\n            else\n              li(\n                data-target='#carousel-ytvids', \n                data-slide-to=count\n              )  \n            - count = count + 1\n        .carousel-inner\n          - count = 0\n          for video in youtube\n            if count == 0\n              .item.active(align='center')\n                if yt_type == \"video\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n                if yt_type == \"playlist\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/videoseries?list=#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n            else\n              .item(align='center')\n                if yt_type == \"video\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n                else if yt_type == \"playlist\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/videoseries?list=#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n            - count = count + 1\n        a.carousel-control.left(href='#carousel-ytvids', data-slide='prev')\n          span.glyphicon.glyphicon-chevron-left\n        a.carousel-control.right(href='#carousel-ytvids', data-slide='next')\n          span.glyphicon.glyphicon-chevron-right\n    .col-md-4\n      div(align='center')\n        h2 Jobs\n      // hardcoded height!! fix \n      div(style='overflow: scroll; height: 320px;')\n        for job in jobs\n          if !job.owner\n            .place-bid\n              b\n                a(target='_blank', href=\"project/#{job.projectid}\") #{job.projectname}\n              br\n              div(class='projectstatus#{job.projectid}')\n                if job.alreadyBidOn\n                  div.alert.alert-success Already placed\n                else\n                  button.btn.btn-default.btn-small(\n                    id = 'bid_submit#{job.projectid}',\n                    type='button', \n                    jobid='#{job.projectid}'\n                  ) Bid on this project\n  .row\n    .col-md-12\n      div(align='center')\n        h2 Courses\n      #carousel-courses.carousel.slide(\n        data-ride='carousel', \n        data-interval='false'\n      )\n        ol.carousel-indicators\n          - count = 0\n          for course in courses\n            if course != \"\"\n              if course.Title\n                if course.scoreRanking > 0\n                  if count == 0\n                    li.active(\n                      data-target='#carousel-courses', \n                      data-slide-to='#{count}'\n                    )\n                  else\n                    li(\n                      data-target='#carousel-courses', \n                      data-slide-to='#{count}'\n                    )\n                  - count = count + 1\n        - count = 0\n        .carousel-inner\n          for course in courses\n            if course != \"\"\n              if course.Title\n                if course.scoreRanking > 0\n                  if count == 0\n                    .item.active(align='center')\n                      .courseinfo\n                        a(target='_blank', href=course.CourseURL) #{course.Title}\n                        br\n                        | #{course.Institution} (#{course.TeachingDate})\n                        br\n                        | Instructors: #{course.Instructors}\n                        br\n                        | Description: #{course.Description}\n                        br\n                        a(target='_blank', href=course.DownloadPageLink) Course Materials\n                        br\n                      br\n                      div(class=\"coursescore\", id=\"#{count}\")\n                        if course.scoreRanking == 1\n                          | <span id=\"rank#{count}\">#{course.scoreRanking}</span> person found this course helpful.\n                        else \n                          | <span id=\"rank#{count}\">#{course.scoreRanking}</span> people found this course helpful.\n                      br\n                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(\n                        courseTitle='#{course.Title}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                      | &nbsp; &nbsp; &nbsp;\n                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(\n                        courseTitle='#{course.Title}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                  else\n                    .item(align='center')\n                      .courseinfo\n                        a(target='_blank', href=course.CourseURL) #{course.Title}\n                        br\n                        | #{course.Institution} (#{course.TeachingDate})\n                        br\n                        | Instructors: #{course.Instructors}\n                        br\n                        | Description: #{course.Description}\n                        br\n                        a(target='_blank', href=course.DownloadPageLink) Course Materials\n                        br\n                      br \n                      div(class=\"coursescore\", id=\"#{count}\")\n                        if course.scoreRanking == 1\n                          | <span id=\"rank#{count}\">#{course.scoreRanking}</span> person found this course helpful.\n                        else \n                          | <span id=\"rank#{count}\">#{course.scoreRanking}</span> people found this course helpful.\n                      br\n                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(\n                        courseTitle='#{course.Title}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"                      )\n                      | &nbsp; &nbsp; &nbsp;\n                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(\n                        courseTitle='#{course.Title}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                  - count = count + 1 \n        a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')\n          span.glyphicon.glyphicon-chevron-left\n        a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')\n          span.glyphicon.glyphicon-chevron-right\n  .row\n    .col-md-12\n      div(align='center', id=\"suggestionText\")\n        | None of these courses helpful? \n        button.btn.btn-small(data-toggle=\"modal\", data-target=\"#suggestCourseDiv\") Suggest a course!\n        div(class=\"modal bs-example-modal-sm\", id=\"suggestCourseDiv\", tabindex=\"-1\", aria-labelledby=\"suggestLabel\", aria-hidden=\"true\")\n          .modal-dialog.modal-sm\n            .modal-content\n              .modal-header\n                h3#suggestLabel\n                  | Suggest A Course\n              .modal-body\n                form#suggestCourseForm\n                  .form-group\n                    input#suggestURL.form-control(type=\"text\", name=\"suggestURL\", placeholder=\"Course URL\")\n                  .form-group\n                    input#suggestTitle.form-control(type=\"text\", name=\"suggestTitle\", placeholder=\"Title\")\n                  .form-group\n                    input#suggestInstitution.form-control(type=\"text\", name=\"suggestInstitution\", placeholder=\"Institution\")\n                  .form-group\n                    input#suggestTeachDate.form-control(type=\"text\", name=\"suggestTeachDate\", placeholder=\"Teaching Date\")\n                  .form-group\n                    input#suggestInstructors.form-control(type=\"text\", name=\"suggestInstructors\", placeholder=\"Instructors\")\n                  .form-group\n                    textarea#suggestDesc.form-control(rows=\"3\", name=\"suggestDesc\", placeholder=\"Description\")\n                  .form-group\n                    input#suggestMaterials.form-control(type=\"text\", name=\"suggestMaterials\", placeholder=\"Course Materials Link\")      \n                  .form-group\n                    button#submitSuggestion.btn.btn-default.btn-lg(type=\"button\", value=\"Submit\", moduleID='#{category}', data-dismiss=\"modal\") Submit");
 }
 },
 
@@ -1489,6 +1503,29 @@ jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
   jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "div(class=\"alert alert-danger\" id=\"vote_message\")\n  | You have already voted in this manner.\n");
+}
+},
+
+"vote_general_failure":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/module/vote_general_failure.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined;
+jade_debug.unshift({ lineno: 0, filename: "jade/module/vote_general_failure.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/module/vote_general_failure.jade" });
+buf.push("<div id=\"vote_message\" class=\"alert alert-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 2, filename: "jade/module/vote_general_failure.jade" });
+buf.push("Something went wrong when voting. Please try again.");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</div>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "div(class=\"alert alert-danger\" id=\"vote_message\")\n  | Something went wrong when voting. Please try again.\n");
 }
 }
 };

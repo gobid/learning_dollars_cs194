@@ -97,17 +97,18 @@
           for course in courses
             if course != ""
               if course.Title
-                if count == 0
-                  li.active(
-                    data-target='#carousel-courses', 
-                    data-slide-to='#{count}'
-                  )
-                else
-                  li(
-                    data-target='#carousel-courses', 
-                    data-slide-to='#{count}'
-                  )
-            - count = count + 1
+                if course.scoreRanking > 0
+                  if count == 0
+                    li.active(
+                      data-target='#carousel-courses', 
+                      data-slide-to='#{count}'
+                    )
+                  else
+                    li(
+                      data-target='#carousel-courses', 
+                      data-slide-to='#{count}'
+                    )
+                  - count = count + 1
         - count = 0
         .carousel-inner
           for course in courses
@@ -176,10 +177,10 @@
                         count="#{count}"
                       )
                   - count = count + 1 
-          a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')
-            span.glyphicon.glyphicon-chevron-left
-          a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')
-            span.glyphicon.glyphicon-chevron-right
+        a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')
+          span.glyphicon.glyphicon-chevron-left
+        a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')
+          span.glyphicon.glyphicon-chevron-right
   .row
     .col-md-12
       div(align='center', id="suggestionText")
