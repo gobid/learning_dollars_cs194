@@ -29,11 +29,14 @@ class ModuleInfo(webapp2.RequestHandler):
     def convert_to_project_JSON(self, project):
         account_id = get_account().key.id()
         frmtd_end_date = project.end_date
+        owner = False
         if frmtd_end_date is not None:
             frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
         alreadyBidOn = False
         if account_id in project.bidders:
             alreadyBidOn = True
+        if account_id == project.owner:
+            owner = True
         newProjectJSON = {
             'projectid': project.key.id(),
             'projectname': project.name,
@@ -43,7 +46,8 @@ class ModuleInfo(webapp2.RequestHandler):
             'bidcount': len(project.bidders),
             'enddate': frmtd_end_date,
             'complete': project.complete,
-            'alreadyBidOn' : alreadyBidOn
+            'alreadyBidOn' : alreadyBidOn,
+            'owner' : owner
         }
         return newProjectJSON
 

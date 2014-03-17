@@ -2,7 +2,6 @@ $(document).ready(function() {
     // initialize page
 	var datalink = $("#datalink").val();
 	$.get(datalink, function(data){
-		console.log(data);
 		$("body").append(Templates.module(data));
 		
 		/* START jQuery Methods */
@@ -79,20 +78,16 @@ function toggle_form(e) {
 }
 
 function make_bid_request(elementid) {
-	console.log(elementid);
-	console.log("button fired!!!!!!");
-
 	var projectid = $("#" + elementid).attr("jobid");
-	$.get('/bidonproject/' + projectid, function(response){
+	$.get("/bidonproject/" + projectid, function(response){
 		if(response === "Success") {
-			console.log("SUCESSSSS");
 			var string = "#bid_submit" + elementid;
-			console.log("this is the element id:" + elementid);
 			$("#bid_submit" + projectid).remove();
-			$(".projectstatus" + projectid).append("<div class='alert alert-success'>Already placed</div>");
+			$(".projectstatus" + projectid).append(Templates.bid_success());
 			//remove button. say bid already placed
 		} else {
-			console.log(response);
+			$("#bid_submit" + projectid).remove();
+			$(".projectstatus" + projectid).append(Templates.bid_failure());
 		}
 	});
 }

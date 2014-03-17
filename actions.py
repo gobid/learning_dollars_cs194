@@ -152,13 +152,11 @@ class BidOnProject(webapp2.RequestHandler):
             response = 'Not logged into account.'
         account_id = account.key.id()
         project = Project.get_by_id(project_id)
-        print "hit bid on project"
         if project:
             #check to see if already bid on
             if account_id in project.bidders:
                 response = 'User already bid on this project'
             else:
-                print "hit successfully submitted"
                 project.bidders.append(account_id)
                 project.put()
                 response = 'Success'
@@ -199,17 +197,17 @@ class PostNewProject(webapp2.RequestHandler):
 
     def get(self, projectname, projectdesc, jobtypecsv, budgetoption,
             duration):
+        user_id = get_account().key.id()
         end_date = datetime.datetime.now()
         end_date = end_date + datetime.timedelta(days=int(duration))
-        print end_date
         project = Project(
             name=projectname,
             price=budgetoption,
             description=projectdesc,
             job_type=jobtypecsv,
-            end_date=end_date
+            end_date=end_date,
+            owner= user_id
         )
-        print project
         project.put()  # do error checking on puts later
         account = get_account()
         account.projects_posted.append(project.key.id())

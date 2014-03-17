@@ -39,6 +39,7 @@ class Project(ModelUtils, ndb.Model):
     job_type = ndb.StringProperty() # included on creation (module id)
     end_date = ndb.DateProperty() # included on creation
     complete = ndb.StringProperty()
+    owner = ndb.IntegerProperty()
 
 
 class Message(ModelUtils, ndb.Model):

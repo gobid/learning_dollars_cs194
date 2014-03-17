@@ -70,19 +70,20 @@
       // hardcoded height!! fix 
       div(style='overflow: scroll; height: 320px;')
         for job in jobs
-          .place-bid
-            b
-              a(target='_blank', href="project/#{job.projectid}") #{job.projectname}
-            br
-            div(class='projectstatus#{job.projectid}')
-              if job.alreadyBidOn
-                div.alert.alert-success Already placed
-              else
-                button.btn.btn-default.btn-small(
-                  id = 'bid_submit#{job.projectid}',
-                  type='button', 
-                  jobid='#{job.projectid}'
-                ) Bid on this project
+          if !job.owner
+            .place-bid
+              b
+                a(target='_blank', href="project/#{job.projectid}") #{job.projectname}
+              br
+              div(class='projectstatus#{job.projectid}')
+                if job.alreadyBidOn
+                  div.alert.alert-success Already placed
+                else
+                  button.btn.btn-default.btn-small(
+                    id = 'bid_submit#{job.projectid}',
+                    type='button', 
+                    jobid='#{job.projectid}'
+                  ) Bid on this project
   .row
     .col-md-12
       div(align='center')
