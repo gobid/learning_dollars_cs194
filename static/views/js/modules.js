@@ -54,5 +54,7 @@ function create_new_module(e) {
 		} else {
 			console.log("ERROR no response");
 		}
-	});
+	}).fail(function(){
+		$("#submit_new_module").after(Templates.new_module_failure());
+	});;
 }

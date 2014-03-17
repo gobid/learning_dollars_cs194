@@ -36,6 +36,8 @@ $(document).ready(function() {
 				setTimeout(function(){
 					$(".alert").fadeOut();
 				}, 3000);
+			}).fail(function(){
+				$("#newMessage").after(Templates.sending_failure());
 			});
 		});
 

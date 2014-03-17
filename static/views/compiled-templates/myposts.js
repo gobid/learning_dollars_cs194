@@ -280,6 +280,29 @@ jade_debug.shift();;return buf.join("");
 }
 },
 
+"post_failure":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/myposts/post_failure.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined;
+jade_debug.unshift({ lineno: 0, filename: "jade/myposts/post_failure.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/myposts/post_failure.jade" });
+buf.push("<div id=\"log_message\" class=\"alert alert-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 2, filename: "jade/myposts/post_failure.jade" });
+buf.push("Failure. Reload the page, fill out all fields, and retry. ");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</div>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "div(class=\"alert alert-danger\" id=\"log_message\")\n  | Failure. Reload the page, fill out all fields, and retry. ");
+}
+},
+
 "post_success":
   function template(locals) {
 var jade_debug = [{ lineno: 1, filename: "jade/myposts/post_success.jade" }];

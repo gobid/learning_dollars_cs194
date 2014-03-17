@@ -142,28 +142,6 @@ class ReleaseMilestone(webapp2.RequestHandler):
         self.response.write(json.dumps(response))
 
 
-class BidOnProject(webapp2.RequestHandler):
-
-    def get(self, project_id):
-        project_id = int(project_id)
-        account = get_account()
-        response = 'error'
-        if account == None:
-            response = 'Not logged into account.'
-        account_id = account.key.id()
-        project = Project.get_by_id(project_id)
-        if project:
-            # check to see if already bid on
-            if account_id in project.bidders:
-                response = 'User already bid on this project'
-            else:
-                project.bidders.append(account_id)
-                project.put()
-                response = 'Success'
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
-
-
 # This is retracting a bid from a project
 
 
@@ -272,8 +250,7 @@ class SendMessage(webapp2.RequestHandler):
 #         self.response.headers['Content-Type'] = 'application/json'
 #         self.response.write(json.dumps(response))
 
-
-class AddBidderToProject(webapp2.RequestHandler):
+class BidOnProject(webapp2.RequestHandler):
 
     def get(self, project_id):
         project_id = int(project_id)
@@ -289,9 +266,9 @@ class AddBidderToProject(webapp2.RequestHandler):
                 project.put()
                 account.projects_bidded_on.append(project_id)
                 account.put()
-                response = {'success': 'Bidder added.'}
+                response = 'Success'
             else:
-                response = {'error': 'Bidder already added.'}
+                response = 'Bidder already added.'
         else:
             response = {'error': 'No project of given id.'}
         self.response.headers['Content-Type'] = 'application/json'
