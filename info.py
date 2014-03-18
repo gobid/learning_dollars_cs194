@@ -263,7 +263,8 @@ class GetProjectDetails(webapp2.RequestHandler):
             'bidcount': len(project.bidders),
             'enddate': frmtd_end_date,
             'additionalstatus': project_open,
-            'complete': project.complete
+            'complete': project.complete,
+            'description': project.description
         }
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(newProjectJSON))
