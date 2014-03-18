@@ -48,9 +48,10 @@ $(document).ready(function() {
 function addCourse(moduleID, courseURL, title, institution, teachDate,
 	instructors, description, materials) {
 	"use strict";
-    $.get("/addcourse/" + moduleID + "/" + encodeURIComponent(courseURL) +
-     "/" + title + "/" + institution + "/" + teachDate + "/" + instructors +
-      "/" + description + "/" + encodeURIComponent(materials), function(data){
+    $.get("/addcourse/" + moduleID + "/" + title + "/" + institution +
+    "/" + teachDate + "/" + instructors + "/" + description +
+    "?courseURL=" + encodeURIComponent(courseURL) + "&materials=" +
+    encodeURIComponent(materials), function(data){
         var response = data.success;
 		if(response) {
 			$("#carousel-courses").append(Templates.course_success());

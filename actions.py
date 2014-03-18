@@ -382,17 +382,17 @@ class Downvote(webapp2.RequestHandler):
 
 class AddCourse(webapp2.RequestHandler):
 
-    def get(self, moduleID, courseURL, title, institution, teachDate, instructors, description, materials):
+    def get(self, moduleID, title, institution, teachDate, instructors, description):
         account = get_account()
         if account:
             newCourse = dict()
-            newCourse["CourseURL"] = urlparse.unquote(courseURL)
+            newCourse["CourseURL"] = urlparse.unquote(self.request.get('courseURL'))
             newCourse["Title"] = title
             newCourse["Institution"] = institution
             newCourse["TeachingDate"] = teachDate
             newCourse["Instructors"] = instructors
             newCourse["Description"] = description
-            newCourse["DownloadPageLink"] = urlparse.unquote(materials)
+            newCourse["DownloadPageLink"] = urlparse.unquote(self.request.get('materials'))
             newCourse["scoreRanking"] = 1
             moduleID = int(moduleID)
             match = Module.query(Module.category == moduleID).fetch()
