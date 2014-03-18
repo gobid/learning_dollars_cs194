@@ -396,7 +396,7 @@ jade_debug.unshift({ lineno: 11, filename: "jade/myposts/posted_projects.jade" }
 buf.push("<b>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 11, filename: jade_debug[0].filename });
-buf.push("$" + (jade.escape((jade.interp = price) == null ? '' : jade.interp)) + "");
+buf.push("" + (jade.escape((jade.interp = price) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</b>");
@@ -460,7 +460,7 @@ buf.push("</tr>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr    \n  td\n    a(href=\"project/#{projectid}\") \n      b #{projectname}\n    br\n    ul.bulletless\n      li Status: \n        b #{additionalstatus}\n      if averagebid\n        li Price: \n          b $#{price}\n      li Bids: \n        a(href=\"project/#{projectid}\")\n          b #{bidcount}\n      li End Date: \n        b #{enddate}\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "tr    \n  td\n    a(href=\"project/#{projectid}\") \n      b #{projectname}\n    br\n    ul.bulletless\n      li Status: \n        b #{additionalstatus}\n      if averagebid\n        li Price: \n          b #{price}\n      li Bids: \n        a(href=\"project/#{projectid}\")\n          b #{bidcount}\n      li End Date: \n        b #{enddate}\n");
 }
 }
 };

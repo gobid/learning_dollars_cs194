@@ -262,7 +262,7 @@ jade_debug.unshift({ lineno: 30, filename: "jade/mailbox/mailbox.jade" });
 buf.push("<th>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 30, filename: jade_debug[0].filename });
-buf.push("From");
+buf.push("To");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</th>");
@@ -511,7 +511,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h1 Mailbox\n    .panel-body\n      ul#messageTabs.nav.nav-tabs\n        li#inboxTab.active\n          a(href='#inbox') Inbox\n        li\n          a#sentTab(href='#sent') Sent\n        li\n          a(href='#newMessage') New Message\n      .tab-content\n        #inbox.tab-pane.fade.in.active\n          table#inboxMessages.table.table-hover\n            tr\n              th From\n              th Subject\n              th Message\n              th Date/Time\n            each message in inboxMessages\n              tr\n                td #{message.fromuseremail}\n                td #{message.subject}\n                td #{message.message}\n                td #{message.datetime}\n        #sent.tab-pane.fade\n          table#sentMessages.table.table-hover\n            tr\n              th From\n              th Subject\n              th Message\n              th Date/Time\n            each message in sentMessages\n              tr\n                td #{message.touseremail}\n                td #{message.subject}\n                td #{message.message}\n                td #{message.datetime}\n        #newMessage.tab-pane.fade\n          form.newMessageForm\n            .form-group\n              label To:\n              input#to_user_email.form-control(\n                type='text', \n                placeholder='Email'\n              )\n            .form-group\n              label Subject:\n              input#subject_text.form-control(\n                type='text', \n                placeholder='Subject'\n              )\n            .form-group\n              label Message:\n              textarea#message_text.form-control(\n                rows='3', \n                placeholder='Enter Message Here'\n              )\n            .form-group\n              button#sendBtn.btn.btn-lg.btn-default(\n                value='Submit'\n              ) Send\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h1 Mailbox\n    .panel-body\n      ul#messageTabs.nav.nav-tabs\n        li#inboxTab.active\n          a(href='#inbox') Inbox\n        li\n          a#sentTab(href='#sent') Sent\n        li\n          a(href='#newMessage') New Message\n      .tab-content\n        #inbox.tab-pane.fade.in.active\n          table#inboxMessages.table.table-hover\n            tr\n              th From\n              th Subject\n              th Message\n              th Date/Time\n            each message in inboxMessages\n              tr\n                td #{message.fromuseremail}\n                td #{message.subject}\n                td #{message.message}\n                td #{message.datetime}\n        #sent.tab-pane.fade\n          table#sentMessages.table.table-hover\n            tr\n              th To\n              th Subject\n              th Message\n              th Date/Time\n            each message in sentMessages\n              tr\n                td #{message.touseremail}\n                td #{message.subject}\n                td #{message.message}\n                td #{message.datetime}\n        #newMessage.tab-pane.fade\n          form.newMessageForm\n            .form-group\n              label To:\n              input#to_user_email.form-control(\n                type='text', \n                placeholder='Email'\n              )\n            .form-group\n              label Subject:\n              input#subject_text.form-control(\n                type='text', \n                placeholder='Subject'\n              )\n            .form-group\n              label Message:\n              textarea#message_text.form-control(\n                rows='3', \n                placeholder='Enter Message Here'\n              )\n            .form-group\n              button#sendBtn.btn.btn-lg.btn-default(\n                value='Submit'\n              ) Send\n");
 }
 },
 
@@ -540,7 +540,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".alert.alert-danger\n\tstrong Error! Your Message was not sent.");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".alert.alert-danger\n  strong Error! Your Message was not sent.");
 }
 },
 
@@ -569,7 +569,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".alert.alert-success\n\tstrong Success! Your message was sent.");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".alert.alert-success\n  strong Success! Your message was sent.");
 }
 }
 };

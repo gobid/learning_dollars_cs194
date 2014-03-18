@@ -141,7 +141,7 @@ jade_debug.unshift({ lineno: 11, filename: "jade/project/project.jade" });
 buf.push("<b class=\"pull-right\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 11, filename: jade_debug[0].filename });
-buf.push("$" + (jade.escape((jade.interp = price) == null ? '' : jade.interp)) + "");
+buf.push("" + (jade.escape((jade.interp = price) == null ? '' : jade.interp)) + "");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</b>");
@@ -244,7 +244,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h1 #{projectname}\n    .panel-body\n      .row\n        .col-md-6\n          table.table.table-striped\n            tr\n              td Budget: \n                b.pull-right $#{price}\n            tr\n              td End date: \n                b.pull-right #{enddate}\n        .col-md-6\n          table.table.table-striped#bids\n            tr\n              td \n                b Bids\n            tr#bids_loader\n              td\n                img(src = '/static/views/img/ajax-loader.gif')");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h1 #{projectname}\n    .panel-body\n      .row\n        .col-md-6\n          table.table.table-striped\n            tr\n              td Budget: \n                b.pull-right #{price}\n            tr\n              td End date: \n                b.pull-right #{enddate}\n        .col-md-6\n          table.table.table-striped#bids\n            tr\n              td \n                b Bids\n            tr#bids_loader\n              td\n                img(src = '/static/views/img/ajax-loader.gif')");
 }
 },
 

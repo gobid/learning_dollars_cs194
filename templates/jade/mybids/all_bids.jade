@@ -1,7 +1,6 @@
 tr
   td
-    a(href="project/#{projectid}")
-      |#{projectname}
+    a(href="project/#{projectid}") #{projectname}
   td #{enddate}
   if additionalstatus == 'open'
     td #{additionalstatus}

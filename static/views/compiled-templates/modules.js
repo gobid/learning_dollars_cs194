@@ -281,15 +281,15 @@ jade_debug.shift();
 jade_debug.unshift({ lineno: 3, filename: "jade/modules/new_module_failure.jade" });
 buf.push("<div id=\"module_alert\" class=\"alert alert-danger\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.shift();
-buf.push("</div>");
-jade_debug.shift();
 jade_debug.unshift({ lineno: 4, filename: "jade/modules/new_module_failure.jade" });
 buf.push("Failure. Reload page, fill in new module name, and repost.");
 jade_debug.shift();
+jade_debug.shift();
+buf.push("</div>");
+jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "br\nbr\ndiv(class=\"alert alert-danger\" id=\"module_alert\")\n| Failure. Reload page, fill in new module name, and repost.");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "br\nbr\ndiv(class=\"alert alert-danger\" id=\"module_alert\")\n  | Failure. Reload page, fill in new module name, and repost.");
 }
 },
 

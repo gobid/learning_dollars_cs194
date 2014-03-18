@@ -73,7 +73,8 @@
           if !job.owner
             .place-bid
               b
-                a(target='_blank', href="project/#{job.projectid}") #{job.projectname}
+                a(target='_blank', href="project/#{job.projectid}")
+                  | #{job.projectname}
               br
               div(class='projectstatus#{job.projectid}')
                 if job.alreadyBidOn
@@ -118,7 +119,8 @@
                   if count == 0
                     .item.active(align='center')
                       .courseinfo
-                        a(target='_blank', href=course.CourseURL) #{course.Title}
+                        a(target='_blank', href=course.CourseURL) 
+                          | #{course.Title}
                         br
                         | #{course.Institution} (#{course.TeachingDate})
                         br
@@ -126,7 +128,8 @@
                         br
                         | Description: #{course.Description}
                         br
-                        a(target='_blank', href=course.DownloadPageLink) Course Materials
+                        a(target='_blank', href=course.DownloadPageLink) 
+                        | Course Materials
                         br
                       br
                       div(id="coursescore#{count}")
@@ -134,21 +137,26 @@
                         if course.scoreRanking == 1
                           if voteStr in votedCourses
                             if votedCourses[voteStr] == "Y"
-                              span(id="rank#{count}" class="text-success") #{course.scoreRanking}
+                              span(id="rank#{count}" class="text-success") 
+                                | #{course.scoreRanking}
                             else
-                              span(id="rank#{count}" class="text-danger") #{course.scoreRanking}
+                              span(id="rank#{count}" class="text-danger") 
+                                | #{course.scoreRanking}
                           else
                             span(id="rank#{count}") #{course.scoreRanking}
                           |  person found this course helpful.
                         else 
                           if voteStr in votedCourses
                             if votedCourses[voteStr] == "Y"
-                              span(id="rank#{count}" class="text-success") #{course.scoreRanking}
+                              span(id="rank#{count}" class="text-success") 
+                                | #{course.scoreRanking}
                             else
-                              span(id="rank#{count}" class="text-danger") #{course.scoreRanking}
+                              span(id="rank#{count}" class="text-danger") 
+                                | #{course.scoreRanking}
                           else
                             span(id="rank#{count}") #{course.scoreRanking}
                           |  people found this course helpful.
+                        br
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
                         courseID='#{course.ID}',
@@ -164,7 +172,8 @@
                   else
                     .item(align='center')
                       .courseinfo
-                        a(target='_blank', href=course.CourseURL) #{course.Title}
+                        a(target='_blank', href=course.CourseURL) 
+                          | #{course.Title}
                         br
                         | #{course.Institution} (#{course.TeachingDate})
                         br
@@ -172,7 +181,8 @@
                         br
                         | Description: #{course.Description}
                         br
-                        a(target='_blank', href=course.DownloadPageLink) Course Materials
+                        a(target='_blank', href=course.DownloadPageLink) 
+                          | Course Materials
                         br
                       br 
                       div(id="coursescore#{count}")
@@ -180,26 +190,31 @@
                         if course.scoreRanking == 1
                           if voteStr in votedCourses
                             if votedCourses[voteStr] == "Y"
-                              span(id="rank#{count}" class="text-success") #{course.scoreRanking}
+                              span(id="rank#{count}" class="text-success") 
+                                | #{course.scoreRanking}
                             else
-                              span(id="rank#{count}" class="text-danger") #{course.scoreRanking}
+                              span(id="rank#{count}" class="text-danger") 
+                                | #{course.scoreRanking}
                           else
                             span(id="rank#{count}") #{course.scoreRanking}
                           |  person found this course helpful.
                         else 
                           if voteStr in votedCourses
                             if votedCourses[voteStr] == "Y"
-                              span(id="rank#{count}" class="text-success") #{course.scoreRanking}
+                              span(id="rank#{count}" class="text-success") 
+                                | #{course.scoreRanking}
                             else
-                              span(id="rank#{count}" class="text-danger") #{course.scoreRanking}
+                              span(id="rank#{count}" class="text-danger") 
+                                | #{course.scoreRanking}
                           else
                             span(id="rank#{count}") #{course.scoreRanking}
                           |  people found this course helpful.
+                        br
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
                         courseID='#{course.ID}',
                         moduleID='#{category}',
-                        count="#{count}"                      )
+                        count="#{count}")
                       | &nbsp; &nbsp; &nbsp;
                       button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
                         courseID='#{course.ID}',
@@ -207,37 +222,83 @@
                         count="#{count}"
                       )
                   - count = count + 1 
-        a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')
+        a#coursesleft.carousel-control.left(
+          href='#carousel-courses', 
+          data-slide='prev'
+        )
           span.glyphicon.glyphicon-chevron-left
-        a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')
+        a#coursesright.carousel-control.right(
+          href='#carousel-courses', 
+          data-slide='next'
+        )
           span.glyphicon.glyphicon-chevron-right
   .row
     .col-md-12
       div(align='center', id="suggestionText")
         | None of these courses helpful? 
-        button.btn.btn-small(data-toggle="modal", data-target="#suggestCourseDiv") Suggest a course!
-        div(class="modal bs-example-modal-sm", id="suggestCourseDiv", tabindex="-1", aria-labelledby="suggestLabel", aria-hidden="true")
+        button.btn.btn-small(
+          data-toggle="modal", 
+          data-target="#suggestCourseDiv"
+        ) Suggest a course!
+        div(
+          class="modal bs-example-modal-sm", 
+          id="suggestCourseDiv", 
+          tabindex="-1", 
+          aria-labelledby="suggestLabel", 
+          aria-hidden="true"
+        )
           .modal-dialog.modal-sm
             .modal-content
               .modal-header
-                h3#suggestLabel
-                  | Suggest A Course
+                h3#suggestLabel Suggest A Course
               .modal-body
                 form#suggestCourseForm
                   .form-group
-                    input#suggestURL.form-control(type="text", name="suggestURL", placeholder="Course URL")
+                    input#suggestURL.form-control(
+                      type="text", 
+                      name="suggestURL", 
+                      placeholder="Course URL"
+                    )
                   .form-group
-                    input#suggestTitle.form-control(type="text", name="suggestTitle", placeholder="Title")
+                    input#suggestTitle.form-control(
+                      type="text", 
+                      name="suggestTitle", 
+                      placeholder="Title"
+                    )
                   .form-group
-                    input#suggestInstitution.form-control(type="text", name="suggestInstitution", placeholder="Institution")
+                    input#suggestInstitution.form-control(
+                      type="text", 
+                      name="suggestInstitution", 
+                      placeholder="Institution"
+                    )
                   .form-group
-                    input#suggestTeachDate.form-control(type="text", name="suggestTeachDate", placeholder="Teaching Date")
+                    input#suggestTeachDate.form-control(
+                      type="text", 
+                      name="suggestTeachDate", 
+                      placeholder="Teaching Date"
+                    )
                   .form-group
-                    input#suggestInstructors.form-control(type="text", name="suggestInstructors", placeholder="Instructors")
+                    input#suggestInstructors.form-control(
+                      type="text", 
+                      name="suggestInstructors", 
+                      placeholder="Instructors"
+                    )
                   .form-group
-                    textarea#suggestDesc.form-control(rows="3", name="suggestDesc", placeholder="Description")
+                    textarea#suggestDesc.form-control(
+                      rows="3", 
+                      name="suggestDesc", 
+                      placeholder="Description"
+                    )
                   .form-group
-                    input#suggestMaterials.form-control(type="text", name="suggestMaterials", placeholder="Course Materials Link")      
+                    input#suggestMaterials.form-control(
+                      type="text", 
+                      name="suggestMaterials", 
+                      placeholder="Course Materials Link"
+                    )      
                   .form-group
-                    button#submitSuggestion.btn.btn-default.btn-lg(type="button", value="Submit", moduleID='#{category}', data-dismiss="modal") Submit
-                    
+                    button#submitSuggestion.btn.btn-default.btn-lg(
+                      type="button", 
+                      value="Submit", 
+                      moduleID='#{category}', 
+                      data-dismiss="modal"
+                    ) Submit 
