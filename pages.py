@@ -55,82 +55,101 @@ class TeamPage(webapp2.RequestHandler):
 class ModulesPage(webapp2.RequestHandler):
 
     def get(self):
-        template_values = basicinfo(users.get_current_user(), self)
-        template_values['title'] = 'Modules'
-        template_values['compiled_template'] = 'modules.js'
-        template_values['datalink'] = 'modulesinfo'
-        template_values['javascript'] = 'modules.js'
-        template = JINJA_ENVIRONMENT.get_template('templates/template.html')
-        self.response.write(template.render(template_values))
-
+        if (users.get_current_user()):
+            template_values = basicinfo(users.get_current_user(), self)
+            template_values['title'] = 'Modules'
+            template_values['compiled_template'] = 'modules.js'
+            template_values['datalink'] = 'modulesinfo'
+            template_values['javascript'] = 'modules.js'
+            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            self.response.write(template.render(template_values))
+        else:
+            self.redirect('/')
 
 class ModulePage(webapp2.RequestHandler):
 
     def get(self, module_id):
-        template_values = basicinfo(users.get_current_user(), self)
-        mi = ModuleInfo()
-        module = mi.get_info(module_id)
-        template_values['title'] = module['name']
-        template_values['compiled_template'] = 'module.js'
-        template_values['datalink'] = 'moduleinfo/' + module_id
-        template_values['javascript'] = 'module.js'
-        template_values['extra_css'] = ['static/views/css/module.css']
-        template = JINJA_ENVIRONMENT.get_template('templates/template.html')
-        self.response.write(template.render(template_values))
+        if (users.get_current_user()):
+            template_values = basicinfo(users.get_current_user(), self)
+            mi = ModuleInfo()
+            module = mi.get_info(module_id)
+            template_values['title'] = module['name']
+            template_values['compiled_template'] = 'module.js'
+            template_values['datalink'] = 'moduleinfo/' + module_id
+            template_values['javascript'] = 'module.js'
+            template_values['extra_css'] = ['static/views/css/module.css']
+            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            self.response.write(template.render(template_values))
+        else:
+            self.redirect('/')
 
 
 class MailboxPage(webapp2.RequestHandler):
 
     def get(self):
-        template_values = basicinfo(users.get_current_user(), self)
-        template_values['title'] = 'Mailbox'
-        template_values['compiled_template'] = 'mailbox.js'
-        template_values['datalink'] = 'messagesinfo'
-        template_values['javascript'] = 'mailbox.js'
-        template = JINJA_ENVIRONMENT.get_template('templates/template.html')
-        self.response.write(template.render(template_values))
-
+        if (users.get_current_user()):
+            template_values = basicinfo(users.get_current_user(), self)
+            template_values['title'] = 'Mailbox'
+            template_values['compiled_template'] = 'mailbox.js'
+            template_values['datalink'] = 'messagesinfo'
+            template_values['javascript'] = 'mailbox.js'
+            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            self.response.write(template.render(template_values))
+        else:
+            self.redirect('/')
 
 class MyBidsPage(webapp2.RequestHandler):
 
     def get(self):
-        template_values = basicinfo(users.get_current_user(), self)
-        template_values['title'] = 'My Bids'
-        template_values['compiled_template'] = 'mybids.js'
-        template_values['javascript'] = 'mybids.js'
-        template = JINJA_ENVIRONMENT.get_template('templates/template.html')
-        self.response.write(template.render(template_values))
-
+        if (users.get_current_user()):
+            template_values = basicinfo(users.get_current_user(), self)
+            template_values['title'] = 'My Bids'
+            template_values['compiled_template'] = 'mybids.js'
+            template_values['javascript'] = 'mybids.js'
+            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            self.response.write(template.render(template_values))
+        else:
+            self.redirect('/')
 
 class MyPostsPage(webapp2.RequestHandler):
 
     def get(self):
-        template_values = basicinfo(users.get_current_user(), self)
-        template_values['title'] = 'My Posts'
-        template_values['compiled_template'] = 'myposts.js'
-        template_values['javascript'] = 'myposts.js'
-        template = JINJA_ENVIRONMENT.get_template('templates/template.html')
-        self.response.write(template.render(template_values))
+        if (users.get_current_user()):
+            template_values = basicinfo(users.get_current_user(), self)
+            template_values['title'] = 'My Posts'
+            template_values['compiled_template'] = 'myposts.js'
+            template_values['javascript'] = 'myposts.js'
+            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            self.response.write(template.render(template_values))
+        else:
+            self.redirect('/')
 
 
 class MilestonesPage(webapp2.RequestHandler):
 
     def get(self):
-        template_values = basicinfo(users.get_current_user(), self)
-        template_values['title'] = 'Milestones'
-        template_values['compiled_template'] = 'milestones.js'
-        template_values['javascript'] = 'milestones.js'
-        template = JINJA_ENVIRONMENT.get_template('templates/template.html')
-        self.response.write(template.render(template_values))
+        if (users.get_current_user()):
+            template_values = basicinfo(users.get_current_user(), self)
+            template_values['title'] = 'Milestones'
+            template_values['compiled_template'] = 'milestones.js'
+            template_values['javascript'] = 'milestones.js'
+            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            self.response.write(template.render(template_values))
+        else:
+            self.redirect('/')
 
 
 class ProjectPage(webapp2.RequestHandler):
 
     def get(self, project_id):
-        template_values = basicinfo(users.get_current_user(), self)
-        template_values['title'] = 'Project'
-        template_values['compiled_template'] = 'project.js'
-        template_values['javascript'] = 'project.js'
-        template_values['datalink'] = 'projectDetails/' + project_id
-        template = JINJA_ENVIRONMENT.get_template('templates/template.html')
-        self.response.write(template.render(template_values))
+        if (users.get_current_user()):
+            template_values = basicinfo(users.get_current_user(), self)
+            template_values['title'] = 'Project'
+            template_values['compiled_template'] = 'project.js'
+            template_values['javascript'] = 'project.js'
+            template_values['datalink'] = 'projectDetails/' + project_id
+            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            self.response.write(template.render(template_values))
+        else:
+            self.redirect('/')
+            

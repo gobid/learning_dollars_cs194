@@ -71,25 +71,13 @@ function post_project(e) {
 	var type = $("#type").val();
 	var budget_option = $("#budget_option option:selected").text();
 	var duration = $("#duration").val();
-	var job_type = $("#job_type").val()
+	var job_type = $("#job_type").val();
 	$.get("/postnewproject/" + name + "/" + description + "/" + job_type 
 		+ "/" + budget_option + "/" + duration, function(data, err){
 			if(data) {
 				$("#log_message_div").after(Templates.post_success);
 			} else {
-				response = data.errors;
-				if (!response) response = data.error;
-				else response = response.error.longmsg;
-				if (!($(".alert.alert-warning")[0])) {
-					var alertDiv = document.createElement("div");
-					alertDiv.className ="alert alert-warning";
-					var spaceMe = document.createElement("hr");
-					document.getElementsByClassName("post_project")[0]
-					.appendChild(spaceMe);
-					document.getElementsByClassName("post_project")[0].
-					appendChild(alertDiv);
-				}
-				$(".alert.alert-warning").html(response);
+				$("#log_message_div").after(Templates.post_failure);
 			}
 		}
 	).fail(function(){
