@@ -40,7 +40,6 @@ class Youtube:
                 channels.append("%s" % (search_result["id"]["channelId"]))
             elif search_result["id"]["kind"] == "youtube#playlist":
                 playlists.append("%s" % (search_result["id"]["playlistId"]))
-            print search_result
 
         if len(playlists) > 0:
             return playlists[:20], "playlist"

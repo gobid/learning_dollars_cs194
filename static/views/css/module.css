@@ -1,10 +1,8 @@
 .carousel-control.left{
 	background-image:none;
-	background-image:none;
 }
 
 .carousel-control.right{
-	background-image:none;
 	background-image:none;
 }
 
@@ -13,16 +11,7 @@
   	color:#000;
 }
 
-#carousel-ytvids {
-  margin-bottom: 40px;
-}
-
-#carousel-jobs {
-  margin-bottom: 40px;
-  height:320px;
-}
-
-#carousel-courses {
+.carousel.slide {
   margin-bottom: 40px;
 }
 
@@ -35,10 +24,6 @@
 
 .carousel-indicators .active {
 	background-color:#000;
-}
-
-#jobsleft, #jobsright {
-	margin-top:1px;
 }
 
 .place-bid{

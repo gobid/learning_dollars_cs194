@@ -56,7 +56,8 @@ class ModuleInfo(webapp2.RequestHandler):
         module = Module.get_by_id(module_id)
         votedCourses = {}
         account = get_account()
-        if account: votedCourses = account.courses_voted
+        if account:
+            votedCourses = account.courses_voted
         votedCourses = dict(votedCourses)
         newJobsJSON = []
         jobs = Project.query(Project.job_type == module.name).fetch()
@@ -101,7 +102,6 @@ class PostsInfo(webapp2.RequestHandler):
             project = Project.get_by_id(project_id)
             project_open = "open"
             frmtd_end_date = project.end_date
-            # print project.end_date.strftime('We are the %d, %b %Y')
             if frmtd_end_date is not None:
                 frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
             if project.winner is not None:
@@ -217,9 +217,7 @@ class GetPlacedBids(webapp2.RequestHandler):
         placed_bids = []
         for i in placed_bids_ids:
             project_id = int(i)
-            print project_id
             project = Project.get_by_id(project_id)
-            print project
             project_open = "open"
             frmtd_end_date = project.end_date
             winner_email = None
@@ -254,7 +252,6 @@ class GetProjectDetails(webapp2.RequestHandler):
         project = Project.get_by_id(project_id)
         project_open = "open"
         frmtd_end_date = project.end_date
-        print project.end_date.strftime('We are the %d, %b %Y')
         if frmtd_end_date is not None:
             frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
         if project.winner is not None:

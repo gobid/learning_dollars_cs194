@@ -887,7 +887,13 @@ if ( votedCourses[voteStr] == "Y")
 {
 jade_debug.unshift({ lineno: 137, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 137, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-success\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-success\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 137, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -895,7 +901,13 @@ else
 {
 jade_debug.unshift({ lineno: 139, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 139, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-danger\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 139, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -906,13 +918,19 @@ else
 {
 jade_debug.unshift({ lineno: 141, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 141, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + ">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 141, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
 jade_debug.unshift({ lineno: 142, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> person found this course helpful.");
+buf.push(" person found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -928,7 +946,13 @@ if ( votedCourses[voteStr] == "Y")
 {
 jade_debug.unshift({ lineno: 146, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 146, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-success\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-success\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 146, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -936,7 +960,13 @@ else
 {
 jade_debug.unshift({ lineno: 148, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 148, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-danger\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 148, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -947,13 +977,19 @@ else
 {
 jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + ">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 150, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
 jade_debug.unshift({ lineno: 151, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> people found this course helpful.");
+buf.push(" people found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1060,7 +1096,13 @@ if ( votedCourses[voteStr] == "Y")
 {
 jade_debug.unshift({ lineno: 183, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 183, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-success\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-success\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 183, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1068,7 +1110,13 @@ else
 {
 jade_debug.unshift({ lineno: 185, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 185, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-danger\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 185, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1079,13 +1127,19 @@ else
 {
 jade_debug.unshift({ lineno: 187, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 187, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + ">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 187, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
 jade_debug.unshift({ lineno: 188, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> person found this course helpful.");
+buf.push(" person found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1101,7 +1155,13 @@ if ( votedCourses[voteStr] == "Y")
 {
 jade_debug.unshift({ lineno: 192, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 192, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-success\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-success\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 192, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1109,7 +1169,13 @@ else
 {
 jade_debug.unshift({ lineno: 194, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 194, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-danger\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 194, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1120,13 +1186,19 @@ else
 {
 jade_debug.unshift({ lineno: 196, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 196, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + ">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 196, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
 jade_debug.unshift({ lineno: 197, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> people found this course helpful.");
+buf.push(" people found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1268,7 +1340,13 @@ if ( votedCourses[voteStr] == "Y")
 {
 jade_debug.unshift({ lineno: 137, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 137, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-success\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-success\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 137, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1276,7 +1354,13 @@ else
 {
 jade_debug.unshift({ lineno: 139, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 139, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-danger\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 139, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1287,13 +1371,19 @@ else
 {
 jade_debug.unshift({ lineno: 141, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 141, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + ">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 141, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
 jade_debug.unshift({ lineno: 142, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> person found this course helpful.");
+buf.push(" person found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1309,7 +1399,13 @@ if ( votedCourses[voteStr] == "Y")
 {
 jade_debug.unshift({ lineno: 146, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 146, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-success\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-success\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 146, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1317,7 +1413,13 @@ else
 {
 jade_debug.unshift({ lineno: 148, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 148, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-danger\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 148, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1328,13 +1430,19 @@ else
 {
 jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 150, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + ">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 150, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
 jade_debug.unshift({ lineno: 151, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> people found this course helpful.");
+buf.push(" people found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1441,7 +1549,13 @@ if ( votedCourses[voteStr] == "Y")
 {
 jade_debug.unshift({ lineno: 183, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 183, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-success\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-success\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 183, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1449,7 +1563,13 @@ else
 {
 jade_debug.unshift({ lineno: 185, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 185, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-danger\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 185, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1460,13 +1580,19 @@ else
 {
 jade_debug.unshift({ lineno: 187, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 187, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + ">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 187, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
 jade_debug.unshift({ lineno: 188, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> person found this course helpful.");
+buf.push(" person found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1482,7 +1608,13 @@ if ( votedCourses[voteStr] == "Y")
 {
 jade_debug.unshift({ lineno: 192, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 192, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-success\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-success\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 192, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1490,7 +1622,13 @@ else
 {
 jade_debug.unshift({ lineno: 194, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 194, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\" class=\"text-danger\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + " class=\"text-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 194, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1501,13 +1639,19 @@ else
 {
 jade_debug.unshift({ lineno: 196, filename: "jade/module/module.jade" });
 jade_debug.unshift({ lineno: 196, filename: "jade/module/module.jade" });
-buf.push("<span id=\"rank" + (jade.escape((jade.interp = count) == null ? '' : jade.interp)) + "\">");
+buf.push("<span" + (jade.attr("id", "rank" + (count) + "", true, false)) + ">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 196, filename: jade_debug[0].filename });
+buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</span>");
 jade_debug.shift();
 jade_debug.shift();
 }
 jade_debug.shift();
 jade_debug.unshift({ lineno: 197, filename: "jade/module/module.jade" });
-buf.push("" + (jade.escape((jade.interp = course.scoreRanking) == null ? '' : jade.interp)) + "</span> people found this course helpful.");
+buf.push(" people found this course helpful.");
 jade_debug.shift();
 jade_debug.shift();
 }
@@ -1755,7 +1899,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .row\n    .col-md-8\n      h1(align='center') #{name}\n      #carousel-ytvids.carousel.slide(\n        data-ride='carousel', \n        data-interval='false'\n      )\n        ol.carousel-indicators\n          - var count = 0\n          for video in youtube\n            if count == 0\n              li.active(\n                data-target='#carousel-ytvids', \n                data-slide-to=count\n              )\n            else\n              li(\n                data-target='#carousel-ytvids', \n                data-slide-to=count\n              )  \n            - count = count + 1\n        .carousel-inner\n          - count = 0\n          for video in youtube\n            if count == 0\n              .item.active(align='center')\n                if yt_type == \"video\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n                if yt_type == \"playlist\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/videoseries?list=#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n            else\n              .item(align='center')\n                if yt_type == \"video\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n                else if yt_type == \"playlist\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/videoseries?list=#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n            - count = count + 1\n        a.carousel-control.left(href='#carousel-ytvids', data-slide='prev')\n          span.glyphicon.glyphicon-chevron-left\n        a.carousel-control.right(href='#carousel-ytvids', data-slide='next')\n          span.glyphicon.glyphicon-chevron-right\n    .col-md-4\n      div(align='center')\n        h2 Jobs\n      // hardcoded height!! fix \n      div(style='overflow: scroll; height: 320px;')\n        for job in jobs\n          if !job.owner\n            .place-bid\n              b\n                a(target='_blank', href=\"project/#{job.projectid}\") #{job.projectname}\n              br\n              div(class='projectstatus#{job.projectid}')\n                if job.alreadyBidOn\n                  div.alert.alert-success Already placed\n                else\n                  button.btn.btn-default.btn-small(\n                    id = 'bid_submit#{job.projectid}',\n                    type='button', \n                    jobid='#{job.projectid}'\n                  ) Bid on this project\n  .row\n    .col-md-12\n      div(align='center')\n        h2 Courses\n      #carousel-courses.carousel.slide(\n        data-ride='carousel', \n        data-interval='false'\n      )\n        ol.carousel-indicators\n          - count = 0\n          for course in courses\n            if course != \"\"\n              if course.Title\n                if course.scoreRanking > 0\n                  if count == 0\n                    li.active(\n                      data-target='#carousel-courses', \n                      data-slide-to='#{count}'\n                    )\n                  else\n                    li(\n                      data-target='#carousel-courses', \n                      data-slide-to='#{count}'\n                    )\n                  - count = count + 1\n        - count = 0\n        .carousel-inner\n          for course in courses\n            if course != \"\"\n              if course.Title\n                if course.scoreRanking > 0\n                  if count == 0\n                    .item.active(align='center')\n                      .courseinfo\n                        a(target='_blank', href=course.CourseURL) #{course.Title}\n                        br\n                        | #{course.Institution} (#{course.TeachingDate})\n                        br\n                        | Instructors: #{course.Instructors}\n                        br\n                        | Description: #{course.Description}\n                        br\n                        a(target='_blank', href=course.DownloadPageLink) Course Materials\n                        br\n                      br\n                      div(id=\"coursescore#{count}\")\n                        - voteStr = category + \"+\" + course.ID\n                        if course.scoreRanking == 1\n                          if voteStr in votedCourses\n                            if votedCourses[voteStr] == \"Y\"\n                              | <span id=\"rank#{count}\" class=\"text-success\">\n                            else\n                              | <span id=\"rank#{count}\" class=\"text-danger\">\n                          else\n                            | <span id=\"rank#{count}\">\n                          | #{course.scoreRanking}</span> person found this course helpful.\n                        else \n                          if voteStr in votedCourses\n                            if votedCourses[voteStr] == \"Y\"\n                              | <span id=\"rank#{count}\" class=\"text-success\">\n                            else\n                              | <span id=\"rank#{count}\" class=\"text-danger\">\n                          else\n                            | <span id=\"rank#{count}\">\n                          | #{course.scoreRanking}</span> people found this course helpful.\n                      br\n                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(\n                        courseID='#{course.ID}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                      | &nbsp; &nbsp; &nbsp;\n                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(\n                        courseID='#{course.ID}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                  else\n                    .item(align='center')\n                      .courseinfo\n                        a(target='_blank', href=course.CourseURL) #{course.Title}\n                        br\n                        | #{course.Institution} (#{course.TeachingDate})\n                        br\n                        | Instructors: #{course.Instructors}\n                        br\n                        | Description: #{course.Description}\n                        br\n                        a(target='_blank', href=course.DownloadPageLink) Course Materials\n                        br\n                      br \n                      div(id=\"coursescore#{count}\")\n                        - voteStr = category + \"+\" + course.ID\n                        if course.scoreRanking == 1\n                          if voteStr in votedCourses\n                            if votedCourses[voteStr] == \"Y\"\n                              | <span id=\"rank#{count}\" class=\"text-success\">\n                            else\n                              | <span id=\"rank#{count}\" class=\"text-danger\">\n                          else\n                            | <span id=\"rank#{count}\">\n                          | #{course.scoreRanking}</span> person found this course helpful.\n                        else \n                          if voteStr in votedCourses\n                            if votedCourses[voteStr] == \"Y\"\n                              | <span id=\"rank#{count}\" class=\"text-success\">\n                            else\n                              | <span id=\"rank#{count}\" class=\"text-danger\">\n                          else\n                            | <span id=\"rank#{count}\">\n                          | #{course.scoreRanking}</span> people found this course helpful.\n                      br\n                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(\n                        courseID='#{course.ID}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"                      )\n                      | &nbsp; &nbsp; &nbsp;\n                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(\n                        courseID='#{course.ID}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                  - count = count + 1 \n        a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')\n          span.glyphicon.glyphicon-chevron-left\n        a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')\n          span.glyphicon.glyphicon-chevron-right\n  .row\n    .col-md-12\n      div(align='center', id=\"suggestionText\")\n        | None of these courses helpful? \n        button.btn.btn-small(data-toggle=\"modal\", data-target=\"#suggestCourseDiv\") Suggest a course!\n        div(class=\"modal bs-example-modal-sm\", id=\"suggestCourseDiv\", tabindex=\"-1\", aria-labelledby=\"suggestLabel\", aria-hidden=\"true\")\n          .modal-dialog.modal-sm\n            .modal-content\n              .modal-header\n                h3#suggestLabel\n                  | Suggest A Course\n              .modal-body\n                form#suggestCourseForm\n                  .form-group\n                    input#suggestURL.form-control(type=\"text\", name=\"suggestURL\", placeholder=\"Course URL\")\n                  .form-group\n                    input#suggestTitle.form-control(type=\"text\", name=\"suggestTitle\", placeholder=\"Title\")\n                  .form-group\n                    input#suggestInstitution.form-control(type=\"text\", name=\"suggestInstitution\", placeholder=\"Institution\")\n                  .form-group\n                    input#suggestTeachDate.form-control(type=\"text\", name=\"suggestTeachDate\", placeholder=\"Teaching Date\")\n                  .form-group\n                    input#suggestInstructors.form-control(type=\"text\", name=\"suggestInstructors\", placeholder=\"Instructors\")\n                  .form-group\n                    textarea#suggestDesc.form-control(rows=\"3\", name=\"suggestDesc\", placeholder=\"Description\")\n                  .form-group\n                    input#suggestMaterials.form-control(type=\"text\", name=\"suggestMaterials\", placeholder=\"Course Materials Link\")      \n                  .form-group\n                    button#submitSuggestion.btn.btn-default.btn-lg(type=\"button\", value=\"Submit\", moduleID='#{category}', data-dismiss=\"modal\") Submit");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .row\n    .col-md-8\n      h1(align='center') #{name}\n      #carousel-ytvids.carousel.slide(\n        data-ride='carousel', \n        data-interval='false'\n      )\n        ol.carousel-indicators\n          - var count = 0\n          for video in youtube\n            if count == 0\n              li.active(\n                data-target='#carousel-ytvids', \n                data-slide-to=count\n              )\n            else\n              li(\n                data-target='#carousel-ytvids', \n                data-slide-to=count\n              )  \n            - count = count + 1\n        .carousel-inner\n          - count = 0\n          for video in youtube\n            if count == 0\n              .item.active(align='center')\n                if yt_type == \"video\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n                if yt_type == \"playlist\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/videoseries?list=#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n            else\n              .item(align='center')\n                if yt_type == \"video\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n                else if yt_type == \"playlist\"\n                  iframe(\n                    width='560', \n                    height='315', \n                    src='//www.youtube.com/embed/videoseries?list=#{video}', \n                    frameborder='0', \n                    allowfullscreen='allowfullscreen'\n                  )\n            - count = count + 1\n        a.carousel-control.left(href='#carousel-ytvids', data-slide='prev')\n          span.glyphicon.glyphicon-chevron-left\n        a.carousel-control.right(href='#carousel-ytvids', data-slide='next')\n          span.glyphicon.glyphicon-chevron-right\n    .col-md-4\n      div(align='center')\n        h2 Jobs\n      // hardcoded height!! fix \n      div(style='overflow: scroll; height: 320px;')\n        for job in jobs\n          if !job.owner\n            .place-bid\n              b\n                a(target='_blank', href=\"project/#{job.projectid}\") #{job.projectname}\n              br\n              div(class='projectstatus#{job.projectid}')\n                if job.alreadyBidOn\n                  div.alert.alert-success Already placed\n                else\n                  button.btn.btn-default.btn-small(\n                    id = 'bid_submit#{job.projectid}',\n                    type='button', \n                    jobid='#{job.projectid}'\n                  ) Bid on this project\n  .row\n    .col-md-12\n      div(align='center')\n        h2 Courses\n      #carousel-courses.carousel.slide(\n        data-ride='carousel', \n        data-interval='false'\n      )\n        ol.carousel-indicators\n          - count = 0\n          for course in courses\n            if course != \"\"\n              if course.Title\n                if course.scoreRanking > 0\n                  if count == 0\n                    li.active(\n                      data-target='#carousel-courses', \n                      data-slide-to='#{count}'\n                    )\n                  else\n                    li(\n                      data-target='#carousel-courses', \n                      data-slide-to='#{count}'\n                    )\n                  - count = count + 1\n        - count = 0\n        .carousel-inner\n          for course in courses\n            if course != \"\"\n              if course.Title\n                if course.scoreRanking > 0\n                  if count == 0\n                    .item.active(align='center')\n                      .courseinfo\n                        a(target='_blank', href=course.CourseURL) #{course.Title}\n                        br\n                        | #{course.Institution} (#{course.TeachingDate})\n                        br\n                        | Instructors: #{course.Instructors}\n                        br\n                        | Description: #{course.Description}\n                        br\n                        a(target='_blank', href=course.DownloadPageLink) Course Materials\n                        br\n                      br\n                      div(id=\"coursescore#{count}\")\n                        - voteStr = category + \"+\" + course.ID\n                        if course.scoreRanking == 1\n                          if voteStr in votedCourses\n                            if votedCourses[voteStr] == \"Y\"\n                              span(id=\"rank#{count}\" class=\"text-success\") #{course.scoreRanking}\n                            else\n                              span(id=\"rank#{count}\" class=\"text-danger\") #{course.scoreRanking}\n                          else\n                            span(id=\"rank#{count}\") #{course.scoreRanking}\n                          |  person found this course helpful.\n                        else \n                          if voteStr in votedCourses\n                            if votedCourses[voteStr] == \"Y\"\n                              span(id=\"rank#{count}\" class=\"text-success\") #{course.scoreRanking}\n                            else\n                              span(id=\"rank#{count}\" class=\"text-danger\") #{course.scoreRanking}\n                          else\n                            span(id=\"rank#{count}\") #{course.scoreRanking}\n                          |  people found this course helpful.\n                      br\n                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(\n                        courseID='#{course.ID}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                      | &nbsp; &nbsp; &nbsp;\n                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(\n                        courseID='#{course.ID}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                  else\n                    .item(align='center')\n                      .courseinfo\n                        a(target='_blank', href=course.CourseURL) #{course.Title}\n                        br\n                        | #{course.Institution} (#{course.TeachingDate})\n                        br\n                        | Instructors: #{course.Instructors}\n                        br\n                        | Description: #{course.Description}\n                        br\n                        a(target='_blank', href=course.DownloadPageLink) Course Materials\n                        br\n                      br \n                      div(id=\"coursescore#{count}\")\n                        - voteStr = category + \"+\" + course.ID\n                        if course.scoreRanking == 1\n                          if voteStr in votedCourses\n                            if votedCourses[voteStr] == \"Y\"\n                              span(id=\"rank#{count}\" class=\"text-success\") #{course.scoreRanking}\n                            else\n                              span(id=\"rank#{count}\" class=\"text-danger\") #{course.scoreRanking}\n                          else\n                            span(id=\"rank#{count}\") #{course.scoreRanking}\n                          |  person found this course helpful.\n                        else \n                          if voteStr in votedCourses\n                            if votedCourses[voteStr] == \"Y\"\n                              span(id=\"rank#{count}\" class=\"text-success\") #{course.scoreRanking}\n                            else\n                              span(id=\"rank#{count}\" class=\"text-danger\") #{course.scoreRanking}\n                          else\n                            span(id=\"rank#{count}\") #{course.scoreRanking}\n                          |  people found this course helpful.\n                      br\n                      button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(\n                        courseID='#{course.ID}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"                      )\n                      | &nbsp; &nbsp; &nbsp;\n                      button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(\n                        courseID='#{course.ID}',\n                        moduleID='#{category}',\n                        count=\"#{count}\"\n                      )\n                  - count = count + 1 \n        a#coursesleft.carousel-control.left(href='#carousel-courses', data-slide='prev')\n          span.glyphicon.glyphicon-chevron-left\n        a#coursesright.carousel-control.right(href='#carousel-courses', data-slide='next')\n          span.glyphicon.glyphicon-chevron-right\n  .row\n    .col-md-12\n      div(align='center', id=\"suggestionText\")\n        | None of these courses helpful? \n        button.btn.btn-small(data-toggle=\"modal\", data-target=\"#suggestCourseDiv\") Suggest a course!\n        div(class=\"modal bs-example-modal-sm\", id=\"suggestCourseDiv\", tabindex=\"-1\", aria-labelledby=\"suggestLabel\", aria-hidden=\"true\")\n          .modal-dialog.modal-sm\n            .modal-content\n              .modal-header\n                h3#suggestLabel\n                  | Suggest A Course\n              .modal-body\n                form#suggestCourseForm\n                  .form-group\n                    input#suggestURL.form-control(type=\"text\", name=\"suggestURL\", placeholder=\"Course URL\")\n                  .form-group\n                    input#suggestTitle.form-control(type=\"text\", name=\"suggestTitle\", placeholder=\"Title\")\n                  .form-group\n                    input#suggestInstitution.form-control(type=\"text\", name=\"suggestInstitution\", placeholder=\"Institution\")\n                  .form-group\n                    input#suggestTeachDate.form-control(type=\"text\", name=\"suggestTeachDate\", placeholder=\"Teaching Date\")\n                  .form-group\n                    input#suggestInstructors.form-control(type=\"text\", name=\"suggestInstructors\", placeholder=\"Instructors\")\n                  .form-group\n                    textarea#suggestDesc.form-control(rows=\"3\", name=\"suggestDesc\", placeholder=\"Description\")\n                  .form-group\n                    input#suggestMaterials.form-control(type=\"text\", name=\"suggestMaterials\", placeholder=\"Course Materials Link\")      \n                  .form-group\n                    button#submitSuggestion.btn.btn-default.btn-lg(type=\"button\", value=\"Submit\", moduleID='#{category}', data-dismiss=\"modal\") Submit\n                    \n");
 }
 },
 

@@ -20,8 +20,9 @@ class OCWSearch:
                     num = int(r)
                     return_courses.append(json_conv['Results'][r])
                     return_courses[numAppended]['scoreRanking'] = 20 - num
-                    return_courses[numAppended]['ID'] = num-1
+                    return_courses[numAppended]['ID'] = num - 1
                     numAppended += 1
         f.close()
-        return_courses = sorted(return_courses, key=lambda k:k['scoreRanking'], reverse=True)
+        return_courses = sorted(
+            return_courses, key=lambda k: k['scoreRanking'], reverse=True)
         return return_courses
