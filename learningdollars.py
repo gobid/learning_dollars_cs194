@@ -182,13 +182,6 @@ application = webapp2.WSGIApplication([
         handler=GetPlacedBids,
         name='getPlacedBids'
     ),
-    # webapp2.Route(
-    #     '/createproject/<name:[^/]+>/<price:[^/]+>/<description:[^/]+>/' +
-    #     '<date:\d+>/<month:\d+>/<year:\d+>/<job_type:\d+>',
-    #     handler=CreateProject,
-    #     name='createProject'
-    # ),
-
     webapp2.Route(
         '/bidonproject/<project_id:\d+>',
         handler=BidOnProject,
@@ -210,7 +203,8 @@ application = webapp2.WSGIApplication([
         name='downvote'
     ),
     webapp2.Route(
-        '/addcourse/<moduleID:\d+>/<courseURL:[^/]+>/<title:[^/]+>/<institution:[^/]+>/<teachDate:[^/]+>/<instructors:[^/]+>/<description:[^/]+>/<materials:[^/]+>',
+        '/addcourse/<moduleID:\d+>/<courseURL:[^/]+>/<title:[^/]+>/<institution:[^/]+>' \
+        + '/<teachDate:[^/]+>/<instructors:[^/]+>/<description:[^/]+>/<materials:[^/]+>',
         handler=AddCourse,
         name='addcourse'
     ),
