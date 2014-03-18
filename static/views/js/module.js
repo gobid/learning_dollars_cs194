@@ -53,15 +53,15 @@ function addCourse(moduleID, courseURL, title, institution, teachDate,
       "/" + description + "/" + encodeURIComponent(materials), function(data){
         var response = data.success;
 		if(response) {
-			$("#suggestionText").append(Templates.course_success());
+			$("#carousel-courses").append(Templates.course_success());
 		} else {
-			$("#suggestionText").append(Templates.course_failure());
+			$("#carousel-courses").append(Templates.course_failure());
 		}
 		setTimeout(function(){
 			$(".alert").fadeOut();
 		}, 3000);
 	}).fail(function(){
-		$("#suggestionText").append(Templates.course_failure);
+		$("#carousel-courses").append(Templates.course_failure);
 		setTimeout(function(){
 			$(".alert").fadeOut();
 		}, 3000);

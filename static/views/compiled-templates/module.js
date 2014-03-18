@@ -54,15 +54,9 @@ var jade_mixins = {};
 var locals_ = (locals || {}),undefined = locals_.undefined;
 jade_debug.unshift({ lineno: 0, filename: "jade/module/course_failure.jade" });
 jade_debug.unshift({ lineno: 1, filename: "jade/module/course_failure.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 2, filename: "jade/module/course_failure.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 3, filename: "jade/module/course_failure.jade" });
-buf.push("<div id=\"course_message\" class=\"alert alert-danger\">");
+buf.push("<div align=\"center\" class=\"alert alert-danger course_message\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 4, filename: "jade/module/course_failure.jade" });
+jade_debug.unshift({ lineno: 2, filename: "jade/module/course_failure.jade" });
 buf.push("There was an error submitting your course. Please try again.");
 jade_debug.shift();
 jade_debug.shift();
@@ -70,7 +64,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "br\nbr\ndiv(class=\"alert alert-danger\" id=\"course_message\")\n  | There was an error submitting your course. Please try again.");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "div(class=\"alert alert-danger course_message\", align=\"center\")\n  | There was an error submitting your course. Please try again.");
 }
 },
 
@@ -83,15 +77,9 @@ var jade_mixins = {};
 var locals_ = (locals || {}),undefined = locals_.undefined;
 jade_debug.unshift({ lineno: 0, filename: "jade/module/course_success.jade" });
 jade_debug.unshift({ lineno: 1, filename: "jade/module/course_success.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 2, filename: "jade/module/course_success.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 3, filename: "jade/module/course_success.jade" });
-buf.push("<div id=\"course_message\" class=\"alert alert-success\">");
+buf.push("<div align=\"center\" class=\"alert alert-success course_message\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 4, filename: "jade/module/course_success.jade" });
+jade_debug.unshift({ lineno: 2, filename: "jade/module/course_success.jade" });
 buf.push("Course submitted successfully!");
 jade_debug.shift();
 jade_debug.shift();
@@ -99,7 +87,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "br\nbr\ndiv(class=\"alert alert-success\" id=\"course_message\")\n  | Course submitted successfully!\n\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "div(class=\"alert alert-success course_message\", align=\"center\")\n  | Course submitted successfully!\n\n");
 }
 },
 
@@ -1988,15 +1976,9 @@ var jade_mixins = {};
 var locals_ = (locals || {}),undefined = locals_.undefined;
 jade_debug.unshift({ lineno: 0, filename: "jade/module/vote_failure.jade" });
 jade_debug.unshift({ lineno: 1, filename: "jade/module/vote_failure.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 2, filename: "jade/module/vote_failure.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 3, filename: "jade/module/vote_failure.jade" });
-buf.push("<div id=\"vote_message\" class=\"alert alert-danger\">");
+buf.push("<div class=\"alert alert-danger vote_message\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 4, filename: "jade/module/vote_failure.jade" });
+jade_debug.unshift({ lineno: 2, filename: "jade/module/vote_failure.jade" });
 buf.push("You have already voted in this manner.");
 jade_debug.shift();
 jade_debug.shift();
@@ -2004,7 +1986,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "br\nbr\ndiv(class=\"alert alert-danger\" id=\"vote_message\")\n  | You have already voted in this manner.\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "div(class=\"alert alert-danger vote_message\")\n  | You have already voted in this manner.\n");
 }
 },
 
@@ -2017,15 +1999,9 @@ var jade_mixins = {};
 var locals_ = (locals || {}),undefined = locals_.undefined;
 jade_debug.unshift({ lineno: 0, filename: "jade/module/vote_general_failure.jade" });
 jade_debug.unshift({ lineno: 1, filename: "jade/module/vote_general_failure.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 2, filename: "jade/module/vote_general_failure.jade" });
-buf.push("<br/>");
-jade_debug.shift();
-jade_debug.unshift({ lineno: 3, filename: "jade/module/vote_general_failure.jade" });
-buf.push("<div id=\"vote_message\" class=\"alert alert-danger\">");
+buf.push("<div class=\"alert alert-danger vote_message\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.unshift({ lineno: 4, filename: "jade/module/vote_general_failure.jade" });
+jade_debug.unshift({ lineno: 2, filename: "jade/module/vote_general_failure.jade" });
 buf.push("Something went wrong when voting. Please try again.");
 jade_debug.shift();
 jade_debug.shift();
@@ -2033,7 +2009,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "br\nbr\ndiv(class=\"alert alert-danger\" id=\"vote_message\")\n  | Something went wrong when voting. Please try again.\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "div(class=\"alert alert-danger vote_message\")\n  | Something went wrong when voting. Please try again.\n");
 }
 }
 };
