@@ -151,13 +151,13 @@ jade_debug.unshift({ lineno: 3, filename: "jade/mybids/mybids.jade" });
 buf.push("<div class=\"panel-heading\">");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 4, filename: "jade/mybids/mybids.jade" });
-buf.push("<h3>");
+buf.push("<h1>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 4, filename: jade_debug[0].filename });
 buf.push("My Bids");
 jade_debug.shift();
 jade_debug.shift();
-buf.push("</h3>");
+buf.push("</h1>");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
@@ -209,7 +209,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h3 My Bids\n    table#all_placed_bids.table.table-striped\n      tr\n        th Project Name\n        th End date\n        th Status");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  .panel.panel-default\n    .panel-heading\n      h1 My Bids\n    table#all_placed_bids.table.table-striped\n      tr\n        th Project Name\n        th End date\n        th Status");
 }
 },
 

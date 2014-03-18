@@ -1,7 +1,7 @@
 .container
   .panel.panel-default
     .panel-heading
-      h3 Mailbox
+      h1 Mailbox
     .panel-body
       ul#messageTabs.nav.nav-tabs
         li#inboxTab.active
@@ -41,12 +41,23 @@
           form.newMessageForm
             .form-group
               label To:
-              input#to_user_email.form-control(type='text', placeholder='Email')
+              input#to_user_email.form-control(
+                type='text', 
+                placeholder='Email'
+              )
             .form-group
               label Subject:
-              input#subject_text.form-control(type='text', placeholder='Subject')
+              input#subject_text.form-control(
+                type='text', 
+                placeholder='Subject'
+              )
             .form-group
               label Message:
-              textarea#message_text.form-control(rows='3', placeholder='Enter Message Here')
+              textarea#message_text.form-control(
+                rows='3', 
+                placeholder='Enter Message Here'
+              )
             .form-group
-              button#sendBtn.btn.btn-lg.btn-default(value='Submit') Send
+              button#sendBtn.btn.btn-lg.btn-default(
+                value='Submit'
+              ) Send
