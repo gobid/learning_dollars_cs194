@@ -129,7 +129,7 @@
                         a(target='_blank', href=course.DownloadPageLink) Course Materials
                         br
                       br
-                      div(class="coursescore", id="#{count}")
+                      div(id="coursescore#{count}")
                         - voteStr = category + "+" + course.Title
                         if course.scoreRanking == 1
                           if voteStr in votedCourses
@@ -175,7 +175,7 @@
                         a(target='_blank', href=course.DownloadPageLink) Course Materials
                         br
                       br 
-                      div(class="coursescore", id="#{count}")
+                      div(id="coursescore#{count}")
                         - voteStr = category + "+" + course.Title
                         if course.scoreRanking == 1
                           if voteStr in votedCourses
