@@ -65,19 +65,19 @@ function upvote(moduleID, courseTitle, count) {
 			var newScore = data["newScore"];
 			data["count"] = count;
 			if (newScore == 1) {
-				$(".coursescore#"+count).html(Templates.post_voting_single(data));
+				$("#coursescore"+count).html(Templates.post_voting_single(data));
 			} else {
-				$(".coursescore#"+count).html(Templates.post_voting_multiple(data));
+				$("#coursescore"+count).html(Templates.post_voting_multiple(data));
 			}
             $("#rank"+count).attr("class", "text-success");
         } else {
-			$(".coursescore#"+count).append(Templates.vote_failure());
+			$("#coursescore"+count).append(Templates.vote_failure());
 			setTimeout(function(){
 					$(".alert").fadeOut();
 			}, 1000);
 		}
 	}).fail(function(){
-		$(".coursescore#"+count).append(Templates.vote_general_failure);
+		$("#coursescore"+count).append(Templates.vote_general_failure);
 		setTimeout(function(){
 			$(".alert").fadeOut();
 		}, 3000);
@@ -92,19 +92,19 @@ function downvote(moduleID, courseTitle, count) {
 			var newScore = data["newScore"];
 			data["count"] = count;
 			if (newScore == 1) {
-				$(".coursescore#"+count).html(Templates.post_voting_single(data));
+				$("#coursescore"+count).html(Templates.post_voting_single(data));
 			} else {
-				$(".coursescore#"+count).html(Templates.post_voting_multiple(data));
+				$("#coursescore"+count).html(Templates.post_voting_multiple(data));
 			}
 			$("#rank"+count).attr("class", "text-danger");
 		} else {
-			$(".coursescore#"+count).append(Templates.vote_failure());
+			$("#coursescore"+count).append(Templates.vote_failure());
 			setTimeout(function(){
 					$(".alert").fadeOut();
 			}, 1000);
 		}
 	}).fail(function(){
-		$(".coursescore#"+count).append(Templates.vote_general_failure);
+		$("#coursescore"+count).append(Templates.vote_general_failure);
 		setTimeout(function(){
 			$(".alert").fadeOut();
 		}, 3000);
