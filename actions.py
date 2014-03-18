@@ -301,18 +301,18 @@ class ChooseWinner(webapp2.RequestHandler):
 
 class Upvote(webapp2.RequestHandler):
 
-    def get(self, moduleID, courseTitle):
-        courseTitle=urlparse.unquote(courseTitle);
+    def get(self, moduleID, courseID):
+        courseID=int(courseID)
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
-            idTitlePair = moduleID + "+" + courseTitle
-            if idTitlePair not in courseVoteList.keys() or courseVoteList[idTitlePair] == 'N':
+            idPair = moduleID + "+" + str(courseID)
+            if idPair not in courseVoteList.keys() or courseVoteList[idPair] == 'N':
                 case = "votedNo"
-                if idTitlePair not in courseVoteList.keys():
+                if idPair not in courseVoteList.keys():
                     case = "notVoted"
                 print case
-                courseVoteList[idTitlePair] = 'Y'
+                courseVoteList[idPair] = 'Y'
                 account.courses_voted = courseVoteList.items()
                 print account
                 account.put()
@@ -322,12 +322,13 @@ class Upvote(webapp2.RequestHandler):
                 moduleCourses = match.courses
                 newScore = 0
                 for course in moduleCourses:
-                    if course["Title"] == courseTitle:
-                        if case == "notVoted":
-                            course["scoreRanking"] = course["scoreRanking"] + 1
-                        else:
-                            course["scoreRanking"] = course["scoreRanking"] + 2
-                        newScore = course["scoreRanking"]
+                    if course:
+                        if course['ID'] == courseID:
+                            if case == "notVoted":
+                                course["scoreRanking"] = course["scoreRanking"] + 1
+                            else:
+                                course["scoreRanking"] = course["scoreRanking"] + 2
+                            newScore = course["scoreRanking"]
                 match.courses = moduleCourses
                 match.courses = sorted(match.courses, key=lambda k:k['scoreRanking'], reverse=True)
                 match.put()
@@ -342,17 +343,17 @@ class Upvote(webapp2.RequestHandler):
 
 class Downvote(webapp2.RequestHandler):
 
-    def get(self, moduleID, courseTitle):
-        courseTitle=urlparse.unquote(courseTitle);
+    def get(self, moduleID, courseID):
+        courseID=int(courseID)
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
-            idTitlePair = moduleID + "+" + courseTitle
-            if idTitlePair not in courseVoteList.keys() or courseVoteList[idTitlePair] == 'Y':
+            idPair = moduleID + "+" + str(courseID)
+            if idPair not in courseVoteList.keys() or courseVoteList[idPair] == 'Y':
                 case = "votedYes"
-                if idTitlePair not in courseVoteList.keys():
+                if idPair not in courseVoteList.keys():
                     case = "notVoted"
-                courseVoteList[idTitlePair] = 'N'
+                courseVoteList[idPair] = 'N'
                 account.courses_voted = courseVoteList.items()
                 account.put()
                 moduleID = int(moduleID)
@@ -361,12 +362,13 @@ class Downvote(webapp2.RequestHandler):
                 moduleCourses = match.courses
                 newScore = 0
                 for course in moduleCourses:
-                    if course["Title"] == courseTitle:
-                        if case == "notVoted":
-                            course["scoreRanking"] = course["scoreRanking"] - 1
-                        else:
-                            course["scoreRanking"] = course["scoreRanking"] - 2
-                        newScore = course["scoreRanking"]
+                    if course:
+                        if course['ID'] == courseID:
+                            if case == "notVoted":
+                                course["scoreRanking"] = course["scoreRanking"] - 1
+                            else:
+                                course["scoreRanking"] = course["scoreRanking"] - 2
+                            newScore = course["scoreRanking"]
                 match.courses = moduleCourses
                 match.courses = sorted(match.courses, key=lambda k:k['scoreRanking'], reverse=True)
                 match.put()
@@ -396,6 +398,7 @@ class AddCourse(webapp2.RequestHandler):
             match = Module.query(Module.category == moduleID).fetch()
             match = match[0]
             moduleCourses = match.courses
+            newCourse['ID'] = len(moduleCourses)
             moduleCourses.append(newCourse)
             match.courses = moduleCourses
             match.courses = sorted(match.courses, key=lambda k:k['scoreRanking'], reverse=True)

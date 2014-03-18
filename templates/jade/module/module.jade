@@ -130,7 +130,7 @@
                         br
                       br
                       div(id="coursescore#{count}")
-                        - voteStr = category + "+" + course.Title
+                        - voteStr = category + "+" + course.ID
                         if course.scoreRanking == 1
                           if voteStr in votedCourses
                             if votedCourses[voteStr] == "Y"
@@ -151,13 +151,13 @@
                           | #{course.scoreRanking}</span> people found this course helpful.
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
-                        courseTitle='#{course.Title}',
+                        courseID='#{course.ID}',
                         moduleID='#{category}',
                         count="#{count}"
                       )
                       | &nbsp; &nbsp; &nbsp;
                       button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
-                        courseTitle='#{course.Title}',
+                        courseID='#{course.ID}',
                         moduleID='#{category}',
                         count="#{count}"
                       )
@@ -176,7 +176,7 @@
                         br
                       br 
                       div(id="coursescore#{count}")
-                        - voteStr = category + "+" + course.Title
+                        - voteStr = category + "+" + course.ID
                         if course.scoreRanking == 1
                           if voteStr in votedCourses
                             if votedCourses[voteStr] == "Y"
@@ -197,12 +197,12 @@
                           | #{course.scoreRanking}</span> people found this course helpful.
                       br
                       button#helpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-up(
-                        courseTitle='#{course.Title}',
+                        courseID='#{course.ID}',
                         moduleID='#{category}',
                         count="#{count}"                      )
                       | &nbsp; &nbsp; &nbsp;
                       button#nothelpful.btn.btn-default.btn-lg.glyphicon.glyphicon-thumbs-down(
-                        courseTitle='#{course.Title}',
+                        courseID='#{course.ID}',
                         moduleID='#{category}',
                         count="#{count}"
                       )

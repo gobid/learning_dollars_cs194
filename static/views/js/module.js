@@ -14,16 +14,16 @@ $(document).ready(function() {
 
 	$(document).on("click", ".btn.btn-default#helpful", function() {
 		var moduleID = $(this).attr("moduleID");
-		var courseTitle = $(this).attr("courseTitle");
+		var courseID = $(this).attr("courseID");
 		var count = $(this).attr("count");
-		upvote(moduleID, courseTitle, count);
+		upvote(moduleID, courseID, count);
 	});
 
 	$(document).on("click", ".btn.btn-default#nothelpful", function() {
 		var moduleID = $(this).attr("moduleID");
-		var courseTitle = $(this).attr("courseTitle");
+		var courseID = $(this).attr("courseID");
 		var count = $(this).attr("count");
-		downvote(moduleID, courseTitle, count);
+		downvote(moduleID, courseID, count);
 	});
 
 	$(document).on("click", "#submitSuggestion", function() {
@@ -58,8 +58,8 @@ function addCourse(moduleID, courseURL, title, institution, teachDate, instructo
 	});
 }
 
-function upvote(moduleID, courseTitle, count) {
-    $.get("/upvote/" + moduleID+ "/" + encodeURIComponent(courseTitle), function(data){
+function upvote(moduleID, courseID, count) {
+    $.get("/upvote/" + moduleID+ "/" + courseID, function(data){
         var response = data["success"];
 		if(response) {
 			var newScore = data["newScore"];
@@ -85,8 +85,8 @@ function upvote(moduleID, courseTitle, count) {
 }
 
 
-function downvote(moduleID, courseTitle, count) {
-	$.get("/downvote/" + moduleID + "/" + encodeURIComponent(courseTitle), function(data){
+function downvote(moduleID, courseID, count) {
+	$.get("/downvote/" + moduleID + "/" + courseID, function(data){
 		var response = data["success"];
 		if(response) {
 			var newScore = data["newScore"];

@@ -200,12 +200,12 @@ application = webapp2.WSGIApplication([
         name='chooseWinner'
     ),
     webapp2.Route(
-        '/upvote/<moduleID:\d+>/<courseTitle:[^/]+>',
+        '/upvote/<moduleID:\d+>/<courseID:\d+>',
         handler=Upvote,
         name='upvote'
     ),
     webapp2.Route(
-        '/downvote/<moduleID:\d+>/<courseTitle:[^/]+>',
+        '/downvote/<moduleID:\d+>/<courseID:\d+>',
         handler=Downvote,
         name='downvote'
     ),

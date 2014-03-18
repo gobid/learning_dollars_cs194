@@ -12,12 +12,16 @@ class OCWSearch:
         f = urllib.urlopen(query)
         s = f.read()
         json_conv = json.loads(s)
-        return_courses = [""] * 20
+        return_courses = []
+        numAppended = 0
         for subheading in json_conv:
             if subheading == 'Results':
                 for r in json_conv['Results']:
                     num = int(r)
-                    return_courses[num - 1] = json_conv['Results'][r]
-                    return_courses[num - 1]['scoreRanking'] = 20 - num
+                    return_courses.append(json_conv['Results'][r])
+                    return_courses[numAppended]['scoreRanking'] = 20 - num
+                    return_courses[numAppended]['ID'] = num-1
+                    numAppended += 1
         f.close()
+        return_courses = sorted(return_courses, key=lambda k:k['scoreRanking'], reverse=True)
         return return_courses
