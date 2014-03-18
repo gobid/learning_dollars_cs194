@@ -210,7 +210,7 @@ application = webapp2.WSGIApplication([
         name='downvote'
     ),
     webapp2.Route(
-        '/addcourse/<moduleID:\d+>/<courseURL:[^/]+>/<title:[^/]+>/<institution:[^/]+>/<teachDate:[^/]+>/<instructors:[^/]+>/<description:[^/]+>/<materials:[^/]+>',
+        '/addcourse/<moduleID:\d+>/<title:[^/]+>/<institution:[^/]+>/<teachDate:[^/]+>/<instructors:[^/]+>/<description:[^/]+>',
         handler=AddCourse,
         name='addcourse'
     ),
