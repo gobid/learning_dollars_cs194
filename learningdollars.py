@@ -188,7 +188,7 @@ application = webapp2.WSGIApplication([
     #     handler=CreateProject,
     #     name='createProject'
     # ),
-    
+
     webapp2.Route(
         '/bidonproject/<project_id:\d+>',
         handler=BidOnProject,

@@ -302,7 +302,7 @@ class ChooseWinner(webapp2.RequestHandler):
 class Upvote(webapp2.RequestHandler):
 
     def get(self, moduleID, courseID):
-        courseID=int(courseID)
+        courseID = int(courseID)
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
@@ -325,14 +325,18 @@ class Upvote(webapp2.RequestHandler):
                     if course:
                         if course['ID'] == courseID:
                             if case == "notVoted":
-                                course["scoreRanking"] = course["scoreRanking"] + 1
+                                course["scoreRanking"] = course[
+                                    "scoreRanking"] + 1
                             else:
-                                course["scoreRanking"] = course["scoreRanking"] + 2
+                                course["scoreRanking"] = course[
+                                    "scoreRanking"] + 2
                             newScore = course["scoreRanking"]
                 match.courses = moduleCourses
-                match.courses = sorted(match.courses, key=lambda k:k['scoreRanking'], reverse=True)
+                match.courses = sorted(
+                    match.courses, key=lambda k: k['scoreRanking'], reverse=True)
                 match.put()
-                response = {'success': 'Vote submitted successfully.', 'newScore': newScore}
+                response = {
+                    'success': 'Vote submitted successfully.', 'newScore': newScore}
             else:
                 response = {'error': 'No.'}
         else:
@@ -344,7 +348,7 @@ class Upvote(webapp2.RequestHandler):
 class Downvote(webapp2.RequestHandler):
 
     def get(self, moduleID, courseID):
-        courseID=int(courseID)
+        courseID = int(courseID)
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
@@ -365,14 +369,18 @@ class Downvote(webapp2.RequestHandler):
                     if course:
                         if course['ID'] == courseID:
                             if case == "notVoted":
-                                course["scoreRanking"] = course["scoreRanking"] - 1
+                                course["scoreRanking"] = course[
+                                    "scoreRanking"] - 1
                             else:
-                                course["scoreRanking"] = course["scoreRanking"] - 2
+                                course["scoreRanking"] = course[
+                                    "scoreRanking"] - 2
                             newScore = course["scoreRanking"]
                 match.courses = moduleCourses
-                match.courses = sorted(match.courses, key=lambda k:k['scoreRanking'], reverse=True)
+                match.courses = sorted(
+                    match.courses, key=lambda k: k['scoreRanking'], reverse=True)
                 match.put()
-                response = {'success': 'Vote submitted successfully.', 'newScore': newScore}
+                response = {
+                    'success': 'Vote submitted successfully.', 'newScore': newScore}
             else:
                 response = {'error': 'No.'}
         else:
@@ -380,20 +388,21 @@ class Downvote(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
+
 class AddCourse(webapp2.RequestHandler):
 
     def get(self, moduleID, courseURL, title, institution, teachDate, instructors, description, materials):
         account = get_account()
         if account:
             newCourse = dict()
-            newCourse["CourseURL"] = urlparse.unquote(courseURL);
-            newCourse["Title"] = title;
-            newCourse["Institution"] = institution;
-            newCourse["TeachingDate"] = teachDate;
-            newCourse["Instructors"] = instructors;
-            newCourse["Description"] = description;
-            newCourse["DownloadPageLink"] = urlparse.unquote(materials);
-            newCourse["scoreRanking"] = 1;
+            newCourse["CourseURL"] = urlparse.unquote(courseURL)
+            newCourse["Title"] = title
+            newCourse["Institution"] = institution
+            newCourse["TeachingDate"] = teachDate
+            newCourse["Instructors"] = instructors
+            newCourse["Description"] = description
+            newCourse["DownloadPageLink"] = urlparse.unquote(materials)
+            newCourse["scoreRanking"] = 1
             moduleID = int(moduleID)
             match = Module.query(Module.category == moduleID).fetch()
             match = match[0]
@@ -401,7 +410,8 @@ class AddCourse(webapp2.RequestHandler):
             newCourse['ID'] = len(moduleCourses)
             moduleCourses.append(newCourse)
             match.courses = moduleCourses
-            match.courses = sorted(match.courses, key=lambda k:k['scoreRanking'], reverse=True)
+            match.courses = sorted(
+                match.courses, key=lambda k: k['scoreRanking'], reverse=True)
             match.put()
             response = {'success': 'Course submitted successfully.'}
         else:
@@ -409,13 +419,15 @@ class AddCourse(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
+
 class GetUserVoteList(webapp2.RequestHandler):
 
     def get(self):
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
-            response = {'success': 'Votes retrieved successfully.', 'voteList': courseVoteList}
+            response = {
+                'success': 'Votes retrieved successfully.', 'voteList': courseVoteList}
         else:
             response = {'error': 'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'

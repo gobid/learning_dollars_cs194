@@ -61,10 +61,12 @@ class ModulesPage(webapp2.RequestHandler):
             template_values['compiled_template'] = 'modules.js'
             template_values['datalink'] = 'modulesinfo'
             template_values['javascript'] = 'modules.js'
-            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            template = JINJA_ENVIRONMENT.get_template(
+                'templates/template.html')
             self.response.write(template.render(template_values))
         else:
             self.redirect('/')
+
 
 class ModulePage(webapp2.RequestHandler):
 
@@ -78,7 +80,8 @@ class ModulePage(webapp2.RequestHandler):
             template_values['datalink'] = 'moduleinfo/' + module_id
             template_values['javascript'] = 'module.js'
             template_values['extra_css'] = ['static/views/css/module.css']
-            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            template = JINJA_ENVIRONMENT.get_template(
+                'templates/template.html')
             self.response.write(template.render(template_values))
         else:
             self.redirect('/')
@@ -93,10 +96,12 @@ class MailboxPage(webapp2.RequestHandler):
             template_values['compiled_template'] = 'mailbox.js'
             template_values['datalink'] = 'messagesinfo'
             template_values['javascript'] = 'mailbox.js'
-            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            template = JINJA_ENVIRONMENT.get_template(
+                'templates/template.html')
             self.response.write(template.render(template_values))
         else:
             self.redirect('/')
+
 
 class MyBidsPage(webapp2.RequestHandler):
 
@@ -106,10 +111,12 @@ class MyBidsPage(webapp2.RequestHandler):
             template_values['title'] = 'My Bids'
             template_values['compiled_template'] = 'mybids.js'
             template_values['javascript'] = 'mybids.js'
-            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            template = JINJA_ENVIRONMENT.get_template(
+                'templates/template.html')
             self.response.write(template.render(template_values))
         else:
             self.redirect('/')
+
 
 class MyPostsPage(webapp2.RequestHandler):
 
@@ -119,7 +126,8 @@ class MyPostsPage(webapp2.RequestHandler):
             template_values['title'] = 'My Posts'
             template_values['compiled_template'] = 'myposts.js'
             template_values['javascript'] = 'myposts.js'
-            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            template = JINJA_ENVIRONMENT.get_template(
+                'templates/template.html')
             self.response.write(template.render(template_values))
         else:
             self.redirect('/')
@@ -133,7 +141,8 @@ class MilestonesPage(webapp2.RequestHandler):
             template_values['title'] = 'Milestones'
             template_values['compiled_template'] = 'milestones.js'
             template_values['javascript'] = 'milestones.js'
-            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            template = JINJA_ENVIRONMENT.get_template(
+                'templates/template.html')
             self.response.write(template.render(template_values))
         else:
             self.redirect('/')
@@ -148,8 +157,8 @@ class ProjectPage(webapp2.RequestHandler):
             template_values['compiled_template'] = 'project.js'
             template_values['javascript'] = 'project.js'
             template_values['datalink'] = 'projectDetails/' + project_id
-            template = JINJA_ENVIRONMENT.get_template('templates/template.html')
+            template = JINJA_ENVIRONMENT.get_template(
+                'templates/template.html')
             self.response.write(template.render(template_values))
         else:
             self.redirect('/')
-            

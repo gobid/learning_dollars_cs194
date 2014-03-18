@@ -56,7 +56,8 @@ class ModuleInfo(webapp2.RequestHandler):
         module = Module.get_by_id(module_id)
         votedCourses = {}
         account = get_account()
-        if account: votedCourses = account.courses_voted
+        if account:
+            votedCourses = account.courses_voted
         votedCourses = dict(votedCourses)
         newJobsJSON = []
         jobs = Project.query(Project.job_type == module.name).fetch()
