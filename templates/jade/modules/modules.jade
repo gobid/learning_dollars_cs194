@@ -1,7 +1,7 @@
 .container
   h1 Modules
   .row 
-    .col-md-6
+    .col-md-9
       each row in modules
         .row
           each module in row
@@ -9,18 +9,17 @@
               a(href=module.key) #{module.name}
       br
       br
-    .col-md-6
-      .row
-        .col-md-6
-          input.form-control(
-            id = 'module_input'
-            type='text', 
-            placeholder='Create a new module'
-          )
-          br
-          button.btn.btn-default.btn-small.bid_submit(
-            id = 'submit_new_module',
-            type='button'
-          ) Add module
-          br
-          br
+    .col-md-3
+      .row 
+        input.form-control(
+          id = 'module_input'
+          type='text', 
+          placeholder='Create a new module'
+        )
+        br
+        button.btn.btn-default.btn-small.bid_submit(
+          id = 'submit_new_module',
+          type='button'
+        ) Add module
+        br
+        br
