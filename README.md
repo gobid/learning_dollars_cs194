@@ -1,4 +1,6 @@
 learning_dollars
 ================
 
-a website and cross-platform mobile app bridging open courseware and paid work http://learningdollars.com/
+The README is at http://goo.gl/ferWhX
+
+

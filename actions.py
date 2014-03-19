@@ -2,6 +2,7 @@ import webapp2
 import json
 import HTMLParser
 import datetime
+import urlparse
 
 from google.appengine.api import users
 from config import config
@@ -45,7 +46,6 @@ class UpdateModules(webapp2.RequestHandler):
                         str(match.yt_type) != y_type or
                         match.youtube != y_list or
                         match.courses != course_list):
-                    print 'module different'
                     match.name = name
                     match.youtube = y_list
                     match.yt_type = y_type
@@ -59,8 +59,6 @@ class UpdateModules(webapp2.RequestHandler):
 class CreateModule(webapp2.RequestHandler):
 
     def get(self, modulename):
-        print "hit createmodule!!!"
-
         match = Module.query(Module.name == modulename).fetch()
         if len(match) > 0:
             response = {'response': 'module exists'}
@@ -77,8 +75,8 @@ class CreateModule(webapp2.RequestHandler):
             )
             module.put()
             response = {'response': 'successfully stored'}
-            print "success!"
-        print response
+            module.category = module.key.id()
+            module.put()
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
@@ -138,28 +136,6 @@ class ReleaseMilestone(webapp2.RequestHandler):
         else:
             response = {'error': 'User has no associated account. '
                         + 'Try logging out and logging in again.'}
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
-
-
-class BidOnProject(webapp2.RequestHandler):
-
-    def get(self, project_id):
-        project_id = int(project_id)
-        account = get_account()
-        response = 'error'
-        if account == None:
-            response = 'Not logged into account.'
-        account_id = account.key.id()
-        project = Project.get_by_id(project_id)
-        if project:
-            # check to see if already bid on
-            if account_id in project.bidders:
-                response = 'User already bid on this project'
-            else:
-                project.bidders.append(account_id)
-                project.put()
-                response = 'Success'
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(response))
 
@@ -272,26 +248,23 @@ class SendMessage(webapp2.RequestHandler):
 #         self.response.headers['Content-Type'] = 'application/json'
 #         self.response.write(json.dumps(response))
 
-
-class AddBidderToProject(webapp2.RequestHandler):
+class BidOnProject(webapp2.RequestHandler):
 
     def get(self, project_id):
         project_id = int(project_id)
         project = Project.get_by_id(project_id)
-        print project
         if project:
             account = get_account()
             # must do redirect for session checks
             account_id = int(account.key.id())
-            print account_id
             if account_id not in project.bidders:
                 project.bidders.append(account_id)
                 project.put()
                 account.projects_bidded_on.append(project_id)
                 account.put()
-                response = {'success': 'Bidder added.'}
+                response = 'Success'
             else:
-                response = {'error': 'Bidder already added.'}
+                response = 'Bidder already added.'
         else:
             response = {'error': 'No project of given id.'}
         self.response.headers['Content-Type'] = 'application/json'
@@ -321,34 +294,40 @@ class ChooseWinner(webapp2.RequestHandler):
 
 class Upvote(webapp2.RequestHandler):
 
-    def get(self, moduleID, courseTitle):
+    def get(self, moduleID, courseID):
+        courseID = int(courseID)
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
-            print courseVoteList
-            idTitlePair = moduleID + "+" + courseTitle
-            if idTitlePair not in courseVoteList.keys() or courseVoteList[idTitlePair] == 'N':
+            idPair = moduleID + "+" + str(courseID)
+            if idPair not in courseVoteList.keys() or courseVoteList[idPair] == 'N':
                 case = "votedNo"
-                if idTitlePair not in courseVoteList.keys():
+                if idPair not in courseVoteList.keys():
                     case = "notVoted"
-                print case
-                courseVoteList[idTitlePair] = 'Y'
+                courseVoteList[idPair] = 'Y'
                 account.courses_voted = courseVoteList.items()
-                print account
                 account.put()
                 moduleID = int(moduleID)
                 match = Module.query(Module.category == moduleID).fetch()
                 match = match[0]
                 moduleCourses = match.courses
+                newScore = 0
                 for course in moduleCourses:
-                    if course["Title"] == courseTitle:
-                        if case == "notVoted":
-                            course["scoreRanking"] = course["scoreRanking"] + 1
-                        else:
-                            course["scoreRanking"] = course["scoreRanking"] + 2
+                    if course:
+                        if course['ID'] == courseID:
+                            if case == "notVoted":
+                                course["scoreRanking"] = course[
+                                    "scoreRanking"] + 1
+                            else:
+                                course["scoreRanking"] = course[
+                                    "scoreRanking"] + 2
+                            newScore = course["scoreRanking"]
                 match.courses = moduleCourses
+                match.courses = sorted(
+                    match.courses, key=lambda k: k['scoreRanking'], reverse=True)
                 match.put()
-                response = {'success': 'Vote submitted successfully.'}
+                response = {
+                    'success': 'Vote submitted successfully.', 'newScore': newScore}
             else:
                 response = {'error': 'No.'}
         else:
@@ -359,33 +338,87 @@ class Upvote(webapp2.RequestHandler):
 
 class Downvote(webapp2.RequestHandler):
 
-    def get(self, moduleID, courseTitle):
+    def get(self, moduleID, courseID):
+        courseID = int(courseID)
         account = get_account()
         if account:
             courseVoteList = dict(account.courses_voted)
-            idTitlePair = moduleID + "+" + courseTitle
-            if idTitlePair not in courseVoteList.keys() or courseVoteList[idTitlePair] == 'Y':
+            idPair = moduleID + "+" + str(courseID)
+            if idPair not in courseVoteList.keys() or courseVoteList[idPair] == 'Y':
                 case = "votedYes"
-                if idTitlePair not in courseVoteList.keys():
+                if idPair not in courseVoteList.keys():
                     case = "notVoted"
-                courseVoteList[idTitlePair] = 'N'
+                courseVoteList[idPair] = 'N'
                 account.courses_voted = courseVoteList.items()
                 account.put()
                 moduleID = int(moduleID)
                 match = Module.query(Module.category == moduleID).fetch()
                 match = match[0]
                 moduleCourses = match.courses
+                newScore = 0
                 for course in moduleCourses:
-                    if course["Title"] == courseTitle:
-                        if case == "notVoted":
-                            course["scoreRanking"] = course["scoreRanking"] - 1
-                        else:
-                            course["scoreRanking"] = course["scoreRanking"] - 2
+                    if course:
+                        if course['ID'] == courseID:
+                            if case == "notVoted":
+                                course["scoreRanking"] = course[
+                                    "scoreRanking"] - 1
+                            else:
+                                course["scoreRanking"] = course[
+                                    "scoreRanking"] - 2
+                            newScore = course["scoreRanking"]
                 match.courses = moduleCourses
+                match.courses = sorted(
+                    match.courses, key=lambda k: k['scoreRanking'], reverse=True)
                 match.put()
-                response = {'success': 'Vote submitted successfully.'}
+                response = {
+                    'success': 'Vote submitted successfully.', 'newScore': newScore}
             else:
                 response = {'error': 'No.'}
+        else:
+            response = {'error': 'You are not logged in. '}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+
+class AddCourse(webapp2.RequestHandler):
+
+    def get(self, moduleID, title, institution, teachDate, instructors, description):
+        account = get_account()
+        if account:
+            newCourse = dict()
+            newCourse["CourseURL"] = urlparse.unquote(self.request.get('courseURL'))
+            newCourse["Title"] = title
+            newCourse["Institution"] = institution
+            newCourse["TeachingDate"] = teachDate
+            newCourse["Instructors"] = instructors
+            newCourse["Description"] = description
+            newCourse["DownloadPageLink"] = urlparse.unquote(self.request.get('materials'))
+            newCourse["scoreRanking"] = 1
+            moduleID = int(moduleID)
+            match = Module.query(Module.category == moduleID).fetch()
+            match = match[0]
+            moduleCourses = match.courses
+            newCourse['ID'] = len(moduleCourses)
+            moduleCourses.append(newCourse)
+            match.courses = moduleCourses
+            match.courses = sorted(
+                match.courses, key=lambda k: k['scoreRanking'], reverse=True)
+            match.put()
+            response = {'success': 'Course submitted successfully.'}
+        else:
+            response = {'error': 'You are not logged in. '}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(response))
+
+
+class GetUserVoteList(webapp2.RequestHandler):
+
+    def get(self):
+        account = get_account()
+        if account:
+            courseVoteList = dict(account.courses_voted)
+            response = {
+                'success': 'Votes retrieved successfully.', 'voteList': courseVoteList}
         else:
             response = {'error': 'You are not logged in. '}
         self.response.headers['Content-Type'] = 'application/json'

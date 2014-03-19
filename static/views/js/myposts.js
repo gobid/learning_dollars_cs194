@@ -1,6 +1,9 @@
+/*global Templates:false */
+
 $(document).ready(function() {
 
 	// initialize page
+	"use strict";
 	$("body").append(Templates.myposts());
 	$.get("/postsinfo", function(data){
 		var numPosts = data.length;
@@ -27,18 +30,17 @@ $(document).ready(function() {
 
 	$("#post_project").click(post_project);
 	
-	var modulesArray = new Array();	
+	var modulesArray = [];
 	$.get("/modulesinfo", function(modules){
 		for(var i = 0; i < modules.length; i++) {
 			modulesArray.push(modules[i].name);
 		}
-		console.log('modules array', modulesArray);
 
 		var substringMatcher = function(strs) {
 		  return function findMatches(q, cb) {
-		    var matches, substringRegex;
+		    var matches, substrRegex;
 		    matches = [];
-		    substrRegex = new RegExp(q, 'i');		 
+		    substrRegex = new RegExp(q, "i");
 		    $.each(strs, function(i, str) {
 		      if (substrRegex.test(str)) {
 		        matches.push({ value: str });
@@ -49,14 +51,14 @@ $(document).ready(function() {
 		  };
 		};
 
-		$('#test .typeahead').typeahead({
+		$("#test .typeahead").typeahead({
 		  hint: true,
 		  highlight: true,
 		  minLength: 1
 		},
 		{
-		  name: 'modulesArray',
-		  displayKey: 'value',
+		  name: "modulesArray",
+		  displayKey: "value",
 		  source: substringMatcher(modulesArray)
 		});
 
@@ -64,34 +66,23 @@ $(document).ready(function() {
 
 });
 
-function post_project(e) {
+function post_project() {
+	"use strict";
 	$("#log_message").remove();
 	var name = $("#name").val();
 	var description = $("#description").val();
-	var type = $("#type").val();
 	var budget_option = $("#budget_option option:selected").text();
 	var duration = $("#duration").val();
-	var job_type = $("#job_type").val()
-	$.get("/postnewproject/" + name + "/" + description + "/" + job_type 
-		+ "/" + budget_option + "/" + duration, function(data){
-			console.log("hit" + data);
+	var job_type = $("#job_type").val();
+	$.get("/postnewproject/" + name + "/" + description + "/" + job_type +
+		"/" + budget_option + "/" + duration, function(data){
 			if(data) {
 				$("#log_message_div").after(Templates.post_success);
 			} else {
-				response = data.errors;
-				if (!response) response = data.error;
-				else response = response.error.longmsg;
-				if (!($(".alert.alert-warning")[0])) {
-					var alertDiv = document.createElement("div");
-					alertDiv.className ="alert alert-warning";
-					var spaceMe = document.createElement("hr");
-					document.getElementsByClassName("post_project")[0]
-					.appendChild(spaceMe);
-					document.getElementsByClassName("post_project")[0].
-					appendChild(alertDiv);
-				}
-				$(".alert.alert-warning").html(response);
+				$("#log_message_div").after(Templates.post_failure);
 			}
 		}
-	);
+	).fail(function(){
+		$("#log_message_div").after(Templates.post_failure);
+	});
 }

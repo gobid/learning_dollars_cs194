@@ -14,8 +14,8 @@ from info import AccountInfo, ModuleInfo, ModulesInfo, ProjectBidsInfo, \
 
 from actions import UpdateModules, CreateMilestonePayment, SendMessage, \
     BidOnProject, PostNewProject, RetractBid, RequestReleaseMilestone, \
-    ReleaseMilestone, AddBidderToProject, ChooseWinner, \
-    Upvote, Downvote
+    ReleaseMilestone, ChooseWinner, \
+    Upvote, Downvote, AddCourse, GetUserVoteList
 
 application = webapp2.WSGIApplication([
     # Views
@@ -162,11 +162,6 @@ application = webapp2.WSGIApplication([
         name='acceptbid'
     ),
     webapp2.Route(
-        '/bidonproject/<project_id:\d+>',
-        handler=BidOnProject,
-        name='bidonproject'
-    ),
-    webapp2.Route(
         '/retractbid/<project_id:\d+>',
         handler=RetractBid,
         name='retractbid'
@@ -187,16 +182,10 @@ application = webapp2.WSGIApplication([
         handler=GetPlacedBids,
         name='getPlacedBids'
     ),
-    # webapp2.Route(
-    #     '/createproject/<name:[^/]+>/<price:[^/]+>/<description:[^/]+>/' +
-    #     '<date:\d+>/<month:\d+>/<year:\d+>/<job_type:\d+>',
-    #     handler=CreateProject,
-    #     name='createProject'
-    # ),
     webapp2.Route(
-        '/addbiddertoproject/<project_id:\d+>',
-        handler=AddBidderToProject,
-        name='addBidderToProject'
+        '/bidonproject/<project_id:\d+>',
+        handler=BidOnProject,
+        name='bidonproject'
     ),
     webapp2.Route(
         '/choosewinner/<project_id:\d+>/<bidder_id:\d+>',
@@ -204,14 +193,25 @@ application = webapp2.WSGIApplication([
         name='chooseWinner'
     ),
     webapp2.Route(
-        '/upvote/<moduleID:\d+>/<courseTitle:[^/]+>',
+        '/upvote/<moduleID:\d+>/<courseID:\d+>',
         handler=Upvote,
         name='upvote'
     ),
     webapp2.Route(
-        '/downvote/<moduleID:\d+>/<courseTitle:[^/]+>',
+        '/downvote/<moduleID:\d+>/<courseID:\d+>',
         handler=Downvote,
         name='downvote'
     ),
+    webapp2.Route(
+        '/addcourse/<moduleID:\d+>/<title:[^/]+>/<institution:[^/]+>/<teachDate:[^/]+>/' \
+        + '<instructors:[^/]+>/<description:[^/]+>',
+        handler=AddCourse,
+        name='addcourse'
+    ),
+    webapp2.Route(
+        '/uservotelist',
+        handler=GetUserVoteList,
+        name='uservotelist'
+    )
 
 ], debug=True)

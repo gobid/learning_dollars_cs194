@@ -54,6 +54,11 @@ class ModuleInfo(webapp2.RequestHandler):
     def get_info(self, module_id):
         module_id = int(module_id)
         module = Module.get_by_id(module_id)
+        votedCourses = {}
+        account = get_account()
+        if account:
+            votedCourses = account.courses_voted
+        votedCourses = dict(votedCourses)
         newJobsJSON = []
         jobs = Project.query(Project.job_type == module.name).fetch()
         for job in jobs:
@@ -65,7 +70,8 @@ class ModuleInfo(webapp2.RequestHandler):
             'yt_type': module.yt_type,
             'courses': module.courses,
             'category': module.category,
-            'jobs': newJobsJSON
+            'jobs': newJobsJSON,
+            'votedCourses': votedCourses
         }
         return info
 
@@ -96,7 +102,6 @@ class PostsInfo(webapp2.RequestHandler):
             project = Project.get_by_id(project_id)
             project_open = "open"
             frmtd_end_date = project.end_date
-            # print project.end_date.strftime('We are the %d, %b %Y')
             if frmtd_end_date is not None:
                 frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
             if project.winner is not None:
@@ -117,12 +122,6 @@ class PostsInfo(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(posted_projects))
 
-        # jac = get_personal_jac()
-        # if jac:
-        #     posts = jac.get_posts()
-        # else:
-        #     posts = {'error': 'User has no associated account. '
-        #              + 'Try logging out and logging in again.'}
 
 
 class ProjectBidsInfo(webapp2.RequestHandler):
@@ -212,9 +211,7 @@ class GetPlacedBids(webapp2.RequestHandler):
         placed_bids = []
         for i in placed_bids_ids:
             project_id = int(i)
-            print project_id
             project = Project.get_by_id(project_id)
-            print project
             project_open = "open"
             frmtd_end_date = project.end_date
             winner_email = None
@@ -249,7 +246,6 @@ class GetProjectDetails(webapp2.RequestHandler):
         project = Project.get_by_id(project_id)
         project_open = "open"
         frmtd_end_date = project.end_date
-        print project.end_date.strftime('We are the %d, %b %Y')
         if frmtd_end_date is not None:
             frmtd_end_date = frmtd_end_date.strftime('%b %d, %Y')
         if project.winner is not None:

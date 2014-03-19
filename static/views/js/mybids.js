@@ -1,6 +1,9 @@
+/*global Templates:false */
+
 $(document).ready(function(){
 
 	// initialize runtime js template
+	"use strict";
 	$("body").append(Templates.mybids());
 
 	/* START jQuery Methods */
@@ -16,8 +19,9 @@ $(document).ready(function(){
 				var bid = bids[b];
 				var date_obj = new Date(bid.enddate);
 				var date_str = m_names[date_obj.getMonth()] + " " +
-				date_obj.getDate() + ", " + date_obj.getFullYear()
-				bid.enddate = date_str; // waiting on tim to push enddate features
+				date_obj.getDate() + ", " + date_obj.getFullYear();
+				bid.enddate = date_str;
+				// waiting on tim to push enddate features
 				$("#all_placed_bids").append(Templates.all_bids(bid));
 			}
 		} else {
@@ -44,6 +48,7 @@ $(document).ready(function(){
 });
 
 function accept_bid(accepted, projectid, state) {
+	"use strict";
 	$("#log_message").remove();
 	$.get("/acceptbid/" + projectid + "/" + state, function(data){
 		var response = data["json-result"];

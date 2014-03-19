@@ -1,22 +1,25 @@
+/*global Templates:false */
+
 // settings
 var NUM_COLS = 4;
 
 $(document).ready(function(){
 	// initialize page
+	"use strict";
 	var datalink = $("#datalink").val();
 	$.get(datalink, function(data){
-		modules = convert_1D_to_2D(data, NUM_COLS);
+		var modules = convert_1D_to_2D(data, NUM_COLS);
 		$("body").append(Templates.modules({
-			'modules': modules
+			"modules": modules
 		}));
 
 		$("#submit_new_module").click(create_new_module);
 
 		/* START jQuery Methods */
 
-	    $('#searchBtn').click(function (e) {
+	    $("#searchBtn").click(function (e) {
 	        e.preventDefault();
-	        $.scrollTo($('#moduleName').val());
+	        $.scrollTo($("#moduleName").val());
 	    });
 
 		/* END jQuery Methods */
@@ -26,6 +29,7 @@ $(document).ready(function(){
 });
 
 function convert_1D_to_2D(array, numcols){
+	"use strict";
 	var new_array = [];
 	var curr_row = [];
 	for (var i = 0; i < array.length; i++){
@@ -40,19 +44,19 @@ function convert_1D_to_2D(array, numcols){
 	return new_array;
 }
 
-function create_new_module(e) {
+function create_new_module() {
+	"use strict";
 	$("#module_alert").remove();
 	var modulename = $("#module_input").val();
 	$.get("/createmodule/" + modulename, function(data){
 		if(data) {
-			console.log(data.response);
 			if(data.response === "successfully stored") {
 				$("#submit_new_module").after(Templates.new_module_success());
 			} else {
 				$("#submit_new_module").after(Templates.new_module_exists());
 			}
-		} else {
-			console.log("ERROR no response");
 		}
+	}).fail(function(){
+		$("#submit_new_module").after(Templates.new_module_failure());
 	});
 }

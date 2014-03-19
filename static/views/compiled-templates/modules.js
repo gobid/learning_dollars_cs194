@@ -229,15 +229,9 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.unshift({ lineno: 27, filename: "jade/modules/modules.jade" });
-buf.push("<script src=\"http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js\" type=\"text/javascript\">");
-jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
-jade_debug.shift();
-buf.push("</script>");
-jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  h1 Modules\n  .row \n    .col-md-6\n      each row in modules\n        .row\n          each module in row\n            .col-md-3\n              a(href=module.key) #{module.name}\n      br\n      br\n    .col-md-6\n      .row\n        .col-md-6\n          input.form-control(\n            id = 'module_input'\n            type='text', \n            placeholder='Create a new module'\n          )\n          br\n          button.btn.btn-default.btn-small.bid_submit(\n            id = 'submit_new_module',\n            type='button'\n          ) Add module\n          br\n          br\nscript(\n  src = 'http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js', \n  type='text/javascript'\n)\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".container\n  h1 Modules\n  .row \n    .col-md-6\n      each row in modules\n        .row\n          each module in row\n            .col-md-3\n              a(href=module.key) #{module.name}\n      br\n      br\n    .col-md-6\n      .row\n        .col-md-6\n          input.form-control(\n            id = 'module_input'\n            type='text', \n            placeholder='Create a new module'\n          )\n          br\n          button.btn.btn-default.btn-small.bid_submit(\n            id = 'submit_new_module',\n            type='button'\n          ) Add module\n          br\n          br\n");
 }
 },
 
@@ -267,6 +261,35 @@ jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
   jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "br\nbr\ndiv(class=\"alert alert-info\" id=\"module_alert\") Module already exists");
+}
+},
+
+"new_module_failure":
+  function template(locals) {
+var jade_debug = [{ lineno: 1, filename: "jade/modules/new_module_failure.jade" }];
+try {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),undefined = locals_.undefined;
+jade_debug.unshift({ lineno: 0, filename: "jade/modules/new_module_failure.jade" });
+jade_debug.unshift({ lineno: 1, filename: "jade/modules/new_module_failure.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 2, filename: "jade/modules/new_module_failure.jade" });
+buf.push("<br/>");
+jade_debug.shift();
+jade_debug.unshift({ lineno: 3, filename: "jade/modules/new_module_failure.jade" });
+buf.push("<div id=\"module_alert\" class=\"alert alert-danger\">");
+jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
+jade_debug.unshift({ lineno: 4, filename: "jade/modules/new_module_failure.jade" });
+buf.push("Failure. Reload page, fill in new module name, and repost.");
+jade_debug.shift();
+jade_debug.shift();
+buf.push("</div>");
+jade_debug.shift();
+jade_debug.shift();;return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, "br\nbr\ndiv(class=\"alert alert-danger\" id=\"module_alert\")\n  | Failure. Reload page, fill in new module name, and repost.");
 }
 },
 
