@@ -521,7 +521,7 @@ var jade_debug = [{ lineno: 1, filename: "jade/mailbox/sending_failure.jade" }];
 try {
 var buf = [];
 var jade_mixins = {};
-var locals_ = (locals || {}),undefined = locals_.undefined;
+var locals_ = (locals || {}),undefined = locals_.undefined,response = locals_.response;
 jade_debug.unshift({ lineno: 0, filename: "jade/mailbox/sending_failure.jade" });
 jade_debug.unshift({ lineno: 1, filename: "jade/mailbox/sending_failure.jade" });
 buf.push("<div class=\"alert alert-danger\">");
@@ -530,7 +530,7 @@ jade_debug.unshift({ lineno: 2, filename: "jade/mailbox/sending_failure.jade" })
 buf.push("<strong>");
 jade_debug.unshift({ lineno: undefined, filename: jade_debug[0].filename });
 jade_debug.unshift({ lineno: 2, filename: jade_debug[0].filename });
-buf.push("Error! Your Message was not sent.");
+buf.push("Error! Your Message was not sent (" + (jade.escape((jade.interp = response) == null ? '' : jade.interp)) + ").");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</strong>");
@@ -540,7 +540,7 @@ buf.push("</div>");
 jade_debug.shift();
 jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".alert.alert-danger\n  strong Error! Your Message was not sent.");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".alert.alert-danger\n  strong Error! Your Message was not sent (#{response}).");
 }
 },
 

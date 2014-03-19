@@ -34,7 +34,9 @@ $(document).ready(function() {
 					}, 3000);
 				} else {
 					response = data.error;
-					$("#newMessage").append(Templates.sending_failure());
+					$("#newMessage").append(Templates.sending_failure({
+						'response' : response
+					}));
 				}
 				setTimeout(function(){
 					$(".alert").fadeOut();
