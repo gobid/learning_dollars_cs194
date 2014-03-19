@@ -11,11 +11,6 @@ $(document).ready(function() {
 		if(numPosts > 0) {
 			for (var p in data){
 				var project = data[p];
-				// var date_obj = new Date(project.enddate);
-				// var date_str = m_names[date_obj.getMonth()]+" "+
-				// date_obj.getDate()+", "+date_obj.getFullYear()+" at "+
-				// date_obj.getHours() + ":" + date_obj.getMinutes() + " GMT";
-				//project.enddate = date_str;
 				$("#posted_projects").append(
 					Templates.posted_projects(project)
 				);
