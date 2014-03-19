@@ -67,7 +67,6 @@
     .col-md-4
       div(align='center')
         h2 Jobs
-      // hardcoded height!! fix 
       div(style='overflow: scroll; height: 320px;')
         for job in jobs
           if !job.owner
@@ -75,7 +74,7 @@
               b
                 a(target='_blank', href="project/#{job.projectid}")
                   | #{job.projectname}
-              br
+                p #{job.price}
               div(class='projectstatus#{job.projectid}')
                 if job.alreadyBidOn
                   div.alert.alert-success Already placed

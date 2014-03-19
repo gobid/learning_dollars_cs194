@@ -386,13 +386,15 @@ class AddCourse(webapp2.RequestHandler):
         account = get_account()
         if account:
             newCourse = dict()
-            newCourse["CourseURL"] = urlparse.unquote(self.request.get('courseURL'))
+            newCourse["CourseURL"] = urlparse.unquote(
+                self.request.get('courseURL'))
             newCourse["Title"] = title
             newCourse["Institution"] = institution
             newCourse["TeachingDate"] = teachDate
             newCourse["Instructors"] = instructors
             newCourse["Description"] = description
-            newCourse["DownloadPageLink"] = urlparse.unquote(self.request.get('materials'))
+            newCourse["DownloadPageLink"] = urlparse.unquote(
+                self.request.get('materials'))
             newCourse["scoreRanking"] = 1
             moduleID = int(moduleID)
             match = Module.query(Module.category == moduleID).fetch()

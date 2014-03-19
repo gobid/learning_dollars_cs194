@@ -49,6 +49,7 @@ class ModuleInfo(webapp2.RequestHandler):
             'alreadyBidOn': alreadyBidOn,
             'owner': owner
         }
+        print newProjectJSON
         return newProjectJSON
 
     def get_info(self, module_id):
@@ -121,7 +122,6 @@ class PostsInfo(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(posted_projects))
-
 
 
 class ProjectBidsInfo(webapp2.RequestHandler):
