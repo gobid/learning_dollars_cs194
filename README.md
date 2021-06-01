@@ -1,8 +1,5 @@
-learning_dollars
-================
+# A prehistory of https://www.learningdollars.com.
 
-# A prehistory of http://learningdollars.com
-
-The README is at http://goo.gl/ferWhX
+learning dollars - the README is at http://goo.gl/ferWhX
 
 
